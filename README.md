@@ -23,6 +23,8 @@ How to apply to join the Study Group?
 4. Submit the pull request and waiting to be merged
 5. Join the telegram to keep in touch: <https://t.me/+1l-mHZidAFMyMDZh>
 
+We also have a weekly meeting for discussing questions or sharing your notes at UTC+0 8:00 AM every Tue. Meeting link: <https://meeting.tencent.com/dm/fA6aRc3FNCF9>.
+
 ## What's Next?
 
 After this program finished, [Ethereum Protocol Fellowship Program cohort five](https://github.com/eth-protocol-fellows/cohort-four) will be started, we could start working on the EPF together.
@@ -52,9 +54,11 @@ After this program finished, [Ethereum Protocol Fellowship Program cohort five](
 4. 创建一个 PR 到当前仓库，等待 Merge
 5. 加入 Telegram 群组保持联系 <https://t.me/+1l-mHZidAFMyMDZh>
 
+我们还有一个周会用于讨论内容或者分享你的笔记，欢迎加入 <https://meeting.tencent.com/dm/fA6aRc3FNCF9>，每周二北京时间下午四点开始。
+
 ## 未来会做什么？
 
-当这个残酷共学计划结束之后，[Ethereum Protocol Fellowship Program](https://github.com/eth-protocol-fellows/cohort-four) 第五期正好开始，剩下的同学可以继续学习和参与 EPF。
+当这个残酷共学计划结束之后，[Ethereum Protocol Fellowship Program](https://github.com/eth-protocol-fellows/cohort-four) 第五期正好开始，坚持下来的同学可以继续学习和参与 EPF。
 
 ---
 
