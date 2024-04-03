@@ -29,6 +29,10 @@ We also have a weekly meeting for discussing questions or sharing your notes at 
 
 After this program finished, [Ethereum Protocol Fellowship Program cohort five](https://github.com/eth-protocol-fellows/cohort-four) will be started, we could start working on the EPF together.
 
+## Who am I?
+
+I'm Bruce from [PlanckerDAO](https://twitter.com/PlanckerDAO), [EIP Fun](https://twitter.com/EIPFun), and [LXDAO](https://twitter.com/LXDAO_Official). Thanks for their community support. Also special thanks to [OpenBuild](https://twitter.com/OpenBuildxyz)], [Web3BuidlerTech](https://twitter.com/Web3BuidlerTech), and [UpchainDAO](https://twitter.com/UpchainDAO).
+
 ---
 
 # 残酷以太坊协议共学小组
