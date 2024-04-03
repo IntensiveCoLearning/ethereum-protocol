@@ -15,6 +15,7 @@ https://epf.wiki/?#/eps/week0?id=helpful-resources-to-get-you-started
 标注一些我以前还不知道的东西：
 
 来源：[53-BEIKO-001-2023-12-13.pdf (summerofprotocols.com)](https://summerofprotocols.com/wp-content/uploads/2023/12/53-BEIKO-001-2023-12-13.pdf)
+
 A more recent example of practical secure
 communication in today’s chat era is
 the Signal protocol. Implemented in the
