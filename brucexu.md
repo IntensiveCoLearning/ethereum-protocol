@@ -4,6 +4,80 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.6
+
+TODO 先把 Week0 没看的视频看一下：
+
+- https://youtu.be/V6gLY-1G4Mc?si=W1ncsNYUSHjm5U4y
+- https://www.youtube.com/watch?v=bBC-nXj3Ng4
+- https://youtu.be/ie-qRQIQT4I?si=eYKzMbn7PGk-Il9M
+- https://www.youtube.com/watch?v=xH00ikD1oDo
+
+### 4.5
+
+#### [Proposer-Builder Separation 详解](https://mp.weixin.qq.com/s/Lhn-Lu0IIiOg2mR0_4T0qw)
+
+接昨天的 Part 3。
+
+第一阶段：PBS 设计
+
+PBS 有 5 点设计要求：
+
+1. Untrusted proposer friendliness: 一个 PBS 机制不应该依赖于某些受信任的 proposer。
+2. Untrusted builder friendliness: 同样，它也不能依赖于 builder 不会作恶。
+3. Weak proposer friendliness: 它不对 proposer 有过高的要求（设备好，带宽大等要求）
+4. Bundle unstealability: proposer 不能从 builder 构建好的包中，提取交易来构建自己的 block body。
+5. Consensus-layer simplicity and safety: 不能损害共识层。
+
+第一阶段主要是实现 PBS 的需求。在 Proposer 选择和广播的方式上稍微有一些区别，对应也有共识层的复杂度或者宽带需求等问题。
+
+第二阶段：mev-boost 实现
+
+通过新增 Relay 和 searcher 两个角色解决。TODO 咋解决的？
+
+第三阶段：enshrine Proposer-Builder Separation (ePBS) 设计
+
+TODO Vitalik 提出的 Two-Block HeadLock (TBHL) 研究一下。TODO <https://ethresear.ch/t/why-enshrine-proposer-builder-separation-a-viable-path-to-epbs/15710>
+
+#### https://epf.wiki/#/
+
+EPF Protocol Studies 的目的就是因为以太坊协议的需求量增加，需要不断的有一些才能的人加入到 core level 的级别。这个 EPS 就是来提供教材和填补这个空缺的。
+
+10 周的课程，两个阶段。前半段是协议的运行机制、架构、概念。第二部分就是两个方向：开发和研究。都是核心开发者和研究员来带课。
+
+EPS 计划目的之一也是一起构建一个不错的 wiki，方便未来大家自学。可以赶紧贡献一下。这个课程不涉及到应用层的 Solidity 开发。
+
+#### https://epf.wiki/#/eps/week0
+
+视频的内容基本上可以看 <https://twitter.com/EIPFun/status/1775443183884763521> 这里的笔记。
+
+发现了问题如何贡献 Wiki 呢？
+
+[贡献指南](https://epf.wiki/#/contributing) 简单的说：
+
+- 避免重写或者 copy，优先使用链接的方式
+- 仔细阅读一下贡献规范等，代码仓库在 <https://epf.wiki/#/contributing>
+- 提交到 main 分支上，等待 merge
+- 不要放一些 dapp、l2、rollups 之类的无关信息，内容会被 EIP 覆盖，而不是 ERC
+
+具体的一些目录格式就具体自己看吧。不要用 LLMs 来生成，质量要好一些。强行硬蹭了一个 PR <https://github.com/eth-protocol-fellows/protocol-studies/pull/149>，发现了一个 URL 错了。
+
+基础知识简单概述一下，我大概都知道一些：
+
+- Cryptography
+  - Hashing：哈希算法，简单的说就是通过一个算法可以对任何内容生成一个字符串，不可逆转而且尽量追求不能碰撞。比较简单的模型是求余数算法，但是碰撞的几率非常高。如果一旦可以碰撞，这个 hash 算法就不太安全了。
+  - Public key cryptography：不对称公钥私钥加密算法，具体流程就在这个图
+    ![](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/537eac62-183c-4284-8451-d0235cf2db7a)
+- Data structures
+  - Merkle trees：就是每个节点带有叶子结点内容 hash 的一棵树，好处就是很容易校验得出某个节点的内容是否被篡改过。因为内容变化之后，Hash 得到的字符串会发生变化。
+    ![](https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Hash_Tree.svg/2560px-Hash_Tree.svg.png)
+- Networking, p2p and distributed systems：分布式网络，包括信息互相传播等等算法
+- Software development basics
+  - Programming languages, compilers
+- Ethereum as a platform
+  - From a user perspective：通过钱包工具调用 RPC 发送相关的交易，通过签名来确认是自己签发的操作，之后进入网络后进行广播
+  - As a dapp developer：编写智能合约，部署上主网，进入到以太坊各个节点，state 存储到 World State 里面。
+
 ### 2024.4.4
 
 #### [Proposer-Builder Separation 详解](https://mp.weixin.qq.com/s/Lhn-Lu0IIiOg2mR0_4T0qw)
