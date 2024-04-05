@@ -6,7 +6,7 @@
 
 ### 2024.4.5
 
-Pending...
+> The Free Software movement is fundamental to Ethereum and all cryptocurrencies. The open, independent and collaborative development culture of Ethereum is strongly rooted in FOSS (Free and Open Source Software). Ethereum needs to be transparently implemented in software that gives full freedom to its users.
 
 ### 2024.4.4
 
