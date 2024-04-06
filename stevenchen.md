@@ -1,15 +1,18 @@
 # Steven
 
-Hi, my name is Steven, studying and working in data. Looking forward to learning a lot from https://epf.wiki/#/ and meet new amazing people. 
+Hi, my name is Steven, studying and working in data. Looking forward to learning a lot from https://epf.wiki/#/ and meeting new amazing people. 
 X/tele/ig: @im24steven
 
-## Notes
+# Notes
+
+
+## The Protocol: Data Structures
 
 ### 04/05
 
 Referencing: https://epf.wiki/#/wiki/protocol/data-structures?id=data-structures-in-ethereum 
 
-#### Data Structures in ETH
+
 
 (Delving into the data structures of eth for a better understanding of building relational databases for eth transactions.)
 
@@ -27,7 +30,7 @@ Referencing: https://epf.wiki/#/wiki/protocol/data-structures?id=data-structures
 2. Within one ETH block, 4 different modified MPTs:
 
  	- Transaction Trie: Nonce, from, to, value, etc.
-	- Receipt Trie : logs, status code, etc.
+	- Receipt Trie: logs, status code, etc.
 	- World State Trie: nonce, balance, storageRoot, etc.
 	- Account State(Storage) Trie, storageRoot
 
@@ -37,7 +40,32 @@ Insight: 1. Efficient data retrieval in MPT. 2. translating MPT into relational 
 
 3. TODO: On Merkle Trees in ETH and ZKP: how ZKP project tables could be generated?
 
+### 04/06
+
+1. More MPT: ETH vs ZKP
+
+	Iden3 as an example:
+
+	Store & validate claims:
 	
+	![zkp-mt1](https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/ZKP3.png)
+
+	![zkp-mt2](https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/ZKP4.png)
+
+	Able to design such a circuit which recreates the calculation model of the root of a merkle tree to verify the received proofs by recalculating the root of the merkle tree.
+
+	[zkp in identity systems](https://github.com/WebOfTrustInfo/rwot8-barcelona/blob/master/topics-and-advance-readings/Zero-knowledge-Proofs.md)
+	
+   
+2. Verkle Update: A better MPT, optimized by reducing witness size.
+
+ - "The main difference between the Verkle tree and the Merkle tree structure is that the Verkle tree is much flatter, meaning there are fewer intermediate nodes linking a leaf to the root, and therefore less data required to generate a proof." [eth org](https://ethereum.org/en/roadmap/verkle-trees/)
+	
+	[Merkle Tree Path Visualize](https://efficient-merkle-trees.netlify.app)
+	
+
+
+
 
 
 
