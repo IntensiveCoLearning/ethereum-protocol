@@ -13,7 +13,7 @@ Hi, I'm Stephen, a c/c++ engineer, hoping to keep up
 - Public key cryptography
   也叫asymmetric cryptography非对称
   需要公钥和私钥，公钥用来加密，私钥用来解密，也可以用来签名
-  ![alt text](assets/step/image.png)
+  ![alt text](img/step/image.png)
 #####  merkle tree
 - merkle tree
   用哈希值搭建起来的二叉树，每个节点都是哈希值
@@ -24,7 +24,7 @@ Hi, I'm Stephen, a c/c++ engineer, hoping to keep up
   - 快速比较大量数据
   - 快速定位修改
   - 零知识证明
-  ![alt text](assets/step/image-1.png)
+  ![alt text](img/step/image-1.png)
   如何向他人证明拥有某个数据 D0 而不暴露其它信息。挑战者提供随机数据 D1，D2 和 D3，或由证明人生成（需要加入特定信息避免被人复用证明过程）。
   证明人构造如图所示的默克尔树，公布 N1，N5，Root。验证者自行计算 Root 值，验证是否跟提供值一致，即可很容易检测 D0 存在。整个过程中验证者无法获知与 D0 相关的额外信息。
 ##### Networking, p2p and distributed systems
@@ -68,7 +68,7 @@ solidity 和 solc 编译器
   4. Blob：EIP-4844 提出的新数据结构
   5. RANDAO：信标链的随机性
 - Beacon API： 共识层的API，主要与validators连接。validator 连接到共识客户端以了解其状态，提供证明
-  ![alt text](assets/step/image-2.png)
+  ![alt text](img/step/image-2.png)
 ### POS & POW
 Proof of Work（POW）和Proof of Stake（POS）是两种常见的共识算法，用于验证和确认区块链网络中的交易，并决定谁有权创建新的区块。
 - 工作原理：
