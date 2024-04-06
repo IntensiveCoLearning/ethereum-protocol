@@ -46,3 +46,28 @@ Join the group.
 4. BitTorrent
     - BitTorrent is designed for a large group of machines to exchange the same file quickly and reliably.
     - Rather than optimizing a single path, BitTorrent tries to take advantage of all available network bandwidth by dividing the transfers needed to retrieve a single large file between multiple cooperating peers. This allows it to frequently outperform the typical model in which clients download only from a central server.
+
+### 2024.4.6
+
+what is Ethereum?
+Ethereum is the World Computer. It made up with 3 parts: Ethereum Virtual Machine (EVM), Ethereum Blockchain, Ethereum Network.
+
+1. Vitalik Buterin reveals Ethereum at Bitcoin Miami 2014
+2. Ethereum Improvement Proposals, aka EIPs, describe standards for etherem platform, including core protocol spec, client APIs and contract standards.
+3. Design principles, only list some of them:
+    - Simplicity, Universality, Modularity, etc.
+    - Sandwich/encapsulated complexity
+    - Freedom, neutrality
+4. Ethereum layers:
+    - Consensus layer: fork choice, RANDAO, Blobs
+    - Execution layer: EVM, mempool, state
+    - Validators <--Beacon APIs--> Consensus layer <--Engine APIs--> Execution layer <--JSON-RPC APIs--> User
+5. Implementations - EL
+    - geth/go
+    - reth/rust, etc.
+6. Implementations - CL
+    - prysm/go
+    - lighthouse/rust, etc.
+7. Testing
+8. Process: Idea -> Research -> Specs -> Implementation -> Testing -> Adoption/Rejection
+9. Coordination: Dev calls, EIPs, Ethresear.ch
