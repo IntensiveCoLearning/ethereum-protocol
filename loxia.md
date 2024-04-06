@@ -2,15 +2,68 @@
 
 哈喽大家，我是 loxia.eth，来这里补课学习一些基础且重要的知识，很高兴能来到这里和大家一起学习。
 
+目录：
+4.5 ECDSA
+4.6 ECDSA。
+
 ## Notes
+
+### 2024.4.7
+
+
 
 ### 2024.4.6
 
-Elliptic curves over finite field 有限域上的椭圆曲线：
+Day2：今日完成 https://epf.wiki/#/wiki/Cryptography/ecdsa 的学习
+
+Elliptic curves over finite field 有限域上的椭圆曲线
+有限域椭圆曲线加法群有良好的循环特性，适合作为密钥生成的场景。
+例：Alice 利用如下参数生成了一条曲线
+sage: E = EllipticCurve(GF(997),[0,7])
+Elliptic Curve defined by y^2 = x^3 + 7 over Finite Field of size 997
+
+在曲线上随机生成点 G，标量相乘 n 次后到达无穷远点 O，n(G) = O
+Alice 从 n 中随机选择了 42 作为私钥 K，公钥则为 P 点，P = 42(G) 也就是 P = K*G
+sage: P = K*G
+(858 : 832 : 1)   P 公钥则为 (858,832)
+
+Alice 发送交易信息时会先将交易信息取哈希值 m，对于每个签名都有临时密钥对的生成减轻暴露的攻击
+Randomly selected ephemeral secret key.
+sage: eK = 10
+Ephemeral public key.
+sage: eP = eK*G
+(215 : 295 : 1)
+
+Ephemeral key pair =[eK,eP]=[10,(215,295)].
+计算签名的组件 s = (k^-1)(e+rK)(modn)
+其中 r 是 eP 的 x 轴值，这个签名中同时用到了私钥 K 和 临时密钥对
+
+# x-coordinate of the ephemeral public key.
+sage: r = int(eP[0])
+215
+# Signature component, s.
+sage: s = mod(eK**-1 * (m + r*K), n)
+160
+
+签名对是 (r,s)=(215,160) 
+
+Bob在拿到签名对时展开验证，首先验证交易哈希，其次计算临时公钥 R，并以此确认 r。
+sage: R = int(mod(m*s^-1,n)) * G  + int(mod(r*s^-1,n)) * P
+(215 : 295 : 1)
+Compare the x-coordinate of the ephemeral public key.
+sage: R[0] == r
+True # Signature is valid ✅
+
+哈希变化或者私钥错误，交易都会验证失败，ETH 中的实际情况要比这复杂，详见
+https://web.archive.org/web/20240229045603/https://lsongnotes.wordpress.com/2018/01/14/signing-an-ethereum-transaction-the-hard-way/
+
+
+
 
 ### 2024.4.5
 
 Start here！从 epf.wiki 的底部目录先开始看吧，我一直没有看过椭圆曲线签名的细节，今儿个来学学数学~~~
+
 ECDSA: Elliptic Curve Digital Signature Algorithm
 ECC: Elliptic curve cryptography
 交易中需要验证交易中的真实授权，以及信息未被篡改。
