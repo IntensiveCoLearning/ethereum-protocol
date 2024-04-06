@@ -7,6 +7,16 @@ Hi I'm Chloe, currently PM of EIP Fun. I've followed the EPF study group since W
 
 
 ## Notes
+### 2024.4.3
+
+My previous notes on EPF study group: https://twitter.com/EIPFun/status/1775443183884763521, incl.
+- Week 1 Ethereum protocol 101
+- Week 2 Execution layer overview
+- Week 3 Consensus layer overview
+- Week 4 Testing & Security overview
+- Week 5 Ethereum roadmap overview
+- Week 6D CL & EL specs
+- Week 6R Sharindg & DAS
 
 ### 2024.4.5 Verkle tree study
 Youtube video:
@@ -59,14 +69,6 @@ Brief notes
         - Bulk conversion
         - State expiry
 
+### 2024.4.6 Week 7R Verkle tree summary notes
+- Review & Summarize Week 7 Verkle tree lecture: https://ab9jvcjkej.feishu.cn/docx/C6VMdpDDHoRq2XxGmKicy0E3nng
 
-### 2024.4.3
-
-My previous notes on EPF study group: https://twitter.com/EIPFun/status/1775443183884763521, incl.
-- Week 1 Ethereum protocol 101
-- Week 2 Execution layer overview
-- Week 3 Consensus layer overview
-- Week 4 Testing & Security overview
-- Week 5 Ethereum roadmap overview
-- Week 6D CL & EL specs
-- Week 6R Sharindg & DAS
