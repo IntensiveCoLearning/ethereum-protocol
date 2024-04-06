@@ -38,10 +38,10 @@ Ephemeral key pair =[eK,eP]=[10,(215,295)].
 计算签名的组件 s = (k^-1)(e+rK)(modn)
 其中 r 是 eP 的 x 轴值，这个签名中同时用到了私钥 K 和 临时密钥对
 
-# x-coordinate of the ephemeral public key.
+x-coordinate of the ephemeral public key.
 sage: r = int(eP[0])
 215
-# Signature component, s.
+Signature component, s.
 sage: s = mod(eK**-1 * (m + r*K), n)
 160
 
