@@ -6,12 +6,29 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ### 4.6
 
-TODO 先把 Week0 没看的视频看一下：
+Week0 预习视频笔记：
 
-- https://youtu.be/V6gLY-1G4Mc?si=W1ncsNYUSHjm5U4y
-- https://www.youtube.com/watch?v=bBC-nXj3Ng4
-- https://youtu.be/ie-qRQIQT4I?si=eYKzMbn7PGk-Il9M
-- https://www.youtube.com/watch?v=xH00ikD1oDo
+#### [What is BitTorrent?](https://www.youtube.com/watch?v=xH00ikD1oDo)
+
+传统的软件下载方式，就是正常的有个服务器，大家去下载：
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/1e9b1b44-526d-462d-a3a7-26db83d8dd88)
+
+问题很明显，可能会比较慢，对这个服务器也有比较大的成本和压力。
+
+BitTorrent 就是每个电脑都保存一些数据，一开始比较慢，其他人会先下载一个片段，之后再交叉同步。所以会越来越快，越多人下载和分享就会越快。但是每台电脑要开放自己的宽带进行上传，要有分享精神。
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/29a0764a-6101-4fd9-b874-38e39ec197a1)
+
+#### [What is a Peer to Peer Network? Blockchain P2P Networks Explained](https://www.youtube.com/watch?v=ie-qRQIQT4I&ab_channel=Lisk)
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/cebb512a-578f-4a97-8e35-4f121604dde2)
+
+简单的说就是 P to P 直接链接和进行信息交换，避免了中心化的中转和单点的控制。信息也会被保护的很好，不容易被篡改或者丢失。
+
+#### [But how does bitcoin actually work?](https://www.youtube.com/watch?v=bBC-nXj3Ng4&ab_channel=3Blue1Brown)
+
+比较简单和基础吧。没看过的看看就行。
 
 ### 4.5
 
