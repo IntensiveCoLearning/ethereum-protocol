@@ -4,6 +4,34 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 ## Notes
 
+### 2024.4.7
+刷了视频: [But how does bitcoin actually work?
+](https://www.youtube.com/watch?v=bBC-nXj3Ng4 )
+
+- 从ledger到bitcoin chain；
+
+- 使用sha256算法从a计算到b ，b很难反推出a
+
+<img width="1147" alt="image" src="https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/25242467/82cda9c0-a6e3-4eb3-b573-db3fcc506d1f">
+
+pow机制：接收响应，hash计算，创建区块，广播区块，接收奖励
+
+视频里面讲了链上的pow机制，但是还是不清楚，所以刷了bitcoin的白皮书，目前还没看完，但是知道整个网络的运行过程大概如下：
+1. 新交易的广播：一笔交易广播到网络中
+2. 构建区块和寻找工作量证明Pow:矿工监听交易信息，从内存池里选择待确认的交易。
+3. PoW的发现与区块广播：矿工计算符合当前链上难度的nounce值，如果计算出来，则将该区块广播出去。
+4. 区块的接收&后续区块的创建
+
+
+todo：
+- 关于nounce的值是怎么计算得出；
+- 目前minner是从内存池里面捞没有完成的交易出来，每个minner捞的交易内容是一样的吗，如果不一样的话，如果有重复的话，其中一个minner算得比较慢，那么没验证的交易是不是就要回到内存池里面；
+- bitcoin的白皮书再细看一下，先了解清楚pow，在看后面eth的pos
+
+
+
+
+
 ### 2024.4.6
 
 

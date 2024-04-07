@@ -13,7 +13,7 @@ Hi, I'm Stephen, a c/c++ engineer, hoping to keep up
 - Public key cryptography
   也叫asymmetric cryptography非对称
   需要公钥和私钥，公钥用来加密，私钥用来解密，也可以用来签名
-  ![alt text](img/step/image.png)
+  ![alt text](img/step/PublicKeyCryptography.png)
 #####  merkle tree
 - merkle tree
   用哈希值搭建起来的二叉树，每个节点都是哈希值
@@ -24,7 +24,7 @@ Hi, I'm Stephen, a c/c++ engineer, hoping to keep up
   - 快速比较大量数据
   - 快速定位修改
   - 零知识证明
-  ![alt text](img/step/image-1.png)
+  ![alt text](img/step/merkleTree.png)
   如何向他人证明拥有某个数据 D0 而不暴露其它信息。挑战者提供随机数据 D1，D2 和 D3，或由证明人生成（需要加入特定信息避免被人复用证明过程）。
   证明人构造如图所示的默克尔树，公布 N1，N5，Root。验证者自行计算 Root 值，验证是否跟提供值一致，即可很容易检测 D0 存在。整个过程中验证者无法获知与 D0 相关的额外信息。
 ##### Networking, p2p and distributed systems
@@ -68,7 +68,7 @@ solidity 和 solc 编译器
   4. Blob：EIP-4844 提出的新数据结构
   5. RANDAO：信标链的随机性
 - Beacon API： 共识层的API，主要与validators连接。validator 连接到共识客户端以了解其状态，提供证明
-  ![alt text](img/step/image-2.png)
+  ![alt text](img/step/design.png)
 ### POS & POW
 Proof of Work（POW）和Proof of Stake（POS）是两种常见的共识算法，用于验证和确认区块链网络中的交易，并决定谁有权创建新的区块。
 - 工作原理：
@@ -84,4 +84,18 @@ Proof of Work（POW）和Proof of Stake（POS）是两种常见的共识算法�
   -  POW：POW算法允许任何人参与挖矿，从而实现了网络的分散化和去中心化。矿工可以通过竞争来创建新的区块，而不依赖于特定的权益。
   -  POS：POS算法中，创建新区块的权益是基于参与者所持有的货币数量，这可能导致权益更多的参与者具有更大的影响力。因此，相对于POW来说，POS可能在一定程度上缺乏完全的去中心化。
 ### 4.7
-TODO：继续研究pos和pow算法，有趣
+#### Week2 notes
+再次感谢Chloe🙏，令人敬佩
+##### 区块验证 Block validation
+  共识层 Consensus Layer
+  可以从共识层规范中了解共识层如何理解执行层
+- Function process_execution_payload：
+  - 由beacon chain验证这一个block是否有效，将CL向前移动
+  - CL执行一些检查(incl. parent hash, previous randao, timestamp, max blobs per block, etc.)，把payload发送到EL进行更深入的验证
+  - CL和EL之间的交流通过执行引擎
+  - Spec link: https://github.com/ethereum/consensus-specs/blob/dev/specs/deneb/beacon-chain.md#modified-process_execution_payload
+- Function notify_new_payload函数
+  - CL 没有实现，因为它只是将执行负载发送到执行引擎，然后执行客户端将执行状态转换功能。
+  - Spec link: https://github.com/ethereum/consensus-specs/blob/dev/specs/deneb/beacon-chain.md#modified-notify_new_payload
+  
+今天少来点，利物浦和曼联要开打了，打死曼联

@@ -71,3 +71,65 @@ Ethereum is the World Computer. It made up with 3 parts: Ethereum Virtual Machin
 7. Testing
 8. Process: Idea -> Research -> Specs -> Implementation -> Testing -> Adoption/Rejection
 9. Coordination: Dev calls, EIPs, Ethresear.ch
+
+### 2024.4.7
+
+1. Ethereum is the work computer consisting of 3 parts:
+    - Ethereum Virtual Machine (EVM): a Turing-complete distributed state machine.
+    - Ethereum Blockchain: the memory & storage of ethereum.
+    - Ethereum Network: a group of people and institutions who decide to run an Ethereum node
+        - Consensus client
+        - Execution Client
+        - PoS: a node operator can escrow (stake) 32 ETH to become a validator, with the right to operate and secure Ethereum and to earn ETH
+            - slashing: confiscate some/all of a validator's staked ETH and eject them from the validator set.
+            - economic incentive
+            - trustless trust: Trustless trust comes from credible neutrality. Credible neutrality comes from decentralization.
+
+2. DeFi
+    - Programmable Money: code is law
+    - Decentralized Finance.
+3. Scalability Trilemma
+    - pick at most two: scalability, decentralization and security.
+4. Scaling Etherem Execution
+    - Move execution off-chain while retaining settlement on-chain
+    - Rollup
+    - Danksharding
+5. Enabling True Decentralization
+    - operate your own node or use a Node-as-a-Service provider
+    - light client
+    - Statelessness
+6. Decentralized Trustlessness: EigenLayer
+7. [Ethereum in 30 secs](https://hackmd.io/@vbuterin/ethereum_in_30_minutes)
+    - Accounts: Externally owned account (EOA) and Contracts
+    - Gas: the "unit" of resource consumption within Ethereum
+        - fee = (base_fee + priority_fee) * gas_used
+        - Base fee: burned, value determined by protocol
+        - Priority fee: paid to block proposer
+        - A maximum of 30,000,000 gas can be spent in each block
+    - Trasaction object
+        - Tx type -- byte -- Here: 0x02
+        - Chain ID -- int -- Which chain is this tx for?
+        - Nonce -- int -- Anti-replay value
+        - Max priority fee -- int -- Priority fee per gas, for block proposer
+        - Max fee -- int -- Max total fee (base + priority) per gas
+        - Gas limit -- int -- Max gas this tx is allowed to consume
+        - Destination -- address -- Which address this tx goes to
+        - Amount -- int -- How much ETH to send
+        - Data -- bytes -- Data passed in call if destination is a contract
+        - Access list -- List[Tuple[int, List[int]]] -- Accounts and storage slots to more cheaply pre-access
+        - Signature (3 fields) -- (bool, int, int) -- Verifies who sent it
+    - Proof of Stake consensus
+        - deposit 32 ETH to become a validator
+        - Each slot, 1/32 of all validators attest to the block created during that slot
+        - validator can get 1) in-protocol rewards and 2) priority fees and MEV from transactions as revenue
+        - Validators can withdraw at any time, with a delay
+    - Fork choice: LMD-GHOST
+    - Casper FFG finalization: If > 2/3 of validators online + honest, then after 2 epochs a block is finalized, and cannot be reverted.
+    - Merkle trees in Ethereum: Allow for efficiently verifiable proofs that something happened in a block
+    - Layer 2 protocols: to inherit security from Ethereum and add higher scalability on top.
+    - Future directions:
+        - The Merge: Done. But PoS can be improved with single slot finality
+        - The Surge: Improved scalability through rollups, danksharding and ZK-SNARKs
+        - The Verge: Replacing Merkle trees with more efficient data structures that let Ethereum nodes be much lighter ("stateless clients")
+        - The Purge: Clearing out old data and technical debt
+        - The Splurge: a grab bag of various useful stuff: account abstraction, EVM improvements, PBS, etc.
