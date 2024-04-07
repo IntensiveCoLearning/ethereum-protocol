@@ -4,6 +4,13 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.8
+
+TODO
+
+- https://epf.wiki/#/eps/week1 把官方资料过一下，避免太发散了，不要看太多
+- https://twitter.com/EIPFun/status/1759938858286776710 路线图大概了解几个关键阶段和节奏
+
 ### 4.7
 
 #### [Week1 Notes](https://twitter.com/EIPFun/status/1759938839890522603)
