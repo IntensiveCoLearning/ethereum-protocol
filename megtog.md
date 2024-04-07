@@ -4,6 +4,20 @@
 
 ## Notes
 
+### 2024.4.7
+
+读了一些旧历史
+
+* [Deprecating EIP 1011 in favor of a Casper+Sharding design](https://medium.com/@djrtwo/casper-%EF%B8%8F-sharding-28a90077f121) 发于 Jun 16 2018
+  * 之前的想法 <https://twitter.com/megtog/status/1539972179961319427>
+  * [eip-1011](https://eips.ethereum.org/EIPS/eip-1011) 结合了 PoW + PoS
+  * consensus-spec 项目是在这之后启动的（Sep 20 2018）
+ 
+* 在 consensus-spec 的 git 记录里考古
+  * vitalik <https://github.com/ethereum/research/commit/093aad4a7820fd4a06be370a5b1b1586d39b48c3>
+  * protolambda <https://github.com/ethereum/consensus-specs/issues/793>
+
+
 ### 2024.4.6
 
 这几天清明假期有点疏于学习
