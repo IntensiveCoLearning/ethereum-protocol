@@ -133,3 +133,54 @@ Ethereum is the World Computer. It made up with 3 parts: Ethereum Virtual Machin
         - The Verge: Replacing Merkle trees with more efficient data structures that let Ethereum nodes be much lighter ("stateless clients")
         - The Purge: Clearing out old data and technical debt
         - The Splurge: a grab bag of various useful stuff: account abstraction, EVM improvements, PBS, etc.
+
+### 2024.4.8
+
+Ethereum design rationale(outdated but still worth learning)
+
+1. Principles
+    - **Sandwich complexity model**: the bottom level architecture of Ethereum should be as simple as possible, and the interfaces to Ethereum should be as easy to understand as possible. The "middle layers" of the protocol can be complex.
+    - **Freedom**: net neutrality, no resstriction to use Ethereum protocol.
+    - **Generalization**: protocol features and opcodes in Ethereum should embody maximally low-level concepts, so that they can be combined in arbitrary ways.
+    - **We Have No Features**: often refuse to build in even very common high-level use cases
+    - **Non-risk-aversion**
+
+2. Blockchain-level protocol
+    - Accounts and not UTXOs
+        - benefit of UTXO: higher degree of privacy and potential scalability paradigms
+        - benefits of accounts: large space savings, greater fungibility, simplicity and constant light client reference
+    - Merkle Patricia Trees
+        - Combination of Merkle tree and Patricia tree
+        - Every unique set of key/value pairs maps uniquely to a root hash
+        - It is possible to change, add or delete key/value pairs in logarithmic time
+    - RLP
+        - RLP ("recursive length prefix") encoding for serialization
+        - (1) simplicity of implementation, and (2) guaranteed absolute byte-perfect consistency
+    - Compression algorithm
+    - Trie Usage
+        - the state trie: representing the entire state after accessing the block
+        - the transaction trie: representing all transactions in the block keyed by index
+        - the receipt tree, representing the "receipts" corresponding to each transaction
+    - Uncle incentivization
+        - blockchains with fast confirmation times currently suffer from reduced security due to a high stale rate
+        - To solve network security loss, it includes stale blocks in the calculation of which chain is the "longest"
+        - To solve centralization bias, it provides block rewards to stales, 1/8
+        - up to the seventh-generation descendant
+    - Difficulty Update Algorithm
+    - Gas and Fees
+        - preventing denial-of-service attacks via infinite loops
+    - Virtual Machine
+        - Ethereum virtual machine: Simplicity, Total determinism, Space savings, Specialization to expected applications, Simple security, Optimization-friendliness
+        - Temporary/permanent storage distinction
+            - temporary storage: exists within each instance of the VM and disappears when VM execution finishes
+            - permanent storage: exists on the blockchain state level on a per-account basis
+            - purpose:
+                1. provide each execution instance with its own memory that is not subject to corruption by recursive calls, making secure programming easier
+                2. provide a form of memory which can be manipulated very quickly, as storage updates are necessarily slow due to the need to modify the trie.
+        - Stack/memory model
+        - 32 byte word size: enough but not inefficient
+        - Having our own VM at all: allow to design simple VM and specialize VM, but not to have a very complex external dependency
+        - Using a variable extendable memory size
+        - Not having a stack size limit
+        - Having a 1024 call depth limit
+        - No types
