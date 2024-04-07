@@ -4,6 +4,95 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.7
+
+#### [Week1 Notes](https://twitter.com/EIPFun/status/1759938839890522603)
+
+UNIX 的设计理念、FOSS 的开源思想都是很值得一看的视频，尤其是很多刚刚接触技术或者开源的。这一点在国内的技术学习资料上面很少见。简单的说就是模块化、爱自由、无许可、开放开源等。
+
+TODO 深入学习了解下 Cypherpunks movement 这个，密码朋克宣言等 <https://www.activism.net/cypherpunk/manifesto.html>。这个是加密文化和精神层面的洗礼。
+
+以太坊的最初设计和定位就是 A Next-Generation Smart Contract and Decentralized Application Platform，就是做一个实用的通用的区块链平台，上面可以承载各种去中心化应用，构建一个新世界。
+
+因此，以太坊的构建需要遵循一些原则和文化，比如模块化、可信中立、开放开源、比较平台和中立，不做定制等等。以太坊的升级流程也是通过 EIP（社区驱动，不断的讨论、修补，定稿） -> 客户端落地实施升级。比较大的改动都会通过硬分叉的方式实现。
+
+TODO 实际升级的时候如何实现某个时间点切换的？例如最近的 Dencun 升级，背后的升级操作是怎么样的？按照目前我的思路，客户端需要改造升级，然后支持 Blob 这个存储，之后节点升级客户端版本重启之类的才可以实现新的功能吧？还是提前升级好了，到时候有个开关切换？
+
+TODO 以太坊的 Validator 是不能停机的，如果不提供服务将会导致扣费。那么 Validator 的升级是如何进行的？
+
+以太坊的模块化设计，是从 PoW 转成 PoS 开始的，目前的架构：
+
+- Execution Layer：运行智能合约、存储 Accounts State、运行处理交易
+  - EVM：Ethereum Virtual Machine，就是智能合约运行虚拟机，可以简单类比 Docker Container 或者 serverless，对被调用的智能合约代码创建一个虚拟机进行代码运行，并且输出相应的结果或者改造到 The World State
+  - State (data) & Transactions：具体的以太坊区块链上存储的状态和数据
+  - P2P layer：网络的节点信息交互和传输
+  - 对外接口：
+    - JSON-RPC API：可以直接暴露给外部的一些 Dapps
+    - Engine API：用于跟 Consensus layer 进行同步和交互 canonical block（TODO canonical block 是什么）
+  - 实现：Geth、Nethermind、Besu、Reth、ethereumjs
+- Consensus Layer：包括共识算法选举块的逻辑、分叉选择、Block gossip（TODO）
+  - Fork choice：Fork choice 算法会选出来一个合适的链，具体算法是 LMD GOHST (Latest Message Driven - Greedy Heaviest Observed SubTree)（TODO 了解下逻辑）
+  - P2P layer：跟其他 consensus 客户端交互，实施 blocks gossip，选出一个 global ledger 所有人都同意
+  - Blobs：EIP-4844 升级之后，存储的内容
+  - RANDAO：TODO
+  - Validator：是一个运行在 Consensus 客户端上的插件，支持 staking 来获得激励
+  - 对外接口：
+    - Beacon API： 跟 Validators 进行沟通和
+  - 实现：Prysm、Lighthouse、Teku、Nimbus、Lodestar
+
+一个以太坊完整的支持质押的 full node 上面需要运行 Execution client、Consensus client 和 Validator。通常是需要同时运行，听 Kenway from XHash 的说法，有一些算法的限制，防止不在同一台服务器上运行。开发者常用的查询以太坊信息、智能合约状态的服务其实就是通过 RPC 连接到了一个 Execution 客户端查询的。
+
+**Testing in Ethereum**
+
+很多客户端或者工具，测试挑战挺大的。包括比较常见的性能测试、压力测试、单元测试之类的。
+
+工作流程通常是：提出想法 -> 研究 -> 产出标准（EIP）-> 实施 -> 测试 -> 客户端升级更新。非常缓慢和漫长。
+
+通过 AllCoreDevs call、论坛 EthMagicians、Discord EthCatHerders 来沟通。当然未来还有 EIP Fun 这个社区和项目。
+
+**以太坊路线图**
+
+Vitalik 会周期性的更新，基本包括了整个以太坊的发展阶段以及接下来的一些重点工作等。
+
+关键词和概念：
+
+- Gossip Protocol <https://www.cs.umd.edu/~dml/papers/ethereum_fc21.pdf>
+- LMD GHOST
+- Ethereum Roadmap <https://domothy.com/roadmap/>
+
+**World State vs Accounts State：**
+
+World State 包含了整个以太坊网络的全部 state，是一个 mapping（TODO 有待验证或者找到原始数据），映射了所有的 Accounts 和 Contacts。通过 Merkle Patricia tree 数据结构来存储（TODO 存储位置？）。一个全新的以太坊钱包地址是没有办法在 World State 上被找到，因为之前没有过交易，所以不会被存储，否则这个钱包地址几乎无限，会导致 World State 太大。因此有些场景需要钱包进行至少一次交易才可以。
+
+Accounts State 就是比较具体的到某个地址的存储数据，包括 storageRoot, Balance 等等，后面详细介绍吧。
+
+除此之外，以太坊还包括 Transaction、Block 和 Blob 等数据，下图是一个简单的关系图（没有包括升级后的 Blob）。
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/24812a47-3032-4058-8af1-67bda046abd6)
+
+Credit: <https://www.lucassaldanha.com/author/lucas-saldanha/>
+
+TODO [Lucas Saldanha](https://www.lucassaldanha.com/author/lucas-saldanha/) 的博客有很多不错的图示，比较适合参考绘制以太坊
+
+#### [Week1](https://epf.wiki/#/eps/week1)
+
+#### Ethereum roadmap
+
+TODO https://twitter.com/EIPFun/status/1759938858286776710
+
+#### Merkle Patricia tree
+
+TODO 介绍下这个数据结构。这个数据结构用来存储 Ethereum World State，然后存储和验证数据比较高效。
+
+TODO 不错的介绍文章：
+
+- https://medium.com/cybermiles/diving-into-ethereums-world-state-c893102030ed
+- https://docs.dogechain.dog/docs/concepts/ethereum-state
+
+#### Trie 数据结构
+
+TODO 还有这个数据结构介绍一下。
+
 ### 4.6
 
 Week0 预习视频笔记：
