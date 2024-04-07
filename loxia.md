@@ -3,12 +3,54 @@
 哈喽大家，我是 loxia.eth，来这里补课学习一些基础且重要的知识，很高兴能来到这里和大家一起学习。
 
 目录：
+
+loxia week 0：
+
 4.5 ECDSA
-4.6 ECDSA。
+4.6 ECDSA
+4.7 Week 0，1学习
+
+loxia week 1：
 
 ## Notes
 
+### 2024.4.8
+
+Day4：通过 https://ethereum.org/quizzes
+测验对以太坊基础知识的了解，查漏补缺之后继续 Week2 的学习。
+
 ### 2024.4.7
+
+Day3：Week 0，1 内容学习，旨在查漏补缺，记录之前遗漏的部分。
+https://epf.wiki/#/eps/week0
+https://epf.wiki/#/eps/week1
+
+Week0内容笔记：
+
+前置知识：What is BitTorrent?  
+https://www.youtube.com/watch?v=xH00ikD1oDo
+
+BitTorrent允许所有节点自由传输自己整个文件中拥有的部分，从距离最近，传输最快的地方补全中间没有的部分，这会使得文件在网络中的传输比中心化服务器来得更快。
+
+BitTorrent的上传下载是不对称的，减少单一节点上传的压力，旨在利用所有可利用的上传带宽，因为在网络边缘的节点，人们下载的速度通常比上传的速度快得多。
+
+Wiki上有补充细节：https://zh.wikipedia.org/wiki/BitTorrent_(%E5%8D%8F%E8%AE%AE)
+
+Week1内容笔记：
+
+史前史和 ETH 的基础哲思：UNIX，自由软件运动 FOSS（Free and Open Source Software），非对称加密密码学
+
+以太坊协议设计：白皮书为概述，黄皮书为技术说明，更新在 EIPs (Ethereum Improvement Proposals) 中体现。https://eips.ethereum.org/
+
+更新的基本原则：Simplicity, Universality, Modularity, Non-discrimination, Agility：简单性、通用性、模块化、非歧视性、敏捷性
+
+客户端的实现分为 CL 和 EL 层，细节会在之后详细了解。以太坊的测试和测试标准很重要，之后也会详细了解。
+
+在以太坊中，社区的想法和建议的更改在这里: https://eips.ethereum.org/EIPS/eip-1
+
+讨论核心升级的最集中的地方在这里：https://ethresear.ch/
+
+另一个与 EIP 流程相关的论坛，用于讨论具体提案：https://ethereum-magicians.org/
 
 
 
@@ -63,6 +105,7 @@ https://web.archive.org/web/20240229045603/https://lsongnotes.wordpress.com/2018
 ### 2024.4.5
 
 Start here！从 epf.wiki 的底部目录先开始看吧，我一直没有看过椭圆曲线签名的细节，今儿个来学学数学~~~
+https://epf.wiki/#/wiki/Cryptography/ecdsa
 
 ECDSA: Elliptic Curve Digital Signature Algorithm
 ECC: Elliptic curve cryptography
