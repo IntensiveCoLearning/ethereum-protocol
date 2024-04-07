@@ -4,12 +4,50 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
-### 4.8
+### 4.9
 
 TODO
 
-- https://epf.wiki/#/eps/week1 把官方资料过一下，避免太发散了，不要看太多
+- https://epf.wiki/#/eps/week1 把官方资料过一下，避免太发散了，不要看太多，Week1 的完成
 - https://twitter.com/EIPFun/status/1759938858286776710 路线图大概了解几个关键阶段和节奏
+
+### 4.8
+
+发现了个宝藏博主，把以太坊节点在本地电脑上跑起来了。教程：https://blog.wssh.trade/posts/ethereum-node/。
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/0cbf9fb6-6a63-4a87-9287-3614ca63c273)
+
+还需要两天时间完成同步。
+
+#### [Week1](https://epf.wiki/#/eps/week1)
+
+PDF 课件资料：
+
+- 以太坊设计思想：Unix philosophy, FOSS, Cryptography and Cypherpunks
+- Cypherpunks：Cypherpunks write code... Our code is free for all to use, worldwide. We don't much care if you don't approve of the software we write. We know that software can't be destroyed and that a widely dispersed system can't be shut down. ——Eric Hughes, Cypherpunk Manifesto, 1993
+- Cryptoanarchy：Just as the technology of printing altered and reduced the power of medieval guilds and the social power structure, so too will cryptologic methods fundamentally alter the nature of corporations and of government interference in economic transactions. Combined with emerging information markets, crypto anarchy will create a liquid market for any and all material which can be put into words and pictures. —— Timothy C. May https://activism.net/cypherpunk/crypto-anarchy.html
+  - 看 The Crypto Anarchist Manifesto 加密无政府主义者宣言，莫名其妙联想到了星灵的黑暗圣堂武士，因为拒绝加入卡拉（主流思想）被放逐，练就了独特的能力，关键时刻回归拯救了世界。
+
+预习资料：
+
+- 交易的工作流程：操作数据 + 签名 发给 EVM 运算得到结果，更新到 Account Storage，之后被 CL attest 加入到 blockchain 上面 ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/cee81703-2825-41f4-97ef-b8bb89759cd8)
+- 一个 Block 最多容纳 3000 万 gas
+- gas fee 计算公式 = (base_fee + priority_fee) \* gas_used
+  - base_fee 就是基础的平台 gas，交易越多越高，反映了整个平台的
+  - priority_fee 是小费，你愿意多给，交易就可以越快打包或者被选中
+  - gas_used 就是具体使用的量，比如一个 tx 是 21000 gas，每一个指令或者存储都会有相应的 gas 用量
+    - 每个 EVM 字节码的 gas 消耗 https://www.evm.codes/?fork=cancun
+    - Editing a storage slot costs 5000 gas, 20000 if slot not filled yet（TODO slot 是如何存储的？）
+    - 存储一个 byte 花费 16 gas，如果是 zero byte 是 4 gas
+  - 如果很难理解这几个关系和概念，可以把 gas 想象成汽油，每次出行根据需求和复杂度路途不一样，烧的汽油不一样，加油的时候油价是浮动的，根据供需进行调整。如果你比较紧急不想排队，也可以多出价格高价买油。
+  - TODO 写一个小科普 Max priority fee, Max fee, Gas limit 的关系和区别
+- Full transaction object ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/5abe2fe1-bd1a-4619-ad09-03c595c80a30)
+- ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/931e19e5-5cbd-4254-8412-a7a8138932f9)
+- ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/55ae4d3a-b425-459f-8999-d165ca0ce633) TODO attest 过程是怎么样的？
+- ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/6fcd89fd-ab19-45e7-a61d-f1b890df173c) 简单的应用马上就可以确认，复杂的比较重要的应用，可以等 2 个 epoch 确认
+- ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/44afef0b-0727-4fe7-bdbd-3bb5d4cb616c)
+
+TODO Next steps in the Purge https://notes.ethereum.org/@vbuterin/purge_2024_03_31
 
 ### 4.7
 
@@ -66,6 +104,8 @@ Vitalik 会周期性的更新，基本包括了整个以太坊的发展阶段以
 - Gossip Protocol <https://www.cs.umd.edu/~dml/papers/ethereum_fc21.pdf>
 - LMD GHOST
 - Ethereum Roadmap <https://domothy.com/roadmap/>
+- Epoch：1 Epoch = 32 slots or 6.4 minutes
+- Slot：一个 block，大概 12s 出一个
 
 **World State vs Accounts State：**
 
@@ -80,8 +120,6 @@ Accounts State 就是比较具体的到某个地址的存储数据，包括 stor
 Credit: <https://www.lucassaldanha.com/author/lucas-saldanha/>
 
 TODO [Lucas Saldanha](https://www.lucassaldanha.com/author/lucas-saldanha/) 的博客有很多不错的图示，比较适合参考绘制以太坊
-
-#### [Week1](https://epf.wiki/#/eps/week1)
 
 #### Ethereum roadmap
 
