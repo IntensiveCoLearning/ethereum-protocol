@@ -4,6 +4,10 @@
 
 ## Notes
 
+### 2024.4.7
+
+理解state结构和state trie，开始输出学习收获
+
 ### 2024.4.6
 
 继续阅读go-ethereum源代码，现在进入core理解state中
