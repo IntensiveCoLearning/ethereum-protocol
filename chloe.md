@@ -72,3 +72,72 @@ Brief notes
 ### 2024.4.6 Week 7R Verkle tree summary notes
 - Review & Summarize Week 7 Verkle tree lecture: https://ab9jvcjkej.feishu.cn/docx/C6VMdpDDHoRq2XxGmKicy0E3nng
 
+### 2024.4.7 Working on Week 7D Reth Architecture notes
+Intro on Reth
+Recap on Reth
+- What is Reth?
+  - Reth is an Ethereum execution client, which started in Sep 2022
+    - Introducing Reth blog: https://www.paradigm.xyz/2022/12/reth
+  - Alpha stage released in June 2023
+    - Releasing Reth blog: https://www.paradigm.xyz/2023/06/reth-alpha
+  - Beta stage released in March 2024
+    - Announcing Reth beta blog: https://www.paradigm.xyz/2024/03/reth-beta
+- Why Reth?
+  - Client diversity: Need more client implementations for staking
+  - Talent resilience: Need more clients to onboard more new core devs, and more eyes on Ethereum protocols
+  - Client scalability: Need clients built for a high gas per second L2 world
+  - Code extensibility: Need clients that are easy to extend with principle, without cowboy forking/ rebasing
+- 2024 Goals
+  - Credible alternative client for L1 Ethereum usage
+  - Fastest L2 EVM client
+  - State of the art framework for building EVM infra
+- What has Reth done so far?
+  - Reth github: https://github.com/paradigmxyz/reth
+  - Inclusive open source culture & shipping
+- Reth's performance benchmark
+  - Sync speed
+    - Historical sync: 2-4k mg/second
+      - Sync historical blocks
+    - Live sync: 100-200 mg/second
+      - incl. new blocks and check state root for every block
+  - Tools used for benchmarking
+    - Flood: a load testing tool for benchmarking EVM nodes over RPC
+      - Github: https://github.com/paradigmxyz/flood
+    - Cryo: the easiest way to extract blockchain data to parquet, csv, json, or a python dataframe
+      - Github: https://github.com/paradigmxyz/cryo
+- Beta version: 0.2.0 beta.4
+  - Current status
+    - L1: Cancun ready, tested on Devnets/ Sepolia etc.
+    - L2: Support OP stack for usage in L2/ L3s, aka OP Reth
+    - Stress tested on EF's EVM fuzzing/ chaos testing, for staking & RPC
+    - State of the art performance on all axes except block notifications
+    - Snapshot sync done by the Merkle: https://snapshots.merkle.io/
+    - Full JSON-RPC incl. Geth-style & Parity style traces
+    - Protocol guild/ RetroPGF recipients for impact, to be redistributed
+  - Docs
+    - Extensive Docs: https://paradigmxyz.github.io/reth/
+- Production ready?
+  - Production ready in May
+    - Reth audit with Sigma Prime (Lighthouse)
+    - REVM fuzzing engagement with Guido Vranken (#1 ETH bug bounty leaderboard)
+2024 Roadmap
+- 3 tracks & mission
+  - Core development: Ethereum resilience
+    - Cancun: already shipped
+    - Ship Electra ASAP: EOF, Verkle tries, Account abstraction
+    - Contribute to core dev process with precise writing & benchmarking
+  - Performance: Maximize gas per second
+    - Parallel EVM: Parallelized execution for any historical/ live sync, builder, or sequencer use cases. Each one is different.
+    - JIT/AOT EVM: Run native code instead of interpreter overhead
+    - Optimized state commitment: Parallelized state root calculation + new algos
+    - Optimal database: Replace MDBX with firewood/ MonadDB-style DB or new perfect hash table index-based design
+    - Rigorous benchmarking: Regression testing in CL, aggressive systems optimization
+  - Reth Kernel: State of the art EVM infra in <1 day
+    - Reth Kernel is the SDK for building bleeding-edge EVM infra
+    - Node builder API: Puggable componenets, stop forking nodes
+    - Library usage: Build p2p crawlers, indexers, simulations APIs, MEV bots etc.
+    - Import Rust node infra and run as one:
+      - Rethhouse = Reth + Lighthouse = CL + EL in 1 binary
+      - Reth + Helios = Light client CL + EL in 1 binary
+      - OP Reth + Reth + Helios + Magi = L1 CL/EL + L2 CL/EL in 1 binary
+    - Project idea: Testnet rollup w/ customer EIPs?
