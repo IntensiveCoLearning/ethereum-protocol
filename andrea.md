@@ -5,7 +5,9 @@
 ## Notes
 ### 2024.4.7
 DFS我昨天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
-- counter-party risk
+
+counter-party risk
+
 [Ethereum Virtual Machine | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/evm) Resources -- Further reading
 #### Downsides of the Ethereum Virtual Machine
 •   **The EVM network isn’t entirely decentralized.** The vast majority of Ethereum nodes are hosted on centralized cloud servers like Amazon Web Services. If the owners of such services decide they don’t like Ethereum for some reason, the nodes could easily be shut down, damaging or destroying the network. This has happened before with certain social media apps, for example.
@@ -20,7 +22,9 @@ From [What Is the Ethereum Virtual Machine (EVM)? | SoFi](https://www.sofi.com/l
 
 EVM 操作码：死去的汇编记忆又复活了 🫠
 - `CALLER` 获取调用者的地址
-- `CALLVALUE` 获取随调用（交易）发送的 eth 数量 
+  
+- `CALLVALUE` 获取随调用（交易）发送的 eth 数量
+
 - `NUMBER` 获取当前区块的编号
 - `LT`（Less Than）：此操作码用于比较栈顶的两个元素。如果第一个元素小于第二个元素，则将 1（真）压入栈顶；否则，压入 0（假）。
 - `GT`（Greater Than）：此操作码类似于 `LT`，但用于检查第一个元素是否大于第二个元素。如果第一个元素大于第二个元素，则将 1（真）压入栈顶；否则，压入 0（假）。
