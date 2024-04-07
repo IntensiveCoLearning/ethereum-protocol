@@ -96,3 +96,26 @@ Hash 是将任意长度的输入数据通过哈希函数转换成固定长度的
 - https://www.routledge.com/Absolute-Essentials-of-Ethereum/Dylan-Ennis/p/book/9781032334189
 - https://github.com/ethereumbook/ethereumbook
 - 还有一个 Ethereum quiz，明天可以做一下
+
+### 2024.4.7
+
+今天做了一下以太坊官网上的 quizzes，可以很明显的看出自己哪些内容需要学习，特别是 Using Ethereum 部分，链接：https://ethereum.org/en/quizzes/，今天就先整理一下错题。
+
+1. 以太坊的共识层在被叫做共识层之前是被称作 Eth2 的，但是在升级之后如果有人拿 Eth2 来表示 Eth 的升级后版本，一般都是诈骗的。
+2. 这道题问的是哪个选项是用来扩展以太坊的，Layer2 rollups 捆绑交易、Proto-Danksharding 为这些数据创建廉价的临时存储、Danksharding 共享存储负担，使所有 validator 都能访问。
+3. Proto-Danksharding 是如何在 rollups 上降低 rollup transaction 花费的？
+   Proto-Danksharding 创建了临时的 ”blob“ 存储，可以让 rollups 更加便宜的将结果发布到主网。
+
+4. 对于 rollups 扩展以太坊的关键的下一步是什么？
+   将 sequencers 和 provers 的责任分散到更多人的身上。对 rollup 的控制是从中心化开始的，因为这有助于启动，但也使 network 容易收到审查。将交易过程去中心化处理，使任何人都可以参与其中，对防止网络被妥协的可能性至关重要。
+
+5. 如果你的节点离线了会发生什么？
+   当你的节点不在线的时候，它将不能从节点同步接收到新的交易和区块，所以会跟链上的当前状态脱节。重新连接到网络将使你的节点软件重新同步，以便再次完全正常运行。
+
+6. 一个 validator 要获得盈利的正常运行时间是多少？
+   答案是大约 50%，处于离线状态的时间如果是 50%，仍然可以实现盈利，但是比那些更加可靠可用的 validator 要少。
+
+7. 如果一个 validator 离线了会发生什么？
+   当 validator 不可用时，会产生小额的 inactivity 惩罚，大约等于正确证明所获奖励的 75%。在罕见/极端情况下，如果 network 未完成最终状态（即超过 network 的 1/3 也处于离线状态），这些惩罚将显著增加。当 validator 恢复在线时，奖励会恢复，不会发生惩罚。
+
+8. 运行被大多数其他 validator 使用的 client 会是你在该 client 存在软件错误的情况下面临被 slashed 的风险，而运行少数人使用的 client 可以防止这种情况发生。
