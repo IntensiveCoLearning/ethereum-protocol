@@ -4,6 +4,20 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.8
+
+今天学习了一下 EVM
+
+参考资料：
+
+- https://inevitableeth.com/home/ethereum/evm
+- https://ethereum.org/en/developers/docs/evm/
+- 图解 EVM（推荐！）：https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf
+
+EVM（Ethereum Virtual Machine）是以太坊的计算平台，是以太坊的核心组成部分，是智能合约的运行时环境，是图灵完备的分布式状态机（以太坊不是像 BTC 一样的分布式账本，除了保存所有账户和余额，它还保存了一个机器状态），是基于栈（stack）的虚拟机。它还提供了一个沙盒环境，保证了智能合约的执行是隔离的，不受外界因素影响，确保了安全性和稳定性。EVM 还内置了加密学函数，包括哈希和数字签名算法，使智能合约能够进行安全的加密操作。
+
+EVM 兼容是指提供了类似 EVM 的代码执行环境，可以方便以太坊开发者将智能合约迁移至兼容链/平台，不用再重新开发一遍。比如：BSC、Polygon、Avalanche、HECO 等。
+
 ### 2024.4.7
 
 今天做了一下以太坊官网上的 [quizzes](https://ethereum.org/en/quizzes/)，可以很明显的看出自己哪些内容需要学习，特别是 Using Ethereum 部分，今天就先整理一下错题。
