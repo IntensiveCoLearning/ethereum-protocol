@@ -12,6 +12,7 @@
 Well, we'll just distribute it across the P2P network!好吧，我们将通过 P2P 网络分发它！
 Here's what's important: each node will download just a small data sample from each blob. No single node will be required hold an entire blob, just tiny fractions. These tiny fractions will be efficiently distributed across the network to ensure that it is always available.重要的是：每个节点只会从每个 blob 下载一个小数据样本。不需要单个节点保存整个 blob，只需要保存很小的部分。这些微小的部分将有效地分布在网络上，以确保它始终可用。
 Upon request, the network will be able to quickly/efficiently reconstruct a blob. 根据请求，网络将能够快速/高效地重建 blob。
+
 BT用户就很熟悉了。。。
 想起来之前看的 telegra.ph/白话解读区块链不可能三角的变革性解决方案-03-17，感觉讲的更深入浅出一点，但现在结合来看又有新收获
 
