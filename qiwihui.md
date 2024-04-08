@@ -184,3 +184,83 @@ Ethereum design rationale(outdated but still worth learning)
         - Not having a stack size limit
         - Having a 1024 call depth limit
         - No types
+
+### 2024.4.9
+
+Merkle Patricia Trie
+
+1. Ethereum uses 3 trie structures: stateRoot, transactionRoot, and receiptsRoot.
+![image](https://github.com/qiwihui/intensive-ethereum-protocol-study-group/assets/3297411/61a00bf1-79ce-46f8-addb-756e546fb314)
+    - state trie / world state trie
+        - a mapping between account addresses and the account states including balance, nonce, codeHash, and storageRoot
+        - the key is a 160 bit address of an Ethereum account
+        - storageRoot: an account storage trie, the contract data associated with an account, the hash of the root node
+    - Transaction trie
+        - created on the list of transactions within a block, the path is tracked based on the position of the transaction within the block
+        - once minted, never updated
+        - transactionRoot is the hash of the root node
+    - Receipt trie
+        - the result of the transaction which is executed successfully
+        - consists of four items: status code of the transaction, cumulative gas used, transaction logs, Bloom filter
+        - the key is an index of transactions in the block
+        - never get updated
+        - receiptsRoot is the hash of the root node
+2. The value in the trie often consists of multiple data items, Ethereum uses `Recursive Length Prefix` (RLP) encoding for data structures
+3. Ethereum Merkle-Patricia Trie
+![YZGxe (1)](https://github.com/qiwihui/intensive-ethereum-protocol-study-group/assets/3297411/e555a2ba-27e8-40d2-a32f-cb4b26c6672f)
+4. An [example](https://ethereum.stackexchange.com/a/39918/91862) of inserting 3  key-value pairs into trie:
+
+```text
+"0x01": 1
+"0x01234": 2
+"0x01235": 3
+```
+
+after `0x01` is inserted, hash0 is root
+
+```text
+<hash0> leaf ["0x01", 1]
+```
+
+After `0x01234` is inserted, hash1 is root
+
+```text
+<hash1> extension ["0x01", <hash2>]
+<hash2> branch [NULL,NULL,<hash3>,..<13 NULLs>.., 1]
+<hash3> leaf ["0x34", 2]
+```
+
+After `0x01235` is inserted, hash4 is root:
+
+```text
+<hash4> extension ["0x01", <hash5>]
+<hash5> branch [NULL,NULL,<hash6>,..<13 NULLs>.., 1]
+<hash6> extension ["0x3", <hash7>]
+<hash7> branch [NULL,NULL,NULL,NULL,<hash8>,<hash9>..<10 NULLs>.., NULL]
+<hash8> leaf ["", 2]
+<hash9> leaf ["", 3]
+```
+
+Generally, while inserting a key-value pair:
+
+- if you stopped at a NULL node, you add a new leaf node with the remaining path and replace NULL with the hash of the new leaf.
+- if you stopped at a leaf node, you need to convert it to an extension node and add a new branch and 1 or 2 leafs.
+- if you stopped at an extension node, you convert it to another extension with shorter path and create a new branch and 1 or 2 leafs. If the new path turns out to be empty you convert it to a branch instead.
+
+When deleting a key-value pair:
+
+- if there is a branch that has a single non NULL nibble and NULL value, this branch can be replaced with a leaf or an extension.
+- if there is an extension that points to another extension or a leaf, it can be collapsed into a single extension/leaf.
+- if there is branch with all NULL nibbles and non NULL value, it can be converted into a leaf.
+
+When adding/deleting key-value pairs the algorithm can make the decision locally at the current node, there is no need to create an unpacked version of the trie first and then pack it.
+
+5. Why Merkle Patricia trie?
+    - quick re-calculation of root hash when updates
+    - easy detection of data changes
+    - Querying is easy without requiring re-computation of the whole trie.
+
+6. Merkle Vs Merkle-Patricia
+    - Root of a Merkle Patricia trie does not depend on the order of data while Merkle root depends on.
+    - Tree size of Merkle Patricia trie is lower than a standard Merkle tree due to prefix based compression techniques.
+    - Merkle patricia tries are faster than Merkle trees, but the implementation is complicated.
