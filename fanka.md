@@ -4,6 +4,10 @@
 
 ## Notes
 
+### 2024.4.8
+
+完成对state和trie的理解，输出学习文档，投稿在openbuild：https://github.com/openbuildxyz/OpenContent/pull/36
+
 ### 2024.4.7
 
 理解state结构和state trie，开始输出学习收获
