@@ -9,15 +9,37 @@ loxia week 0：
 4.5 ECDSA
 4.6 ECDSA
 4.7 Week 0，1学习
+4.8 做了一些测试，补充些 rollup 和 L2 的基础知识
 
 loxia week 1：
 
 ## Notes
 
+### 2024.4.9
+
+Week2 EL层细节
+
+
 ### 2024.4.8
 
 Day4：通过 https://ethereum.org/quizzes
 测验对以太坊基础知识的了解，查漏补缺之后继续 Week2 的学习。
+
+Gavin Wood 在15年发布以太坊后创立了 Web3 这个名词。
+账户和钱包不是一个东西，钱包是通向以太坊账户的界面。
+
+Rollups 扩展以太坊的下一步关键步骤是什么？
+将运行 sequencer 和 provers 的责任分配给更多人。
+
+Proto-Danksharding 为 rollups 引入了临时数据存储选项，使他们能够更便宜地将结果发布到主网
+
+Question number 2:What hard drive storage is required for an Ethereum node?：2 TB SSD
+
+Using the same client as a majority of the rest of the network puts you at risk for being slashed in the event of a software bug in that client. Running a minority client protects against this.
+
+solo staking 时，仅仅离线并不会导致 slashing。 离线时这将导致轻微的不活动处罚，但返回在线后将恢复证明。
+
+validator 需要正常运行 50% 以上的时间才能盈利，Validators are penalized approximately 75% of what they would have been rewarded for correctly and promptly attesting to the state of the chain. This means for a given time period, being offline 50% of that time will still be net profitable, albeit less profitable than a more reliably available validator.
 
 ### 2024.4.7
 
