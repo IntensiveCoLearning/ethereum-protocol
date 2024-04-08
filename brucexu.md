@@ -11,6 +11,34 @@ TODO
 - https://epf.wiki/#/eps/week1 把官方资料过一下，避免太发散了，不要看太多，Week1 的完成
 - https://twitter.com/EIPFun/status/1759938858286776710 路线图大概了解几个关键阶段和节奏
 
+#### [Inevitable Ethereum](https://inevitableeth.com/home/ethereum/world-computer)
+
+先提了一下人类演进，提出了人类协作以及通过钱作为协作的介质，这个角度挺有意思的。钱是人类分配时间、资源、能量的重要协调工具。所以延伸到区块链的价值，可以提供比较高效可靠的资金相关。
+
+EVM 就是一个图灵完备的状态机。
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/24cba54d-53c7-4330-b970-6290e048e5e7)
+
+Printing Press Revolution
+
+印刷机的出现，引发了社会变革。实际上是加速了人类的知识和思想传播，引发了更多思考带来的。区块链最大的问题就是人们理解区块链需要时间。
+
+Statelessness is a nuanced topic worth reading more about, but the idea can be summarized as "using cryptography to trustlessly access the EVM without having to store it locally."
+
+The Portal Network is (will be) an independent network of computers dedicated to capturing and serving the data needed to serve light clients.
+
+Light clients will query the Portal Network for proofs, mempools anything a its needs to verify the hashes created by Ethereum.
+
+TODO ultra sound money 的背景了解一下
+
+In the Ethereum endgame, ETH is the global currency of trustless trust. ETH is how we can coordinate without centralization. Ethereum is inevitable.
+
+#### [week1](https://epf.wiki/#/eps/week1)
+
+The coordination mainly happens via regular calls which are scheduled in the [PM](https://github.com/ethereum/pm) repo. There are different kinds of developer calls with the biggest one being All Core Devs (ACD). This is where representatives of all involved teams come to discuss the current development of the consensus or execution layer.
+
+其他的都看完了，在之前的部分。
+
 ### 4.8
 
 发现了个宝藏博主，把以太坊节点在本地电脑上跑起来了。教程：https://blog.wssh.trade/posts/ethereum-node/。
