@@ -26,7 +26,7 @@ Several projects have created tools to attempt making bytecode more readable. Fo
 
 Contract calls usually require an “**ABI**” (**_A_**_pplication_ **_B_**_inary_ **_I_**_nterface_), which is a piece of data documenting all functions and events, including their needed input and output. When calling a function on a contract, the _function signature_ is determined by hashing the name of the function including its inputs (using [keccak256](https://en.wikipedia.org/wiki/SHA-3)), and truncating everything but the first **4 bytes**.
 
-As you can see in the image above, our function `**HelloWorld()**` resolves to the signature hash `**0x7fffb7bd**`. If we would like to call this function, our transaction data needs to start with 0x7fffb7bd. Arguments which need to be passed to a function (none in this case) can be added in **32-byte pieces** called **words** after the signature hash in a transaction’s input data.
+As you can see in the image above, our function `HelloWorld()` resolves to the signature hash `0x7fffb7bd`. If we would like to call this function, our transaction data needs to start with 0x7fffb7bd. Arguments which need to be passed to a function (none in this case) can be added in **32-byte pieces** called **words** after the signature hash in a transaction’s input data.
 
 If an argument contains over 32 bytes (256 bits) of data, like an array or string, the argument is split into multiple words which are added to the input data after all other arguments have been included. Moreover, the total size of all words gets included as another word, before all array words. At the location where the argument would have been included, the start position of the array words (including the size word) is added instead.
 ### 2024.4.7
