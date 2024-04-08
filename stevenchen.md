@@ -8,9 +8,11 @@ X/tele/ig: @im24steven
 
 ## The Protocol: Data Structures
 
+Regarding my original BG, I will be looking at what's the detailed, optimized data structure of ETH, e.g., what's in each tries that got hashed into the Merkle root within each block, so that how different kinds of databases can be built.  
+
 ### 04/05
 
-Referencing: https://epf.wiki/#/wiki/protocol/data-structures?id=data-structures-in-ethereum 
+[Reference](https://epf.wiki/#/wiki/protocol/data-structures?id=data-structures-in-ethereum)
 
 
 
@@ -62,7 +64,14 @@ Insight: 1. Efficient data retrieval in MPT. 2. translating MPT into relational 
  - "The main difference between the Verkle tree and the Merkle tree structure is that the Verkle tree is much flatter, meaning there are fewer intermediate nodes linking a leaf to the root, and therefore less data required to generate a proof." [eth org](https://ethereum.org/en/roadmap/verkle-trees/)
 	
 	[Merkle Tree Path Visualize](https://efficient-merkle-trees.netlify.app)
-	
+
+## Execution Layer: EVM
+
+### 04/07
+1. 
+
+
+
 
 
 
