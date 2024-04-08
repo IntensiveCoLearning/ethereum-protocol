@@ -14,7 +14,7 @@
 
   * 搜了搜关于 Houwu Chen 的信息，大概是早期 [Pyethereum 的开发者](https://blog.ethereum.org/2014/04/10/pyethereum-and-serpent-programming-guide)
     *  [照片](https://web.archive.org/web/20140509173418/https://www.ethereum.org/)
-    *  [Sky: Opinion Dynamics Based Consensus for P2P Network with Trust Relationships](https://arxiv.org/abs/1501.06238v8) 这文章粗看应该挺有料的，但后来撤稿了
+    *  [Sky: Opinion Dynamics Based Consensus for P2P Network with Trust Relationships](https://arxiv.org/abs/1501.06238v8) 这文章粗看应该挺有料的，但后来撤稿了。这文章致谢了万向的[BlockGrant X](https://web.archive.org/web/20151219053234/http://blockchainlabs.org/blockgrant-x-en/)，但看不出来具体是哪项。
 
 
 ### 2024.4.7
