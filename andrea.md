@@ -3,6 +3,32 @@
 区块链萌新
 
 ## Notes
+### 2024.4.8
+继续我昨天看的文章[The Ethereum Virtual Machine — How does it work? | by Luit Hollander | MyCrypto | Medium](https://medium.com/mycrypto/the-ethereum-virtual-machine-how-does-it-work-9abac2b7c9e)
+
+the opcode **KECCAK256** (formerly known as **SHA3**) has a base cost of **30 gas**, and a dynamic cost of **6 gas per word** (words are 256-bit items). Computationally expensive instructions charge a higher gas fee than simple, straightforward instructions. On top of that, every transaction starts at **21000 gas**.
+
+When executing instructions which reduce state size, gas can also be refunded. Setting a storage value to zero from non-zero refunds **15000 gas**, while completely removing a contract (using the **SELFDESTRUCT** opcode) refunds **24000 gas**. Refunds only occur after contract execution has completed, thus contracts cannot pay for themselves. Additionally, a refund cannot exceed half the gas used for the current contract call.
+
+When deploying a smart contract, a regular transaction is created, without a `to` address. Additionally, some bytecode is added as input data. This bytecode acts as a **_constructor_**, which is needed to write initial variables to storage before copying the **_runtime bytecode_** to the contract’s code. During deployment, creation bytecode will only run **once**, while runtime bytecode will run **on every contract call**.
+
+At the end of this bytecode, a [**Swarm hash**](https://github.com/ethereum/wiki/wiki/Swarm-Hash) of a [**metadata file**](https://solidity.readthedocs.io/en/v0.5.2/metadata.html) created by Solidity gets appended. Swarm is a distributed storage platform and content distribution service, or, more simply stated: a decentralized file storage. Although the Swarm hash will also be included in the runtime bytecode, it will never be interpreted as opcodes by the EVM, because its location can never be reached. Currently, Solidity utilizes the following format:
+
+`0xa1 0x65 'b' 'z' 'z' 'r' '0' 0x58 0x20 [32 bytes swarm hash] 0x00 0x29`
+
+Therefore, in this case, we can extract the following Swarm hash:
+
+`4e048d6cab20eb0d9f95671510277b55a61a582250e04db7f6587a1bebc134d2`  
+  
+The metadata file contains various information about the contract, such as the compiler version or the contract’s functions. Unfortunately, this is an experimental feature, and not many contracts have publicly uploaded their metadata to the Swarm network.
+
+Several projects have created tools to attempt making bytecode more readable. For example, you can try decompiling a contract on mainnet using [**eveem.org**](https://eveem.org/) or [**ethervm.io**](https://ethervm.io/). Unfortunately, some parts of the original contract source, such as functions names or event names, are always lost due to optimization done by the compiler. Nonetheless, most function names can still be brute forced by comparing function signatures to large datasets containing popular function and event names (see [**4byte.directory**](https://www.4byte.directory/)).
+
+Contract calls usually require an “**ABI**” (**_A_**_pplication_ **_B_**_inary_ **_I_**_nterface_), which is a piece of data documenting all functions and events, including their needed input and output. When calling a function on a contract, the _function signature_ is determined by hashing the name of the function including its inputs (using [keccak256](https://en.wikipedia.org/wiki/SHA-3)), and truncating everything but the first **4 bytes**.
+
+As you can see in the image above, our function `**HelloWorld()**` resolves to the signature hash `**0x7fffb7bd**`. If we would like to call this function, our transaction data needs to start with 0x7fffb7bd. Arguments which need to be passed to a function (none in this case) can be added in **32-byte pieces** called **words** after the signature hash in a transaction’s input data.
+
+If an argument contains over 32 bytes (256 bits) of data, like an array or string, the argument is split into multiple words which are added to the input data after all other arguments have been included. Moreover, the total size of all words gets included as another word, before all array words. At the location where the argument would have been included, the start position of the array words (including the size word) is added instead.
 ### 2024.4.7
 DFS我昨天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
 
