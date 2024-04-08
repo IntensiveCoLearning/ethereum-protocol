@@ -98,4 +98,45 @@ Proof of Work（POW）和Proof of Stake（POS）是两种常见的共识算法�
   - CL 没有实现，因为它只是将执行负载发送到执行引擎，然后执行客户端将执行状态转换功能。
   - Spec link: https://github.com/ethereum/consensus-specs/blob/dev/specs/deneb/beacon-chain.md#modified-notify_new_payload
   
-今天少来点，利物浦和曼联要开打了，打死曼联
+### 4.8
+#### Week2 notes
+接上文
+  Excution layer (EL): Simple illustration written in Go
+![alt text](img/step/ELinGO.png)
+
+
+状态转换函数 State transition function (STF)
+- 所需参数
+  - Parent block:(需要验证从父块到当前块的转换逻辑)
+  - Current block
+  - StateDB:(最后一个已知的有效状态，它存储与父块相关的所有状态数据)
+- 返回结果
+  - 更新状态数据库(StateDB):包括当前block的信息
+  - Error(函数失败，状态数据库未更新)
+- step 1：验证headers
+  - 可能导致error
+    - Gas limit 变化超过前一个block的 1/1024
+    - block编号不连续
+    - EIP-1559 基本费用未正确更新
+    - etc.
+- Step 2: Apply the Tx if the headers are correct
+  - 范围覆盖block tx，通过 VM 执行每个 tx，如果 tx 正确则更新状态
+  - 可能导致error
+    - 有一个无效的tx，则整个block无效，并且状态不会更新
+- Wrap function eg. newPayload
+  - 需要的参数 
+    - 执行负载（Execution payload）
+  - 返回的结果
+    - Return bool to the beacon chain
+    - beacon chain 再call STF
+- Q&A
+- Why put block.header() into the vm.Run?
+  - There are 2 pieces of context needed when executing the tx
+    - The state: eg. Contract code, storage within the account etc.
+    - The block context: eg. Parent hash, previous randao, base fee etc.
+- The STF is called by the CL and gets returned whether it's valid. If it's not valid, what happens to CL?
+  - The block is gonna be rejected.
+##### Block building
+illustration written in Go
+###### Build Function
+![alt text](img/step/BuildFunction.png)
