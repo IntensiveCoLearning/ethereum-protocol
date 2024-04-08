@@ -4,6 +4,19 @@
 
 ## Notes
 
+### 2024.4.8
+
+今天搁置了 spec 学习
+
+看了一篇 [ICO 旧文](https://web.archive.org/web/20210818204534/https://www.newyorker.com/tech/annals-of-technology/pumpers-dumpers-and-shills-the-skycoin-saga)
+
+> He boasted that Obelisk was written by Houwu Chen, a developer who had worked on Ethereum, the second-most popular cryptocurrency platform. He posted an academic paper written by Chen on the Skycoin Web site, claiming that it was a Skycoin white paper. But when Stephens reached out to Chen, he got no response. “We kept trying to chase people down to ask details, and it was slowly revealed it just . . . didn’t exist,” he told me. In a later discussion about technical details, a Skycoin “community manager” told coinholders that “it’s too advanced to share” and that the company “can’t trust the public with it.” When pressed, Smietana wrote, of Chen, “He is a recluse, I doubt anyone can contact him or he would respond.” Smietana eventually told me that Chen had taken a payment of a million Skycoins for his work on the white paper and then left the project. (Chen declined to comment, saying, “Just don’t put my name in the article. That’s my statement.”)
+
+  * 搜了搜关于 Houwu Chen 的信息，大概是早期 [Pyethereum 的开发者](https://blog.ethereum.org/2014/04/10/pyethereum-and-serpent-programming-guide)
+    *  [照片](https://web.archive.org/web/20140509173418/https://www.ethereum.org/)
+    *  [Sky: Opinion Dynamics Based Consensus for P2P Network with Trust Relationships](https://arxiv.org/abs/1501.06238v8) 这文章粗看应该挺有料的，但后来撤稿了
+
+
 ### 2024.4.7
 
 读了一些旧历史
