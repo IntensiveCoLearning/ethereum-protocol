@@ -72,7 +72,7 @@ Brief notes
 ### 2024.4.6 Week 7R Verkle tree summary notes
 - Review & Summarize Week 7 Verkle tree lecture: https://ab9jvcjkej.feishu.cn/docx/C6VMdpDDHoRq2XxGmKicy0E3nng
 
-### 2024.4.7 Working on Week 7D Reth Architecture notes
+### 2024.4.7 Working on Week 7D Reth (EL client) Architecture notes
 Intro on Reth
 Recap on Reth
 - What is Reth?
@@ -141,3 +141,35 @@ Recap on Reth
       - Reth + Helios = Light client CL + EL in 1 binary
       - OP Reth + Reth + Helios + Magi = L1 CL/EL + L2 CL/EL in 1 binary
     - Project idea: Testnet rollup w/ customer EIPs?
+
+### 2024.4.8 Working on Week 8D Teku (CL client) Architecture brief notes
+Guest speaker
+- Paul Harris, Lead protocol engineer at Teku
+    - Senior staff blockchain protocol engineer at Consensys
+    - CL client Teku developer
+    - Beacon-api maintainer
+    - Keymanager-api maintainer
+
+Summary notes
+Teku CL client
+- Team of Teku
+  - 7 software engineers: 4 in EU, 3 in APAC
+- High level overview
+  - Key drivers of each CL client
+    - CL spec
+    - Execution API: interface to CL
+    - Standard REST api's: beacon-api, keymanager-api, builder-api
+    - Client team direction: eg. Teku currently doesn't implement lightclient
+- Rules: CL and EL both define open specs
+  - PoS is bascially a distributed game
+    - Interactions are fairly well defined, and there are rules & grey areas
+  - CL uses executable specs
+    - Tests are written for the specs, and can be run on all implementations
+- Key features of Teku: Aim to be the client of choice for institutional stakers
+  - Written in Java
+  - Fairly extensive metrics (prometheus/ grafana)
+  - Focuses on testing (incl. unit, integration, system tests)
+  - Relatively clear logging
+  - Maintain 1 code-stream generally (aka master development), and release frequently
+  - Well documented, open source, and strive to offer good support
+  - Teku is node operator, and also runs the Teku client
