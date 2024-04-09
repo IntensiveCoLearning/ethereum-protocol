@@ -3,14 +3,18 @@
 Hi, my name is Steven, studying and working in data. Looking forward to learning a lot from https://epf.wiki/#/ and meeting new amazing people. 
 X/tele/ig: @im24steven
 
+Timezone: PST
+
 # Notes
 
 
 ## The Protocol: Data Structures
 
-### 04/05
+Regarding my original BG, I will be looking at what's the detailed, optimized data structure of ETH, e.g., what's in each trie that got hashed into the Merkle root within each block. Further, how different kinds of databases can be built.  
 
-Referencing: https://epf.wiki/#/wiki/protocol/data-structures?id=data-structures-in-ethereum 
+### 04/05 MPT
+
+[Reference](https://epf.wiki/#/wiki/protocol/data-structures?id=data-structures-in-ethereum)
 
 
 
@@ -29,10 +33,10 @@ Referencing: https://epf.wiki/#/wiki/protocol/data-structures?id=data-structures
 
 2. Within one ETH block, 4 different modified MPTs:
 
- 	- Transaction Trie: Nonce, from, to, value, etc.
-	- Receipt Trie: logs, status code, etc.
-	- World State Trie: nonce, balance, storageRoot, etc.
-	- Account State(Storage) Trie, storageRoot
+ 	- **Transaction Trie:** Nonce, from, to, value, etc.
+	- **Receipt Trie:** logs, status code, etc.
+	- **World State Trie:** nonce, balance, storageRoot, etc.
+	- **Account State(Storage) Trie:** storageRoot
 
 ([Visualization](https://epf.wiki/#/wiki/protocol/data-structures))
 
@@ -40,7 +44,7 @@ Insight: 1. Efficient data retrieval in MPT. 2. translating MPT into relational 
 
 3. TODO: On Merkle Trees in ETH and ZKP: how ZKP project tables could be generated?
 
-### 04/06
+### 04/06 MPT
 
 1. More MPT: ETH vs ZKP
 
@@ -62,7 +66,24 @@ Insight: 1. Efficient data retrieval in MPT. 2. translating MPT into relational 
  - "The main difference between the Verkle tree and the Merkle tree structure is that the Verkle tree is much flatter, meaning there are fewer intermediate nodes linking a leaf to the root, and therefore less data required to generate a proof." [eth org](https://ethereum.org/en/roadmap/verkle-trees/)
 	
 	[Merkle Tree Path Visualize](https://efficient-merkle-trees.netlify.app)
-	
+
+## Execution Layer: EVM
+
+### 04/07 Skipped
+
+### 04/08 
+
+1. EVM state machine, world state (mapping of all addresses) changing where input is the current state and transactions.
+2. Opcode as the lower-level "assembly-like" operations to be readable bytecodes. EIP can propose changes. [EVM data structure animation](https://epf.wiki/#/wiki/EL/evm)
+	i. Stack: the good old PUSH and POP
+	ii. Program Counter
+	iii. **Gas also prevents resource devours by setting computational limitations.** ("Since gas restricts computations to a finite number of steps, the EVM is considered quasi Turing complete.") **Not only an incentive for validators. **
+	iv. **Memory** TODO
+	v. **Storage** TODO
+
+ 
+
+
 
 
 
