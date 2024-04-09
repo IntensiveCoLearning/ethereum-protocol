@@ -3,6 +3,23 @@
 区块链萌新
 
 ## Notes
+### 2024.4.9
+合约元数据文档：[Contract Metadata — Solidity 0.5.2 documentation (soliditylang.org)](https://docs.soliditylang.org/en/v0.5.2/metadata.html)
+
+合约反编译器：[Online Solidity Decompiler (ethervm.io)](https://ethervm.io/decompile)
+
+ A standard transaction, from address A to address B with no contracts involved, will use a fixed amount of 21,000 gas.
+The gas price is commonly denoted in gwei and is on a scale that starts from 0 and goes to 500+ in some extreme cases.
+
+今天看了以太坊最新的黄皮书：[paper.pdf (ethereum.github.io)](https://ethereum.github.io/yellowpaper/paper.pdf)
+
+Throughout the present work, any reference to value, in the context of Ether, currency, a balance or a payment, should be assumed to be counted in Wei.
+
+Occasionally actors do not agree on a protocol change, and a permanent fork occurs. In order to distinguish be tween diverged blockchains, EIP-155 by Buterin [2016] introduced the concept of chain ID, which we denote by $\beta$ . For the Ethereum main network $\beta=1$
+
+The trie requires a simple database backend that maintains a map ping of byte arrays to byte arrays; we name this underlying database the state database. This has a number of benefits; firstly the root node of this structure is cryptographically dependent on all internal data and as such its hash can be used as a secure identity for the entire system state. Secondly, being an immutable data structure, it allows any previous state (whose root hash is known) to be recalled by simply altering the root hash accordingly. Since we store all such root hashes in the blockchain, we are able to trivially revert to old states.
+
+下次再说吧 不是我能看懂的 🫠 
 ### 2024.4.8
 继续我昨天看的文章[The Ethereum Virtual Machine — How does it work? | by Luit Hollander | MyCrypto | Medium](https://medium.com/mycrypto/the-ethereum-virtual-machine-how-does-it-work-9abac2b7c9e)
 
