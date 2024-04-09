@@ -138,5 +138,37 @@ Proof of Work（POW）和Proof of Stake（POS）是两种常见的共识算法�
   - The block is gonna be rejected.
 ##### Block building
 illustration written in Go
+###4.9
 ###### Build Function
 ![alt text](img/step/BuildFunction.png)
+- 所需参数
+  - 环境：时间戳、区块号、当前块、base fee
+  - Tx pool：维护交易列表，按其价值排序​
+  - 状态数据库
+- 返回结果
+  - block
+  - 更新过的状态数据库
+  - error
+- step 1：跟踪使用过的 Gas 并存储发送到该块的交易
+  - 交易可以连续添加到区块中，直到达到gasUse限制。目前主网gas限制大概是30m
+- step 2；从交易池中获取下一个最佳交易并执行
+  - 用 Pop() 获取下一个最佳交易，通过 VM 执行，并附加所有已执行的交易
+  - 如果由于交易无效而出现错误，则该过程将继续，直到没有 Gas 或交易池为空。​
+- step 3:使用Finalize函数返回结果
+  - Finalize 函数获取交易和有关该块的信息，并生成一个完全组装的块
+##### Q&A
+- Is the txpool ordered in any way? If not, how do we ensure maximal profit when using pool.Pop?
+  - Orderd by the highest paying tx to the builder
+  - Every time you call Pop(), you will get the tx that is giving you the most value per gas.
+- When building the block, does the EL reject any tx before sending it to the CL?
+  - The only time you reject a tx is when it's invalid. In general, the tx pool would verify if the tx is valid, so this situation doesn't occur too much. 
+- Encrypted mempools: 1. How viable is that? 2. Since block txs are ordered by gas price, is gas unencrypted under such design?
+  - It's a challenging problem and there are many ideas on how to do it. Some might have unencrypted gas, some even have unencrypted sender info, but that all leaks some kind of info. 
+  - From Ethereum perspective, this might be solved in the future when an efficient way to encrypt mempool is figured out.
+- Whether there are any erase conditions to worry about here? eg. Tx from the mempool being incl. In the block and then be deleted before you build another block
+  - The tx pool is supposed to do the tx verification, so generally the txs are valid here. But the pool is not always in sync and might cause some tx to be invalid, and the erase condition could happen. 
+
+##### 进一步深入了解STF、EVM 和 P2P 协议
+###### 状态转换函数
+- newPayload函数
+  TODO
