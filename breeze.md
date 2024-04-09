@@ -3,6 +3,25 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.4.9
+继续week1计划，先翻看了week1 的整体目录以及大致内容；后面计划针对白皮书和黄皮书，再细看；
+
+[Design philosophy](https://web.archive.org/web/20220815014507mp_/https://ethereumbuilders.gitbooks.io/guide/content/en/design_philosophy.html)
+- Simplicity
+- Universality
+- Modularity
+- Non-Discrimination
+- Agility
+
+上面是eth的设计哲学，在其他领域其实同样适用；
+
+eth两个重要的组成组件：
+- Execution layer
+- Consensus layer
+其中执行层主要处理交易，共识层主要执行POS的的机制确保安全；
+
+
+
 
 ### 2024.4.8
 继续前面的关于pow计算的问题, 之前对于nounce的值不清楚，这次结合bitcoin的白皮书+gpt4大概理了一下nounce计算的整个流程:
