@@ -4,6 +4,19 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.9
+
+今天继续学习图解 EVM 的 PDF：https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf
+
+- account 是 address 和 account state 对应的一个 mapping。
+
+- account state 包含了 nonce、balance、storage hash(?) 和 EVM code hash(?)。
+
+  - EOA（externally owned account）是由 private key 控制的，它的 account state 不包含 storage 和 EVM code。
+  - contract account 是由 EVM code 来控制的，它的 account state 是包含 storage 和 EVM code 的。
+
+- world state 是 account state 的总集合，它记录了所有以太坊的账户信息，每一个以太坊节点中都会有一份相同的 copy。当某些 account state 发生了改变时，world state 也会随之发生改变，所以它是一份不断变化的数据。状态的变化是一个转移的过程，每当有新的交易产生时，就会导致 world state 从 σ𝑡 转移到 σ𝑡+1。
+
 ### 2024.4.8
 
 今天学习了一下 EVM
