@@ -80,7 +80,11 @@ Insight: 1. Efficient data retrieval in MPT. 2. translating MPT into relational 
 	
  	ii. Program Counter
 	
- 	iii. **Gas also prevents resource devours by setting computational limitations.** ("Since gas restricts computations to a finite number of steps, the EVM is considered quasi Turing complete.") **Not only an incentive for validators. **
+ 	iii. **Gas also prevents resource devours by setting computational limitations.**
+
+   		"Since gas restricts computations to a finite number of steps, the EVM is considered quasi Turing complete."	
+
+  	 **Not only an incentive for validators.**
 	
  	iv. **Memory** TODO
 	
