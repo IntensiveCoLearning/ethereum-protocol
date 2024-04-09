@@ -82,3 +82,13 @@ BLS 的第一作者是斯坦福大学教授 Dan Boneh。BLS 算法不需要随�
 
 以太坊中将质押的最低设置为 32 ETH 就是为了防止产生的签名数量过多，因为签名本身的聚合也需要大量的计算，如果 validator 的数量过多，那么就会需要提升节点规格或者优化签名聚合技术，提升节点规则会降低网络的去中心化程度，而优化聚合技术也需要足够的时间。
 
+### 2024.4.9
+以太坊的 slot 和 epoch 构成了一个严格的时间表，所有的 validator 都需要严格按照这个时间表来投票。
+
+在共识的过程中，一方面会选择最长链，另一方面需要决定区块中交易的顺序。 在一个 committee 中，会有一个 block proposer，其他的 validator 会对 block proposer 创建的区块进行投票。block proposer 在前 4 秒需要创建一个区块，在接下来的 4 秒内，每个 validator 都可以对区块投票，最后 4 秒，validator 的投票签名将是用 BLS 聚合，生成一个最终的签名，发给下一个 slot 中的 block proposer。
+
+validator 实际在签名中过程中，会对两个事情进行投票，一个是最长链，一个是 checkpoint。checkpoint 的目的是在以太坊上确认一些坐标，告诉所有人，在 checkpoint 之前的区块是不会被撤销的。具体的做法是在当前的 epoch 中，往前找两个 epoch，并选择其中的一个历史区块，并决定是否将其作为不可逆的 checkpoint。因为每个 epoch 的时间大致是 6 分钟，那么在用户来看，产生 checkpoint 之后，也就是12分钟后，可以绝对保证交易不会被撤销。
+
+checkpoint 的投票不是单独进行的，每次 validator 在为最新区块投票的时候，同时也在为 checkpoint 投票，投票的过程中，会有两个被选中的区块需要被投票，第一个称之为 source，另一个称之为 target。
+
+由于 checkpoint 投票会决定两个 epoch 以前的区块，所以这里的 source 其实就是上一轮 epoch 的 target 投票。那么在两轮 epoch 之后，source 就会成为永久不会被逆转的 checkpoint，target 就会成为下一个 source。
