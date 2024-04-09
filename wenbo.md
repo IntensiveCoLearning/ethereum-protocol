@@ -3,6 +3,15 @@
 [Hello，my name is Wenbo and I'm a undergraduate student who loves BlockChain and Deeplearning. I'm looking forward to learning about the Ethereum Protocol by attending intensive-study-group.ヾ(≧▽≦*)o]
 
 ## Notes
+### 2024.4.9
+1. 在看：https://summerofprotocols.com/research/sop2024
+  2. > To claim that the built environment is full of infrastructurally constrained coordination problems is another way of saying that cities have protocol problems. If protocols are coordination mechanisms supported by infrastructure, then cities are dense clusters of overlapping protocols—organizing processes that channel or filter physically grounded behavior in the pursuit of some overarching goal, such as traffic flow, public space usage, or the allocation of housing.
+声称建筑环境充满基础设施限制的协调问题是城市存在协议问题的另一种说法。如果协议是基础设施支持的协调机制，那么城市就是密集的重叠协议集群——组织流程，引导或过滤物理基础行为，以追求某些总体目标，例如交通流量、公共空间使用或住房分配。
+In his 1996 paean to the urban street grid, Ladders, Albert Pope argues that the widespread expansion of the grid in the 19th century “reconceived the city as an active process rather than a discrete urban plan.”9 As this has become even more true in the time since, the role of protocols in the built environment has grown accordingly.
+阿尔伯特·波普 (Albert Pope) 在 1996 年对城市街道网格的赞歌《阶梯》中指出，19 世纪网格的广泛扩张“将城市重新视为一个活跃的过程，而不是一个离散的城市规划”。 9 从那时起，这一点变得更加正确，协议在建筑环境中的作用也相应增强。
+     > 
+
+
 ### 2024.4.8
 1. 快速过了：inevitableeth.com/en/home/background 和 inevitableeth.com/en/home/background/mass-comm, ![y](印刷技术传播图tps://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/78262508/4369768c-2735-4d2c-a6ce-12f205cad48c) 让我想起之前的分析说奥斯曼帝国对印刷术的各种严厉限制措施是中亚识字率甚至低于大清的主要原因。
 2. 看了：inevitableeth.com/home/ethereum/upgrades/scaling/data
