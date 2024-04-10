@@ -90,6 +90,25 @@ Insight: 1. Efficient data retrieval in MPT. 2. translating MPT into relational 
 	
  	v. **Storage** TODO
 
+### 04/09
+
+More on the three important components: gas, memory, storage
+
+[A more detailed illustration of EVM](https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf)
+
+1. Gas
+From the more detailed but clear illustration:
+![gas1](https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/Screenshot%202024-04-10%20004707.png)
+![gas2](https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/Screenshot%202024-04-10%20004725.png)
+
+3. Memory: read and write using the SLOAD and SSTORE opcode.
+
+   		Memory expansion
+ 		In EVM, memory is dynamically allocated in multiples of 1 word “pages”. Gas is charged for the number of pages expanded. All locations in memory are well-defined initially as zero.
+   
+4. Storage: also use SLOAD and SSTORE. Storage is designed as a word-addressed word array. Unlike memory, storage is associated with an Ethereum account and is persisted across transactions as part of the world state.
+
+
  
 
 
