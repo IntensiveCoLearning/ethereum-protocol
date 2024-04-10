@@ -4,6 +4,15 @@
 
 ## Notes
 
+### 2024.4.10
+
+今天又是比较懒散
+
+* 看了一半 [Week 8D Consensus Client 架构视频](https://www.youtube.com/live/cZ33bfGXzOc?si=HyqNP4ubVKTtBL3m)
+  * Eip 7251(MaxEB) 里有修改 [initial penalty](https://eth2book.info/capella/part2/incentives/slashing/#the-initial-penalty)
+* spec 里 `process_slashings` 这个函数再仔细看看
+  * `adjusted_total_slashing_balance = min(sum(state.slashings) * PROPORTIONAL_SLASHING_MULTIPLIER, total_balance)` 的计算
+
 ### 2024.4.8
 
 今天搁置了 spec 学习
