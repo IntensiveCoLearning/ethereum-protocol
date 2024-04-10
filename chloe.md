@@ -173,3 +173,20 @@ Teku CL client
   - Maintain 1 code-stream generally (aka master development), and release frequently
   - Well documented, open source, and strive to offer good support
   - Teku is node operator, and also runs the Teku client
+
+### 2024.4.10 Notes on SNARK proving ASICs
+Guest speaker: Justin Drake @zksummit11
+
+- Instant proving can incur
+    - instant proving (proof latency < slot time) → synchronous composability
+    - light validators
+    - EVM-in-EVM precompile → native rollups
+- For builder there is also incentives
+    - synchronous composability → more txns
+    - light validators → faster blocks
+    - native rollups → bigger blocks
+    - overall more MEV
+- Companies that work on zkASICs
+    - dedicated companies: ASSEAL, Cysic, Fabric
+    - relevant companies: Bitmain, Semisand, SuperScalar, ZKTo
+    - others: Auradine, Ingonyama, SupraNational
