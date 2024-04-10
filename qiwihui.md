@@ -2,8 +2,8 @@
 
 Hi, I am qiwihui, a python dev. I am interested in Ethereum protocol. Looking forward to learning from you guys.
 
-- Twitter/X: https://twitter.com/qiwihuix
-- Telegram: https://t.me/qiwihui
+- Twitter/X: <https://twitter.com/qiwihuix>
+- Telegram: <https://t.me/qiwihui>
 
 ## Notes
 
@@ -264,3 +264,133 @@ When adding/deleting key-value pairs the algorithm can make the decision locally
     - Root of a Merkle Patricia trie does not depend on the order of data while Merkle root depends on.
     - Tree size of Merkle Patricia trie is lower than a standard Merkle tree due to prefix based compression techniques.
     - Merkle patricia tries are faster than Merkle trees, but the implementation is complicated.
+
+### 2024.4.10
+
+#### Next Generation ZKP System and Single Slot Finality
+
+A prover, maybe malicious prover, makes a claim. The verifier does not know what the prover is going to claim.
+To verify these claim, the verifier need some some to help him.
+
+There are some ways to solve the problem.
+
+case 1: The verifier leverages a trust the third party that can help you to understand the claim.
+
+- trusted setup using groth16 or plonk
+- require a lot of prover's resources and it also introduce additional trust
+- extensive computation like MSM or FFT
+
+case 2: preprocessing via polynomial commitment by verifier
+
+- take a long time to preprocessing
+- usually makes prover slower
+
+case 3: compilation
+
+- compiler identifies patterns in the source code of the circuit
+- complier indicates the that the source code is simply repeating the sentence
+
+#### A revolutionary compiler -- Log Complier
+
+Log Complier， inspired from that the large circuit can be generated from a very small program
+
+- Name from "log-space uniform circuit"
+- Initially support Gnark's frontend language at launch
+- Adding Plony, Halo, Circom later
+- Open source: May 2024, together with the Prover
+
+Overall architecture
+
+- Using Gnark circuit language, discribed by go language
+- Pass the circuit to GKR specialzed compiler
+- Output specical circuit output, consisting of different subcircuits identified by compiler
+- For the verifier to unstandand the circuit, it only need to look at each at individual subcircuit instead of whole circuit
+
+Pros:
+
+- the verifier can save the computation by orders of magnitude
+- This new compiler potentially could enable a recursive snark because the verifier circuit is orders of magnitude smaller, allowing us to directly recurse and make everything infinitely recursive.
+
+#### Next generation of ZKP
+
+- 3M constraints per seconds per CPU core(BN254)
+- GKR based
+
+Prover structure
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/ab3022b4-08b4-4ce0-bcf1-bd47d34f4649)
+
+- the end to end experience is like you write a circuit program and you execute it on the approver, the finally you can verify this proof on the Ethereum chain
+- verify billion size circuit on chain
+- papers related to these
+  - [Libra: Succinct Zero-Knowledge Proofs with Optimal Prover Computation](https://eprint.iacr.org/2019/317)
+
+#### Infinite horizontal scalability
+
+zero-overhead distributed computing
+
+scalability issue for the origin FRI:
+
+- it relies on the FFT but FFT itself has a problem of distributed Computing. In the middle of fft there is a linear size of communication between machines
+- For example: for the following circuit, FRI network communication scale serveral Gigabytes.
+  - Sub-circuit size: 1M
+  - number of sub-circuits: 256
+- can only place the machines in the same data center.
+
+Solution: Bi-variate KZG algorithm
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/fa54273b-79bb-41f1-97d4-e86ce0ab7ee2)
+
+- Paper: [Pianist: Scalable zkRollups via Fully Distributed Zero-Knowledge Proofs](https://eprint.iacr.org/2023/1271)
+- replace the FFT with scheme: Polynomial f(x,y) -> f(machine_id, y), which require constant communication between different machines
+- O(1) communication between mahchines
+  - concretely solution: GKR + Bi-KZG
+  - each node needs to send 100 KB data
+  - Most of them comes from GKR
+- lead to global scale decentralization
+
+#### Decentralization
+
+performance:
+
+- verifier 32768 signatures
+  - time: 5~6 seconds
+  - hardware requirements: 64 handheld machines
+  - hardware requirement: stable network connection, mobile CPU, 16GB RAM
+
+All validators in one slot
+
+- fast finality
+- improved scalability
+- reduced network communication
+
+current Ethereum's solution
+
+- almost 1 million validators
+- divided into 32 different slots, each has 30k validators
+- problem: have to wait a lot of slot/blocks to get finality and get tx confirmed
+- Ethereum: ~20 slots to get tx confirmed
+- with more committees, the p2p network get overloaded
+
+this signature verification algorithm can batch signatures into very small proofs instead of sending all the public keys, so to reduce the burden of the p2p network
+
+#### A chatGPT summary
+
+- **Verification Challenges and Current Solutions:**
+  - Encounter with potentially malicious provers online, leading to verification challenges.
+  - Current solutions involve reliance on trusted third parties or extensive personal computation.
+- **Proposal of Compiler-based Verification:**
+  - Introduction of a compiler-based solution to simplify verification by identifying patterns.
+  - Compiler significantly reduces computational resources required for verification.
+- **Introduction to Log Compiler:**
+  - Tentative name for the revolutionary compiler, inspired by log space uniform circuits.
+  - Initial support for Genox front-end language with plans for expansion.
+- **Architecture and Benefits of the Compiler:**
+  - Compiler's structure involves generating circuits with specific substructures for easier verification.
+  - Potential for recursive snark due to significantly smaller verifier circuit.
+- **Advancements in Proof Structure and Approver:**
+  - State-of-the-art GKR-based prover capable of high-speed operation.
+  - End-to-end experience: writing circuit program, execution on approver, and verification on the chain.
+- **Addressing Scalability and Network Overload:**
+  - Proposal for a signature verification algorithm to batch signatures into small proofs.
+  - Reduces burden on P2P network, enabling single slot finality and alleviating network overload.
