@@ -76,7 +76,7 @@ Insight: 1. Efficient data retrieval in MPT. 2. translating MPT into relational 
 1. EVM state machine, world state (mapping of all addresses) changing where input is the current state and transactions.
 2. Opcode as the lower-level "assembly-like" operations to be readable bytecodes. EIP can propose changes. [EVM data structure animation](https://epf.wiki/#/wiki/EL/evm)
 	i. Stack: the good old PUSH and POP
-	ii. Program Counter. Gas increases as 
+	ii. Program Counter. Gas increases as counter increases.
 	iii. **Gas also prevents resource devours by setting computational limitations.** ("Since gas restricts computations to a finite number of steps, the EVM is considered quasi Turing complete.") **Not only an incentive for validators. **
 	iv. **Memory** TODO
 	v. **Storage** TODO
