@@ -4,12 +4,50 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
-### 4.9
+### 4.10
+
+#### 核心路线图简介
+
+- The Merge：已经完成，从 PoW 到 PoS 的共识转换，同时还拆分了 EL 和 CL，开启模块化。目前在关注 Single Slot Finality。
+- The Surge：聚焦 scaling，扩展。通过 Dencun 升级，EIP-4844 开始第一阶段，第二阶段可以继续提升。
+- The Scourge：关注经济学，包括面向 MEV、Censorship Resistance 以及其他 economics 课题。
+- The Verge：关注加密学和迁移 Merkle tree 到 Verkle tree 数据结构。
+- The Purge：通过去掉一些历史状态来实现轻量级的运行方式。
+- The Splurge：fix 剩余的东西。
+
+最终目的就是解决去中心化三角的困境。坑越挖越多，没有什么尽头。
+
+#### [week2 notes](https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh)
+
+Block validation
+
+- CL
+  - process_execution_payload：验证 block 是否 valid，发给 EL 去 EVM 里面执行验证
+  - 调用 EL 的 STF 方法，验证不通过 block 被 reject
+- EL
+  - 通过 STF（State Transition Function）方法来验证和执行数据
+  - 验证 header 是不是有问题
+  - 丢到 vm 里面去执行，包括 tx 的信息和 state（TODO 这个 state.StateDB 是 World State 还是 Accounts State，last known valid state 是什么意思？）
+  - 没报错就算是成功啦
+
+Block building
+
+- build function
+  - 参数：环境变量和通用信息、mempool，按照 value 排序的 txns、StateDB
+  - 不断增加 tx 到 block 的 gasUse limit，大概是 30M
+  - 持续的 Pop() 拿到 next best tx 然后加入到 block 中直到 no gas 或者 tx pool 空了（TODO 那挂很多低 gas 的 tx 没法执行，岂不是会撑爆 mempool？）
+    - 只有 tx invalid 的时候才会被 reject
+  - Finalize function 合并成一个 block
+- 问题和挑战
+  - 如何加密 mempools 目前暂时没有想法和进展。目的是为了减少 mempool 交易的信息泄漏，因为拿到信息之后，可以通过更高的 gas 来抢跑等，或者出现一些隐私的问题
+
+STF
+
+- newPayload 源代码 <https://github.com/ethereum/go-ethereum/blob/master/eth/catalyst/api.go#L524>
 
 TODO
 
-- https://epf.wiki/#/eps/week1 把官方资料过一下，避免太发散了，不要看太多，Week1 的完成
-- https://twitter.com/EIPFun/status/1759938858286776710 路线图大概了解几个关键阶段和节奏
+### 4.9
 
 #### [Inevitable Ethereum](https://inevitableeth.com/home/ethereum/world-computer)
 
