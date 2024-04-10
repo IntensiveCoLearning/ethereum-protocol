@@ -3,6 +3,24 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+
+### 2024.4.10
+开始看 [ETH白皮书](https://ethereum.org/en/whitepaper/#ethereum-whitepaper)
+
+ETH提供了一套图灵完备的区块链系统，你可以在上面通过智能合约来实现各种功能；
+
+看了Introduction to Bitcoin and Existing Concepts Mining这一节；其中提到的双花攻击；
+1. Send 100 BTC to a merchant in exchange for some product (preferably a rapid-delivery digital good)
+2. Wait for the delivery of the product
+3. Produce another transaction sending the same 100 BTC to himself
+4. Try to convince the network that his transaction to himself was the one that came first.
+
+如果要实现这个攻击，需要黑客在第一步之前的那个区块上再分叉出一个链出来，且需要超过51%的算力让这条分叉出来的链成为最长（因为区块链只认最长的那个节点），这样才能实现攻击；不过这个攻击会耗费巨大的资源，通常来说花费抵不上收益；另外历史上也出现过几次硬分叉的case，在eth链上，比较典型的是ETH和ETC.
+
+
+
+
+
 ### 2024.4.9
 继续week1计划，先翻看了week1 的整体目录以及大致内容；后面计划针对白皮书和黄皮书，再细看；
 
@@ -19,7 +37,6 @@ eth两个重要的组成组件：
 - Execution layer
 - Consensus layer
 其中执行层主要处理交易，共识层主要执行POS的的机制确保安全；
-
 
 
 
