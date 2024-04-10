@@ -94,7 +94,7 @@ Proof of Work（POW）和Proof of Stake（POS）是两种常见的共识算法�
   - CL执行一些检查(incl. parent hash, previous randao, timestamp, max blobs per block, etc.)，把payload发送到EL进行更深入的验证
   - CL和EL之间的交流通过执行引擎
   - Spec link: https://github.com/ethereum/consensus-specs/blob/dev/specs/deneb/beacon-chain.md#modified-process_execution_payload
-- Function notify_new_payload函数
+- Function notify_new_payload
   - CL 没有实现，因为它只是将执行负载发送到执行引擎，然后执行客户端将执行状态转换功能。
   - Spec link: https://github.com/ethereum/consensus-specs/blob/dev/specs/deneb/beacon-chain.md#modified-notify_new_payload
   
@@ -102,10 +102,17 @@ Proof of Work（POW）和Proof of Stake（POS）是两种常见的共识算法�
 #### Week2 notes
 接上文
   Excution layer (EL): Simple illustration written in Go
-![alt text](img/step/ELinGO.png)
+![alt text](img/step/EL_in_GO.png)
 
 
 状态转换函数 State transition function (STF)
+状态转换函数的工作流程大致如下：
+
+1. **验证交易**：首先验证交易的有效性，包括签名的验证和交易发起者账户余额是否足够支付交易费用。
+2. **执行交易**：然后根据交易的内容执行相应的操作。这可能包括转移以太币、执行智能合约代码或创建新的智能合约。
+3. **更新状态**：执行交易后，更新全局状态以反映交易的结果。这可能包括改变账户的余额、更新存储的数据或更改智能合约的代码。
+4. **收取交易费**：最后从交易发起者的账户中扣除交易费用，并将其作为奖励发给矿工或验证者。
+
 - 所需参数
   - Parent block:(需要验证从父块到当前块的转换逻辑)
   - Current block
@@ -119,7 +126,7 @@ Proof of Work（POW）和Proof of Stake（POS）是两种常见的共识算法�
     - block编号不连续
     - EIP-1559 基本费用未正确更新
     - etc.
-- Step 2: Apply the Tx if the headers are correct
+- Step 2: 如果头文件正确执行交易
   - 范围覆盖block tx，通过 VM 执行每个 tx，如果 tx 正确则更新状态
   - 可能导致error
     - 有一个无效的tx，则整个block无效，并且状态不会更新
@@ -138,7 +145,7 @@ Proof of Work（POW）和Proof of Stake（POS）是两种常见的共识算法�
   - The block is gonna be rejected.
 ##### Block building
 illustration written in Go
-###4.9
+### 4.9
 ###### Build Function
 ![alt text](img/step/BuildFunction.png)
 - 所需参数
@@ -168,7 +175,48 @@ illustration written in Go
 - Whether there are any erase conditions to worry about here? eg. Tx from the mempool being incl. In the block and then be deleted before you build another block
   - The tx pool is supposed to do the tx verification, so generally the txs are valid here. But the pool is not always in sync and might cause some tx to be invalid, and the erase condition could happen. 
 
-##### 进一步深入了解STF、EVM 和 P2P 协议
-###### 状态转换函数
+### 4.10
+##### 进一步了解STF、EVM 和 P2P 协议
+###### State transition function(STF)
 - newPayload函数
-  TODO
+  - 共识层(CL)调用，执行层(EL)将对块信息进行一系列完整性检查。
+  - 一直向下insertBlockWithoutSetHead函数，也就是实际入链的位置。
+  - Link: https://github.com/ethereum/go-ethereum/blob/master/eth/catalyst/api.go
+- insertBlockWithoutSetHead 函数
+  - 该函数执行区块，运行验证，然后将区块和交易状态保存到数据库中。 与InsertChain 函数的主要区别是它不会进行规范链更新。仍然依赖于额外的 SetCananical 函数调用来完成整个过程。
+  - Link: https://github.com/ethereum/go-ethereum/blob/master/core/blockchain.go
+- insertChain函数
+  - verifyHeaders 函数：检查 header 是否符合共识规则
+    - 将验证多个项目，例如header的 EIP-1559 属性（以确保 Gas 限制在允许的范围内）、Gas 限制、使用的 Gas、时​​间戳等，并确保所有字段都正确。
+    - 一旦验证了headers，就可以执行该块。
+    -   - Link: https://github.com/ethereum/go-ethereum/blob/master/consensus/beacon/consensus.go
+- Process 函数
+  - 所需参数包括Block, stateDB, vm config
+  - Geth中的状态转换通过state_processor
+    - 流程与 STF 概述类似，但有更多细节。
+    - Link: https://github.com/ethereum/go-ethereum/blob/master/core/types.go
+    - Link: https://github.com/ethereum/go-ethereum/blob/master/core/state_processor.go
+  - 一旦该过程完成， blockchain将更新更多指标并最终将block写入状态。
+###### Q&A
+- What's a Receipt?
+  - A receipt is information about a transaction that can only be verified or determined after executing the transaction.
+  - Link: https://github.com/ethereum/go-ethereum/blob/master/core/types/receipt.go
+- Question regarding the environment of multiple transactions which result in multiple other transactions: How is the context environment that you use? How is it fetched?
+  - EVM environment: 
+    - Transaction level context: Might change within the block, eg. Gas price, blob etc.
+    - Block level context: Fixed across the entire block, eg. Block number, base fee, time difficulty etc.
+    - Link: https://github.com/ethereum/go-ethereum/blob/master/core/state_processor.go
+  - EVM interpreter: 
+    - ScopeContext: Change within the tx, eg. Memory, stack, contract
+    - Link: https://github.com/ethereum/go-ethereum/blob/master/core/vm/interpreter.go
+###### EVM
+###### EVM structure
+- 想象该区域是 EVM 调用帧，它在整个交易过程中发生变化。在 EVM 调用框架内，有：
+![alt text](img/step/EVM.png)
+  - Code
+  - PC (Program Counter): If PC is at 0, the interpreter will load the instruction at index is 0 in the code, then execute it. Then it would update the PC by 1 byte. 
+  - Stack
+  - Memory
+  - Gas remaining
+  - Block context & Tx context
+  - State
