@@ -4,6 +4,12 @@
 
 ## Notes
 ### 2024.4.9
+DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
+
+[Ethereum Node | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/node)
+
+还看了很多 比较简单 就没有放笔记 基本就是组合起来之前已经知道的知识。
+### 2024.4.9
 合约元数据文档：[Contract Metadata — Solidity 0.5.2 documentation (soliditylang.org)](https://docs.soliditylang.org/en/v0.5.2/metadata.html)
 
 合约反编译器：[Online Solidity Decompiler (ethervm.io)](https://ethervm.io/decompile)
