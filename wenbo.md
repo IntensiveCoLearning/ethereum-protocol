@@ -3,13 +3,28 @@
 [Hello，my name is Wenbo and I'm a undergraduate student who loves BlockChain and Deeplearning. I'm looking forward to learning about the Ethereum Protocol by attending intensive-study-group.ヾ(≧▽≦*)o]
 
 ## Notes
+### 2024.4.11
+1. 快速过了：[Ethereum: The World Computer--以太坊：世界计算机](https://inevitableeth.com/en/home/ethereum/world-computer)，概论来的老东西
+> Light Clients 轻客户端:Light clients are pieces of software that can directly, trustlessly access Ethereum without running a full Ethereum node.轻客户端是可以直接、无需信任地访问以太坊而无需运行完整以太坊节点的软件。Before we can support light clients, we first need to upgrade Ethereum to be stateless.在支持轻客户端之前，我们首先需要将以太坊升级为无状态。
+
+> Statelessness  无国籍状态:Deep Dive: The Road to Stateless Ethereum深入探讨：通往无状态以太坊之路
+Statelessness is a nuanced topic worth reading more about, but the idea can be summarized as "using cryptography to trustlessly access the EVM without having to store it locally."
+无状态性是一个值得深入了解的微妙主题，但这个想法可以概括为“使用加密技术以无需信任的方式访问 EVM，而无需将其存储在本地”. But statelessness is not enough to support light clients - the EVM is not the only component of the World Computer. 但无状态性不足以支持轻客户端——EVM 并不是世界计算机的唯一组件。
+> ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/78262508/1fa7eeba-200b-4d19-b1ac-ce179b70f6da)
+
+诶，第一次听，感觉挺有前景
+
+3. [Accessing Ethereum  访问以太坊](https://inevitableeth.com/home/ethereum/network/node/accessing-ethereum)
+  > Think like this: 像这样思考：Consensus client: responsible for Proof of Stake (PoS), securing Ethereum with the value of $ETH共识客户端：负责权益证明（PoS），以 $ETH 的价值保护以太坊
+Execution client: responsible for operating the computing platform of the World Computer (the EVM).执行客户端：负责运行世界计算机（EVM）的计算平台。
+These clients are HEAVY DUTY pieces of software.这些客户端是重型软件。
+
 ### 2024.4.9
 1. 在看：https://summerofprotocols.com/research/sop2024
   2. > To claim that the built environment is full of infrastructurally constrained coordination problems is another way of saying that cities have protocol problems. If protocols are coordination mechanisms supported by infrastructure, then cities are dense clusters of overlapping protocols—organizing processes that channel or filter physically grounded behavior in the pursuit of some overarching goal, such as traffic flow, public space usage, or the allocation of housing.
 声称建筑环境充满基础设施限制的协调问题是城市存在协议问题的另一种说法。如果协议是基础设施支持的协调机制，那么城市就是密集的重叠协议集群——组织流程，引导或过滤物理基础行为，以追求某些总体目标，例如交通流量、公共空间使用或住房分配。
 In his 1996 paean to the urban street grid, Ladders, Albert Pope argues that the widespread expansion of the grid in the 19th century “reconceived the city as an active process rather than a discrete urban plan.”9 As this has become even more true in the time since, the role of protocols in the built environment has grown accordingly.
 阿尔伯特·波普 (Albert Pope) 在 1996 年对城市街道网格的赞歌《阶梯》中指出，19 世纪网格的广泛扩张“将城市重新视为一个活跃的过程，而不是一个离散的城市规划”。 9 从那时起，这一点变得更加正确，协议在建筑环境中的作用也相应增强。
-     > 
 
 
 ### 2024.4.8
