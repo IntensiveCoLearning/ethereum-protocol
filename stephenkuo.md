@@ -210,7 +210,7 @@ illustration written in Go
     - ScopeContext: Change within the tx, eg. Memory, stack, contract
     - Link: https://github.com/ethereum/go-ethereum/blob/master/core/vm/interpreter.go
 ###### EVM
-###### EVM structure
+**EVM structure**
 - 想象该区域是 EVM 调用帧，它在整个交易过程中发生变化。在 EVM 调用框架内，有：
 ![alt text](img/step/EVM.png)
   - Code
@@ -220,3 +220,25 @@ illustration written in Go
   - Gas remaining
   - Block context & Tx context
   - State
+### 4.11
+**EVM 中不同类型的指令**
+- 算数：加减、指数、乘法
+- 位运算：bit-banging *这里应该是chloe的小错误*
+- 环境：授予对块上下文和交易上下文的访问权限​。
+- 控制流：对于更复杂的程序，eg.Branch (EIP 4788)
+  - Link: https://github.com/lightclient/4788asm
+- stack
+- System: eg. call, create, return, sstorage etc.
+- Memory: eg. mload, mstore, mstore8 etc.
+###### Q&A
+- How were the various instruction costs determined? Are they basically incentives to reduce the load of the network?
+  - There is a target gas per second, which is a benchmark for the cost decision. Today a lot of the instructions just use what the gas cost of other similar types of instructions as the benchmark. 
+###### P2P协议
+- 执行层在devp2p上运行，devp2p是以太坊的定制协议
+devp2p 协议命名的有趣历史：
+- p2p 协议的职责：访问历史数据和待处理的交易以及状态​
+  - 交易
+  - NewPooledTransactionHashes：TODO
+  - GetPooledTransactions:TODO
+- 状态
+  - snap 同步 TODO
