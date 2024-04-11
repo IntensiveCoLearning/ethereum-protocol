@@ -2,18 +2,14 @@
 
 哈喽大家，我是 loxia.eth，来这里补课学习一些基础且重要的知识，很高兴能来到这里和大家一起学习。
 
-目录：
-
-loxia week 0：
-
-4.5 ECDSA
-4.6 ECDSA
-4.7 Week 0，1学习
-4.8 做了一些测试，补充些 rollup 和 L2 的基础知识
-
-loxia week 1：
-
 ## Notes
+
+### 2024.4.11
+
+这两天无心学习，看了 Vitalik 关于 Meme 的文章，制定了 ZKP 的学习计划，以太坊执行层和共识层的学习明天继续。
+
+https://learn.z2o-k7e.world/beginner.html
+
 
 ### 2024.4.9
 
@@ -31,7 +27,7 @@ Gavin Wood 在15年发布以太坊后创立了 Web3 这个名词。
 Rollups 扩展以太坊的下一步关键步骤是什么？
 将运行 sequencer 和 provers 的责任分配给更多人。
 
-Proto-Danksharding 为 rollups 引入了临时数据存储选项，使他们能够更便宜地将结果发布到主网
+Proto-Danksharding 为 roll-ups 引入了临时数据存储选项，使他们能够更便宜地将结果发布到主网
 
 Question number 2:What hard drive storage is required for an Ethereum node?：2 TB SSD
 
