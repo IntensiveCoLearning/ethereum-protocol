@@ -4,6 +4,28 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 ## Notes
 
+### 2024.4.11
+
+#### ethereum/execution-spec-tests
+
+`ethereum/execution-spec-tests`框架收集并执行测试用例，以生成测试夹具（JSON），任何执行客户端都可以使用该夹具来验证其以太坊/执行规范的实现。fixture定义了状态转换和块测试，由框架使用大多数执行客户端提供的 `t8n` 命令行工具之一来生成.
+
+| Client | t8n Tool | Tracing Support |
+|--------|----------|-----------------|
+| ethereum/evmone | evmone-t8n | Yes |
+| ethereum/execution-specs | ethereum-spec-evm | Yes |
+| ethereum/go-ethereum | evm t8n | Yes |
+| hyperledger/besu | evm t8n-server | No |
+| status-im/nimbus-eth1 | t8n | Yes |
+
+##### 配置测试环境
+```
+sudo add-apt-repository -y ppa:ethereum/ethereum
+sudo apt-get update
+sudo apt-get install ethereum solc
+```
+
+
 ### 2024.4.10
 
 #### ethereum测试
