@@ -4,6 +4,41 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.11
+
+#### [week2 notes](https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh)
+
+STF
+
+- [insertBlockWithoutSetHead](https://github.com/ethereum/go-ethereum/blob/master/core/blockchain.go#L1645) 插入到 blockchain，上面有详细的逻辑。简单的说就是检查、执行、存储
+
+代码解读部分跳过，需要构建 debug 环境，借助单元测试 debug 一边比较容易了解具体逻辑。
+
+- Example on stack machine simulation: https://www.evm.codes/playground
+- The EL operates on devp2p, which is the bespoken protocol of Ethereum.
+
+- Historical data: 3 methods to get the historical data from Ethereum
+  - GetBlockHeaders: Require peer to return a blockheaders message
+  - GetBlockBodies: Request block body data by hash
+  - GetReceipts: Require peer to return a receipts message containing the receipts of the given block hashs
+
+#### [Study Group Week 2 | Execution Layer](https://epf.wiki/#/eps/week2)
+
+NODES AND CLIENTS
+
+[ETHEREUM VIRTUAL MACHINE (EVM)](https://ethereum.org/en/developers/docs/evm/)
+
+- At any given block in the chain, Ethereum has one and only one 'canonical' state, and the EVM is what defines the rules for computing a new valid state from block to block.
+- It therefore is quite helpful to more formally describe Ethereum as having a state transition function
+- In the context of Ethereum, the state is an enormous data structure called a modified Merkle Patricia Trie, which keeps all accounts linked by hashes and reducible to a single root hash stored on the blockchain.
+- The EVM executes as a stack machine with a depth of 1024 items. Each item is a 256-bit word, which was chosen for the ease of use with 256-bit cryptography (such as Keccak-256 hashes or secp256k1 signatures).
+  - During execution, the EVM maintains a transient memory (as a word-addressed byte array), which does not persist between transactions.
+  - Contracts, however, do contain a Merkle Patricia storage trie (as a word-addressable word array), associated with the account in question and part of the global state.
+  - All implementations of the EVM must adhere to the specification described in the Ethereum Yellowpaper. 可以跑一下 JS 的 EVM 了解下执行原理 https://github.com/ethereumjs/ethereumjs-monorepo/tree/master/packages/evm 或者自己构建一个最简单的 EVM 写个教程
+-
+
+[MERKLE PATRICIA TRIE](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/)
+
 ### 4.10
 
 #### 核心路线图简介
