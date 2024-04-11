@@ -394,3 +394,37 @@ this signature verification algorithm can batch signatures into very small proof
 - **Addressing Scalability and Network Overload:**
   - Proposal for a signature verification algorithm to batch signatures into small proofs.
   - Reduces burden on P2P network, enabling single slot finality and alleviating network overload.
+
+### 2024.4.11
+
+1. transaction finality
+
+A transaction has finality on Ethereum when it is part of a block that can’t change. also means block can’t change
+
+2. Transaction Finality Under Proof-of-Work
+
+There was always a potential for reorgs, so dapps would often wait several blocks before classifying a transaction as "confirmed" (i.e. unlikely to be removed from the canonical chain)
+
+- the more block, the less possibility
+- no real sense of time, just block number.
+
+3. Transaction Finality Under Proof-of-Stake
+
+- PoS introduced safe head (justified) blocks and finalized blocks, which can be used more reliably than "confirmed" PoW blocks finalized block can’t be reverted, strong startement, but it doesn’t mean is absolutely can’t be reverted. it means that the cost of reversion would be so extreme, one third of total staked ETH.
+- there is an actual clock. every slot occurs ecery 12 seconds.
+- you can confidently say a block has been finalized after 2 epochs.
+
+- slot: occur actually 12 seconds, there may be a block in a slot. missed slot contains no blocks.
+- epoch: 32 slots, 6.4 minutes. basic unit to determine the level of finality of transactions.
+
+- at the beginning of the epoch, the first slot is special, a checkpoint to say that if 2/3 of the staked ETH have been voted on this slot, then the previous epoch is justified. and the previous one epoch of the previous checkpoint is upgraded to finalized from justified.
+
+- it is "justified," meaning under normal network conditions it is expect it to be included in the canonical chain and finalized.
+
+two components to the consensus algorithm: Casper FFG and LMD Ghost.
+
+- Casper FFG: take the aggregated stake of all the validators that attesting to a particular slot and particular epoch. once achieves 2/3, then a block can be justified or finalized.
+- LMD Ghost: fork choice rule, designed to keep the timeline moving forward.
+trade-off in PoS between liveness which is you keep building blocks, the chain doesn’t halt, and casper adding safety on top of liveness.
+
+4. how are proposer and attesters chosen.(TODO)
