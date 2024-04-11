@@ -61,3 +61,11 @@ The base fee is calculated by a formula that compares the size of the previous b
 ```
 
 单区块 gas 上限目前是 30m，不过 V 曾经在一次 reddit AMA 中提议提升 33.3% 到 40m。这一提议遭受了很多反对意见，比方说很多 node runners 表示这样会大幅增加运营成本，社交媒体上也曾有很多人表示这样的提议很不负责，如果 40 不够是要改成 80 吗，那不如直接改成超大。目前还没有增加 gas 上限的新投票。相应的投票实际上不是实时的、动态的，一般来说不会经常变化，但是理论上确实发生在每次出块的过程中。
+
+### 2024.4.11
+
+学习资料：
+
+ - https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/
+
+学习了 Merkle-Patricia 的基本原理，以及相对基本的 Merkle tree 的改善。相应的算法和代码均已学习。
