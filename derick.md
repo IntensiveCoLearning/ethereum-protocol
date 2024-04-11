@@ -25,6 +25,64 @@ sudo apt-get update
 sudo apt-get install ethereum solc
 ```
 
+```
+git clone https://github.com/ethereum/execution-spec-tests
+cd execution-spec-tests
+python3 -m venv ./venv/
+source ./venv/bin/activate
+pip install -e '.[docs,lint,test]'
+```
+
+##### 验证测试环境
+```
+fill --collect-only
+fill -v tests/berlin/eip2930_access_list/test_acl.py
+```
+##### 增加新测试用例
+```
+📁 execution-test-specs/
+├─╴📁 tests/
+|   ├── 📄 __init__.py
+│   ├── 📁 cancun/
+|   |    ├── 📄 __init__.py
+│   |    └── 📁 eip4844_blobs/
+|   |        ├── 📄 __init__.py
+|   |        ├── 📄 test_blobhash_opcode.py
+|   |        ├── 📄 test_excess_blob_gas.py
+|   |        └── 📄 ...
+|   ├── 📁 shanghai
+|   |    ├── 📁 eip3651_warm_coinbase
+|   |    |   ├── 📄 __init__.py
+|   |    |   └── 📄 test_warm_coinbase.py
+|   |    ├── 📁 eip3855_push0
+|   |    |   ├── 📄 __init__.py
+|   |    |   └── 📄 test_push0.py
+|   |    ├── 📁...
+|   |    ...
+│   └── 📁 ...
+```
+每个测试用例都被定义为一个Python函数，该函数通过使用框架提供的 state_test 或 blockchain_test 对象之一来定义单个 StateTest 或 BlockchainTest 。测试用例和测试模块必须满足以下要求：
+
+## Ethereum Test Case Requirements
+
+| Requirement | When |
+|-------------|------|
+| Be decorated with validity markers | If the test case is not valid for all forks |
+| Use one of `state_test` or `blockchain_test` in its function arguments | Always |
+| Call the `state_test` or `blockchain_test` in its test body | Always |
+| Add a reference version of the EIP spec under test | Test path contains `eip` |
+
+对于状态测试：
+`def test_access_list(state_test: StateTestFiller):`
+
+对于区块链测试：
+```
+def test_contract_creating_tx(
+    blockchain_test: BlockchainTestFiller, fork: Fork, initcode: Initcode
+):
+```
+
+`state_test` 和 `blockchain_test` 对象实际上分别是 `StateTest` 和 `BlockchainTest` 对象的包装器类，它们一旦被调用就实际上实例化这些对象的新实例，并根据测试中定义的前状态和后状态以及事务使用 evm 工具填充测试用例。
 
 ### 2024.4.10
 
