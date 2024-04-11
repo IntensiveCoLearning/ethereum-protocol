@@ -108,6 +108,21 @@ From the more detailed but clear illustration:
    
 4. Storage: also use SLOAD and SSTORE. Storage is designed as a word-addressed word array. Unlike memory, storage is associated with an Ethereum account and is persisted across transactions as part of the world state.
 
+## Consensus Layer
+
+### 04/10
+
+The p2p network, and 7594, and its relationship with 4844.
+
+The consensus clients participate in a separate peer-to-peer network with a different specification. Consensus clients need to participate in block gossip so that they can receive new blocks from peers and broadcast them when it is their turn to be block proposers. Similar to the execution layer, this first requires a discovery protocol so that a node can find peers and establish secure sessions for exchanging blocks, attestations, etc.
+
+1. EIP-4844
+   	Blobs of course. For scalability, support L2 rollups.
+    	[danksharding](https://ethereum.org/en/roadmap/danksharding/)
+2. EIP-7594 - Peer Data Availability Sampling
+	Extend the capabilities introduced by 4844.
+
+	"The intent of a PeerDAS design is to reuse well-known, battle-tested p2p components already in production in Ethereum to bring additional DA scale beyond that of 4844 while keeping the minimum amount of work of honest nodes in the same realm as 4844 (downloading < 1MB per slot)."
 
  
 
