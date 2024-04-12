@@ -190,3 +190,17 @@ Guest speaker: Justin Drake @zksummit11
     - dedicated companies: ASSEAL, Cysic, Fabric
     - relevant companies: Bitmain, Semisand, SuperScalar, ZKTo
     - others: Auradine, Ingonyama, SupraNational
+
+### 2024.4.12 Notes on EIP 3074 <> 4337
+Source: https://hackmd.io/@matt/note-on-3074
+
+How 3074 different from 4337
+- 3074’s Main goal is to delegate control of EOA to a smart contract. Stolen key means total loss. There is no consideration for tx sponsoring/ relaying.
+- 3074 allows EOAs to be used within 4337, and set the stage for future EIPs, which could allow EOAs to permanently upgrade to smart contract wallets.
+
+Beef between 3074 and 4337
+- Previously, there are some people from the 4337 camp complained about that 3074 would fragment the community, where devs would build momentum on separate EIPs.
+- 3074 could support the multi EVM chain future more easily than 4337.
+
+Weakness of 3074
+- Inability to spend ETH from the authorized account
