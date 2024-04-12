@@ -4,6 +4,33 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 ## Notes
 
+### 2024.4.12
+继续白皮书，其中一直提到了utxo，详细了解了一下， 
+
+utxo：unspent Transaction output
+在比特币系统中,UTXO 代表了可以作为未来交易输入的比特币金额。具体来说:
+
+1. 每一笔比特币交易都会产生一个或多个输出,对应接收者可以使用的比特币金额。
+2. 这些输出一旦被创建,就会进入 UTXO 池,表示为未使用的余额。
+3. 后续的交易需要引用并使用 UTXO 池中的一些输出作为输入,即引用并"花费"前交易遗留的未花费余额。
+4. 被引用使用后,这些 UTXO 将从 UTXO 池中移除,同时新的交易输出将被添加进 UTXO 池。
+UTXO 实际上是比特币账户模型的实现方式。不同于记录账户余额,比特币网络跟踪并验证每个UTXO 的所有权和状态。用户的"余额"实际上是他们钱包控制下的所有 UTXO 的总和。
+
+维护 UTXO 池的做法避免了需要处理整个交易历史进行余额计算,同时也确保了比特币不可被双重花费,因为每个 UTXO 只能被使用一次。这种设计使得比特币系统无需像传统账户模型那样进行全局状态同步。
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/25242467/e125ab75-684c-4289-835d-27f3e2dd8e77)
+
+
+脚本语言在比特币链中会收到很多限制：
+1. 缺少图灵完备；比如没办法使用循环；
+2. 数据不可感知：UTXO脚本无法对输出的比特币金额进行细粒度控制和判断；UTXO是不可分割，要嘛完整使用要嘛不使用，很难精准到固定面额。这会导致无法实现金额相关的合约逻辑
+3. 缺少状态，utxo只有两个状态， 已花费和未花费。而且每个utxo是独立的，无法组合，所以utxo智能支持简单，无状态的脚本；
+4. 区块链数据不可感知；utxo无法访问链上数据，比如nounce和前块哈
+
+
+
+
+
 ### 2024.4.10
 开始看 [ETH白皮书](https://ethereum.org/en/whitepaper/#ethereum-whitepaper)
 
