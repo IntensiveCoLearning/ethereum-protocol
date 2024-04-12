@@ -236,9 +236,40 @@ illustration written in Go
 ###### P2P协议
 - 执行层在devp2p上运行，devp2p是以太坊的定制协议
 devp2p 协议命名的有趣历史：
-- p2p 协议的职责：访问历史数据和待处理的交易以及状态​
-  - 交易
-  - NewPooledTransactionHashes：TODO
-  - GetPooledTransactions:TODO
-- 状态
-  - snap 同步 TODO
+**p2p 协议的职责：访问历史数据和待处理的交易以及状态​**
+- 历史数据：从以太坊获取历史数据的3种方法
+  - GetBlockHeaders：要求对等方返回块头消息
+  - GetBlockBodies:通过hash请求块体数据
+  - GetReceipts:要求对等方返回包含给定块哈希的收据的收据消息
+- 待处理交易（还不在块中的）
+  - Transactions：具体的交易方应确保包含在其交易队列中的
+  - NewPooledTransactionHashes:向对等方发送交易类型、大小、交易哈希值的列表；如果对等方之前没有见过交易哈希值，那么它将调用 GetPooledTransactions 函数
+    - 目标是通过仅将完整的交易发送到对等点的平方根而不是每个对等点来减少执行客户端的带宽
+- State
+  - Link: https://github.com/ethereum/devp2p/blob/master/caps/snap.md
+  - Snap sync: 它可以被视为一个两阶段协议。第一个阶段是连续状态检索，第二个阶段是修复阶段，以同步状态树。
+###### Q&A
+- How do you know you are not downloading the wrong data from the wrong chain?
+  - The process would be
+    - Start with the weak subjectivity checkpoint, which will give a root
+    - Get the block associated with the hash
+    - Start snap against that block state
+  - The state root you are snapping sync with is authenticated by you, so you assume it is correct and download the state. The data you get back would be a witness against the root. 
+  - The only thing that could possibly happen is that the state was computed incorretly and you downloaded the corrupted state that the chain has accepted. That is extremely unlikely to happen as we have the economic majority verifying the chain. 
+### 4.12
+### week3
+#### 区块链提供了一种创造数字稀缺的方法
+- 为什么我们首先关心区块链？
+  - 区块链创造了一种制造数字稀缺的方法，这是以前很难实现的。
+  - 因此，数字稀缺性的这种特性可用于模拟数字领域中不同类型的物理资产，例如。金钱、代币、产权等
+- 数字稀缺之道：创造稀缺数字货币的例子
+  - Target:创建具有稀缺性的数字货币
+  - unit:coins
+  - Scarcity:一次只有 N 个硬币。用户不能花费比他们拥有的更多的硬币
+  
+|       | Single trusted operator case | Distributed nodes case     |
+| :---        |    :----   |          :--- |
+| Operator     | 单个操作员运行一个实现该货币协议的网络服务器 | 实现该协议的分布式节点网络​N 个节点将根据相同的输入计算一些输出
+| Implication   |用户需要信任该网络服务器运营商以确保不会出现双重支出|通过不同节点之间的“状态机复制”达成共识，无需可信的第三方
+| Consequence   | 由于不同的场景，很难有值得信赖的运营商，eg.货币协议中的bug  、协议服务器主动攻击、不诚实的Operator 、由于稀缺而攻击和滥用协议的动机| 系统中的节点将复制相同的输入日志以获得相同的输出  、每个节点都应该就输出达成一致，并且诚实的节点最终必须得到相同的输出 、随着节点数量的增加，系统变得更难被攻击  |
+| result   | 需要删除单一可信Operator并最小化信任       | 输出错误的节点，只要有大多数节点对输出状态有相同的看法，协议就可以达成共识并继续运行   |
