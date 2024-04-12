@@ -428,3 +428,35 @@ two components to the consensus algorithm: Casper FFG and LMD Ghost.
 trade-off in PoS between liveness which is you keep building blocks, the chain doesn’t halt, and casper adding safety on top of liveness.
 
 4. how are proposer and attesters chosen.(TODO)
+
+### 2024.4.12
+
+Ethereum nodes and clients
+    - A "node" is any instance of Ethereum client software that is connected to other computers also running Ethereum software, forming a network.
+    - A node has to run two clients: a consensus client and an execution client.
+    - execution client
+        - listens to new transactions broadcasted in the network
+        - executes them in EVM
+        - holds the latest state and database of all current Ethereum data.
+    - consensus client, aka Beacon Node
+        - implements the proof-of-stake consensus algorithm including the fork-choice algorithm, processing attestations and managing proof-of-stake rewards and penalties.
+        - validator, allowing a node to participate in securing the network
+    - client diversity: multiple client implementations
+    - node types
+        - full node
+            - Stores full blockchain data
+            - Participates in block validation, verifies all blocks and states.
+            - All states can be either retrieved from local storage or regenerated from 'snapshots' by a full node.
+            - Serves the network and provides data on request.
+        - archive node:  ull nodes that verify every block from genesis and never delete any of the downloaded data.
+        - light node: only download block headers, do not participate in consensus
+    - execution clients: Geth, Nethermind, Besu, etc.
+    - consensus clients: Prysm, Lighthouse, Teku, etc.
+    - Synchronization modes
+        - Execution layer sync mode
+            - Full archive sync
+            - Full snap sync
+            - Light sync
+        - Consensus layer sync mode
+            - Optimistic sync
+            - Checkpoint sync
