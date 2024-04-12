@@ -192,6 +192,7 @@ Guest speaker: Justin Drake @zksummit11
     - others: Auradine, Ingonyama, SupraNational
 
 ### 2024.4.12 Notes on EIP 3074 <> 4337
+
 Source: https://hackmd.io/@matt/note-on-3074
 
 How 3074 different from 4337
