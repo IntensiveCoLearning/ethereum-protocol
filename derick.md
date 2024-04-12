@@ -23,7 +23,7 @@ EIP-4844 被称为 proto-danksharding，它是以太坊的 Dencun 硬分叉中�
 
 ##### EIP-4844 如何降低 `gas` 费用？
 
-它提出了一种新的交易类型，称为「blob携带交易 (`blob-carrying transactions`)」。这种交易类似于附加在以太坊交易上的「sidecar」，可以包含额外的信息块。这些 blob 的体积很大（最大可达 128 KB），但与当前的 calldata 相比，费用却更低。通过将这些 blob 临时存储在以太坊的共识层上，EIP-4844 旨在显着降低 rollup 向以太坊主网传输数据的成本，从而降低交易费用。
+它提出了一种新的交易类型，称为「blob携带交易 (`blob-carrying transactions`)」。这种交易类似于附加在以太坊交易上的「sidecar」，可以包含额外的信息块。这些 blob 的体积很大（最大可达 128 KB），但与当前的 calldata 相比费用更低。通过将这些 blob 临时存储在以太坊的共识层上，EIP-4844 旨在显着降低 rollup 向以太坊主网传输数据的成本，从而实现降低交易费用。
 
 
 ##### EIP-4844 的优点
