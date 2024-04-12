@@ -4,6 +4,28 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.12
+
+Week2
+
+refs:
+
+- https://epf.wiki/#/eps/week2
+- https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh
+
+Block validation:
+
+Consensus Layer:
+
+- [process_execution_playload](https://github.com/ethereum/consensus-specs/blob/dev/specs/deneb/beacon-chain.md#modified-process_execution_payload)
+  先进行一系列的校验：verify paret hash 和 previous execution payload header 一致性、pre_randao、timestamp、commitments ≤ limit、execution payload，然后将 versioned_hashes 和 parent_beacon_block_root 传到 execution engine，CL 和 EL 的通信是通过 execution engine 实现的。
+- [notify_new_payload](https://github.com/ethereum/consensus-specs/blob/dev/specs/deneb/beacon-chain.md#modified-notify_new_payload)
+  将 execution playload 发送到 execution engine，然后 execution client 会执行 state transition function。
+
+### 2024.4.11
+
+缺席
+
 ### 2024.4.10
 
 今天时间有限，学习了 Node 和 Client 的内容：
