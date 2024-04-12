@@ -69,3 +69,26 @@ The base fee is calculated by a formula that compares the size of the previous b
  - https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/
 
 学习了 Merkle-Patricia 的基本原理，以及相对基本的 Merkle tree 的改善。相应的算法和代码均已学习。
+
+### 2024.4.12
+
+学习资料：
+
+ - https://epf.wiki/#/eps/week2
+ - https://cs251.stanford.edu/lectures/lecture7.pdf
+ - https://www.youtube.com/watch?v=7sxBjSfmROc
+ - https://epf.wiki/#/eps/week3
+ - https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/
+
+
+ > 注：[视频 An Overview of the Ethereum Excecution Layer - Dan Boneh](https://www.youtube.com/watch?v=7sxBjSfmROc) 中 5:40 左右对交易执行和同步区块的顺序解释有误，视频下的讨论也没有结论，tx 在用户端不是先进入 consensus layer 的。正确的顺序是：  
+ > 1. 交易的提交：用户提交的交易首先进入到执行层（Execution Layer）。在执行层，交易被放入交易池（mempool）中等待被处理。这是因为执行层负责管理以太坊的状态和执行交易（包括智能合约的执行）。
+ > 2. 区块的提议：共识层（Consensus Layer）根据权益证明（PoS）机制选出一个验证者（validator）来提议新的区块。这个验证者会从执行层的交易池中选择交易来构建新的区块。
+ > 3. 新区块的处理：验证者在共识层提议新的区块后，通过 `notify_new_payload` 函数将这个新区块（或称为payload）发送给执行层。执行层接收到新区块后，会对其中的交易进行处理和验证，包括执行智能合约、更新状态等。
+ > 4. 区块的确认：一旦执行层完成了对新区块的处理并验证无误，共识层就会最终确定这个区块，并将其加入到区块链中。这样，交易就被确认了。
+
+The Beacon Chain:
+
+1. 一个 slot 是 12s，一个 epoch 有 32 个 slots，也就是 12s *32 = 384s = 6.4mins
+
+(看到一半有事去忙，明天继续看完)
