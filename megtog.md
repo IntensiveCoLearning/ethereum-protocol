@@ -4,6 +4,18 @@
 
 ## Notes
 
+### 2024.4.12
+
+今天又又没搞 spec 学习 :-(
+
+看到 unchained 的 learn 板块发了一篇文章 [What is EIP-7251 (MaxEB) in Ethereum? A Beginner’s Guide](https://unchainedcrypto.com/eip-7251-maxeb-ethereum/)。 就看这篇文章当今天的学习吧（话说 learn 板块的文章好像都没有作者署名，不知道怎么考虑的）
+
+> Validators won’t have to fully exit and re-enter the protocol to merge their effective balances.
+
+正好不太明白 MaxEB 里 [Consolidation](https://hackmd.io/@philknows/S1JbLXmlA#Consolidations) 的意指，就是这个合并的意思么
+
+看到这个 hackmd 里说这个 eip 还会修改，方便 lido 兼容，很多细节需要学习
+
 ### 2024.4.11
 
 今天又没搞 spec 学习
