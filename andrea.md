@@ -3,6 +3,75 @@
 区块链萌新
 
 ## Notes
+### 2024.4.13
+
+### 2024.4.12
+DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
+
+[Ethereum Transaction | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/blockchain/transaction)
+
+An Ethereum transaction is made of up 3 parts:
+
+- metadata, including to/from, $ETH amount, gas details and signature data
+- cache, a list of accounts and keys the transaction expects to use
+- data, the payload of the transaction (smart contract code or API call)
+
+![](https://inevitableeth.com/transaction-full-txn.jpeg)
+
+Cache contains the accessList, a list of addresses and keys the transaction anticipates using. The transaction will still be able to use resources off this list, but at a higher (gas)cost.
+
+The accessList was added by EIP-2929, allowing clients to fetch/cache data to be used during the transaction. 
+
+Today, the discount for using addresses & keys in the accessList is ~10%. However, this will increase in the future as Ethereum moves to support light clients.
+
+The data payload being delivered by the transaction. This can be used in 3 ways:
+
+- ETH transfer - empty
+- smart contract API call - name of function and parameters
+- new smart contract - code of the smart contract
+
+Data in the input field is recorded in binary, but can be translated back to a human readable form.
+
+The input field exists on-chain, but is not part of the EVM state. It simply provides data for the contract to use during the transaction, it is not tracked by Ethereum nor used in consensus.
+
+The EVM can only use data supplied in that transaction; it cannot look back.
+
+This property becomes useful for applications that want to write historical data to the Ethereum blockchain (eg for manual retrieval later) but don't care about having direct EVM access.
+
+[Ethereum Gas | Inevitable Ethereum](https://inevitableeth.com/home/concepts/gas)
+
+The EVM has computational costs; every activity that touches the World Computer can be boiled down to the machine code readable by the EVM. That bytecode is made of operations that each have a specific gas cost. 
+
+Therefore, gas measures the amount of computational effort required to execute specific operations.
+
+This gas is consumed by the World Computer in the same way that electricity is consumed by a (physical) computer; it is gone forever. Ethereum does this by "burning" the gas, or sending it to a permanently unrecoverable address.
+
+In order to actually run a transaction, you must supply the World Computer with enough gas to execute it.
+
+一个对Gas非常好的理解
+
+Gas is complicated, there are 2 markets you need to follow when making a transaction: 
+
+- ETH (priced in $) 
+- gas (priced in ETH/[GWEI](https://www.investopedia.com/terms/g/gwei-ethereum.asp)). 
+
+Think of it this way: does you computer care about the cost of electricity? 
+
+Why would the World Computer care about the cost of ETH?
+
+Gas is an abstraction that allows us to have a distinct value layer for computational expenses vs the valuation of ETH. 
+
+The World Computer is a globally shared, scare resource. Gas is how we divide up the units of the EVM, and then we let the market distribute it.
+
+ETH(Gas) 就像水电，而水电目前需要用法币来支付
+
+Finally, gas fees keeps Ethereum secure. 
+
+By requiring a fee for every transaction, [spam attacks](https://en.wikipedia.org/wiki/Denial-of-service_attack) quickly become nonviable. Infinite loops or other computational wastage quickly burn themselves out.
+
+And higher gas fees = more $ETH burn = higher % staked = more economic security.
+
+
 ### 2024.4.9
 DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
 
