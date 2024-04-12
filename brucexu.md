@@ -4,6 +4,18 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.12
+
+#### [Study Group Week 2 | Execution Layer](https://epf.wiki/#/eps/week2)
+
+[NODES AND CLIENTS](https://ethereum.org/en/developers/docs/nodes-and-clients/)
+
+A node has to run two clients: a consensus client and an execution client.
+
+There is also a third piece of software, known as a 'validator' that can be added to the consensus client, allowing a node to participate in securing the network.
+
+There are different classes of full node - some start from the genesis block and verify every single block in the entire history of the blockchain. Others start their verification at a more recent block that they trust to be valid (e.g. Geth's 'snap sync'). Regardless of where the verification starts, full nodes only keep a local copy of relatively recent data (typically the most recent 128 blocks), allowing older data to be deleted to save disk space. Older data can be regenerated when it is needed.
+
 ### 4.11
 
 #### [week2 notes](https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh)
@@ -35,9 +47,10 @@ NODES AND CLIENTS
   - During execution, the EVM maintains a transient memory (as a word-addressed byte array), which does not persist between transactions.
   - Contracts, however, do contain a Merkle Patricia storage trie (as a word-addressable word array), associated with the account in question and part of the global state.
   - All implementations of the EVM must adhere to the specification described in the Ethereum Yellowpaper. 可以跑一下 JS 的 EVM 了解下执行原理 https://github.com/ethereumjs/ethereumjs-monorepo/tree/master/packages/evm 或者自己构建一个最简单的 EVM 写个教程
--
 
 [MERKLE PATRICIA TRIE](https://ethereum.org/en/developers/docs/data-structures-and-encoding/patricia-merkle-trie/)
+
+TODO
 
 ### 4.10
 
