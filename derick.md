@@ -4,7 +4,10 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 ## Notes
 
-### 2024.4.11
+### 2024.4.13
+
+
+### 2024.4.12
 
 #### EIP-4844
 
