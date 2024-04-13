@@ -203,9 +203,9 @@ Beef between 3074 and 4337
 - Previously, there are some people from the 4337 camp complained about that 3074 would fragment the community, where devs would build momentum on separate EIPs.
 - 3074 could support the multi EVM chain future more easily than 4337.
 
+Weakness of 3074
+- Inability to spend ETH from the authorized account
+
 ### 2024.4.13 Notes on Evolving Ethereum With Improvement Proposals | Pooja Ranjan
 - 观看 EthDenver EIP 相关视频，并整理笔记 Evolving Ethereum With Improvement Proposals | Pooja Ranjan - EthCatHerders
 - 笔记：https://forum.plancker.org/t/evolving-ethereum-with-improvement-proposals-pooja-ranjan-ethcatherders/379
-
-Weakness of 3074
-- Inability to spend ETH from the authorized account
