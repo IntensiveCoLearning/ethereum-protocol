@@ -414,6 +414,8 @@ There was always a potential for reorgs, so dapps would often wait several block
 - there is an actual clock. every slot occurs ecery 12 seconds.
 - you can confidently say a block has been finalized after 2 epochs.
 
+![i](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/f3587931-65bc-4b53-8c01-c1b0023ac88b)
+
 - slot: occur actually 12 seconds, there may be a block in a slot. missed slot contains no blocks.
 - epoch: 32 slots, 6.4 minutes. basic unit to determine the level of finality of transactions.
 
@@ -460,3 +462,28 @@ Ethereum nodes and clients
         - Consensus layer sync mode
             - Optimistic sync
             - Checkpoint sync
+
+### 2024.4.13
+
+1. how are proposer and attesters chosen.
+
+not every validators are voting or testing on every slot.
+committee: at least 128 validators are chosen for a committee. A validator can only be in one committee per epoch.
+All active validators are separated using RANDAO function into 32 committees in an epoch. Then for every slot, one validator is selected to be proposer to propose a block and the rest of the validators will be attesters for the slot.
+
+![i](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/c7ff6c02-8f88-4893-8784-87c870e39ae7)
+
+2. What happens in a slot?
+
+slot has three distinct four-second phrases:
+
+- t=0~4: Block propagation, Honest proposer broadcasts their block at the start of their slot
+- t=4~8: Attestation aggregation, Attestation deadline, where attesters determine which block they will vote for based on the fork-choice rule. usig BLS signatures .
+- t=8~12: Aggregation propagation, A subset of validators broadcast an aggregate,
+
+![i](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/e00c9844-0002-415a-a549-2a80bb054725)
+
+3. Consensus layer
+
+validators: responsible for proposing new blocks, validating existing ones, and processing transactions.
+
