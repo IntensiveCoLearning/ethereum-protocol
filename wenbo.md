@@ -3,6 +3,9 @@
 [Hello，my name is Wenbo and I'm a undergraduate student who loves BlockChain and Deeplearning. I'm looking forward to learning about the Ethereum Protocol by attending intensive-study-group.ヾ(≧▽≦*)o]
 
 ## Notes
+##$ 2024.4.14
+1. 继续学习 Stateless Ethereum
+
 ### 2024.4.11
 1. 快速过了：[Ethereum: The World Computer--以太坊：世界计算机](https://inevitableeth.com/en/home/ethereum/world-computer)，概论来的老东西
 > Light Clients 轻客户端:Light clients are pieces of software that can directly, trustlessly access Ethereum without running a full Ethereum node.轻客户端是可以直接、无需信任地访问以太坊而无需运行完整以太坊节点的软件。Before we can support light clients, we first need to upgrade Ethereum to be stateless.在支持轻客户端之前，我们首先需要将以太坊升级为无状态。
