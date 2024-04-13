@@ -3,6 +3,66 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.4.13
+继续白皮书，终于到eth的内容了；
+总结了一下组成部分的要点
+
+账户(Accounts):
+- 外部拥有账户(Externally Owned Accounts):
+  - 地址(20字节)
+  - 余额
+  - 发送交易时使用私钥签名
+
+- 合约账户(Contract Accounts):
+  - 地址(20字节)  
+  - 余额
+  - 合约代码
+  - 存储(默认为空)
+
+交易(Transactions):
+- 接收者地址
+- 发送者签名
+- 转移的以太币金额
+- 可选数据字段
+- STARTGAS - 最大可用Gas
+- GASPRICE - 每单位Gas支付的费用
+
+消息(Messages):
+- 发送者(隐式)
+- 接收者
+- 转移的以太币金额  
+- 可选数据字段
+- STARTGAS
+
+gas费用：燃料费用，evm里面执行代码需要消耗的
+
+eth区块链和挖矿：
+
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/25242467/ad3b080a-6b58-4016-8e53-830dbfc26a70)
+
+eth 和btc相比，它存储了完整的state的状态；
+以太坊和比特币在存储区块状态时的主要区别在于:
+
+比特币:
+- 只存储最终的交易merkle树的根哈希
+- 不单独存储每笔交易导致的状态变化
+- 需要从创世区块开始重新执行所有交易才能重构整个UTXO状态
+
+而以太坊:
+- 存储整个状态Trie的结构,包括中间节点
+- 单独存储了每笔交易导致状态Trie变化的部分
+- 不需从创世重新执行,只根据状态根哈希及已存储的Trie节点就可以重构整个状态
+
+以太坊的做法是将每笔交易导致的所有账户状态变化incrementally存储在Trie中,而不是像比特币那样只存储最终的哈希值。
+
+这样做的好处是:
+1) 更快重构状态,不需从头重放所有交易
+2) 支持更复杂的状态和执行模型(如以太坊的智能合约)
+3) 存储开销并没有想象中那么大,因为重复的状态只存储一次，采用了Patricia tree解决此类问题。实际存储空间相比比特币少了5-20倍；
+
+
+
 
 ### 2024.4.12
 继续白皮书，其中一直提到了utxo，详细了解了一下， 
