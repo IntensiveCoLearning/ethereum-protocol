@@ -4,6 +4,9 @@
 
 ## Notes
 ### 2024.4.13
+深入了解了一下RLP编码和EIP-2718
+[以太坊RLP(递归长度前缀)编码 | 登链社区 | 区块链技术社区 (learnblockchain.cn)](https://learnblockchain.cn/2019/05/20/geth-rlp-encode/)
+[以太坊上新的事务类型：EIP-2718 简介 | 登链社区 | 区块链技术社区 (learnblockchain.cn)](https://learnblockchain.cn/article/2528)
 
 ### 2024.4.12
 DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
