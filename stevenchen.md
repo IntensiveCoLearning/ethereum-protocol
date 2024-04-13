@@ -124,7 +124,23 @@ The consensus clients participate in a separate peer-to-peer network with a diff
 
 	"The intent of a PeerDAS design is to reuse well-known, battle-tested p2p components already in production in Ethereum to bring additional DA scale beyond that of 4844 while keeping the minimum amount of work of honest nodes in the same realm as 4844 (downloading < 1MB per slot)."
 
- 
+ ### 04/11 Skipped
+
+## ETH Research
+
+ ### 04/12 
+
+[ETH Roadmap Overview](https://ethereum.org/en/roadmap/)
+1. The Merge: Transitioned from proof-of-work to proof-of-stake to drastically reduce energy consumption and increase network security​.
+2. The Surge: Focuses on scalability enhancements through rollups and data sharding, reducing costs and increasing transaction throughput​.
+3. The Scourge: Ensures the network remains secure and decentralized, protecting against various attacks and manipulation​.​
+4. The Verge: Introduces Verkle trees to optimize and reduce Ethereum's state, easing processing demands on nodes​.
+5. The Purge: Simplifies Ethereum's history and state to reduce storage requirements for node operators​​.
+6. The Splurge: Comprises smaller, necessary upgrades to refine the network's functionality and resilience​​.
+
+Impossible triangle of scaling - trilemma
+![trilemma](https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/blockchain-trilemma.png)
+
 
 
 
