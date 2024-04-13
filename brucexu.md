@@ -4,6 +4,37 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.14
+
+TODO
+
+- finish [lecture7](https://cs251.stanford.edu/lectures/lecture7.pdf)
+- finish week2
+
+### 4.13
+
+#### [Study Group Week 2 | Execution Layer](https://epf.wiki/#/eps/week2)
+
+[NODES AND CLIENTS](https://ethereum.org/en/developers/docs/nodes-and-clients/)
+
+Archive nodes are full nodes that verify every block from genesis and never delete any of the downloaded data.
+
+Instead of downloading every block, light nodes only download block headers. These headers contain summary information about the contents of the blocks.
+
+The light nodes do not participate in consensus (i.e. they cannot be miners/validators), but they can access the Ethereum blockchain with the same functionality and security guarantees as a full node.
+
+[Portal Network](https://www.ethportal.net/overview)
+
+Decentralized API access to an Ethereum archive node with near-zero sync time and minimal hardware requirements!
+
+The Portal Network is a peer-to-peer protocol that runs parallel to Ethereum. Ethereum data is distributed across the Portal Network, instead of being copied in every individual node. This allows users to access Ethereum data with minimal hardware and bandwidth requirements and almost instant syncing.
+
+The Portal Network is actually several peer-to-peer networks (state, beacon, and history networks) that can be accessed using a Portal Network client. Each of these networks stores a specific subset of the data stored by an Ethereum full node. Each individual Portal client only stores a tiny fraction of each type of data. However, the Portal Network (the complete set of nodes) stores all the historical Ethereum data spanning from genesis right up to within a block or two of the head of the chain.
+
+#### [lecture7](https://cs251.stanford.edu/lectures/lecture7.pdf)
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/11e5780e-bc37-44b0-b63a-ea11c1b01df0)
+
 ### 4.12
 
 #### [Study Group Week 2 | Execution Layer](https://epf.wiki/#/eps/week2)
