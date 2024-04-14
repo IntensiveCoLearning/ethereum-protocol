@@ -146,3 +146,81 @@ randao 算法的随机性不是每次都重新生成随机数，而是累加产�
 这里有个问题，那就是 randao_reveal 的随机性怎么产生，这里就很巧妙的复用了 BLS 的签名，前面有说到通过 BLS 签名会把所有验证者的签名聚合，这个签名的产生几乎完全随机。randao_reveal 中存储的就是 BLS 签名。
 
 这样即使每个区块的随机性比较弱，但是累计的随机性会很高。在当前 epoch N 产生的随机数会用来计算 N+2 epoch 中验证者的分布。
+
+### 2024.4.14
+randao 的计算是在共识层完成的。在 BeaconState 中，维护了一个 randaoMixes 的变量，这个变量在每个  slot 都会不一样：
+
+```go
+type BeaconState struct {
+  //...
+	slot                                primitives.Slot
+	// ...
+	randaoMixes                         customtypes.RandaoMixes
+	// ...
+}
+```
+
+每次在新产生区块的时候，都会使用区块的中 randaoReveal 变量来更新 randaoMixes 值：
+
+```go
+func ProcessRandao(
+	ctx context.Context,
+	beaconState state.BeaconState,
+	b interfaces.ReadOnlySignedBeaconBlock,
+) (state.BeaconState, error) {
+	// ...
+	// 获取区块中的 RandaoReveal 值
+	randaoReveal := body.RandaoReveal()
+	if err := verifySignature(buf, proposerPub, randaoReveal[:], domain); err != nil {
+		return nil, errors.Wrap(err, "could not verify block randao")
+	}
+  // 更新 randaoMixes 值
+	beaconState, err = ProcessRandaoNoVerify(beaconState, randaoReveal[:])
+	if err != nil {
+		return nil, errors.Wrap(err, "could not process randao")
+	}
+	return beaconState, nil
+}
+
+func ProcessRandaoNoVerify(
+	beaconState state.BeaconState,
+	randaoReveal []byte,
+) (state.BeaconState, error) {
+	// ...
+	// 更新 randaoMixes 值
+	if err := beaconState.UpdateRandaoMixesAtIndex(uint64(currentEpoch%latestMixesLength), [32]byte(latestMixSlice)); err != nil {
+		return nil, err
+	}
+	return beaconState, nil
+}
+```
+
+在需要对 Validator 重新排列的时候，就会使用 randaoMixes 来生成一个新的随机数种子：
+
+```go
+func Seed(state state.ReadOnlyBeaconState, epoch primitives.Epoch, domain [bls.DomainByteLength]byte) ([32]byte, error) {
+	lookAheadEpoch := epoch + params.BeaconConfig().EpochsPerHistoricalVector -
+		params.BeaconConfig().MinSeedLookahead - 1
+
+  // 读取特定位置的 randaoMix 
+	randaoMix, err := RandaoMix(state, lookAheadEpoch)
+	if err != nil {
+		return [32]byte{}, err
+	}
+	seed := append(domain[:], bytesutil.Bytes8(uint64(epoch))...)
+	seed = append(seed, randaoMix...)
+
+	seed32 := hash.Hash(seed)
+
+	return seed32, nil
+}
+
+// 读取 RandaoMix 值
+func RandaoMix(state state.ReadOnlyBeaconState, epoch primitives.Epoch) ([]byte, error) {
+	return state.RandaoMixAtIndex(uint64(epoch % params.BeaconConfig().EpochsPerHistoricalVector))
+}
+```
+
+看完这个实现，觉得太优雅了，利用 BLS 签名，既解决了签名聚合的问题，也解决了随机源的问题。
+
+在完成 The Merge 升级之后，执行层的 block.difficulty 已经没有意义，就用来返回最新的 randao 值，在 solidity 0.8.18 之后，新增了 block.prevrandao 来返回最新的 randao 值。这两个变量返回的值是一样的，可以根据 solidity 的版本来决定使用哪个。
