@@ -4,6 +4,24 @@
 
 ## Notes
 
+### 2024.4.15
+
+Week 2 区块验证和区块构建的概述：
+
+- Function process_execution_payload: 由信标链执行，验证块有效并将 CL 向前移动。CL 进行检查并将 payload 发送至 EL 以进一步验证（通过execution_engine）。https://github.com/ethereum/consensus-specs/blob/dev/specs/deneb/beacon-chain.md#modified-process_execution_payload
+
+- Function notify_new_payload: CL 将执行负载发送到 EL，由EL执行状态转换。https://github.com/ethereum/consensus-specs/blob/dev/specs/deneb/beacon-chain.md#modified-notify_new_payload
+
+- State transition function (STF): 需要父区块（验证父区块到当前块的转换逻辑）；当前块；状态库（StateDB）（醉后已知的有效状态，存储与父区块相关的所有状态数据）
+返回：更新后的 StateDB（包含当前块的信息）；错误。
+首先验证 headers，出现如下情况会发生错误：Gas limit 变化超过前一个区块的1/1024；区块编号不连续；EIP-1559基本费用未正确更新。
+第二步若 headers 正确，则应用 Tx。覆盖区块 tx 后通过 VM 执行每个 tx，若 tx 正确则更新状态。若有一个无效 tx 则整个块无效，不更新状态。
+
+- Wrap function eg. newPayload：需要执行负载（Execution payload），返回 bool 到信标链，然后信标链会调用 STF。
+
+CL 判断共识，EL 执行共识，CL 有驳回区块的权力
+
+
 ### 2024.4.12
 
 还是没去看 EL 和 CL
