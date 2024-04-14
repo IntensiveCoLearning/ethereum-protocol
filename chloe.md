@@ -209,3 +209,6 @@ Weakness of 3074
 ### 2024.4.13 Notes on Evolving Ethereum With Improvement Proposals | Pooja Ranjan
 - 观看 EthDenver EIP 相关视频，并整理笔记 Evolving Ethereum With Improvement Proposals | Pooja Ranjan - EthCatHerders
 - 笔记：https://forum.plancker.org/t/evolving-ethereum-with-improvement-proposals-pooja-ranjan-ethcatherders/379
+
+### 2024.4.14 Week 8R protocol services notes
+- Link: https://twitter.com/EIPFun/status/1779616224940318890
