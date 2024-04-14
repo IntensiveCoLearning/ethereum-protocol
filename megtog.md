@@ -4,6 +4,29 @@
 
 ## Notes
 
+### 2024.4.14
+
+周末感觉没啥学习动力
+
+今天看了一点这个视频 [Eth2 Collaboration Culture ](https://youtu.be/ixGeIEgdf4Y?t=530)
+
+发现了这个 
+
+<https://twitter.com/drakefjustin/status/1102911207785287680>
+
+<https://github.com/protolambda/beacon-challenge>
+
+
+所以 protolambda 是赢了这个 10 eth 的 bounty 之后加入 EF 工作的呀
+
+#### TODO
+一些 2019 年那个时期资料，后续梳理历史的时候再看
+
+<https://twitter.com/drakefjustin/status/1102916908326797312>
+
+<https://youtu.be/83DGZPJoyPQ>
+
+
 ### 2024.4.12
 
 今天又又没搞 spec 学习 :-(
