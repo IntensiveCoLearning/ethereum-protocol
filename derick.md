@@ -6,19 +6,46 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 ### 2024.4.14
 
+- 了解了共识客户端和执行客户端信息
+
+
 #### Consensus Clients
 
-| Client    | | Status | Support                | Language   |
-|-----------|-|--------|------------------------|------------|
-| Grandine  | | beta   | Linux, Win, macOS      | -          |
-| Lighthouse| | stable | Linux, Win, macOS, ARM | Rust       |
-| Lodestar  | | stable | Linux, Win, macOS      | TypeScript |
-| Nimbus    | | stable | Linux, Win, macOS, ARM | Nim        |
-| Prysm     | | stable | Linux, Win, macOS, ARM | Golang     |
-| Teku      | | stable | Linux, Win, macOS      | Java       |
+| Client    | 占比| Status | Support                | Language   |
+|-----------|-  |--------|------------------------|------------|
+| Grandine  |   | beta   | Linux, Win, macOS      | -          |
+| Lighthouse| 33.47%  | stable | Linux, Win, macOS, ARM | Rust       |
+| Lodestar  | 0.92%   | stable | Linux, Win, macOS      | TypeScript |
+| Nimbus    |9.34%   | stable | Linux, Win, macOS, ARM | Nim        |
+| Prysm     |37.89%   | stable | Linux, Win, macOS, ARM | Golang     |
+| Teku      |18.39%   | stable | Linux, Win, macOS      | Java       |
+
+Data provided by Sigma Prime's Blockprint — updated daily.
+Data may not be 100% accurate. 
+
 
 #### Execution Clients
 
+| Client     | 占比|Status       | Support                | Language   |
+|------------|-|-------------|------------------------|------------|
+| Akula      | |deprecated   | -                      | -          |
+| Besu       |12% |stable       | Linux, Win, macOS      | Java       |
+| Erigon     |2% |alpha & beta | Linux, Win, macOS, ARM | Golang     |
+| EthereumJS | |alpha        | Linux, Win, macOS      | TypeScript |
+| Geth       |63% |stable       | Linux, Win, macOS, ARM | Golang     |
+| Nethermind |23% |stable       | Linux, Win, macOS, ARM | .NET       |
+| Nimbus     | |pre-alpha    | -                      | Nim        |
+| Reth       | |alpha        | Linux, Win, macOS, ARM | Rust       |
+| Silkworm   | |pre-alpha    | Linux, Win, macOS      | C++        |
+
+Data provided by supermajority.info — updated manually.
+Data may not be 100% accurate. 
+##### Client Diversity Is Not Optional
+
+> 许多人知道客户端的多样性对于构建一个更有韧性的网络非常重要，但他们不明白为什么这么重要，或者它的重要性到底有多大。这不仅仅是重要——它是至关重要的。如果有一个单一的客户端被三分之二（66%）的验证者使用，这将非常真实地带来中断链条和节点操作者经济损失的风险。
+达到最终一致性需要三分之二的验证者。如果一个拥有超过66%市场份额的客户端出现了一个错误，并分叉到它自己的链上，它将能够完成最终确定。一旦分叉完成最终确定，验证者就无法返回到真正的链上，而不被惩罚。如果66%的链同时被惩罚，那么罚款就是全部的32 ETH。
+那么，为什么超过50%的市场份额仍然危险呢？如果一个少数客户端分叉，那么超过50%的多数客户端可以获得超过66%的多数。如果没有任何一个客户端的市场份额超过33%，这些情况就可以避免。这就是为什么所有客户端的目标市场份额是小于33%。
+执行客户端也不是免疫的。上面提到的风险同样适用于共识客户端和执行客户端。
 
 ### 2024.4.13
 
