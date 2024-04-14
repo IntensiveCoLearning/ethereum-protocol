@@ -126,7 +126,7 @@ The consensus clients participate in a separate peer-to-peer network with a diff
 
  ### 04/11 Skipped
 
-## ETH Research
+## ETH In the future
 
  ### 04/12 
 
@@ -139,12 +139,39 @@ The consensus clients participate in a separate peer-to-peer network with a diff
 6. The Splurge: Comprises smaller, necessary upgrades to refine the network's functionality and resilience​​.
 
 Impossible triangle of scaling - trilemma
+
 ![trilemma](https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/blockchain-trilemma.png)
 
+### 04/13
+
+More on scalability [core changes](https://epf.wiki/?#/wiki/research/scaling/core-changes/core-changes):
+
+The ultimate goals of Ethereum scalability:
+
+ - Transition the execution layer (dApps) entirely to L2 rollups.
+   
+ - Optimize Ethereum, the L1, to serve primarily as the settlement and data availability layer.
+
+The Consensus Layer (CL) is key for rollups in terms of Data Availability (DA) and for storing proofs of validity, particularly for ZK rollups, as it aims to achieve scalability and reduce Ethereum's gas costs. 
+
+Outline of the development phases for the CL:
+
+1. Proto-danksharding (EIP-4844): This initial phase introduced "blobs" to the network, which are large data batches that help improve scalability by providing a cost-effective way to store large amounts of data necessary for rollups. It was implemented on March 14, 2024.
+
+2. Increasing blob count & gas modifications: Scheduled for the end of 2024, this phase aims to increase the number of blobs that can be included in each block and adjust gas pricing to optimize network throughput and costs.
+
+3. Addition of PeerDAS: This phase involves incorporating a decentralized autonomous system (PeerDAS) for further enhancement of data availability solutions, making the network more robust and scalable.
+
+4. Full implementation of Danksharding: The final phase completes the roadmap by fully implementing Danksharding, which is expected to dramatically increase network capacity and reduce costs by optimizing data shard handling.
 
 
+### 04/14
 
+Complete walk-through of 4844:
 
+Overview: EIP-4844 introduces "blob-carrying transactions" to scale Ethereum's data availability in a cost-effective manner without fully implementing sharding (still "proto"). It would enable the storage of large data blobs on the beacon chain, further increasing rollup scalability compared to the base chain, by at least two orders of magnitude. 4844 outlines blob transaction parameters, gas accounting, **new opcodes**, and **execution layer changes** to cope with these transactions. This EIP would allow for the shifting to a full sharding paradigm while enabling all the current needs of rollups.
+
+TODO: learn 4844 thoroughly [here](https://eips.ethereum.org/EIPS/eip-4844) 
 
 
 
