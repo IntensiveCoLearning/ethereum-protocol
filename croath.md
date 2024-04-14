@@ -87,8 +87,18 @@ The base fee is calculated by a formula that compares the size of the previous b
  > 3. 新区块的处理：验证者在共识层提议新的区块后，通过 `notify_new_payload` 函数将这个新区块（或称为payload）发送给执行层。执行层接收到新区块后，会对其中的交易进行处理和验证，包括执行智能合约、更新状态等。
  > 4. 区块的确认：一旦执行层完成了对新区块的处理并验证无误，共识层就会最终确定这个区块，并将其加入到区块链中。这样，交易就被确认了。
 
+### 2024.4.13
+
+学习资料：
+
+ - https://ethos.dev/beacon-chain
+
 The Beacon Chain:
 
 1. 一个 slot 是 12s，一个 epoch 有 32 个 slots，也就是 12s *32 = 384s = 6.4mins
-
-(看到一半有事去忙，明天继续看完)
+2. 一个 slot 一般有一个 block，但是由于 validator 下线等原因也可以是空的
+3. Validator 的最大 balance 是 32E，但是 staking 可以很多
+4. 每一个 slot 都至少有一个 committee，每一个 committee 至少有 128 个 validators，一个 epoch 里每个 slot 的 commitee 中 validator 的数量是均等的，最开始就平均分配好的
+5. RANDAO 根据 validator 的 balance 权重选择 proposer，proposer 可能也是该 slot 的 committee 成员，这种情况发生的概率是 1/32
+6. 每个 epoch 的第一个 slot 是 checkpoint，如果 epoch 空置，checkpoint 向下一个 epoch 顺延
+7. 一个 checkpoint 经过两个 epochs 会被 finalized
