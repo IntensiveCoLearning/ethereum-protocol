@@ -295,3 +295,26 @@ devp2p 协议命名的有趣历史：
 ##### Q&A
 - Do PBFT protocols have an upper bound of nodes? If yes, what is that, practically speaking?
   - The number of nodes doesn't have a hard cap, but there is a trade-off between high throughput and low latency. 
+
+### 4.14
+##### 比特币用PoW方式解决BFT
+###### 比特币被认为是解决Byzantine Generals问题的第一个解决方案
+- 系统可以扩展到无限的节点数量
+- 开放且无需许可的参与
+- 使用PoW机制达成共识
+###### 比特币共识机制
+- 比特币的状态机复制
+  - 输入：交易（以区块形式组织）用于花费比特币
+  - 输出：比特币账本的当前状态
+- 使用密码学来减少可能的状态空间
+  - 数字签名：使用密码学来验证交易的真实性
+  - 父哈希：每个新块必须包含前一个块的哈希
+- 使用PoW实现共识
+  - 挖矿难度调整：
+    - 比特币有挖矿难度的概念，指的是矿工解决数学方程并找到下一个区块的哈希值的难度。
+    - 挖矿难度由网络总算力决定。如果更多的矿工加入网络，哈希率增加，挖矿难度就会增加，反之亦然。
+  - 挖矿难度调整的影响：
+    - Sybil 保护：新区块必须执行一定量的工作才能被视为有效
+    - 共识算法：：节点寻找链头的方式是总结每个区块所做的挖矿难度，选出总难度最大的链
+  - 发行本币BTC进行激励：
+    - 为当前工作量最多的单链提供奖励以激励工作​
