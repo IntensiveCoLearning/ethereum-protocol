@@ -4,6 +4,22 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 ## Notes
 
+### 2024.4.14
+
+#### Consensus Clients
+
+| Client    | | Status | Support                | Language   |
+|-----------|-|--------|------------------------|------------|
+| Grandine  | | beta   | Linux, Win, macOS      | -          |
+| Lighthouse| | stable | Linux, Win, macOS, ARM | Rust       |
+| Lodestar  | | stable | Linux, Win, macOS      | TypeScript |
+| Nimbus    | | stable | Linux, Win, macOS, ARM | Nim        |
+| Prysm     | | stable | Linux, Win, macOS, ARM | Golang     |
+| Teku      | | stable | Linux, Win, macOS      | Java       |
+
+#### Execution Clients
+
+
 ### 2024.4.13
 
 #### zk/op rollup
