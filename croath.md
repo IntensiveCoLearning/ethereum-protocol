@@ -102,3 +102,32 @@ The Beacon Chain:
 5. RANDAO 根据 validator 的 balance 权重选择 proposer，proposer 可能也是该 slot 的 committee 成员，这种情况发生的概率是 1/32
 6. 每个 epoch 的第一个 slot 是 checkpoint，如果 epoch 空置，checkpoint 向下一个 epoch 顺延
 7. 一个 checkpoint 经过两个 epochs 会被 finalized
+
+### 2024.4.14
+
+学习资料：
+
+ - https://ethos.dev/beacon-chain
+
+接上次内容，同样是讨论 The Beacon Chain。
+
+对于 validators 的奖惩制度主要分为六类：
+
+1. 见证人奖励（不展开）
+2. 见证人惩罚
+    > 不证实 block 或者证实的 block 没有被 finalized，产生处罚
+3. 日常的不在线处罚
+    > 是赢得奖励的 75% 程度的处罚。例如可以获得 10% 的 APY，表现十分差的（但诚实不作恶的） validator 最多获得 -7.5% APY 的处罚，一年有 10% 时间不在线的 validator 差不多有 -0.75% APY 的处罚。
+4. 削减和举报者奖励
+    > 连续 8192 个 epochs 不在线的 validator 会被削减 1/32(0.5E) 的 balance，注意这里是 balance 不是 staking。如果一批 validators 同时不在线惩罚将上升，公式是 `validator_balance*3*fraction_of_validators_slashed`,如果 1/3 的 validators 同时不在线，那么第三个参数就是 1/3，公式的结算结果将是 32E，那么这批同时下线的 validators 每个人的所有 balance(32E)就全部被罚没了。与此同时，举报他人不在线可以得到奖励。
+5. 提案人奖励（不展开）
+6. 不作为惩罚
+    > 触发条件：当网络中无法达到足够的共识，即连续四个Epoch（大约51.2分钟）都没有区块达到终结性时，不活跃泄露机制会被触发。
+    >
+    > 惩罚方式：一旦触发，所有验证者开始遭受不活跃泄露惩罚，这种惩罚是以二次方方式增加的，也就是说惩罚随时间的增长而迅速增大。
+    >
+    > 目的：这种设计的目的是在网络中出现大规模不活跃或者故障时，通过削弱不活跃验证者的影响力，快速恢复网络的正常运作。当大量验证者不活跃时，这个机制通过逐渐减少他们的抵押份额，最终使得剩余活跃的验证者能够构成网络所需的2/3多数，恢复区块的终结性。
+    >
+    > 影响：在不活跃泄露期间，所有验证者的见证人（attester）奖励被设置为零，但是他们仍然可以获得提案者（proposer）和告密者（whistleblower）奖励。
+    >
+    > 示例效果：如果50%的验证者离线，根据不活跃泄露机制的设计，大约在18天后，网络将会自动恢复到能够再次达到区块终结性的状态，因为不活跃的验证者会被逐渐排除出去。
