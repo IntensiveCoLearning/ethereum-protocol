@@ -487,3 +487,99 @@ slot has three distinct four-second phrases:
 
 validators: responsible for proposing new blocks, validating existing ones, and processing transactions.
 
+### 2024.4.14
+
+1. Ethereum: mechanics
+
+beacon chain:
+
+- becoming a validator: 32 ETH or use Lido.
+- validators:
+  - sign blocks to express correctness
+  - occasionally act as block proposer
+  - correct behavior -> issued new ETH
+  - incorrect behavior -> slashed
+
+2. Ethereum compute layer: the EVM
+
+- accounts:
+
+|Account data| EOA | Contacts |
+|--|--| -- |
+|address|H(PK)| H(creatorAddress+creatorNonce)|
+|code|-|CodeHash|
+|storage root(state)|-|storageRoot|
+|balance|balance|balance|
+|nonce|nonce|nonce|
+
+- Account state:
+  - storage array S[]: S[0], S[1], … , S[2^256-1]:
+  - Account storage root: Merkle Patricia Tree hash of s[]
+    - time to compute root hash: <= 2 * |S|, |S| = # non-zero cells
+    - for example
+    ![Screenshot 2024-04-14 at 17 37 42](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/969c6222-65b9-4ea0-b2ec-b9e7c276650e)
+- State transitions
+  - To: 32-byte address of target (0 -> create new account)
+  - From, [Signature]: initiator address and signature on Tx (if owned)
+  - Value: # Wei being sent with Tx (1 Wei = 10^-18 ETH)
+  - Tx fees (EIP 1559): gasLimit, maxFee, maxPriorityFee (later)
+  - if To = 0: create new contract `code = (init, body)`
+  - if To ≠ 0: data (what function to call & arguments)
+  - nonce: must match current nonce of sender (prevents Tx replay)
+  - chain_id: ensures Tx can only be submitted to the intended chain
+- transaction types:
+  - owned -> owned: transfer ETH between users
+  - owned -> contract: call contract with ETH & data
+- virtual Tx initiated by a contract
+  - contract -> owned: contract sends funds to user
+  - contract -> contract: one program calls another (and sends funds)
+- An Ethereum Block
+  - Block proposer produce a block do:
+    1. for i=1,…,n: execute state change of Tx_i sequentially
+    2. record updated world state in block
+  - Other validators re-execute all Tx to verify block
+- Block header data
+  - consensus data: proposer ID, parent hash, votes, etc.
+  - address of gas beneficiary: where Tx fees will go
+  - **world state root**: updated world state, Merkle Patricia Tree hash of all accounts in the system
+  - **Tx root**: Merkle hash of all Tx processed in block
+  - **Tx receipt root**: Merkle hash of log messages generated in block
+  - Gas used: used to adjust gas price (target 15M gas per block)
+- EVM mechanics: execution environment
+  - Write code in Solidity
+  - compile to EVM bytecode
+  - validators use the EVM to execute contract bytecode
+- The EVM
+  - Stack machine, max stack depth = 1024
+  - program aborts if stack size exceeded
+  - two types of zero initialized memory
+    - Persistent storage (on blockchain): `SLOAD`, `SSTORE` (expensive)
+    - Volatile memory (for single Tx): `MLOAD`, `MSTORE` (cheap)
+    - `LOG0`(data): write data to log
+  - Every instruction costs gas, some gets gas refund
+  - Why charge gas?
+    - prevents submitting Tx that runs for many steps(DoS attack)
+    - block proposer chooses Tx from mempool that maximize its income.
+  - Gas calculation: EIP1559
+    - goals:
+      - users incentivized to bid their true utility for posting Tx,
+      - block proposer incentivized to not create fake Tx, and
+      - disincentivize off chain agreements.
+    - Every block has a `baseFee`:
+      - the minimum gasPrice for all Tx in the block
+      - computed from total gas in earlier blocks
+        - earlier blocks at gas limit (30M gas) -> base fee goes up 12.5%
+        - earlier blocks empty -> base fee decreases by 12.5%
+    - Three parameters:
+      - `gasLimit`: max total gas allowed for Tx
+      - `maxFee`: maximum allowed gas price
+      - `maxPriorityFee`: additional "tip" to be paid to block proposer
+      - Computed gasPrice bid: `gasPrice <- min(maxFee, baseFee + maxPriorityFee)`
+      - Max Tx fee: `gasLimit × gasPrice`
+    - gasUsed ⇽ gas used by Tx
+      - Send `gasUsed×(gasPrice – baseFee)` to block proposer
+      - BURN `gasUsed× baseFee`
+      - total supply of ETH can decrease
+    ![i](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/2a5a3dfc-337a-4a68-bf23-ca5dfcc0c185)
+    - Why burn ETH?
+      - Suppose no burn (i.e., baseFee given to block producer) => in periods of low Tx volume proposer would try to increase volume by offering to refund the baseFee off chain to users.

@@ -6,10 +6,13 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ### 4.14
 
-TODO
+#### [lecture7](https://cs251.stanford.edu/lectures/lecture7.pdf)
 
-- finish [lecture7](https://cs251.stanford.edu/lectures/lecture7.pdf)
-- finish week2
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/054a8bfb-d776-4ab1-aea4-5623761332e9)
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95468177/8926f81d-e2fe-4474-9a09-88a871161614)
+
+Finished Week2
 
 ### 4.13
 

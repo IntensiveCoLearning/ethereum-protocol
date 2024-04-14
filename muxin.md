@@ -4,6 +4,35 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.14
+
+Week2
+
+refs:
+
+- https://epf.wiki/#/eps/week2
+- https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh
+
+Block Building:
+
+Execution Layer
+
+build():
+
+- parameters:
+  - env: it has all the information, timestamp, block number, previous block, base fee, etc.
+  - pool: a list of ordered transactions
+  - state
+- returns:
+  - Block
+  - StateDB
+  - error?
+- process:
+  - 是一个循环
+  - keep tracking the gasUsed, 要 check 有没有到达 gas limit 并且 tx pool 是否为空
+  - 从 tx pool 里 pop 一个 transaction 进行 execution - vm.Run(env, tx, state)，如果没有 error，gasUsed += gas，continue next transaction
+  - 最后 retrun core.Finalize(env, txs, state), 这个 core.Finalize function 是将 a bunch of transaction 和 block 的其他一些信息做计算处理，生成一个完全简单的 block
+
 ### 2024.4.12
 
 Week2
