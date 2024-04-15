@@ -583,3 +583,22 @@ beacon chain:
     ![i](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/2a5a3dfc-337a-4a68-bf23-ca5dfcc0c185)
     - Why burn ETH?
       - Suppose no burn (i.e., baseFee given to block producer) => in periods of low Tx volume proposer would try to increase volume by offering to refund the baseFee off chain to users.
+
+### 2014.3.15
+
+the execution layer node
+
+- Block validation
+  - ELs process state transaction
+  - each transaction is validated by the client, executed, and its result accumulated into the state trie
+  - add additional mechanisms to blocks:
+    - such as the EIP-1559 base fee, the EIP-4844 excess blob gas, the EIP-4844 beacon root ring buffer, beacon chain withdrawals
+- Block building
+  - build blocks
+  - sync transaction pool over p2p
+- State transition function
+  - header validation
+    - verify merkle roots
+    - verify gas limit
+    - verify timestamp
+  - block validation
