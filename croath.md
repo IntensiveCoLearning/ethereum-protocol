@@ -131,3 +131,48 @@ The Beacon Chain:
     > 影响：在不活跃泄露期间，所有验证者的见证人（attester）奖励被设置为零，但是他们仍然可以获得提案者（proposer）和告密者（whistleblower）奖励。
     >
     > 示例效果：如果50%的验证者离线，根据不活跃泄露机制的设计，大约在18天后，网络将会自动恢复到能够再次达到区块终结性的状态，因为不活跃的验证者会被逐渐排除出去。
+
+### 2024.4.15
+
+学习资料：
+
+ - https://epf.wiki/#/eps/week5
+ - https://ethereum.org/en/roadmap/
+ - https://domothy.com/roadmap/
+ - https://ethereum.org/en/community/research/#active-areas-of-ethereum-research
+
+#### Roadmap:
+
+The Merge:
+
+已经完成：
+
+  - Beacon chain
+  - PoW -> PoS
+  - Staking 提现
+
+计划中：
+
+ - Secret leader election (SLE)
+ - Single Slot Finality
+ - Quantum-safe aggregation-friendly signatures
+
+The Surge:
+
+已经完成：
+
+ - 4844 Proto-Danksharding
+
+计划中：
+
+ - Rollup scaling
+
+### 2024.4.16
+
+学习资料：
+
+ - https://domothy.com/blobspace/
+ - https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum
+ - https://www.youtube.com/watch?v=UClaoL12W00
+ - https://blog.bingx.com/blockchain-en/what-are-sequencers-in-ethereum-network/
+ - https://epf.wiki/#/eps/week6-dev
