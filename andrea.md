@@ -3,6 +3,18 @@
 区块链萌新
 
 ## Notes
+### 2024.4.14
+了解了一些SSZ编码
+
+[Simple serialize | ethereum.org](https://ethereum.org/en/developers/docs/data-structures-and-encoding/ssz/)
+
+So the actual values for variable-length types are stored in a heap at the end of the serialized object with their offsets stored in their correct positions in the ordered list of fields.
+
+There are also some special cases that require specific treatment, such as the `BitList` type that requires a length cap to be added during serialization and removed during deserialization. Full details are available in the [SSZ spec(opens in a new tab)](https://github.com/ethereum/consensus-specs/blob/dev/ssz/simple-serialize.md).
+
+There are also cases where the leaves of the tree do not naturally evenly distribute in the way they do in the example above. For example, leaf 4 could be a container with multiple elements that require additional "depth" to be added to the Merkle tree, creating an uneven tree.
+
+[ssz.dev/overview](https://www.ssz.dev/overview) 交互式表现
 ### 2024.4.13
 深入了解了一下RLP编码和EIP-2718
 
