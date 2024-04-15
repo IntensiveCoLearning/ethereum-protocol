@@ -62,7 +62,7 @@ ref: https://www.youtube.com/watch?v=5gfNUVmX3Es
 
 每一个区块对应一个 slot，一个 slot 代表 12s，32 个 slot 组成一个 epoch。
 
-在每个 epoch 中，所有在只能合约中质押的验证者都会被随机分成 committee，每个 committee 都会负责 epoch 中的一个 slot。一个 committee 会划分成 128 个子网，每个子网中至少 128 个 Validator，当前以太坊有近 100 万的 Validator，每个 slot 的 validator 超过了 3 万。每个 epoch 会提前两个 epoch 周期（13 分钟）分配完成，Validator 有充足的时间找到分配给他们的 slot。
+在每个 epoch 中，所有在只能合约中质押的验证者都会被随机分成 committee，每个 committee 都会负责 epoch 中的一个 slot。一个 committee 会划分成 128 个子网，当前以太坊有近 100 万的 Validator，每个 slot 的 validator 超过了 3 万。每个 epoch 会提前两个 epoch 周期（13 分钟）分配完成，Validator 有充足的时间找到分配给他们的 slot。
 
 Validator 的分配是基于一个 randao 的分配算法，randao 依赖 validator 的私钥签名来产生随机数，这里会是用 BLS 技术将所有的签名汇集到一起，最后产生一个随机数。只要至少有一个诚实的 validator，那么最后产生的结果就是随机的。
 
@@ -224,3 +224,22 @@ func RandaoMix(state state.ReadOnlyBeaconState, epoch primitives.Epoch) ([]byte,
 看完这个实现，觉得太优雅了，利用 BLS 签名，既解决了签名聚合的问题，也解决了随机源的问题。
 
 在完成 The Merge 升级之后，执行层的 block.difficulty 已经没有意义，就用来返回最新的 randao 值，在 solidity 0.8.18 之后，新增了 block.prevrandao 来返回最新的 randao 值。这两个变量返回的值是一样的，可以根据 solidity 的版本来决定使用哪个。
+
+
+### 2024.4.15
+
+每个 epoch 的 Validator 都会被重新分配，最终的分配结果会受两个因素的影响：1. 当前活跃 validator 数量，2. randao 的值。
+
+在上面已经详细分析过了 randao 的产生机制，这个值决定了 validator 会以随机的方式来分配。当前以太坊的网络中接近百万的 validator，这些 validator 一定会被分配到某个 committee，那么这些 validator 具体是如何分配的？
+
+首先可以确定的是每个 epoch 中有 32 个 slot，每个 slot 中至少有一个 committee，每个 committee 中至少有  128 个 validator。所以如果需要让以太坊网络运行起来，那么至少需要 4096 validator，这是最低要求。
+
+但是 committee 基本不会单独运作，至少需要两个，所以至少要有 8192 个 validator，整个网络才能以比较安全的方式运行。
+
+但是实际上现在有近百万的 validator，远超 8192，但是也需要将这些 validator 分配到每个 committee 中。
+
+在当前的以太坊网络中，每个 slot 最多可以有 64 个 committee，每个 committee 中最多有 2048 个 validator。
+
+如果每个 slot 中已经有了 64 个 comittee，那么就不会再增加 committee 的数量，而是增加其中的 validator 数量。如果此时每个 committee 中刚好是 128 个 validator，那么总的 validator 数量是 262144，这个数据少于 100 万，说明此时以太坊网络中每个 slot 有 64 个 committee，而且每个 committee 中的数量多于 128。
+
+如果每个 committee 中的达到最多 2048 个validator，那么总的 validator 数量是 4194304，这个数据已经超过了当前以太币的发行总量，所以当前来看，validator 的数量是肯定会少于 4194304 个。
