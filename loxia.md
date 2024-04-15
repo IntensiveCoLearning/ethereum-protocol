@@ -4,6 +4,12 @@
 
 ## Notes
 
+### 2024.4.16
+
+Week 2 notes 完成学习：https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh
+
+https://learnblockchain.cn/article/4998
+
 ### 2024.4.15
 
 Week 2 区块验证和区块构建的概述：
