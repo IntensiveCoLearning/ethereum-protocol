@@ -5,6 +5,10 @@
 ## Notes
 ### 2024.4.13
 1. 继续学习 Stateless Ethereum
+[Accessing Ethereum  访问以太坊](https://inevitableeth.com/home/ethereum/network/node/accessing-ethereum)
+  > Think like this: 像这样思考：Consensus client: responsible for Proof of Stake (PoS), securing Ethereum with the value of $ETH共识客户端：负责权益证明（PoS），以 $ETH 的价值保护以太坊
+Execution client: responsible for operating the computing platform of the World Computer (the EVM).执行客户端：负责运行世界计算机（EVM）的计算平台。
+These clients are HEAVY DUTY pieces of software.这些客户端是重型软件。
 
 ### 2024.4.11
 1. 快速过了：[Ethereum: The World Computer--以太坊：世界计算机](https://inevitableeth.com/en/home/ethereum/world-computer)，概论来的老东西
@@ -16,11 +20,6 @@ Statelessness is a nuanced topic worth reading more about, but the idea can be s
 > ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/78262508/1fa7eeba-200b-4d19-b1ac-ce179b70f6da)
 
 诶，第一次听，感觉挺有前景
-
-3. [Accessing Ethereum  访问以太坊](https://inevitableeth.com/home/ethereum/network/node/accessing-ethereum)
-  > Think like this: 像这样思考：Consensus client: responsible for Proof of Stake (PoS), securing Ethereum with the value of $ETH共识客户端：负责权益证明（PoS），以 $ETH 的价值保护以太坊
-Execution client: responsible for operating the computing platform of the World Computer (the EVM).执行客户端：负责运行世界计算机（EVM）的计算平台。
-These clients are HEAVY DUTY pieces of software.这些客户端是重型软件。
 
 ### 2024.4.9
 1. 在看：https://summerofprotocols.com/research/sop2024
