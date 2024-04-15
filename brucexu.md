@@ -4,6 +4,22 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.15
+
+[Week 3 EPFsg Consensus Layer Notes](https://ab9jvcjkej.feishu.cn/docx/X7Ard9UlPoj2lmxKMvucfNubnTb)
+
+scarcity 的意思是独一无二的东西。digital scarcity 独一无二的数字品。
+
+Blockchain enables a way to create digital scarcity
+
+What's Byzantine fault tolerance (BFT)?
+
+- Byzantine fault tolerance (BFT) is the property of a system that is able to resist the class of failures derived from the Byzantine Generals' Problem. This means that a BFT system is able to continue operating even if some of the nodes fail or act maliciously.
+
+Two-phase commit (2PC)
+
+-
+
 ### 4.14
 
 #### [lecture7](https://cs251.stanford.edu/lectures/lecture7.pdf)
