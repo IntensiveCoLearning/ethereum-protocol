@@ -4,6 +4,23 @@
 
 ## Notes
 
+### 2024.4.15
+
+还是浅层次学习，比较愿意看看历史和八卦 （已经过了午夜了啊啊）
+
+今天关注 Casey Detrio
+
+> The bridge idea is a few months old now, but has not been immediately recognized as something major (at least, not by me). Tracing the history, we can see why it's been under-appreciated. The story begins, of course, with the June 2018 pivot.
+> The pivot away from deploying PoS on the main chain, to the new plan of launching Eth2 (PoS + sharding) as a separate new chain (beacon-chain + shards), left us reeling and disoriented. Thrust into a new universe, we became reoriented around eth2, with an eth2-centric vision.
+
+<https://twitter.com/cdetrio/status/1134949255045681152>
+
+之前提到 eip1011，那个计划里是没有 beacon chain，所以也就不需要 merge
+
+
+2020 十月 Vitalik 在 A rollup-centric ethereum roadmap 里引用了
+<https://ethresear.ch/t/phase-one-and-done-eth2-as-a-data-availability-engine/5269>
+
 ### 2024.4.14
 
 周末感觉没啥学习动力
