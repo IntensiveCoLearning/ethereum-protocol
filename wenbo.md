@@ -3,6 +3,17 @@
 [Hello，my name is Wenbo and I'm a undergraduate student who loves BlockChain and Deeplearning. I'm looking forward to learning about the Ethereum Protocol by attending intensive-study-group.ヾ(≧▽≦*)o]
 
 ## Notes
+### 2024.4.14
+1. 了解了 EIP-4844（thanks to derick）
+    1. 引入「blob」数据块 本质上是大数据包，可以比当前以太坊使用的 calldata 更有效地处理和存储数据。这些 blob 可以存储大量信息，例如去中心化交易所的订单簿数据。
+区块链验证的权衡：验证器节点（以前称为矿工）仍然需要完全验证交易本身，但他们可以選擇不下载和验证相关联的 blob 数据。这降低了运行以太坊节点所需的计算量和存储空间。
+Rollup 是以太坊扩展解决方案的重要组成部分，它们将交易数据存储在链下，以降低成本并提高吞吐量。EIP-4844 将允许 rollup 使用这些 blob 来存储交易数据，而无需将其包含在主网上需要支付 gas 费用的每一笔交易中。
+数据有效期有限：EIP-4844 规定了 blob 数据的有效期。这些数据块仅在共识层上存储有限的时间（通常约 18 天），然后将被删除。
+    2. EIP-4844 如何降低 gas 费用？
+它提出了一种新的交易类型，称为「blob携带交易 (blob-carrying transactions)」。这种交易类似于附加在以太坊交易上的「sidecar」，可以包含额外的信息块。这些 blob 的体积很大（最大可达 128 KB），但与当前的 calldata 相比费用更低。通过将这些 blob 临时存储在以太坊的共识层上，EIP-4844 旨在显着降低 rollup 向以太坊主网传输数据的成本，从而实现降低交易费用。
+**为分片扩展奠定基础**：EIP-4844 的设计与以太坊未来的分片扩展路线图兼容。分片是一种将区块链数据分布到多个分片中的方法，可以显着提高可扩展性。EIP-4844 引入了分片所需的一些技术要素，例如 blob 和分离的交易数据。
+    3. EIP-4844 的潜在影响
+EIP-4844 可以降低 Layer 2 rollup 解决方案的交易费用为以太坊未来更复杂的扩容方案（例如完整分片）奠定基础
 ### 2024.4.13
 1. 继续学习 Stateless Ethereum
 [Accessing Ethereum  访问以太坊](https://inevitableeth.com/home/ethereum/network/node/accessing-ethereum)
