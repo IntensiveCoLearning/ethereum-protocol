@@ -3,6 +3,32 @@
 区块链萌新
 
 ## Notes
+### 2024.4.16
+继续DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
+[Deep Dive: Time in Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/time)
+
+Every 12 seconds, Ethereum opens a new slot, expecting a new block. 
+
+Within a block there are thousands [transactions](https://inevitableeth.com/home/ethereum/blockchain/block), but they execute atomically: either all together or none at all.
+
+An epoch is made up of 32 slots.
+
+A [BLS signature](https://inevitableeth.com/home/concepts/bls-signatures) is a [digital signature](https://inevitableeth.com/home/concepts/digital-signatures) that provides all the normal guarantees (proof a specific message was signed by a specific person) but has a useful bonus property: it can be aggregated. 
+
+Once aggregated, thousands of signatures can be verified in one operation.
+
+For those of you not following along at home, 440k validators / 64 committees = 27k validators / committees. 
+
+This is too big a number to aggregate all at once. 
+
+And so, committees are broken up into 128 subnets. ~200 validators / subnet
+
+In each subnet, 16 validators are designated as aggregators. All subnet-members publish their BLS signatures, but only aggregators listen and do the aggregation. All 16 are trying to build the same ideal aggregate signature, but conditions are often not ideal.
+
+Next, the block proposer will pick the best BLS aggregate signature, one from each of the 128 subnets The BLS aggregation algorithm is applied one final time, and the 128 subnet signatures are merged into one final committee BLS signature, representing ~27k validators
+
+As an aside, this whole process is the reason 32 ETH is the minimum amount of ETH required to become a validator. This aggregation process is slow and complex; reducing the minimum stake increases the number of validators, exponentially increasing the problem.
+
 ### 2024.4.14
 了解了一些SSZ编码
 
