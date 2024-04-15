@@ -212,3 +212,86 @@ Weakness of 3074
 
 ### 2024.4.14 Week 8R protocol services notes
 - Link: https://twitter.com/EIPFun/status/1779616224940318890
+
+### 2024.4.15 Week 9D Testing & Prototyping
+- Slides link: https://docs.google.com/presentation/d/1c95eV_55ZlojL9yE1OOPHUPjLyAU8xdh/edit?rtpof=true&sd=true
+- What was complicated about the testing?
+  - Over 20 client comlinations need to be tested & regressions can sneak in easily
+  - Debugging can also be difficult
+  - Competences for CLs and ELs are separate
+- What are devnets?
+  - Devnets are short lived eg. from 30min to a few months, compared to testnets
+  - A testing mirror of the Ethereum base layer
+  - Contain EL/CL/validators, setup in a config that we want to test
+  - Pectra devnet will be setup soon
+  - Verkle devnet is already on
+- What does testing look like today?
+  - Pectra: current upcoming fork
+  - Verkle: upcoming future fork
+  - Features that are proposed for future forks, prototyping
+    - IL
+    - EIP 7441 (whisk)
+  - Client optimisations
+    - EthereumJS snap sync testnet
+    - Bigboi beaconchain tests for blob/validator limits
+- Local testing: 
+  - Hard to test changes quickly, as it normally needs a lot of coordination
+  - Solution: local testing
+    - Move to local devnets enables faster iterations: enter Kurtosis
+    - Able to work async on features
+    - Configurable locally: 3s slot times, quick forks, MEV workflow
+    - Scalable: to whatever extent kurbernets/ docker allows
+  - Github repo: https://github.com/kurtosis-tech/ethereum-package
+  - Install instruction: https://docs.kurtosis.com/install/
+  - Example of configured with YAML
+  - Example of MEV local testing
+- How do I prototype?
+  - Kurtosis works on the concept of "allow everything to be overridden"
+  - To test protocol changes, we can override the client images
+  - To test new tools, run an existing network and connect your tool to it
+  - To test quick forks, we can override the network parameters
+- Example of prototype testing: Verkle transition
+- What comes after local testing?
+  - Remote/ public devnets
+    - Devnets used to be error prone and time consuming
+    - Easy drift btw setup configs of various testnets due to customizations
+  - Solution 
+    - Move barebones logics upstream into role
+    - Move generic components into its own tool, eg. Genesis
+    - Make tooling independent of repo/ testnet (with GitOps)
+    - Generalize setups for all testnets
+- Shadowforks
+  - Allow us to check compatibility across all clients through the entire lifecycle
+  - Shadow forks allow us to stress test the clients with real state and tx load
+  - Act as release test which triggers real world edge cases, before we recommend the releases to the general public
+- Handy tools overview
+  - Overview 
+    - https://ethpandaops.io/
+    - notes.ethereum.org/@parithosh/testing-overview-doc
+    - Tools are all open-sourced (MIT). Some configs depending on the projects sometimes won't be open-sourced.
+  - Template-devnets
+    - Contain everything to config for any type of testnet
+    - Use Terraform to spin up cloud instances and Ansible to deploy the network
+    - Useful if you want to run nodes on a larger scale and local testing tools are inadequate
+  - Assertoor
+    - Tool to assert network level expectations, eg. Can a network handle deposits, handle every opcode being called, handle a reorg etc.
+    - Similar to Hive: Hive <> Single node, Assertoor <> Network side
+    - Can be run locally via kurtosis or integrated into a CL
+  - Forky
+    - Ethereum forkchoice visualizer
+    - Can display the forkchoice of a live node
+    - Help debug forkchoice related issues
+  - Tracoor
+    - Ethereum trace explorer
+    - Can display a collection of traces & states of EL & CL blocks/ slots
+    - Help debug network related issues
+    - Recent blog post [][]
+  - Dora
+    - Lightweight slot explorer for the Ethereum beacon chain
+    - Extendable, low level access to DB 
+    - Links 
+      - https://github.com/ethpandaops/dora
+      - https://beaconlight.ephemery.dev/
+  - Xatu
+    - Xatu data is fed into an analysis pipeline to get data we care about
+    - The visualization is handled by Grafana, but the DB can directly be queried as well
