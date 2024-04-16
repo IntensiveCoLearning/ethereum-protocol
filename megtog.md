@@ -4,6 +4,26 @@
 
 ## Notes
 
+### 2024.4.16
+
+希望带着问题看 consensus-spec 
+
+* 本来 block 是里存 txs 的， 问 beacon chain 的 block 里存了什么信息
+  * 肯定是存了 attestations
+  * 更深入的问题 beacon chain block，哪些信息存在 block header，哪些信息存在 block body
+
+* block 里肯定要记录 slot， 记录 slot 编号的方式是哪种
+  * 选项 A ： 0 - 31 的数字，一个 epoch 结束后重新从 0 开始
+  * 选项 B ： 从 0 开始一直增长
+ 
+* 一个 slot 12 秒，我们知道这 12 秒 分成 4秒 + 4秒 + 4 秒三个阶段，每个阶段要做的事情不同
+  * 这个信息在 spec 中如何描述
+
+
+> With 4 years of hindsight it is now clear to me that the beacon chain is needless complicated. With all the latest and greatest research ideas I believe one could redesign the beacon chain from scratch to be ~10x more powerful and ~2x simpler. We obviously need continuity and can't simply declare tabula rasa, but there is definitely an opportunity for massive simplifications and improvements in the future :)
+
+<https://old.reddit.com/r/ethereum/comments/191kke6/ama_we_are_ef_research_pt_11_10_january_2024/khcfkve/>
+
 ### 2024.4.15
 
 还是浅层次学习，比较愿意看看历史和八卦 （已经过了午夜了啊啊）
