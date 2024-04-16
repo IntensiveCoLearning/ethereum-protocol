@@ -243,3 +243,56 @@ func RandaoMix(state state.ReadOnlyBeaconState, epoch primitives.Epoch) ([]byte,
 如果每个 slot 中已经有了 64 个 comittee，那么就不会再增加 committee 的数量，而是增加其中的 validator 数量。如果此时每个 committee 中刚好是 128 个 validator，那么总的 validator 数量是 262144，这个数据少于 100 万，说明此时以太坊网络中每个 slot 有 64 个 committee，而且每个 committee 中的数量多于 128。
 
 如果每个 committee 中的达到最多 2048 个validator，那么总的 validator 数量是 4194304，这个数据已经超过了当前以太币的发行总量，所以当前来看，validator 的数量是肯定会少于 4194304 个。
+
+### 2024.4.16
+Validator 的分配和每个 slot 中区块的 proposer 选择都是通过洗牌算法来实现。
+
+对于这个问题，通常的解决办法可能是使用 Fisher-Yates 算法，这个算法用来将一个有限集合生成一个随机排列的方式，这个算法生成的随机排列是等概率的，而且不需要额外的空间，算法很高效。
+
+但是这种算法需要对整个元素集合进行排列，而以太坊中的 validator 多达百万个，需要对所有的 validator 进行洗牌，然后对这些排列来分段，最后分成一个个 committee。如果只需要知道一个 committee 中的成员，这样做是非常低效的，特别是对于轻客户端，这样做的代价太大了。
+
+所以最后是用了 swap-or-not 的洗牌算法。这个算法可以做到只处理感兴趣的目标列表子集，对于轻客户端来说，负担就小了很多。
+
+```go
+func ComputeShuffledIndex(index primitives.ValidatorIndex, indexCount uint64, seed [32]byte, shuffle bool) (primitives.ValidatorIndex, error) {
+	//...
+	// 根据 seed 来进行洗牌
+	copy(buf[:32], seed[:])
+	for {
+		buf[seedSize] = round
+		h := hashfunc(buf[:pivotViewSize])
+		hash8 := h[:8]
+		hash8Int := bytesutil.FromBytes8(hash8)
+		pivot := hash8Int % indexCount
+		flip := (pivot + indexCount - uint64(index)) % indexCount
+		position := uint64(index)
+		if flip > position {
+			position = flip
+		}
+		binary.LittleEndian.PutUint64(posBuffer[:8], position>>8)
+		copy(buf[pivotViewSize:], posBuffer[:4])
+		source := hashfunc(buf)
+		byteV := source[(position&0xff)>>3]
+
+		bitV := (byteV >> (position & 0x7)) & 0x1
+		if bitV == 1 {
+			index = primitives.ValidatorIndex(flip)
+		}
+		if shuffle {
+			round++
+			if round == rounds {
+				break
+			}
+		} else {
+			if round == 0 {
+				break
+			}
+			round--
+		}
+	}
+	return index, nil
+}
+```
+
+对于给定的`index`、`index_count`和值`seed`，这个方法始终返回相同的输出，这样每次能决定 validator 位置的变量就是 seed。
+
