@@ -4,7 +4,7 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
-### 2024.04.17
+### 2024.04.16
 
 Week2
 
