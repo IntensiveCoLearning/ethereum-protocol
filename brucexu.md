@@ -4,6 +4,43 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.16
+
+[Week 3 EPFsg Consensus Layer Notes](https://ab9jvcjkej.feishu.cn/docx/X7Ard9UlPoj2lmxKMvucfNubnTb)
+
+Byzantine fault tolerance BFT 拜占庭容错在区块链的应用非常重要，因为它要实现两个特性：
+
+- 一致性：所有诚实的节点需要达成一致
+- 可用性：损失部分节点不影响决策
+
+在区块链中，去中心化的网络有很多节点，服务器都有故障的可能性，所以需要拜占庭容错。
+
+Two-phase commit (2PC)
+
+其实是分布式数据库用来确保事务一致性的协议，协调所有节点同时提交或者回滚事务，达成一致的状态。
+
+- 第一阶段：一个节点问其他节点，是否可以接受新的 txs。大家需要响应 yes or no，超过 2/3 的 yes 即可确认完成该阶段。相当于号召一下，大家是否响应你的号召。
+- 第二阶段：这个节点命令其他节点 commit txs 接受你的指示，如果有人拒绝了，可能就变成 abort 了。
+
+这种方式在高性能和高可用的环境下可能不是最佳选择，在网络传输的过程中，容易形成阻塞或者失败恢复等问题。
+
+PBFT consensus algorithm allows a distributed system to reach a consensus even when a small amount of nodes demonstrate malicious behavior.
+
+Bitcoin is considered the 1st solution to solve the Byzantine General problem
+
+- The system can scale to unlimited node count
+- Open & permissionless participation
+- Use PoW mechanism to reach consensus
+
+通过 PoW 算法选举出 coordinator 来命令大家，其他节点通过密码学来验证确实是要听它的，然后进行响应和保存新的数据。根据网络情况，会动态调整 PoW 的难度等。在通过激励 BTC 的方式激励大家，确实是自成体系的一套运转规则，有点鬼斧天工的意思。
+
+TODO 这里面涉及到哪些学科或者知识才能产出来这样的？
+
+- 技术：分布式技术、P2P、密码学
+- 经济学：了解货币的发展、对经济危机不满
+
+TODO 还有什么跨学科的知识？不得不说，人才还是需要双 T 或者多 T 的，不然根本没法交织在一起进行创新。
+
 ### 4.15
 
 [Week 3 EPFsg Consensus Layer Notes](https://ab9jvcjkej.feishu.cn/docx/X7Ard9UlPoj2lmxKMvucfNubnTb)
@@ -15,10 +52,6 @@ Blockchain enables a way to create digital scarcity
 What's Byzantine fault tolerance (BFT)?
 
 - Byzantine fault tolerance (BFT) is the property of a system that is able to resist the class of failures derived from the Byzantine Generals' Problem. This means that a BFT system is able to continue operating even if some of the nodes fail or act maliciously.
-
-Two-phase commit (2PC)
-
--
 
 ### 4.14
 
