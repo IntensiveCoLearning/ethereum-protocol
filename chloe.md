@@ -295,3 +295,35 @@ Weakness of 3074
   - Xatu
     - Xatu data is fed into an analysis pipeline to get data we care about
     - The visualization is handled by Grafana, but the DB can directly be queried as well
+
+### 2024.4.16 Week 9R History expiry pre-reading
+Statelessness, state expiry and history expiry: https://ethereum.org/en/roadmap/statelessness/
+
+**Goal**
+- Let modest hardware (eg. Mobile phones, micro-computers, home computers etc.) have the ability to run Ethereum nodes to achieve decentralization
+**Current problem**
+- High disk space requirement is the main barrier, primarily due to the need to store large Ethereum's state data
+- Currently a fast 2TB SSD is recommended for running a full node
+**Solution: Reduce storage for nodes**
+- Data expiry
+  - History expiry
+    - Enable nodes to discard state data older than X blocks, but does not change how Ethereum client's handle state data
+    - Option for clients to request historical data from peers
+      - Portal network: p2p network for serving historical data
+    - Risk
+      - Moving the responsibility for providing data guarantee outside of the Ethereum core protocol could introduce new censorship risks
+  - State expiry
+    - Allow state data that is not used frequently to become inactive. Inactive data can be ignored by clients until it is resurrected
+    - Options for state expiry
+      - Expire by rent: charging "rent" to accounts and expiring them when their rent reaches 0
+      - Expire by time: making accounts inactive if there is no reading/ writing for some time
+- Statelessness 
+  - Weak statelessness
+    - Only block producers need access to full state data
+    - Other nodes can verify blocks without a local state database
+    - Prerequest: Verkle tree & PBS
+  - Strong statelessness
+    - No nodes need access to the full state data
+**Current progress**
+- Prerequest: Verkle tree and PBS
+- Research in progress: weak statelessness, history expiry, and state expire. If state expiry is implemented first, then there may be no need to implement history expiry
