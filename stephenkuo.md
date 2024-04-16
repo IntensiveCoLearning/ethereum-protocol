@@ -350,3 +350,35 @@ devp2p 协议命名的有趣历史：
     - 最终性意味着交易是无法更改的区块的一部分
     - 合理性：当一个epoch结束时，如果其检查点已经聚集了 2/3 的绝对多数，则该检查点就被合理化了。
     - 最终性：当一个检查点被证明合理时，之前已经证明合理的检查点将被最终确定
+### 4.16
+#### Q&A
+  - Is there any significance of choosing 32 ETH? 
+    - It's a choice under tradeoff. i.e. If the threshold is too low, there will be too many validators, thus it may take too long to reach consensus. And if the threshold is too high, there will be too few then the system becomes less secure.
+    - Originally, the core dev was thinking of 1000 ETH as the threshold, then Justin Drake suggested the usage of BLS signature technology, which lowered the minimum capital required to 32 ETH.
+    - Justin Drake's research on pragmatic signature aggregation with BLS: https://ethresear.ch/t/pragmatic-signature-aggregation-with-bls/2105
+  - Why there is 12s in a slot?
+    - The 12s is kind of arbitrary, which is inspired by the PoW time (14s on average).
+  - Question about randomess of RANDAO and how validators shuffled randomly?
+    - The randomness is achieve using the algorithm RANDAO that mixes a hash from the block proposer with a seed that gets updated every block. This value is used to select a specific validator from the total validator set. The validator selection is fixed two epochs in advance as a way to protect against certain kinds of seed manipulation. 
+    - Although validators add to RANDAO in each slot, the global RANDAO value is only updated once per epoch. (Block proposal)
+    - Github link: https://github.com/randao/randao
+  - Gasper in the context of finality and finding the canonical chain?
+    - Gasper is the combination of Casper-FFG and LMD-GHOST fork choice algorithm (Gasper)
+      - Casper is the mechanism that upgrades certain to finalized, so that new entrants can be confident that they are syncing the canonical chain.
+      - LMD-GHOST is the fork choice algorithm that uses accumulated votes to ensure that nodes can easily select the correct one when forks arise in the blockchain.
+  - Brief explanation of PBS (proposer-builder separation)
+    - PBS (proposer-builder separation):
+      - MEV issue: MEV refers to validators max their profit by favourably ordering txs. Maximizing MEV requires sophisticated know-how and hardware & software, which could potentially lead to centralization as institutional operators usually outperform individual validators. 
+      - PBS: Allow block proposer to outsource block construction, so that validators can continue running on consumer-grade hardware without missing out MEV exposed
+      - Research link: https://ethresear.ch/t/why-enshrine-proposer-builder-separation-a-viable-path-to-epbs/15710
+      - Roadmap blog: https://ethereum.org/en/roadmap/pbs/
+    - Some of the important things on the roadmap of Ethereum
+      - SSF (single slot finality): Aim to get finality in a single slot
+        - Vitalik post on SSF: https://notes.ethereum.org/@vbuterin/single_slot_finality
+        - Roadmap blog: https://ethereum.org/en/roadmap/single-slot-finality/
+      - SSLE (single secret leader election): Aim to have proposer selection in secret
+        - Research link: https://ethresear.ch/t/simplified-ssle/12315
+        - Roadmap blog: https://ethereum.org/en/roadmap/secret-leader-election/
+      - Max EB (max effective balance): Aim to increase the effective balance of Ethereum validators at 32 ETH
+        - Research link: https://ethresear.ch/t/increase-the-max-effective-balance-a-modest-proposal/15801
+今天有航班，大概看了一眼，详细内容明天再看
