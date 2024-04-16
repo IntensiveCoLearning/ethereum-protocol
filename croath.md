@@ -171,6 +171,14 @@ The Surge:
 
 学习资料：
 
+ - https://mp.weixin.qq.com/s/OQmXEPnk_kbrwaD_caT4sg
+ - https://www.theblockbeats.info/news/51310
+ - https://dune.com/hahahash/eigenlayer
+
+14 日学习完 beacon chain 的运作之后，初步了解了节点的奖励和罚没机制，今日入门了一些关于 staking 和 restaking 生态的基础知识，一边学习一边参与了一个 eigenlayer 生态项目的 restaking，准备继续研读 eigenlayer 的合约代码以便深入学习。
+
+### 待学习
+
  - https://domothy.com/blobspace/
  - https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum
  - https://www.youtube.com/watch?v=UClaoL12W00
