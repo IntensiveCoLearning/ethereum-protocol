@@ -301,9 +301,11 @@ Statelessness, state expiry and history expiry: https://ethereum.org/en/roadmap/
 
 **Goal**
 - Let modest hardware (eg. Mobile phones, micro-computers, home computers etc.) have the ability to run Ethereum nodes to achieve decentralization
+
 **Current problem**
 - High disk space requirement is the main barrier, primarily due to the need to store large Ethereum's state data
 - Currently a fast 2TB SSD is recommended for running a full node
+
 **Solution: Reduce storage for nodes**
 - Data expiry
   - History expiry
@@ -324,6 +326,7 @@ Statelessness, state expiry and history expiry: https://ethereum.org/en/roadmap/
     - Prerequest: Verkle tree & PBS
   - Strong statelessness
     - No nodes need access to the full state data
+
 **Current progress**
 - Prerequest: Verkle tree and PBS
 - Research in progress: weak statelessness, history expiry, and state expire. If state expiry is implemented first, then there may be no need to implement history expiry
