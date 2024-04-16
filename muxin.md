@@ -4,6 +4,25 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.04.17
+
+Week2
+
+refs:
+
+- https://epf.wiki/#/eps/week2
+- https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh
+
+State Transition Function
+
+code: https://github.com/ethereum/go-ethereum/blob/master/eth/catalyst/api.go
+
+- newPayload function：CL asks EL to verify the block，参数：ExecutableData（the data necessary to execute on EL payload）
+  - InsertBlockWithoutSetHead
+  - VerifyHeader
+
+还没看完，明天继续
+
 ### 2024.4.14
 
 Week2
