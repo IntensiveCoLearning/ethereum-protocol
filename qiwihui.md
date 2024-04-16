@@ -603,3 +603,39 @@ the execution layer node
     - verify gas limit
     - verify timestamp
   - block validation
+
+### 2024.4.16
+
+1. block validation
+
+- `process_execution_layer` by beacon chain
+  - call `verify_and_notify_new_playload`: verify whether a block is valid and move the CL forward
+  - `notify_new_playload`: send payload to execution engine
+- simplified state transaction function
+
+```go
+func stf(parent types.Block, block types.Block, state state.StateDB) (state.StateDB, error) {
+    if err := core.VerifyHeaders(parent, block); err != nil {
+            // header error detected
+            return nil, err
+    }
+    for , tx := range block.Transactions() {
+        // block header info is to be access RANDAO value to gain some randomness, or base fee in the header
+        res, err := vm.Run(block.Header(), tx, state)
+        if err != nil {
+                // transaction invalid, block is invalid
+                return nil, err
+        }
+        state = res
+    }
+    return state, nil
+}
+
+// will be call from beacon chain, if block is not valid, it will be rejected
+func newPayload(execPayload engine.ExecutionPayload) bool {
+    if , err := stf(..); err != nil {
+        return false
+    }
+    return true
+}
+```
