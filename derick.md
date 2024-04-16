@@ -25,8 +25,6 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 - 新的以太坊节点架构采用模块化设计,由执行客户端和共识客户端组成,分工明确,共同维护以太坊网络的安全和去中心化。
 
-
-
 ### 2024.4.15
 
 #### 以太坊存储新解决方案探索
