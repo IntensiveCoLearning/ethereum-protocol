@@ -296,3 +296,53 @@ func ComputeShuffledIndex(index primitives.ValidatorIndex, indexCount uint64, se
 
 对于给定的`index`、`index_count`和值`seed`，这个方法始终返回相同的输出，这样每次能决定 validator 位置的变量就是 seed。
 
+### 2024.4.17
+
+所有投票的 BLS 最后会聚合到一起，放到区块中。聚合投票有三个好处：1. 减少下一个区块 proposer 验签的压力 2. 减少网络中数据的传数量 3. 减少签名所需要的存储空间。
+
+投票的数据结构如下：
+
+```go
+type Attestation struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AggregationBits github_com_prysmaticlabs_go_bitfield.Bitlist
+	Data            *AttestationData                             
+	Signature       []byte                                       
+}
+```
+
+聚合的过程如下：
+
+1. committee 中的 validator 对投票进行签名，并将签名广播到 committee 订阅的子网
+2. committee 中的一部分 validator 被选为该 committee 的投票聚合器
+3. 聚合器在网络上监听投票，将他们收到的与他们自己观点一致的投票聚合成一个投票
+4. 聚合器会对聚合的结果生成一个证明，并签名
+5. 最后，聚合器将聚合的投票广播到整个网络，下一个区块的 proposer 会接收这些签名
+
+
+聚合器在设计的时候需要考虑三个方面：
+
+1. 每个 committee 中应该选多少个聚合器，validator 本身有可能会掉线、有可能是恶意的，所以聚合器的数量不能太小，从概率上来说大概会有 16 个左右
+2. 聚合器要保密，在聚合器发布聚合结果之前，没人知道聚合器是谁，以免聚合器被 ddos 攻击
+3. 聚合器发布的声明要很容易被验证
+
+<img src="./img/ray/aggregator.png" height="50%" width="50%" />
+
+这里再一次利用 BLS 签名来巧妙地实现了保密。validator 通过是用私钥对当前的 slot 编号签名，然后对生成的 BLS 签名进行 Hash 处理，创建一个可验证的随机数，如果该随机数对另一个数取模为零，那么它就是聚合器。
+
+```go
+func IsAggregator(committeeCount uint64, slotSig []byte) (bool, error) {
+	modulo := uint64(1)
+	if committeeCount/params.BeaconConfig().TargetAggregatorsPerCommittee > 1 {
+		modulo = committeeCount / params.BeaconConfig().TargetAggregatorsPerCommittee
+	}
+
+	b := hash.Hash(slotSig)
+	return binary.LittleEndian.Uint64(b[:8])%modulo == 0, nil
+}
+```
+
+因为私钥是不会被其他人知道的，在发布聚合证明之前，没人确定发布者是否是聚合器。
