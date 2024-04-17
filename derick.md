@@ -4,6 +4,31 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 ## Notes
 
+### 2024.4.17
+
+#### 以太坊共识层和执行层规范
+
+- 通过阅读week6中的资料 
+1. https://github.com/ethereum/consensus-specs 
+2. https://blog.ethereum.org/2023/08/29/eel-spec
+
+共识层规范(Consensus Layer Spec):
+- 以太坊共识层负责维护以太坊区块链的安全性和一致性,目前采用的是权益证明(PoS)共识机制。
+- 在PoS下,验证者需要质押ETH作为抵押,并参与区块提议和投票过程。验证者的权重与其质押的ETH数量成正比。
+- 为了防止验证者作恶,以太坊引入了罚没机制。如果验证者违反协议,其质押的部分ETH将被罚没。
+- 共识层的主要组件包括信标链(Beacon Chain)、分片(Sharding)等。信标链是PoS的核心,负责管理验证者集合和协调分片。
+- 未来以太坊计划实现Danksharding,进一步提高可扩展性。Danksharding允许验证者只保存和验证分片数据的一部分。
+
+执行层规范(Execution Layer Spec):
+- 以太坊执行层负责处理交易和维护状态,目前采用的是以太坊虚拟机(EVM)。
+- EVM是一个图灵完备的虚拟机,支持通过智能合约执行任意复杂度的计算。
+- 执行层的关键组件包括交易池(Txpool)、状态存储(State)、收据存储(Receipt)等。
+- 为了提高执行层的可读性和可维护性,以太坊社区推出了以太坊执行层规范(EELS)。
+- EELS是用Python编写的执行层参考实现,为每个分叉提供了完整的协议快照,有助于开发者理解和实现EIP。
+- EELS的目标是成为指定核心EIP的默认方式,也是EIP作者首先用来原型开发提案的工具。
+
+
+
 ### 2024.4.16
 
 #### 以太坊节点架构
