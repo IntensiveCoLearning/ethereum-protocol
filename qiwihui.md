@@ -639,3 +639,48 @@ func newPayload(execPayload engine.ExecutionPayload) bool {
     return true
 }
 ```
+
+- Verify the headers
+  - Error could happen if
+    - The gas limit change exceeds 1/1024th of the previous block's
+    - Block numbers are not sequential
+    - EIP-1559 base fee is not updated correctly
+    - etc.
+
+### 2024.4.17
+
+1. block building
+
+```go
+func build(env Environment, pool txpool.Pool, state state.StateDB) (types.Block, state.StateDB, error) {
+    var (
+        gasUsed = 0
+        txs []types.Transactions
+    )
+    for ; gasUsed < env.GasLimit || !pool.Empty(); {
+        tx := pool.Pop()
+        res, gas, err := vm.Run(env, tx, state)
+        if err != nil {
+            // tx invalid
+            continue
+        }
+        gasUsed += gas
+        txs = append(txs, tx)
+        state = res
+    }
+    return core.Finalize(env, txs, state)
+}
+```
+
+- Parameters needed
+  - Environment: including Timestamps, block number, previous block, base fee, etc.
+  - Tx pool: Maintain the list of txns, ordered by their value (most value per gas)
+  - StateDB
+- Return results
+  - Block
+  - Updated stateDB
+  - Error
+- Steps:
+  1. Track gas used and store txs going to the block: 30M for mainnet
+  2. Get the next best tx from the tx pool and execute it: skip if invalid
+  3. Use Finalize function to return results, a fully assembled block
