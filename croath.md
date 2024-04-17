@@ -177,6 +177,16 @@ The Surge:
 
 14 日学习完 beacon chain 的运作之后，初步了解了节点的奖励和罚没机制，今日入门了一些关于 staking 和 restaking 生态的基础知识，一边学习一边参与了一个 eigenlayer 生态项目的 restaking，准备继续研读 eigenlayer 的合约代码以便深入学习。
 
+### 2024.4.17
+
+学习资料：
+
+ - https://docs.eigenlayer.xyz/eigenlayer/avs-guides/incredible-squaring
+ - https://eth2book.info/capella/part2/building_blocks/signatures/
+ - https://github.com/Layr-Labs/incredible-squaring-avs
+
+学习了 eigenlayer 的 AVS 相关的应用，以及合并签名相关的算法等。
+
 ### 待学习
 
  - https://domothy.com/blobspace/
