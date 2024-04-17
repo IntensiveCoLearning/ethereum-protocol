@@ -4,6 +4,51 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.17
+
+[Week 3 EPFsg Consensus Layer Notes](https://ab9jvcjkej.feishu.cn/docx/X7Ard9UlPoj2lmxKMvucfNubnTb)
+
+Ethereum consensus mechanism
+
+- Validator makes cryptographic signature over the state of the chain
+- Different types of attestations
+  - LMD GHOST vote: Validator attests to the beacon chain head
+  - Casper FFG vote: Validator attests to the checkpoint in its current epoch
+
+关键词：
+
+- Slot
+  - Every 12 seconds there will be a new slot, and every slot will have a block
+  - 分成三个步骤，一个 4s。首先 proposer 广播 block，然后 attestation，然后一组 validators 广播结果
+- Epoch
+  - Each epoch has 32 slots. The reason behind creating the epoch is to reduce the frequency of consensus processing, so that it doesn't need to happen in every slot
+  - Heavier processing is usually done at the epoch boundary, incl. slashing, rewards info etc.
+- Committee
+  - Validators 随机选举
+  - Each validator will make one attestation per epoch. The exact slot the validator is assigned is determined by the protocol through RANDAO.
+- Finality
+  - Finality means that a tx is part of a block that can't change.
+  - Justification: When an epoch ends, if its checkpoint has gathered a 2/3 supermajority, the checkpoint gets justified.
+  - Finality: When a checkpoint is justified, the previous checkpoint that is already justified becomes finalized.
+- The validator selection is fixed two epochs in advance as a way to protect against certain kinds of seed manipulation.
+- Gasper in the context of finality and finding the canonical chain?
+  - Gasper is the combination of Casper-FFG and LMD-GHOST fork choice algorithm (Gasper)
+    - Casper is the mechanism that upgrades certain to finalized, so that new entrants can be confident that they are syncing the canonical chain.
+    - LMD-GHOST is the fork choice algorithm that uses accumulated votes to ensure that nodes can easily select the correct one when forks arise in the blockchain.
+- Some of the important things on the roadmap of Ethereum
+
+  - SSF (single slot finality): Aim to get finality in a single slot
+    - Vitalik post on SSF: https://notes.ethereum.org/@vbuterin/single_slot_finality
+    - Roadmap blog: https://ethereum.org/en/roadmap/single-slot-finality/
+  - SSLE (single secret leader election): Aim to have proposer selection in secret
+    - Research link: https://ethresear.ch/t/simplified-ssle/12315
+    - Roadmap blog: https://ethereum.org/en/roadmap/secret-leader-election/
+  - Max EB (max effective balance): Aim to increase the effective balance of Ethereum validators at 32 ETH
+    - Research link: https://ethresear.ch/t/increase-the-max-effective-balance-a-modest-proposal/15801
+
+- TODO RANDAO 算法是怎么运行的？
+-
+
 ### 4.16
 
 [Week 3 EPFsg Consensus Layer Notes](https://ab9jvcjkej.feishu.cn/docx/X7Ard9UlPoj2lmxKMvucfNubnTb)
