@@ -4,6 +4,26 @@
 
 ## Notes
 
+### 2024.4.17
+
+用之前提到的 protolambda 的 go 代码跑了 consensus-spec
+
+```text
+zrnt/tests/spec$ go test -count=1 -mod=mod -tags preset_minimal ./test_runners/...
+ok  	github.com/protolambda/zrnt/tests/spec/test_runners/epoch_processing	0.642s
+ok  	github.com/protolambda/zrnt/tests/spec/test_runners/operations	4.494s
+ok  	github.com/protolambda/zrnt/tests/spec/test_runners/sanity	1.913s
+ok  	github.com/protolambda/zrnt/tests/spec/test_runners/ssz_static	8.047s
+```
+<https://github.com/protolambda/zrnt/tree/c223e8d53a8732b65f2891a3ef6d1399ec573cd9>
+
+用的 v0.6.3 测试数据
+
+还学了点 go 语言相关知识
+
+<https://go.dev/ref/mod>
+
+
 ### 2024.4.16
 
 希望带着问题看 consensus-spec 
