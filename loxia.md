@@ -4,6 +4,23 @@
 
 ## Notes
 
+### 2024.4.17
+
+Week 3 CL：https://epf.wiki/#/eps/week3
+
+前置学习：https://ethereum.org/zh/developers/docs/consensus-mechanisms/pos
+阅读 Chloe 笔记：https://ab9jvcjkej.feishu.cn/docx/X7Ard9UlPoj2lmxKMvucfNubnTb
+
+BFT 拜占庭容错问题，BTC 的 POW 解决方案最优
+
+每12秒一个 Slot，每个 Slot 都会有一个区块。
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95400362/0cb7e69a-e4d4-41c0-bffb-80d52aa5c4d1)
+
+每个 Epoch 有 32 个 Slot，设立 Epoch 是为了减少共识处理的频率，slashing 或奖励信息等较为重的进程通常在 Epoch 边界进行。Epoch boundary blocks (EBB) -> checkpoints
+https://ethos.dev/beacon-chain
+
+
+
 ### 2024.4.16
 
 Week 2 notes 完成学习：https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh
