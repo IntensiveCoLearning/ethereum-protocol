@@ -4,6 +4,23 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 ## Notes
 
+### 2024.4.18
+
+#### 数据分片和DAS提案解释
+今天学习了v神发布的一篇[文章](https://hackmd.io/@vbuterin/sharding_proposal)，是一份提案，该提案使用侧重数据可用性的方法来构建以太坊分片实现的第 1 阶段。
+
+1. 信标链的主要新增内容将是一个 ShardDataHeader 对象的向量,每个分片一个。ShardDataHeader 表示大量的底层数据(大小为 0-512 kB)。
+
+2. 只有当 ShardDataHeader 所指向的底层数据可用时,区块才有效,这意味着它已经发布到网络上,任何人都可以下载。
+
+3. 为了保持可扩展性,客户端在验证区块时不会下载每个 ShardDataHeader 的完整底层数据。相反,他们将使用一种称为数据可用性抽样的间接技术来验证数据可用性。
+
+4. 文章还讨论了与分片实现相关的一些参数,例如分片数量、每个 epoch 的槽位数以及每个委员会周期的槽位数。
+
+提出了一种侧重数据可用性的方法,用于以太坊分片实现的第 1 阶段,引入了 ShardDataHeader 对象和数据可用性抽样,以确保数据可用性,同时保持可扩展性。
+
+
+
 ### 2024.4.17
 
 #### 以太坊共识层和执行层规范
