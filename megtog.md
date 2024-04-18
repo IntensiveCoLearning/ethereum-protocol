@@ -4,6 +4,20 @@
 
 ## Notes
 
+### 2024.4.18
+
+发现 ericsson49 研究过不少 eth consensus 时间相关的问题
+
+[Why clock sync matters in Ethereum 2.0](https://hackmd.io/@ericsson49/BJfLjEX-8)
+
+> An alternative approach would be to re-design beacon chain to avoid its reliance on the clock synchronization property. While it seems quite radical, actually it's a traditional approach to build reliable distributed systems, since logical clocks are much easier to implement, ...
+
+搜了搜推特 ericsson49 大概是 <https://twitter.com/alex_vlasov_eth>
+
+另方面想通过 `zrnt/tests/spec/test_util/transition_util.go` 这个文件学习 go 语言
+
+看到 proto 在 2019-08-01 这天的工作真饱满啊
+
 ### 2024.4.17
 
 用之前提到的 protolambda 的 go 代码跑了 consensus-spec
