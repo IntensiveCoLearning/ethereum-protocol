@@ -4,6 +4,19 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.18
+
+[Week3 slide](https://github.com/eth-protocol-fellows/protocol-studies/blob/main/docs/eps/presentations/week3_presentation.pdf)
+
+● Blockchains are useful because they can generate digital scarcity
+● Use this property to emulate all sorts of physical assets in digital realm
+○ Money, tokens, property rights
+○ We are still figuring out what all is possible
+“Scarcity” means that there are only ever N coins at one time, a user can’t
+spend more coins than they have
+
+[PROOF-OF-STAKE (POS)](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/)
+
 ### 4.17
 
 [Week 3 EPFsg Consensus Layer Notes](https://ab9jvcjkej.feishu.cn/docx/X7Ard9UlPoj2lmxKMvucfNubnTb)
