@@ -4,6 +4,28 @@
 
 ## Notes
 
+### 2024.4.18
+
+Slot 和 POS 交易排序详解：https://www.paradigm.xyz/2023/04/mev-boost-ethereum-consensus
+
+如果 Validators 在 t = 4 的证明截止时刻结束前没有看到新的块，将投票给先前的链头，区块提出的越早，传播的时间就越多，因此积累证明就越多。从网络健康的角度来看，发布区块的最佳时间是 t=0（根据规范规定），然而，由于区块的价值随着时间单调增加，提议者有动机推迟区块的发布，以积累更多的 MEV，细节详见：https://ethresear.ch/t/timing-games-in-proof-of-stake/13980
+
+从历史上看，只要下一个 validator 在为下一个 slot 构建块之前观察到该块，提议者就可以在证明截止时刻之后很久（甚至接近 slot 结束时）发布一个块。这是子块继承父块的权重以及分叉选择规则终止于叶节点的结果。因此，推迟区块发布并没有什么坏处。为了帮助推动理性行为（延迟区块发布）转向诚实行为（按时发布），实施了“诚实重组”（“honest reorgs”）。
+
+共识客户端引入了两个新概念，这对证明截止日期具有重要影响：proposer boost (https://github.com/ethereum/consensus-specs/pull/2730) ；honest reorgs (https://github.com/ethereum/consensus-specs/pull/3034) 
+
+proposer boost：尝试通过授予提议者相当于完整证明权重 40% 的分叉选择“boost”来最大程度地减少 balancing-attacks（https://arxiv.org/abs/2009.04987）攻击。重要的是，这种 boost 仅持续该 slot 的持续时间（12s）。
+
+honest reorgs：接受 proposer boost，并允许诚实的提议者使用它来强制重组证明权重低于 20% 的区块。（非强制更改）
+
+在这些特殊情况下会避免 honest reorgs：during epoch boundary blocks; if the chain is not finalizing; if the head of the chain is not from the slot prior to the reorged block
+
+条件 3 确保 honest reorgs 仅从链中删除单个块，这充当断路器，允许链在极端网络延迟期间继续生成块。这也反映了 proposer 对其网络观点的信心下降，因为他们不再确定他们的 proposer boost 的区块将被视为规范。
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95400362/f534a2b7-bed3-4734-bd54-1ecddef2ba6c)
+
+
+
 ### 2024.4.17
 
 Week 3 CL：https://epf.wiki/#/eps/week3
