@@ -3,6 +3,11 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+
+### 2024.4.18
+- 做了题目，但是没全部刷完，到merge这一层的问题就不是很清楚了，得去刷一下相关的再回来重做
+- 开始刷了weeke2视频 https://www.youtube.com/watch?v=pniTkWo70OY，开始涉及具体代码了
+
 ### 2024.4.16
 继续白皮书，今天总体刷完；
 
