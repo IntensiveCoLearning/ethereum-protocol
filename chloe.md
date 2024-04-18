@@ -330,3 +330,24 @@ Statelessness, state expiry and history expiry: https://ethereum.org/en/roadmap/
 **Current progress**
 - Prerequest: Verkle tree and PBS
 - Research in progress: weak statelessness, history expiry, and state expire. If state expiry is implemented first, then there may be no need to implement history expiry
+
+### 2024.4.18 Portal network study
+
+The Portal Network by Piper Merriam - Lightweight protocol for everyone
+https://www.youtube.com/watch?v=0stc9jnQLXA
+- What's the portal network
+  - 5 new decentralized storage networks
+    - Beacon light client: beacon chain light protocol data
+    - State network: account & contract storage
+    - Transaction gossip: lightweight mempool
+    - History network: headers, block bodies, receipts
+    - Canonical txn index: TxHash > Hash, Index
+- Design goals
+  - Users-focused
+  - Lightweight
+  - Elimination of syncing
+  - Scalable in terms of # of participants
+- Project status as of Devcon Bogota
+  - In full development stage
+  - 3 portal client implementations: Trin, Ultralight, Fluffy
+  - Rough timeline: fully operational history network -> beacon light network -> state & transaction gossip networks
