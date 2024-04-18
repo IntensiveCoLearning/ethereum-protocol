@@ -4,6 +4,33 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.18
+
+Week2
+
+refs:
+
+- https://epf.wiki/#/eps/week2
+- https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh
+
+insertChain()
+
+- verifyHeader(): checks whether a header conforms to the consensus rules of the stock Ethereum consensus engine.
+  - verifyEIP1559Header(): verify some header attriibutes which were changed in EIP-1559
+    - gas limit check
+    - basefee check
+- process():
+  - usedGas: check the gas we used is qual to the gas used in the header
+  - go through all the transactions in the block
+    - ApplyTransaction - TransitionDb: a bunch of transaction level checking
+  - Finalize(): implements consensus.Engine and processes withdrawals from beacon chain on top
+  - return receipts
+  - when the process is done, will update some metrics and then eventually write that block to state
+
+扩展学习:
+
+- EIP-1559: 它摆脱了 first-price auction（高价拍卖，出价高者获胜） 作为主要 gas fee 计算方法，而是下一个区块中包含的交易将收取离散的 “base fee”，对于想要优先处理交易的用户或 application，他们可以添加小费，这种小费被称为 priority fee，用于向矿工支付费用来加快纳入速度。
+
 ### 2024.04.16
 
 Week2
