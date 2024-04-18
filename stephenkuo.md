@@ -381,4 +381,31 @@ devp2p 协议命名的有趣历史：
         - Roadmap blog: https://ethereum.org/en/roadmap/secret-leader-election/
       - Max EB (max effective balance): Aim to increase the effective balance of Ethereum validators at 32 ETH
         - Research link: https://ethresear.ch/t/increase-the-max-effective-balance-a-modest-proposal/15801
-今天有航班，大概看了一眼，详细内容明天再看
+### 4.18
+#### Execution Layer Testing
+#### EVM testing
+- 主要目的：验证每个执行客户端都遵守规范，否则会导致链中潜在的积极分叉
+- 设置：为每个客户端提供相同的输入，并期望在相同的环境、预设、硬分叉激活规则的情况下从每个客户端获得相同的输出
+- 测试的重要特性
+  - Pre-state:以太坊链的整个组成，由具有余额、随机数、代码和存储的帐户组成
+  - 环境：根据测试的类型，环境可以指定诸如时间戳、先前的 RANDAO、区块编号、先前的区块哈希值、总 Gas 限制、基本费用和硬分叉激活时间等内容。
+  - Transaction(s)：发送到区块链的消息，在区块链上执行操作，其中包含源帐户和目标帐户、以太币值、gas 限制和数据
+  - Post-state：由修改或创建的帐户组成的结果状态
+#### EVM testing - Tests Filling
+- Definition of Test filling: 将测试源代码编译成可供任何执行客户端使用的固定装置的过程
+- Test filling vs Client unit testing:对于测试填充，可以在任何客户端实现中执行完全相同的测试。而对于客户端单元测试，不同的客户端团队之间可能会有所不同。
+- 特性：所有不同格式的测试装置都是单个 JSON 文件，可供每个客户端使用
+#### EVM testing formats
+- state testing
+  ![alt text](img/step/stateTesting.png)
+  - 使用状态根进行验证：给定相同的预状态和相同的交易，不同的客户端应该返回相同的状态根
+    - 状态根：安全提交状态所有内容的加密计算
+- 模糊微分状态测试
+  ![alt text](img/step/FuzzyDifferential.png)
+  - 在设计的交易之上，将使用 FuzzyVM 工具添加模糊智能合约代码。不同的客户端仍应返回相同的状态根
+- Blockchain testing
+- ![alt text](img/step/BlockchainTesting.png)
+  - 由于我们在执行客户端上检查的所有内容并非都是 EVM 执行的一部分，例如前一个区块的执行结果、1559 基础费用等，因此还需要进行全区块测试来验证客户端的执行情况。
+- Blockchain negative testing
+  ![alt text](img/step/BlockchainNegativeTesting.png)
+  - 在某个时刻添加无效块，以检查客户端是否可以出于设计目的拒绝无效块，返回到之前的有效块并将其声明为链头​
