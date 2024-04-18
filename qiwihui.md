@@ -395,6 +395,8 @@ this signature verification algorithm can batch signatures into very small proof
   - Proposal for a signature verification algorithm to batch signatures into small proofs.
   - Reduces burden on P2P network, enabling single slot finality and alleviating network overload.
 
+- [Single Slot Finality](https://ethresear.ch/t/single-slot-finality/16700)
+
 ### 2024.4.11
 
 1. transaction finality
@@ -684,3 +686,24 @@ func build(env Environment, pool txpool.Pool, state state.StateDB) (types.Block,
   1. Track gas used and store txs going to the block: 30M for mainnet
   2. Get the next best tx from the tx pool and execute it: skip if invalid
   3. Use Finalize function to return results, a fully assembled block
+
+### 2024.4.18
+
+1. state transition function
+
+- walk through go-ethereum
+  - Function newPayload
+  - Function insertBlockWithoutSetHead
+  - Function insertChain
+  - Function Process
+
+2. EVM
+
+- evm structure
+  ![output](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/e9f6c53f-ef1d-4765-962b-6f17217b0ee9)
+- Different types of instructions within the EVM: see https://www.evm.codes
+
+3. p2p
+
+- The EL operates on devp2p
+- Responsibility of the p2p protocol: Access to historical data & pending txs, and the state
