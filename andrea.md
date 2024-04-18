@@ -5,6 +5,66 @@
 ## Notes
 ### 2024.4.16
 继续DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
+
+[Deep Dive: Time in Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/time)
+
+After 32 slots, an epoch ends. 
+
+At the end of every epoch, every validator runs process_epoch, a subroutine of the Ethereum State Transition Function. We'll summarize it in 2 sections: 
+
+- Finalization 
+- Consensus Housekeeping
+
+#### Finalization
+
+Finalization is the application of the Casper FFG protocol. Tl;dr Finalization is a promise by the protocol that an epoch (and therefore the blocks and the transactions within) are irreversible.
+
+Finalization is the mathematical and economic guarantee that a specific action on the World Computer is part of the canonical blockchain. Undoing a single finalized transaction would necessitate destroying 1/3 of staked ETH - more than $20B, today.
+
+Epochs mark the boundaries for finalization.
+
+- If more than 2/3s of the network attest during an epoch, it becomes justified. 
+- If a second epoch with a 2/3 majority follows the first, it will finalize that epoch, granting it the security guarantees of Ethereum
+
+#### Consensus Housekeeping
+
+The other section of process_epoch is consensus and housekeeping. Basically this is everything needed to uphold the rules of consensus (processing slashing, rewards, etc) and reseting the stage for the next epoch. 
+
+Read up on Casper FFG for more info.
+
+Both are considered mathematically safe, but DSA is faster at decrypting and signing, while RSA is faster at encrypting and verifying. The differences appear (mostly) in the encrypt, decrypt and verification function.
+
+[BLS Digital Signatures | Inevitable Ethereum](https://inevitableeth.com/home/concepts/bls-signatures)
+
+[Boneh–Lynn–Shacham Digital Signatures (BLS signatures)](https://en.wikipedia.org/wiki/BLS_digital_signature) are a specific type of digital signature. BLS signatures function perfectly fine (albeit relatively slowly) as standard cryptographic scheme, but the real magic comes from aggregation.
+  
+Aggregation means that given a single message, multiple signatures can be verified with a single operation.
+
+Since aggregate signatures are indistinguishable from normal signatures, and aggregate public keys are indistinguishable from normal public keys, we can reuse our normal verification algorithm.
+
+Thus, a single operation can verify a huge amount of signatures.
+
+As previously mentioned, BLS signatures are computationally expensive when compared to verifying a more standard scheme - more than an order of magnitude slower. However, each verification can count for MUCH more than a standard scheme (a single verification).
+
+Imagine you need to verify 100 signatures: 
+
+- Standard digital signature: x time/verification * 100 verifications = 100x 
+- BLS digital signature: 10x time/verification * 1 verification = 10x 
+
+The more signatures you can aggregate, the higher the savings
+
+But verification speed is not the only benefit: BLS signatures offer huge space savings over non-aggregated signatures. An aggregated signatures is the same size as a single signature, regardless of how many signatures have been aggregated.
+
+Imagine you need to verify 100 signatures: 
+
+- Standard digital signature: x bytes/signature * 100 signatures = 100x 
+- BLS digital signature: x bytes/signature * 1 signature = x 
+
+More aggregation equals more savings, but even more with space than speed.
+
+BLS signatures are a type of digital signature that provide the same guarantees as any signature (authenticity and liveness) but provide huge scaling benefits when verifying large groups of signatures.
+### 2024.4.15
+继续DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
 [Deep Dive: Time in Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/time)
 
 Every 12 seconds, Ethereum opens a new slot, expecting a new block. 
