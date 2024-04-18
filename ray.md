@@ -361,3 +361,39 @@ func IsAggregator(committeeCount uint64, slotSig []byte) (bool, error) {
 以太坊协议的核心原则就是保持简单，每个协议的细节都应该全部记录 spec 文档中，其他人根据 spec 可以将软件实现出来。
 
 ssz 还有另外一个很重要的特性，它与 Merkleization 配合地很好，可以很容易将数据处理成 Merkle 树。能够快速访问序列化中的特定数据，而无需反序列化整个数据。
+
+### 2024.4.19
+对于信标链来说，同样也使用 Merkle 的方式来构建数据。Merkle 树的作用早就被证明了，主要有两点好处：
+
+1. 可以让链的数据校验更加高效，每次只要对数据有变更的地方重新计算，大大减少了计算量，更优雅。
+2. 支持请客户端，轻客户端只需要有 Merkle 树根，就可以验证用户提供的数据是不是真实的。
+
+计算 Merkle 树的过程称之为 **Merkleization，也就是  Merkle 化**。
+
+信标链中的数据对象都通过 SSZ 来序列化，然后组织成 Merkle 树，SSZ 有自己的 Merkle 规范，给定一个 SSZ 对象，可以递归地遍历结构层，直到一个基本类型或者基本类型的集合，然后计算成 hash，最后整个对象就可以以一个 Merkle 树根的形式返回。
+
+所以 SSZ 计算 Merkle 树的步骤如下：
+
+- 对于基本类型或者基本类型的集合（列表和向量），直接计算 hash
+- 对于复合类型的容器和集合，递归地计算内容的哈希树根
+
+前面有说到 validator 的签名最终会被聚合成一个，以这个数据结构为例，来看一下被 Merkle 的过程：
+
+```go
+type IndexedAttestation struct {
+	AttestingIndices []uint64        
+	Data             *AttestationData 
+	Signature        []byte 
+}
+
+type AttestationData struct {
+	Slot            github_com_prysmaticlabs_prysm_v4_consensus_types_primitives.Slot          
+	CommitteeIndex  github_com_prysmaticlabs_prysm_v4_consensus_types_primitives.CommitteeIndex 
+	BeaconBlockRoot []byte                                                                      
+	Source          *Checkpoint                                                                 
+	Target          *Checkpoint                                                                 
+}
+```
+
+在 Merkle 的过程中，数据被划分成 32 字节的块，如果不足 32 直接，会是用 0 来填充，完整 Merkle 的过程如下：
+<img src="./img/ray/merkle.png" height="50%" width="50%" />
