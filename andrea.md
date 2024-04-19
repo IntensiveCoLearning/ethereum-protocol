@@ -3,6 +3,39 @@
 区块链萌新
 
 ## Notes
+### 2024.4.17
+继续DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
+
+[RANDAO | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/randao)
+
+For example, a normal computer might use its users mouse movements as a basis of generating a random number. Mouse movements are very specific; it is very unlikely that two people will move their mice in the same way over a long enough period of time - intentionally or not.
+
+Fortunately or not, the EVM is isolated from the outside world.
+
+One way to solve this issue is with oracles, a type of service that bridge information between the World Computer and the internet. 
+
+However, oracles are not native to Ethereum. 
+
+Relying on an oracle has external trust assumptions and can be very gas intensive (expensive).
+
+Instead, Ethereum relies on a RANDAO mechanism to create protocol-level randomness.
+
+The RANDAO is a value maintained by the beacon chain; with each block, the proposer mixes in their own random contribution to the existing RANDAO value.
+
+- **randao_reveal** - protocol-verified randomness, generated between all block proposers during an epoch.
+    - Randomness is critical to the Beacon Chain; security depends on being able to unpredictably and uniformly select block proposers and committee members.
+- **graffiti** - an (optional) 32-byte field in which block proposers can put anything they want. Often used by mining pools to log their blocks.
+-  **signature** - the signature the block proposer creates to take responsibility (add to blockchain and collect reward if good, get slashed if bad).
+    - Created by combining the BeaconState, BeaconBlock and the proposer's private key.
+![](https://inevitableeth.com/block-consensus.jpeg)
+-  **deposit_root** - the root hash of a Merkle tree which stores the ETH deposits into the staking contract (required to become a validator)
+- **deposit_count** - amount of ETH in the staking contract
+- **deposits** - [beaconcha.in](https://beaconcha.in/) defines this field as "amount of validator deposits which have been included in this block by the block proposer."
+    - Interestingly, the only non-0 value I could find was in the genesis block
+- **attestations** - a list of all the signatures that attested to this block
+	Ethereum PoS elects a proposer who is charged with building (or selecting) a block and proposing it to the network. Attesters review the block and, if it's valid, sign it with their keys.
+- **proposer_slashings** and **attester_slashings** - validators that have performed a hostile action against the network (for example, proposing or attesting to an invalid block). The network confiscates a portion of their staked ETH and ejects them from the validator set.
+  
 ### 2024.4.16
 继续DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
 
