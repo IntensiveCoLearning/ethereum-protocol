@@ -187,6 +187,31 @@ The Surge:
 
 学习了 eigenlayer 的 AVS 相关的应用，以及合并签名相关的算法等。
 
+### 2024.4.18
+
+学习资料：
+
+ - https://pendle.gitbook.io/pendle-academy/ecosystem-and-resources/points-trading/lrt-support-page
+ - https://docs.pendle.finance/ProtocolMechanics/Glossary
+ - https://app.pendle.finance/trade/education/learn?level=1
+ - https://eips.ethereum.org/EIPS/eip-5115
+ - https://research.mintventures.fund/2023/04/19/zh-pendle-unpacking-the-potential-of-the-crypto-interest-rate-market-with-lsd-market-service-provider/
+
+学习了 pendle 协议 SY PT YT 的定义和应用，阅读了 EIP-5115 的解释，对整个 restaking 生态的上下游更了解了一些。
+
+以DAI为例，当用户把100个DAI存入Pendle之后，Pendle会先把DAI存入compound中，变成100个cDAI。然后，Pendle会把100个cDAI封装成标准化收益代币sy-cDAI（Standardized Yield，缩写成sy），随后拆分成100个本金代币（principle token，缩写为PT）PT-cDAI和100个收益代币（yield token，缩写为YT）YT-cDAI。其中，每一个本金代币PT-cDAI在到期后，都可以兑换一个DAI；每一个YT-cDAI，可以兑换在持有期间的cDAI收益。
+
+我们可以把本金代币PT看成是零息债券。越接近到期日，PT的价格就越接近面值；收益代币YT则获得持有期间的任何收益。比如，YT-cDAI在持有期间拥有借贷收益，也拥有Compound提供的COMP激励。
+
+值得注意的是，在上述步骤中，YT+PT=SY。
+
+以业务流程角度来看，用户在Pendle中存入资产后，一共会发生几个变化。我们在这里以用户存入的资产是ETH为例：
+
+用户存入ETH，在“Zap”模式下，Pendle将自动通过Kyberswap把ETH换成stETH；
+Pendle将stETH封装成sy-stTH。标准化收益代币（Standardized Yield，缩写成sy）是ERC-5115标准下的代币，该代币标准下可以封装绝大部分生息资产。该代币协议也是Pendle团队设计的代币标准；
+
+如果用户选择“零价格冲击模式”（zero price impact mode），则Pendle会在第三步中，将一半的sy-stTH分拆成为收益代币YT-stETH和本金代币PT-stETH，并将PT-stETH与另一半sy-stTH组合成LP放入池子中，收益代币YT-stETH存放在用户账户中；如果用户不选择“零价格冲击模式”，则Pendle会在将PT-stETH与另一半sy-stTH组合成LP放入池子中的同时，把YT-stETH自动卖出，并将获得的资金购买更多PT-stETH。如果用户选择“manual”，则上述步骤都需要用户手动操作。
+
 ### 待学习
 
  - https://domothy.com/blobspace/
