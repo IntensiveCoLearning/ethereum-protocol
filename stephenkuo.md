@@ -409,3 +409,36 @@ devp2p 协议命名的有趣历史：
 - Blockchain negative testing
   ![alt text](img/step/BlockchainNegativeTesting.png)
   - 在某个时刻添加无效块，以检查客户端是否可以出于设计目的拒绝无效块，返回到之前的有效块并将其声明为链头​
+### 4.19
+#### Tests Filling in details
+##### ethereum/tests
+- [Repo link](https://github.com/ethereum/tests)
+- 特点
+  - JSON 和 YAML 源代码
+  - 提供简单的参数化
+  - 由 Retesteth 填充（C++）
+##### ethereum/execution-spec-tests
+- [Repo link](https://github.com/ethereum/execution-spec-tests)
+- 特点
+  - Python源码
+  - pytest 提供支持，并提供简单到复杂的参数化
+  - 由于转换功能，仍然需要实际的客户端实现来填充
+- 规范测试
+  ![alt text](img/step/ExecutionSpecTesting.png)
+  - 从包含所有书面参数化的 Python 测试开始
+    - 目前，从 Frontier 到 Cancun，每个分支都有一个 Python 测试
+  - 三个依赖关系
+    - Evm t8n：Geth sub-command evm t8n
+      - 理由：由于测试用例是用Python编写的，开发人员需要执行客户端来提供实际的客户端实现
+      - 命令输入：所有预状态、交易和环境
+      - 输出：执行结果
+    - Solidity: (开发人员在测试中越来越少使用)
+      - 仅当开发人员无法通过字节码编写来完成非常复杂的代码时才使用 Solidity
+    - EIP/ EIPs：开发人员编写测试时规范的主要来源​
+  - Two main sub repos: Source & Tests
+    - Src: https://github.com/ethereum/execution-spec-tests/tree/main/src
+      - 框架的源代码，即开发人员用来填充测试的代码
+      - src里没有测试
+    - Tests: https://github.com/ethereum/execution-spec-tests/tree/main/tests
+      - Incl. hardfork tests, from frontier to cancun
+      - 由于 ethereum/execution-spec-tests 存储库是从上海升级激活的，上海和cancun对所有 EIP 进行了测试，而对于之前的 EIP，完整测试将在 ethereum/tests repo中
