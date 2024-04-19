@@ -171,7 +171,50 @@ Complete walk-through of 4844:
 
 Overview: EIP-4844 introduces "blob-carrying transactions" to scale Ethereum's data availability in a cost-effective manner without fully implementing sharding (still "proto"). It would enable the storage of large data blobs on the beacon chain, further increasing rollup scalability compared to the base chain, by at least two orders of magnitude. 4844 outlines blob transaction parameters, gas accounting, **new opcodes**, and **execution layer changes** to cope with these transactions. This EIP would allow for the shifting to a full sharding paradigm while enabling all the current needs of rollups.
 
-TODO: learn 4844 thoroughly [here](https://eips.ethereum.org/EIPS/eip-4844) 
+### 04/15 & 04/16 Time Off 
+
+### 04/17 
+
+Learn 4844 thoroughly [here](https://eips.ethereum.org/EIPS/eip-4844)
+
+Before 4844 was live on mainnet, rollups have been storing data only via a section of the transaction known as calldata. 4844  introduces "Blobs", which modifies the current transaction and block structure. 
+
+Aim to: scalability up, cost down. In detail:
+
+1. **Objective:** To temporarily boost Ethereum's scalability by introducing new transaction types that include large data blobs.
+
+2. **Implementation:** Adds blob-carrying transactions, which enable storing large amounts of data intended primarily for use by rollups.
+
+3. **Technical Additions:** New Transactions Types: Specific types that can carry and reference data blobs.
+
+4. **Cryptographic Enhancements:** Methods for secure and efficient handling of large data blobs.
+
+5. **Impact:** Requires modifications at the consensus level to support the new data structures and transaction types.
+
+6. **Scalability Benefits:** Designed to reduce transaction costs for rollups, thereby enhancing overall network efficiency.
+
+7. **Strategic Goals:** Sets foundational changes for Ethereum's transition towards a fully sharded architecture in the future.
+
+### 04/18
+Other EIPs regarding data availability.
+
+7624:
+1. Objective: Increase the gas cost for calldata to reduce the maximum Ethereum block size.
+2. Rationale: Mitigates block size variance and supports the incorporation of data availability blobs as per EIP-4844.
+3. New Gas Pricing: Introduces adjustments in gas costs, affecting transactions that use Ethereum mainly for data storage.
+4. Block Size Target: Aims to limit the maximum block size to approximately 0.6 MB.
+5. Impact on Transactions: Primarily affects data storage transactions; minimal impact on transactions with substantial EVM computation.
+6. Implementation: Requires a network upgrade to implement the changes.
+7. Overall Goal: Enhance network efficiency and stability without significantly affecting the majority of users.
+
+### 04/19
+
+[About Gas Limit](https://ethresear.ch/t/on-increasing-the-block-gas-limit/18567)
+1. By increasing the block gas limit and the price for nonzero calldata bytes, a smaller and less variable block size can be achieved, making space to add more blobs in the future.
+2. Increasing the price for nonzero calldata reduces the maximum possible block size. At the same time, the block gas limit could be raised to make more space for regular transactions.
+3. This further incentivizes the transition to using blobs for data availability, strengthening the multidimensional fee market by reducing competition between calldata and blobs.
+4. It slows down history growth, which might be preferable in preparing for the Verkle upgrades.
+
 
 
 
