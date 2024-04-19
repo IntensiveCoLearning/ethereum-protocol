@@ -7,53 +7,40 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 ### 2024.4.19
 
 #### 了解以太坊的EL Client Reth
-Reth (Rust Ethereum的简称,发音为"reth")是一个新的以太坊全节点实现,专注于易用性、模块化、快速和高效。Reth由Paradigm最初构建和推动,并在Apache和MIT许可下发布。
 
-Reth的主要目标包括[2]:
-
-- 易用性:Reth旨在易于在消费级硬件上使用,同时保持安全和高效。
-- 模块化:Reth的每个组件都被构建为库,经过良好的测试、大量文档记录和基准测试。开发人员可以导入节点的crate,混合搭配,并在此基础上进行创新。
-- 性能:Reth专注于速度和效率,利用Rust的性能优势。它使用Staged Sync架构和MDBX数据库来提高性能。
-- 贡献者友好:Reth鼓励来自社区的贡献和创新想法,旨在成为Rust开发人员的孵化器。
-
-Paradigm于2022年9月20日开始开发Reth。截至2022年12月,Reth已经实现了以下功能:
-
-- 执行引擎API
-- 对等网络和同步
-- JSON RPC API的一个子集
-- Anvil和Foundry集成用于测试
+##### What are the goals of Reth?
 
 1. Modularity
 
-Every component of Reth is built to be used as a library: well-tested, heavily documented and benchmarked. We envision that developers will import the node's crates, mix and match, and innovate on top of them.
+- Every component of Reth is built to be used as a library: well-tested, heavily documented and benchmarked. We envision that developers will import the node's crates, mix and match, and innovate on top of them.
 
-Examples of such usage include, but are not limited to, spinning up standalone P2P networks, talking directly to a node's database, or "unbundling" the node into the components you need.
+- Examples of such usage include, but are not limited to, spinning up standalone P2P networks, talking directly to a node's database, or "unbundling" the node into the components you need.
 
-To achieve that, we are licensing Reth under the Apache/MIT permissive license.
+- To achieve that, we are licensing Reth under the Apache/MIT permissive license.
 
 2. Performance
 
-Reth aims to be fast, so we used Rust and the Erigon staged-sync node architecture.
+- Reth aims to be fast, so we used Rust and the Erigon staged-sync node architecture.
 
-We also use our Ethereum libraries (including Alloy and revm) which we’ve battle-tested and optimized via Foundry.
+- We also use our Ethereum libraries (including Alloy and revm) which we’ve battle-tested and optimized via Foundry.
 
 3. Free for anyone to use any way they want
 
-Reth is free open source software, built for the community, by the community.
+- Reth is free open source software, built for the community, by the community.
 
-By licensing the software under the Apache/MIT license, we want developers to use it without being bound by business licenses, or having to think about the implications of GPL-like licenses.
+- By licensing the software under the Apache/MIT license, we want developers to use it without being bound by business licenses, or having to think about the implications of GPL-like licenses.
 
 4. Client Diversity
 
-The Ethereum protocol becomes more antifragile when no node implementation dominates. This ensures that if there's a software bug, the network does not finalize a bad block. By building a new client, we hope to contribute to Ethereum's antifragility.
+- The Ethereum protocol becomes more antifragile when no node implementation dominates. This ensures that if there's a software bug, the network does not finalize a bad block. By building a new client, we hope to contribute to Ethereum's antifragility.
 
 5. Used by a wide demographic
 
-We want to solve for node operators that care about fast historical queries, but also for hobbyists who cannot operate on large hardware.
+- We want to solve for node operators that care about fast historical queries, but also for hobbyists who cannot operate on large hardware.
 
-We also want to support teams and individuals who want both sync from genesis and via "fast sync".
+- We also want to support teams and individuals who want both sync from genesis and via "fast sync".
 
-We envision that Reth will be configurable enough for the tradeoffs that each team faces.
+- We envision that Reth will be configurable enough for the tradeoffs that each team faces.
 
 
 ### 2024.4.18
