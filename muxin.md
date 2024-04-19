@@ -4,6 +4,32 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.19
+
+Week 2
+
+refs:
+
+- https://epf.wiki/#/eps/week2
+- https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh
+
+EVM high level intro
+
+- EVM call frame
+  ![EVM call frame](./img/muxin/evm-call-frame.png)
+- 在这里可以看到 how does the stack machine works：https://www.evm.codes/playground
+- different types of instructions:
+  - arithmetic
+  - bitwise
+  - environment
+  - control flow: https://github.com/lightclient/4788asm
+  - stack ops
+    - push, pop, swap
+  - system
+    - call, create, return, sstorage
+  - memory
+    - mload, mstore, mstore8
+
 ### 2024.4.18
 
 Week2
@@ -204,7 +230,7 @@ EVM 兼容是指提供了类似 EVM 的代码执行环境，可以方便以太�
 
 执行层（EL）和共识层（CL）的实现称为客户端，运行此客户端并连接到网络的计算机称为节点。并且以太坊是允许使用不用语言来实现，经过时间的洗礼，有些也已经废弃了，这里是列表https://ethereum.org/en/developers/docs/nodes-and-clients/#execution-clients。有关 EL 和 CL 会在之后进行详细的学习。
 
-![exection-clients-language](./image-3.png)
+![execution-clients-language](./img/muxin/execution-clients-language.png)
 
 **4. Testing**
 
@@ -258,7 +284,7 @@ Hash 是将任意长度的输入数据通过哈希函数转换成固定长度的
 
 当其他节点接收到新的区块时，它们可以通过比对区块头部中的 Merkle 根与交易数据中的哈希值来验证交易数据的完整性。只需获取到少量的数据和 Merkle 树的根节点，节点即可通过递归地比对哈希值验证整个区块中的交易数据是否被篡改。它只需要通过比对树的根节点来验证整个区块中的交易数据，而不需要获取整个区块的数据，所以提升了验证交易数据的高效性。
 
-![merkle tree](./image-2.png)
+![merkle tree](./img/muxin/merkle-tree.png)
 
 **3. P2P network**
 
