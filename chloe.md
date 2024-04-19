@@ -351,3 +351,32 @@ https://www.youtube.com/watch?v=0stc9jnQLXA
   - In full development stage
   - 3 portal client implementations: Trin, Ultralight, Fluffy
   - Rough timeline: fully operational history network -> beacon light network -> state & transaction gossip networks
+
+### 2024.4.19 Notes on Vitalik's blog on state expiry & statelessness roadmap
+https://notes.ethereum.org/@vbuterin/verkle_and_state_expiry_proposal
+
+- The problem
+  - State storage is increasing at a fast level, which puts pressure on hardware requirements and disk space 
+- Potential solution
+  - State expiry: remove state that hasn't been recently accessed from the state
+  - Weak statelessness: only require block proposer to store state, and allow other nodes to verify blocks statelessly (pre-request is a switch to Verkle trees)
+- History ideas & works on state expiry & statelessness
+  - The Stateless Client Concept, original ethresear.ch post (2017): https://ethresear.ch/t/the-stateless-client-concept/172 (see also EthHub)
+  - State rent (precursor to state expiry), original 2015 proposal: https://github.com/ethereum/EIPs/issues/35
+  - ReGenesis (Alexey Akhunov’s proposal, can be described as a form of state expiry + history expiry): https://medium.com/@mandrigin/regenesis-explained-97540f457807
+  - Verkle trees: https://notes.ethereum.org/_N1mutVERDKtqGIEYc-Flw
+  - Presentation on bounding witness sizes (Youtube): https://www.youtube.com/watch?v=qQpvkxKso2E
+  - A theory of state size management (Feb 2021): https://hackmd.io/@vbuterin/state_size_management
+  - Resurrection-conflict-minimized state bounding: https://ethresear.ch/t/resurrection-conflict-minimized-state-bounding-take-2/8739
+  - A few paths to statelessness and state expiry: https://hackmd.io/@vbuterin/state_expiry_paths
+- How does state expiry work
+  - 2 principles
+    - Only the most recent tree can be modified
+    - Full nodes (incl. Block proposers) are expected to only hold the most recent 2 trees, so only objects in the most recent 2 trees can be read without a witness
+  - Hybrid state regime
+    - Consensus nodes need to store state that was accessed or modified recently
+    - But can use the witness-base stateless client approach to verify older state
+- Roadmap
+  - Hardfork 1: Transform MPT to VKT
+  - Address period expansion: addresses are extended from 20 to 32 bytes, and the new address format incl. "address periods" to allow new contracts fill new storage slots without the need to provide witness
+  - Hardfork 2: State expiry
