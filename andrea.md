@@ -3,6 +3,19 @@
 区块链萌新
 
 ## Notes
+### 2024.4.19
+继续DFS我前几天的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
+[State Transition Function | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/state-transition)
+
+![](https://inevitableeth.com/state-transition-3.jpeg)
+
+#### Process slots
+Sometimes a slot passes without a block being proposed; maybe the proposer was offline or the network dropped the block. The state transition function moves through empty slots and triggers a change of epoch, if needed. 
+
+- Inputs: current state, slot 
+- No output
+![](https://inevitableeth.com/state-transition-5.jpeg)
+
 ### 2024.4.18
 继续DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
 
