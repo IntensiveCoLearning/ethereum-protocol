@@ -171,7 +171,7 @@ Complete walk-through of 4844:
 
 Overview: EIP-4844 introduces "blob-carrying transactions" to scale Ethereum's data availability in a cost-effective manner without fully implementing sharding (still "proto"). It would enable the storage of large data blobs on the beacon chain, further increasing rollup scalability compared to the base chain, by at least two orders of magnitude. 4844 outlines blob transaction parameters, gas accounting, **new opcodes**, and **execution layer changes** to cope with these transactions. This EIP would allow for the shifting to a full sharding paradigm while enabling all the current needs of rollups.
 
-### 04/15 & 04/16 Time Off 
+### 04/15 & 04/16 Days Off 
 
 ### 04/17 
 
