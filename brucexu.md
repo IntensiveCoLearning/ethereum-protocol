@@ -4,6 +4,22 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.19
+
+[PROOF-OF-STAKE (POS)](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/)
+
+In regard to the Ethereum blockchain, the process is formalized, and reaching consensus means that at least 66% of the nodes on the network agree on the global state of the network.
+
+In the rare situations where multiple blocks are in the same position near the head of the chain, there is a fork-choice mechanism that selects blocks that make up the 'heaviest' chain, measured by the number of validators that voted for the blocks weighted by their staked ether balance.
+
+PoS: Validators create blocks. One validator is randomly selected in each slot to be the block proposer. Their consensus client requests a bundle of transactions as an 'execution payload' from their paired execution client. They wrap this in consensus data to form a block, which they send to other nodes on the Ethereum network. This block production is rewarded in ETH. In rare cases when multiple possible blocks exist for a single slot, or nodes hear about blocks at different times, the fork choice algorithm picks the block that forms the chain with the greatest weight of attestations (where weight is the number of validators attesting scaled by their ETH balance).
+
+The weight is the accumulated sum of validator votes, weighted by validator staked-ether balances.
+
+Ethereum uses a consensus mechanism known as Gasper that combines Casper FFG proof-of-stake with the GHOST fork-choice rule.
+
+Proof-of-stake is a way to prove that validators have put something of value into the network that can be destroyed if they act dishonestly. In Ethereum's proof-of-stake, validators explicitly stake capital in the form of ETH into a smart contract on Ethereum. The validator is then responsible for checking that new blocks propagated over the network are valid and occasionally creating and propagating new blocks themselves. If they try to defraud the network (for example by proposing multiple blocks when they ought to send one or sending conflicting attestations), some or all of their staked ETH can be destroyed.
+
 ### 4.18
 
 [Week3 slide](https://github.com/eth-protocol-fellows/protocol-studies/blob/main/docs/eps/presentations/week3_presentation.pdf)
@@ -14,8 +30,6 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 ○ We are still figuring out what all is possible
 “Scarcity” means that there are only ever N coins at one time, a user can’t
 spend more coins than they have
-
-[PROOF-OF-STAKE (POS)](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/)
 
 ### 4.17
 
