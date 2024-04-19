@@ -3,6 +3,30 @@
 区块链萌新
 
 ## Notes
+### 2024.4.18
+继续DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
+
+[RANDAO | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/randao)
+With BLS signatures, every validator already has a closely guarded random number - their private key - achieving unpredictability. Furthermore, every node can verify the RANDAO contribution just by verifying the BLS signature - achieving verifiability.
+
+Specifically, the RANDAO contribution is its normal BLS signature with the the epoch number (think block number) as the message. 
+
+This contribution is both stamped into the block (randao_reveal) and mixed into the EVMs RANDAO value.
+![]()
+![](https://inevitableeth.com/randao-3.png)
+
+Each time a new block is created, RANDAO is updated with just a little more randomness. And so, through the trustless contribution of every proposing validator, we generate a sufficiently random value.
+
+This value is now available to both Ethereum consensus and the EVM.
+
+Practically speaking, if a dApp relies on true randomness, they are probably going to use a Verifiable Random Function (VRF) form an oracle like Chainlink. The true purpose of RANDAO is to provide randomness for consensus.
+
+A protocol that is fully predictable is very vulnerable. An attacker could: 
+
+- DDoS a proposer or a committee to attempt to halt the chain
+- bribe an upcoming proposer
+- attempt to register advantageous validator number to try to gain control over a committee - etc
+
 ### 2024.4.17
 继续DFS我前几天看的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
 
