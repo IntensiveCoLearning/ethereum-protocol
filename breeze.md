@@ -3,6 +3,94 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.4.20
+week2视频： https://www.youtube.com/watch?v=7sxBjSfmROc
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/25242467/e31e319f-987b-4995-a188-4f4f5d693339)
+
+transaction types：
+ - owned -> owned:  transfer ETH between users
+ - owned -> contract: call contract with eth & data
+ - contract -> contract
+ - contract -> owned
+
+在eth中的 transaction中包含nonce，这个和btc的nounce还不一样；具体区别如下
+
+在以太坊（Ethereum）中：
+
+Nonce主要用于防止单一账户的交易被重复发送。每一个新增的交易都会使得Nonce加一，因此相同Nonce的交易只会被网络接收一次，可以防止交易的重放。
+Nonce还可以确保来自同一账户的多笔交易被按照发送的顺序执行。节点会按照Nonce的数值顺序来处理交易。
+
+在比特币（Bitcoin）中：
+
+Nonce是一个4字节的字段，其主要用途是作为工作量证明（Proof of Work， PoW）算法的一部分。Nonce值的更改使得哈希散列值的结果也会随之改变。
+矿工在挖矿过程中，需不断改变Nonce值直至得出一个满足特定条件的哈希值，这个找到特定Nonce的过程需要极大计算能力和时间，体现了“工作量证明”。
+
+视频里面介绍了域名系统的合约实现，类似ENS；
+
+对应的原始代码如下，但是会有不少的漏洞；
+``` solidity
+function nameNew(bytes32 name) {
+    // registration fee is 100 Wei
+    if(data[name] == 0 && msg.value >= 100) {
+         data[name].owner = msg.sender;  // record owner
+         // log event (missing implementation)
+    }
+}
+```
+经过gpt4优化以后的代码
+
+``` solidity 
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+// 引入SafeMath库提供溢出保护
+// import "openzeppelin-solidity/contracts/utils/math/SafeMath.sol";
+
+contract NameSystem {
+    // 使用SafeMath为所有uint运算提供额外的安全检查
+    // using SafeMath for uint256;
+
+    mapping(bytes32 => DomainDetails) public data;
+
+    struct DomainDetails {
+        bytes32 value;
+        address owner;
+    }
+
+    event NameUpdated(bytes32 indexed name, bytes32 value, address indexed owner);
+
+    // 修改后的nameUpdate函数
+    function nameUpdate(bytes32 name, bytes32 newValue, address newOwner) public payable {
+        // 使用require来确保条件是满足的，并且具有良好的错误提示
+        require(msg.value >= 10, "Insufficient funds sent with transaction.");
+        require(data[name].owner == msg.sender, "Caller is not the owner of the domain.");
+
+        // 更新值和所有者
+        data[name].value = newValue;
+        data[name].owner = newOwner;
+
+        // 触发事件日志
+        emit NameUpdated(name, newValue, newOwner);
+
+        // 退回超额支付的以太
+        if(msg.value > 10) {
+            payable(msg.sender).transfer(msg.value - 10);
+        }
+    }
+    
+    // 添加回退函数来处理无效的交易
+    fallback() external payable {
+        revert("Fallback function called.");
+    }
+}
+
+```
+
+
+
+
+
 ### 2024.4.19
 
 刷了week2里的Node and Client
