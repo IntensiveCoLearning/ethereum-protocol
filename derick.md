@@ -4,6 +4,31 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 ## Notes
 
+### 2024.4.20
+
+#### Study Group Week 7 | Verkle Trees
+
+> 关于verkle树的学习，已经在week3 中有过总结 ,在此只记录下视频中提到的如何将以太坊状态转换为verkle树的过程。
+> Converting the Ethereum state into a Verkle tree is a complex process with ongoing research. Here's a breakdown of the key aspects:
+
+**Challenges:**
+
+* **Data Size:** The Ethereum state is massive, and converting it all at once is impractical. The process needs to be batched and optimized for efficiency.
+* **State Updates:**  Ethereum is constantly evolving, with new data added and existing data modified through transactions. The conversion needs to account for these ongoing updates.
+* **Trade-offs:** While Verkle trees offer efficiency benefits, there might be trade-offs in terms of complexity and gas costs for specific operations compared to the current Merkle Patricia Trie (MPT).
+
+**General Steps (Conceptual):**
+
+1. **Preparation:** Identify a starting point (block) and determine the size of data batches for conversion.
+2. **Iterative Conversion:** 
+    * Extract a batch of state data from the existing MPT.
+    * Process the data and organize it according to the Verkle tree structure. This involves hashing and creating Merkle proofs.
+    * Store the Verkle tree representation of the batch.
+3. **State Updates:** 
+    * As new transactions occur, update the corresponding sections in the Verkle tree efficiently. This might involve partial updates or witness creation.
+4. **Verification:** Implement mechanisms to verify the integrity of the Verkle tree data.
+
+
 ### 2024.4.19
 
 #### 了解以太坊的EL Client Reth
