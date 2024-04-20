@@ -4,6 +4,64 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.20
+
+[PROOF-OF-STAKE (POS)](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/)
+
+一个交易的工作流程：
+
+- 用户创建交易，通过 JSON-RPC API 发送到某个节点
+- 节点收到之后，进行初步验证
+- 合法的 txs 会被加入到 local mempool，然后通过 gossip network 广播到其他节点进行同步
+- 通过 RANDAO 随机算法选出来的 block proposer 节点来构建和广播 block
+  - 从本地 mempool 拿出来然后生成 block
+- 其他节点收到构建的 block，然后本地验证是否正确，然后 attests 存储到本地数据库
+- 大概通过两个检查点，可以确定当前交易 finalized 了
+
+Two primary behaviors can be considered dishonest: proposing multiple blocks in a single slot (equivocating) and submitting contradictory attestations.
+
+[The Beacon Chain Ethereum 2.0 explainer you need to read first](https://ethos.dev/beacon-chain)
+
+A block proposer is a validator that has been pseudorandomly selected to build a block.
+
+At every epoch, a validator is pseudorandomly assigned to a slot.
+
+An attestation is a validator’s vote, weighted by the validator’s balance. Attestations are broadcasted by validators in addition to blocks.
+
+Validators also police each other and are rewarded for reporting other validators that make conflicting votes, or propose multiple blocks.
+
+The contents of the Beacon Chain is primarily a registry of validator addresses, the state of each validator, and attestations. Validators are activated by the Beacon Chain and can transition to states, briefly described later in Beacon Chain Validator Activation and Lifecycle.
+
+A checkpoint is a block in the first slot of an epoch. If there is no such block, then the checkpoint is the preceding most recent block. There is always one checkpoint block per epoch. A block can be the checkpoint for multiple epochs.
+
+Epoch boundary blocks (EBB) are a term in some literature (such as the Gasper paper, the source of the diagram above and a later one), and they can be considered synonymous with checkpoints.
+
+A vote that is made by ⅔ of the total balance of all active validators, is deemed a supermajority. Pedagogically, suppose there are three active validators: two have a balance of 8 ETH, and a sole validator with a balance of 32 ETH. The supermajority vote must contain the vote of the sole validator: although the other two validators may vote differently to the sole validator, they do not have enough balance to form the supermajority.
+
+挺中心化的。
+
+When finalizing a checkpoint, there is no limit to the number of blocks that can be finalized. Although finality is only computed at epoch boundaries, attestations are accumulated at each block, as described in alternate narratives “What could have happened from genesis to the head” below.
+
+Validators are rewarded the most when their attestation is included on-chain at their assigned slot; later inclusion is a decaying reward.
+
+To give validators time to prepare, they are assigned to committees one epoch in advance. Proposers are only assigned to slots once the epoch starts. Nonetheless, secret leader election research aims to mitigate attacks or bribing of proposers.
+
+As a staker concerned about how much ETH you may lose, it’s close to a mirror of how much you can earn. For example, if a validator stands to make 10% in a year on attester rewards, a (honest) validator stands to lose 7.5% if they do the worst job possible.
+
+A double proposal is a proposer proposing more than one block for their assigned slot.
+
+Similarly, an LMD GHOST double vote is a validator attesting to two different Beacon Chain heads for their assigned slot.
+
+Each validator needs a balance of 32 ETH to get activated. A user staking 32 ETH into a deposit contract on Ethereum mainnet, will activate one validator.
+
+The Beacon Chain deactivates (“forced exit”) all validators whose balance reaches 16 ETH; stakers will be able to withdraw any remaining validator balance likely in 2023.
+
+Validators can also “voluntary exit” after serving for 2,048 epochs, around 9 days.
+
+In any voluntary or forced exit, there is a delay of four epochs before stakers can withdraw their stake. Within the four epochs, a validator can still be caught and slashed. An honest validator’s balance is withdrawable in around 27 hours. But a slashed validator incurs a delay of 8,192 epochs (approximately 36 days).
+
+To avoid large changes in the validator set in a short amount of time, there are mechanisms limiting how many validators can be activated or exited within an epoch. For example, these make it more difficult to activate many validators quickly to attack the system.
+
 ### 4.19
 
 [PROOF-OF-STAKE (POS)](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/)
