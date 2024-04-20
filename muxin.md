@@ -4,6 +4,37 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.20
+
+Week 2
+
+refs:
+
+- https://epf.wiki/#/eps/week2
+- https://ab9jvcjkej.feishu.cn/docx/BRDdd8kP9o00a2x6F4scRo0fnJh
+
+P2P high-level
+
+- execution layer operates on devp2p
+- devp2p ⇒ sub-capability eth/68, eth/69, snap, whisper, les, wit
+- devp2p protocol naming: eth/1 → eth/2 → eth/6.1 → eth/6.2, then it changed to eth/60, eth/61… now is eth/68
+
+- Responsibilities
+  - historical data
+    - GetBlockHeader
+    - GetBlockBodies
+    - GetReceipts
+  - pending transactions
+    - Transactions
+    - NewPooledTransactionHashes: it comes along with eth/66
+      - sending the list of transaction type, hashes, sizes to peer.
+      - the goal is to reduce the bandwidth of the EL by sending the full transactions only to a square root of the peer, instead of every peer.
+    - GetPooledTransactions: the peer will respond with the full transaction values
+  - state
+    - snap sync: 2-phase protocol
+      - the 1st phase is contiguous state retrieval
+      - 2nd is healing phase in order to sync the state trie
+
 ### 2024.4.19
 
 Week 2
