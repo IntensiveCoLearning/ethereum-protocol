@@ -5,8 +5,8 @@
 ## Notes
 ### 2024.4.19
 继续DFS我前几天的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
-[
-State Transition Function | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/state-transition)
+
+[State Transition Function | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/state-transition)
 
 ![](https://inevitableeth.com/state-transition-3.jpeg)
 
