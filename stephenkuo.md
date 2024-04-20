@@ -442,3 +442,21 @@ devp2p 协议命名的有趣历史：
     - Tests: https://github.com/ethereum/execution-spec-tests/tree/main/tests
       - Incl. hardfork tests, from frontier to cancun
       - 由于 ethereum/execution-spec-tests 存储库是从上海升级激活的，上海和cancun对所有 EIP 进行了测试，而对于之前的 EIP，完整测试将在 ethereum/tests repo中
+### 4.20
+#### FuzzyVM
+- [repo link](https://github.com/MariusVanDerWijden/FuzzyVM)
+- fuzz EVM框架
+  - FuzzyVM 创建状态测试，可用于相互区分fuzz EVM 实现
+  - 它只关注测试生成部分，测试执行部分由[Go evmlab](https://github.com/holiman/goevmlab)处理
+#### 执行 API 测试
+- [repo link](https://github.com/ethereum/execution-apis/tree/main/tests)
+- 测试用于查询执行客户端的所有执行 API
+#### 共识层测试
+- [repo link](https://github.com/ethereum/consensus-specs/tree/dev/tests)
+#### 特点
+- 在规范中独立，因此可以在同一个repo中编写和填写测试，而不依赖于任何共识层客户端
+- 在生成所有客户端都可以使用的不同格式的测试fixture方面也有类似的想法
+- python 实现
+#### 共识层测试格式
+- [repo link](https://github.com/ethereum/consensus-specs/tree/dev/tests/formats)
+- 共识层测试格式比 EVM 的测试格式更多。对于开发人员来说，对共识层的各个方面进行精细测试非常有用。
