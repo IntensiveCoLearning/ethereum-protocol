@@ -701,9 +701,87 @@ func build(env Environment, pool txpool.Pool, state state.StateDB) (types.Block,
 
 - evm structure
   ![output](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/e9f6c53f-ef1d-4765-962b-6f17217b0ee9)
-- Different types of instructions within the EVM: see https://www.evm.codes
+- Different types of instructions within the EVM: see <https://www.evm.codes>
 
 3. p2p
 
 - The EL operates on devp2p
 - Responsibility of the p2p protocol: Access to historical data & pending txs, and the state
+
+### 2024.04.20
+
+[分布式系统](https://mp.weixin.qq.com/s/DyaFZ05HzY84vRi2Ys90Dg)
+
+1. 区块链是一种分布式系统：为了解决特定的问题，在特定的环境中，做出特定的解决方案。可以让我们免除对中心化的那一台计算机，以及那台计算机背后的中心化的公司或组织的依赖。
+2. 分布式系统的理想目标
+
+- 区块链所属的分布式系统——复制状态机模型： 统内所有的节点 / 计算机都有相同的初始状态，在执行完一个事务后，所有的节点都有相同的最终状态。
+- 分布式系统「FLP 不可能原理」：在网络可靠，但允许节点失效的最小化异步模型系统中，不存在一个可以解决一致性问题的确定性共识算法。
+- FLP 不可能原理告诉我们：不要浪费时间去为分布式系统设计面向所有场景的共识算法，那是不可能实现的。
+
+3. 分布式系统的共识算法
+
+- 寻找在特定场景中有效的共识算法。
+- 首先，确定共识的到底是什么：
+  - 最简单的方法就是某一台计算机说了算，它提出一个结果，其他的计算机来表态是否同意这个结果。
+  - 确定一个中心，并关注选出这个领导者的方法是否去中心化。
+- 需要领导者的共识算法的工作步骤
+  1. 选出一个领导者；
+  2. 领导者提出一个结果；
+  3. 追随者确定是否同意这个结果；
+  4. 如果大家就结果达成了共识，系统输出最终结果；如果大家未达成共识，回到步骤 1 重新开始。
+
+4. 同步性假设共识算法
+
+- 如果网络中有计算机连不上系统怎么办？如果一台计算机连不上系统，就忽略它，不要它参与这一轮的共识。但是怎么知道是连不上还是比较慢？
+- 同步性假设： 引入「超时」概念，也就是说事先设定一个时间范围，如果领导者无法在该时间范围内发出提案，就淘汰它，选出一个新的领导者。
+- Paxos 算法和 Raft 算法都是基于同步性假设提出来的。
+  - 还对系统做另一种假设，即认为系统内所有的计算机都是「好人」，它们要么正确地响应领导者的提案，要么因为故障无法响应。
+  - 制定一条规则：只要系统内过半数的计算机接受了领导者的提案，就把该提案作为系统的最终结果。
+
+5. 解决掉系统中的「坏人」
+
+- 拜占庭将军问题： 其中的拜占庭节点就是坏人节点，它们会传递干扰信息阻碍整个系统达成共识。
+  - 兰伯特提出了几种解决方案，其中一种可以在拜占庭节点不到 1/3 时实现系统的共识。
+  - DLS 算法、PBFT 算法（实用拜占庭容错算法）在此基础上发展出来。
+- PBFT
+  1. pre-prepare 阶段：领导者发送结果给所有追随者。领导者在本图中是 0 号节点，它把结果发给追随者 1、2、3 号节点。
+  2. prepare 阶段：如果追随者认为结果没有错误，就告诉所有其他节点自己认可这个结果。比如 1 号节点会把自己的认可消息发给 0、2、3 号节点。
+  3. commit 阶段：如果追随者发现超过 2/3 的节点认可了领导者的结果，就告诉所有其他节点自己接受这个结果为最终结果。
+  4. reply 阶段：如果领导者和追随者发现超过 2/3 的节点接受了最终结果，就可以认为大部分节点达成了共识，就把该共识反馈给客户端；如果客户端收到超过 1/3 的节点的相同的共识，就可以认为全网达成了共识。
+  ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/b4a11592-718e-43fd-b681-f1f51c1315ef)
+- 不过如果系统中坏人的数量等于或多于 1/3，依然是无法达成共识的。
+
+6. 中本聪共识算法
+
+- 中本聪共识使用的是非确定性机制
+- 两种选择： 如果要求结果确定，就不能保证一定能等到结果；如果要求拿到结果，就无法保证该结果一定是最终结果。
+- 分布式系统就是这样，只能二选一，第一种选择被称作 Finality，即「结果的确定性」或安全性；第二种选择被称作 Liveness，即网络的活性或可用性。
+- 这两种选择决定了分布式共识两种不同的设计思路：
+  - 追求 Finality，是优先结果，就要对网络做出要求。
+    - PBFT、Tendermint 都是这一类型的算法，它们走的是网络的同步性假设路线，使用这类算法的系统不会出现分叉。
+  - 追求 Liveness，是优先网络，就要对结果做出让步。
+    - 中本聪共识是这一类型的算法，它走的是结果的非确定性路线，使用这类算法的分布式网络始终可用，而且任意节点都可以随时加入 / 离开系统。
+- 在 Finality 和 Liveness 中二选一也是分布式系统 CAP 定理（不可能三角）的体现
+  - 分布式系统 CAP 定理（不可能三角）： 对于一个分布式系统来说，不可能同时满足一致性、可用性和分区容错性。
+  - 因为分区容错性是指该系统要能容忍网络出现分区，而现实网络是一定会分区的，所以这个条件必须满足
+  - CAP 定理说的是一个分布式系统不可能同时满足一致性和可用性，这其中，CAP 一致性体现的是 Finality，CAP 可用性体现的是 Liveness。
+- 使用非确定性机制的中本聪共识描述起来也很简单：如果你看到某提议的区块拥有最多的工作量证明，就接受该区块，这也被称作最长链规则。
+- 并非所有的 PoS 都是 Finality 路线，比如 Casper FFG 就不是；而 PoW 也不是只能走 Liveness 路线。
+- 中本聪共识追求的是 Liveness
+- Finality 系统在保证了结果的确定性后，系统设计就要反过来追求 Liveness；而 Liveness 系统在保证了网络的开放性后，系统设计就要反过来追求 Finality。
+  - 中本聪共识为了提高结果的确定性或安全性，就需要做出其他让步，比如 TPS。
+
+7. 总结
+
+- 两个定理：FLP 不可能原理；CAP 不可能定理。
+- 两种容错能力：宕机容错；拜占庭容错。
+- 两种共识算法设计思路：Finality；Liveness。
+- 两类共识算法：同步性假设；非确定性机制。
+- 三个共识算法：Paxos、PBFT、中本聪共识。
+
+8. further reading
+
+- [Let’s take a crack at understanding distributed consensus](https://www.preethikasireddy.com/post/lets-take-a-crack-at-understanding-distributed-consensus)
+- [WHAT WE TALK ABOUT WHEN WE TALK ABOUT DISTRIBUTED SYSTEMS](http://alvaro-videla.com/2015/12/learning-about-distributed-systems.html)
+- Time, Clocks and the Ordering of Events in a Distributed System
