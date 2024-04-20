@@ -4,6 +4,28 @@
 
 ## Notes
 
+### 2024.4.21
+
+明天研究下 RUNDAO 细节和真随机数的生成，还有 PBS (proposer-builder separation) 的细节。结束 Week 2 的学习
+
+### 2024.4.20
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95400362/f534a2b7-bed3-4734-bd54-1ecddef2ba6c)
+
+上图展示了诚实行为如何改变以实施 reorg 策略。
+
+在这种情况下，让 b1 代表晚块。由于迟到，b1 只拥有时隙 n 的证明权重的 19%。其余 81% 的证明权重分配给父块 HEAD，因为许多证明者在证明截止日期前没有看到 b1。
+
+如果没有 honest reorgs，slot n+1 的提议者会将 b1 视为链的头部并构建子块 b2。提议者没有努力 reorg b1，尽管它只有 19% 的证明权重。但在 slot n+1 期间，b2 具有 proposer boost，并且假设它按时交付，则 b2 将通过积累该 slot 的大多数证明而成为规范。
+
+如果有 honest reorgs，情况就会大不相同。因此他们构建一个以 HEAD 作为 b2 的父块，并强制 reorg b1。当我们到达 slot n+1 的证明截止日期时，honest reorgs 将比较 b1 (19%) 与 b2（来自 proposer boost 的 40%）的相对权重。所有客户端都实施了 proposer boost ，因此 b2 将被视为链的头部，并将累积 slot n+1 证明。
+
+以上过掉 Slot 相关
+
+Finality：最终性，意味着 tx 是块中无法更改的一部分，当一个 epoch 结束时，若其 checkpoint 已经聚集了2/3的绝对多数，该 checkpoint 就被合理化了（Justification），合理化之后会被最终确定（Finality）。
+
+原本 validator 需要 1000 ETH，但是 Justin Drake 建议使用 BLS 签名技术，将最低资本要求降低至 32 ETH。
+
 ### 2024.4.18
 
 Slot 和 POS 交易排序详解：https://www.paradigm.xyz/2023/04/mev-boost-ethereum-consensus
@@ -21,9 +43,6 @@ honest reorgs：接受 proposer boost，并允许诚实的提议者使用它来�
 在这些特殊情况下会避免 honest reorgs：during epoch boundary blocks; if the chain is not finalizing; if the head of the chain is not from the slot prior to the reorged block
 
 条件 3 确保 honest reorgs 仅从链中删除单个块，这充当断路器，允许链在极端网络延迟期间继续生成块。这也反映了 proposer 对其网络观点的信心下降，因为他们不再确定他们的 proposer boost 的区块将被视为规范。
-
-![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95400362/f534a2b7-bed3-4734-bd54-1ecddef2ba6c)
-
 
 
 ### 2024.4.17
