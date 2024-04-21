@@ -3,6 +3,45 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.4.21
+刷视频：[Ethereum Execution Layer Overview | lightclient](https://www.youtube.com/watch?v=pniTkWo70OY)  还剩1/4没看完；
+
+这个视频里面基本是通过代码演示整个执行过程，比起之前光看白皮书的理解更深了一点。
+
+block building：
+
+```go
+func build(env Environment, pool txpool.Pool, state state.StateDB) (types.Block, state.StateDB, error) {
+    var (
+        gasUsed = 0
+        txs []types.Transactions
+    )
+    for ; gasUsed < env.GasLimit || !pool.Empty(); {
+        tx := pool.Pop()
+        res, gas, err := vm.Run(env, tx, state)
+        if err != nil {
+            // tx invalid
+            continue
+        }
+        gasUsed += gas
+        txs = append(txs, tx)
+        state = res
+    }
+    return core.Finalize(env, txs, state)
+}
+```
+其中 进入到pool里面的tx已经排好了顺序，会优先处理支奖励高的；
+
+block transaction：
+
+- 走了一下go的eth的执行过程
+- todo: 这里可以看一下类似用js实现的内部细节
+
+多次提到了[EIP1559](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1559.md)，主要的改动是动态调整了base fee，而不是矿工指定；提供了更可预测的交易费用并改善网络拥塞
+
+
+
+
 ### 2024.4.20
 week2视频： https://www.youtube.com/watch?v=7sxBjSfmROc
 
