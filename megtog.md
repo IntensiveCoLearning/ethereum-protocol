@@ -4,6 +4,82 @@
 
 ## Notes
 
+### 2024.4.21
+
+继续和 zrnt 玩耍
+
+#### 运行 v0.8.4 版测试
+
+<https://github.com/ethereum/consensus-spec-tests/tree/v0.8.4>
+
+```
+zrnt/tests/spec$ du -sh eth2.0-spec-tests/tests/general/ eth2.0-spec-tests/tests/minimal/
+25M	eth2.0-spec-tests/tests/general/
+87M	eth2.0-spec-tests/tests/minimal/
+```
+
+#### `go.sum` 被更改问题
+
+在 discord 上先提问了
+
+#### 先看这个测试
+
+学习 go 语言测试里 `PAUSE` `CONT` 都是咋回事儿
+
+<details>
+<summary>TestJustificationAndFinalization</summary>
+
+```
+=== RUN   TestJustificationAndFinalization
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/123_ok_support
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/123_ok_support
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/123_poor_support
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/123_poor_support
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_ok_support
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_ok_support
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_ok_support_messed_target
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_ok_support_messed_target
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_poor_support
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_poor_support
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/234_ok_support
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/234_ok_support
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/234_poor_support
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/234_poor_support
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/23_ok_support
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/23_ok_support
+=== RUN   TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/23_poor_support
+=== PAUSE TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/23_poor_support
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/123_ok_support
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/23_ok_support
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/234_ok_support
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_ok_support_messed_target
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/234_poor_support
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_ok_support
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/123_poor_support
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_poor_support
+=== CONT  TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/23_poor_support
+--- PASS: TestJustificationAndFinalization (0.00s)
+    --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization (0.00s)
+        --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests (0.00s)
+            --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/23_ok_support (0.01s)
+            --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/234_poor_support (0.01s)
+            --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_ok_support_messed_target (0.01s)
+            --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/234_ok_support (0.01s)
+            --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/123_poor_support (0.01s)
+            --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_ok_support (0.01s)
+            --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/123_ok_support (0.01s)
+            --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/12_poor_support (0.01s)
+            --- PASS: TestJustificationAndFinalization/epoch_processing/justification_and_finalization/pyspec_tests/23_poor_support (0.01s)
+PASS
+```
+</details>
+
 ### 2024.4.18
 
 发现 ericsson49 研究过不少 eth consensus 时间相关的问题
