@@ -4,6 +4,10 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.21
+
+开始学习 Week4，混了个 PR https://github.com/eth-protocol-fellows/protocol-studies/pull/197
+
 ### 4.20
 
 [PROOF-OF-STAKE (POS)](https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/)
