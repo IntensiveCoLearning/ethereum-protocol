@@ -380,3 +380,7 @@ https://notes.ethereum.org/@vbuterin/verkle_and_state_expiry_proposal
   - Hardfork 1: Transform MPT to VKT
   - Address period expansion: addresses are extended from 20 to 32 bytes, and the new address format incl. "address periods" to allow new contracts fill new storage slots without the need to provide witness
   - Hardfork 2: State expiry
+
+### 2024.4.21 Week 9R History expiry notes
+- Notes: https://twitter.com/EIPFun/status/1782120924172468636
+
