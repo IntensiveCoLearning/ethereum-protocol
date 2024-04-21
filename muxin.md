@@ -4,6 +4,24 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.21
+
+Week 3
+
+Pre-reading:
+
+- Proof-of-stake(POS)
+  - POS underlies Ethereum’s consensus mechanisum
+  - switch from POW to POS in 2022: more secure, less energy-intensive, better for implementing new scaling solutions
+  - validator: deposit 32 ETH, run 3 software: execution client, consensus client, validator client.
+  - how a transaction gets executed in Ethereum POS:
+    - A user creates and signs a transaction with their private key.
+    - The transaction is submitted to an Ethereum execution client which verifies its validity.
+    - If the transaction is valid, the execution client adds it to its local mempool (list of pending transactions) and also broadcasts it to other nodes over the execution layer gossip network.
+    - One of the nodes on the network is the block proposer for the current slot, having previously been selected pseudo-randomly using RANDAO.
+    - Other nodes receive the new beacon block on the consensus layer gossip network.
+    - The transaction can be considered "finalized" if it has become part of a chain with a "supermajority link" between two checkpoints.
+
 ### 2024.4.20
 
 Week 2
