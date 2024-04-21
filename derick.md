@@ -1,21 +1,59 @@
 # Derick
 
-hi guys, my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
+hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
+
+### 2024.4.21
+
+##### 以太坊共识客户端teku
+
+## 以太坊 Teku 架构详解
+
+Teku 是由 ConsenSys 开发的开源以太坊共识客户端，包含完整的信标链节点和验证者客户端实现。它采用 Java 编写，并以 Apache 2.0 许可证发布。
+
+### Teku 的主要组件
+
+1. **信标节点 (Beacon Node):** 信标节点是 Teku 的核心组件之一。它连接到以太坊 2.0 网络，负责同步和验证区块，并维护最新的网络状态。
+
+2. **验证者客户端 (Validator Client):** 验证者客户端负责管理验证者的密钥和签名操作。它与信标节点通信，根据信标链的状态参与证明权益共识过程。
+
+3. **存储:** Teku 使用 LevelDB 作为底层存储，用于存储区块、状态和其他链数据。
+
+4. **网络:** Teku 使用 libp2p 网络库与其他节点通信，并实现了以太坊 2.0 的网络协议。
+
+5. **共识:** Teku 实现了以太坊 2.0 的 Gasper 共识算法，包括 Casper FFG 和 LMD GHOST。
+
+6. **API:** Teku 提供了 REST API 和 JSON-RPC API，允许外部应用程序与之交互。
+
+### Teku 的同步模式
+
+Teku 支持多种同步模式，以适应不同的使用场景和性能要求:
+
+1. **快照同步 (Snap Sync):** 这是 Teku 的默认同步模式。它从一个可信的检查点开始同步，并下载最新的状态快照，以快速同步到网络的当前状态。
+
+2. **完全同步 (Full Sync):** 在完全同步模式下，Teku 从创世区块开始同步，并逐个验证每个区块，以建立完整的区块链状态。
+
+3. **归档同步 (Archive Sync):** 归档同步类似于完全同步，但它会存储所有的历史状态，而不仅仅是最新的状态。
+
+### Teku 的可扩展性和安全性
+
+- Teku 在设计时考虑了可扩展性和安全性。它支持单独运行信标节点和验证者客户端，以提高安全性。Teku 还与 Web3Signer 集成，以实现签名密钥的安全存储和防双签保护。是一个功能完备、架构良好的以太坊 2.0 客户端。它提供了灵活的部署选项、多种同步模式以及与以太坊生态系统的无缝集成，是机构级用户和企业的理想选择。
+
+
 
 ### 2024.4.20
 
 #### Study Group Week 7 | Verkle Trees
 
-> 关于verkle树的学习，已经在week3 中有过总结 ,在此只记录下视频中提到的如何将以太坊状态转换为verkle树的过程。
+> 关于verkle树的学习，已经在week3 中有过总结 ，在此只记录下视频中提到的如何将以太坊状态转换为verkle树的过程。
 > Converting the Ethereum state into a Verkle tree is a complex process with ongoing research. Here's a breakdown of the key aspects:
 
 **Challenges:**
 
-* **Data Size:** The Ethereum state is massive, and converting it all at once is impractical. The process needs to be batched and optimized for efficiency.
-* **State Updates:**  Ethereum is constantly evolving, with new data added and existing data modified through transactions. The conversion needs to account for these ongoing updates.
-* **Trade-offs:** While Verkle trees offer efficiency benefits, there might be trade-offs in terms of complexity and gas costs for specific operations compared to the current Merkle Patricia Trie (MPT).
+* **Data Size:** The Ethereum state is massive， and converting it all at once is impractical. The process needs to be batched and optimized for efficiency.
+* **State Updates:**  Ethereum is constantly evolving， with new data added and existing data modified through transactions. The conversion needs to account for these ongoing updates.
+* **Trade-offs:** While Verkle trees offer efficiency benefits， there might be trade-offs in terms of complexity and gas costs for specific operations compared to the current Merkle Patricia Trie (MPT).
 
 **General Steps (Conceptual):**
 
@@ -25,7 +63,7 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
     * Process the data and organize it according to the Verkle tree structure. This involves hashing and creating Merkle proofs.
     * Store the Verkle tree representation of the batch.
 3. **State Updates:** 
-    * As new transactions occur, update the corresponding sections in the Verkle tree efficiently. This might involve partial updates or witness creation.
+    * As new transactions occur， update the corresponding sections in the Verkle tree efficiently. This might involve partial updates or witness creation.
 4. **Verification:** Implement mechanisms to verify the integrity of the Verkle tree data.
 
 
@@ -37,31 +75,31 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 1. Modularity
 
-- Every component of Reth is built to be used as a library: well-tested, heavily documented and benchmarked. We envision that developers will import the node's crates, mix and match, and innovate on top of them.
+- Every component of Reth is built to be used as a library: well-tested， heavily documented and benchmarked. We envision that developers will import the node's crates， mix and match， and innovate on top of them.
 
-- Examples of such usage include, but are not limited to, spinning up standalone P2P networks, talking directly to a node's database, or "unbundling" the node into the components you need.
+- Examples of such usage include， but are not limited to， spinning up standalone P2P networks， talking directly to a node's database， or "unbundling" the node into the components you need.
 
-- To achieve that, we are licensing Reth under the Apache/MIT permissive license.
+- To achieve that， we are licensing Reth under the Apache/MIT permissive license.
 
 2. Performance
 
-- Reth aims to be fast, so we used Rust and the Erigon staged-sync node architecture.
+- Reth aims to be fast， so we used Rust and the Erigon staged-sync node architecture.
 
 - We also use our Ethereum libraries (including Alloy and revm) which we’ve battle-tested and optimized via Foundry.
 
 3. Free for anyone to use any way they want
 
-- Reth is free open source software, built for the community, by the community.
+- Reth is free open source software， built for the community， by the community.
 
-- By licensing the software under the Apache/MIT license, we want developers to use it without being bound by business licenses, or having to think about the implications of GPL-like licenses.
+- By licensing the software under the Apache/MIT license， we want developers to use it without being bound by business licenses， or having to think about the implications of GPL-like licenses.
 
 4. Client Diversity
 
-- The Ethereum protocol becomes more antifragile when no node implementation dominates. This ensures that if there's a software bug, the network does not finalize a bad block. By building a new client, we hope to contribute to Ethereum's antifragility.
+- The Ethereum protocol becomes more antifragile when no node implementation dominates. This ensures that if there's a software bug， the network does not finalize a bad block. By building a new client， we hope to contribute to Ethereum's antifragility.
 
 5. Used by a wide demographic
 
-- We want to solve for node operators that care about fast historical queries, but also for hobbyists who cannot operate on large hardware.
+- We want to solve for node operators that care about fast historical queries， but also for hobbyists who cannot operate on large hardware.
 
 - We also want to support teams and individuals who want both sync from genesis and via "fast sync".
 
@@ -73,15 +111,15 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 #### 数据分片和DAS提案解释
 今天学习了v神发布的一篇[文章](https://hackmd.io/@vbuterin/sharding_proposal)，是一份提案，该提案使用侧重数据可用性的方法来构建以太坊分片实现的第 1 阶段。
 
-1. 信标链的主要新增内容将是一个 ShardDataHeader 对象的向量,每个分片一个。ShardDataHeader 表示大量的底层数据(大小为 0-512 kB)。
+1. 信标链的主要新增内容将是一个 ShardDataHeader 对象的向量，每个分片一个。ShardDataHeader 表示大量的底层数据(大小为 0-512 kB)。
 
-2. 只有当 ShardDataHeader 所指向的底层数据可用时,区块才有效,这意味着它已经发布到网络上,任何人都可以下载。
+2. 只有当 ShardDataHeader 所指向的底层数据可用时，区块才有效，这意味着它已经发布到网络上，任何人都可以下载。
 
-3. 为了保持可扩展性,客户端在验证区块时不会下载每个 ShardDataHeader 的完整底层数据。相反,他们将使用一种称为数据可用性抽样的间接技术来验证数据可用性。
+3. 为了保持可扩展性，客户端在验证区块时不会下载每个 ShardDataHeader 的完整底层数据。相反，他们将使用一种称为数据可用性抽样的间接技术来验证数据可用性。
 
-4. 文章还讨论了与分片实现相关的一些参数,例如分片数量、每个 epoch 的槽位数以及每个委员会周期的槽位数。
+4. 文章还讨论了与分片实现相关的一些参数，例如分片数量、每个 epoch 的槽位数以及每个委员会周期的槽位数。
 
-提出了一种侧重数据可用性的方法,用于以太坊分片实现的第 1 阶段,引入了 ShardDataHeader 对象和数据可用性抽样,以确保数据可用性,同时保持可扩展性。
+提出了一种侧重数据可用性的方法，用于以太坊分片实现的第 1 阶段，引入了 ShardDataHeader 对象和数据可用性抽样，以确保数据可用性，同时保持可扩展性。
 
 
 
@@ -94,19 +132,19 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 2. https://blog.ethereum.org/2023/08/29/eel-spec
 
 共识层规范(Consensus Layer Spec):
-- 以太坊共识层负责维护以太坊区块链的安全性和一致性,目前采用的是权益证明(PoS)共识机制。
-- 在PoS下,验证者需要质押ETH作为抵押,并参与区块提议和投票过程。验证者的权重与其质押的ETH数量成正比。
-- 为了防止验证者作恶,以太坊引入了罚没机制。如果验证者违反协议,其质押的部分ETH将被罚没。
-- 共识层的主要组件包括信标链(Beacon Chain)、分片(Sharding)等。信标链是PoS的核心,负责管理验证者集合和协调分片。
-- 未来以太坊计划实现Danksharding,进一步提高可扩展性。Danksharding允许验证者只保存和验证分片数据的一部分。
+- 以太坊共识层负责维护以太坊区块链的安全性和一致性，目前采用的是权益证明(PoS)共识机制。
+- 在PoS下，验证者需要质押ETH作为抵押，并参与区块提议和投票过程。验证者的权重与其质押的ETH数量成正比。
+- 为了防止验证者作恶，以太坊引入了罚没机制。如果验证者违反协议，其质押的部分ETH将被罚没。
+- 共识层的主要组件包括信标链(Beacon Chain)、分片(Sharding)等。信标链是PoS的核心，负责管理验证者集合和协调分片。
+- 未来以太坊计划实现Danksharding，进一步提高可扩展性。Danksharding允许验证者只保存和验证分片数据的一部分。
 
 执行层规范(Execution Layer Spec):
-- 以太坊执行层负责处理交易和维护状态,目前采用的是以太坊虚拟机(EVM)。
-- EVM是一个图灵完备的虚拟机,支持通过智能合约执行任意复杂度的计算。
+- 以太坊执行层负责处理交易和维护状态，目前采用的是以太坊虚拟机(EVM)。
+- EVM是一个图灵完备的虚拟机，支持通过智能合约执行任意复杂度的计算。
 - 执行层的关键组件包括交易池(Txpool)、状态存储(State)、收据存储(Receipt)等。
-- 为了提高执行层的可读性和可维护性,以太坊社区推出了以太坊执行层规范(EELS)。
-- EELS是用Python编写的执行层参考实现,为每个分叉提供了完整的协议快照,有助于开发者理解和实现EIP。
-- EELS的目标是成为指定核心EIP的默认方式,也是EIP作者首先用来原型开发提案的工具。
+- 为了提高执行层的可读性和可维护性，以太坊社区推出了以太坊执行层规范(EELS)。
+- EELS是用Python编写的执行层参考实现，为每个分叉提供了完整的协议快照，有助于开发者理解和实现EIP。
+- EELS的目标是成为指定核心EIP的默认方式，也是EIP作者首先用来原型开发提案的工具。
 
 
 
@@ -118,18 +156,18 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 - 以太坊节点由两个客户端组成:执行客户端和共识客户端。
 
-- 在以太坊使用工作量证明时,只需要执行客户端就可以运行一个完整的以太坊节点。但自从实施权益证明后,执行客户端需要与另一个称为"共识客户端"的软件一起使用。
+- 在以太坊使用工作量证明时，只需要执行客户端就可以运行一个完整的以太坊节点。但自从实施权益证明后，执行客户端需要与另一个称为"共识客户端"的软件一起使用。
 
-- 两个客户端分别连接到各自的对等网络(P2P)。执行客户端通过P2P网络传播交易,管理本地交易池,而共识客户端通过P2P网络传播区块,实现共识和区块链增长。
+- 两个客户端分别连接到各自的对等网络(P2P)。执行客户端通过P2P网络传播交易，管理本地交易池，而共识客户端通过P2P网络传播区块，实现共识和区块链增长。
 
 执行客户端的作用包括:
 - 作为以太坊的用户网关 
 - 包含以太坊虚拟机、以太坊状态和交易池
 - 提供JSON-RPC接口供用户查询区块链、提交交易和部署智能合约
 
-- 共识客户端的作用是参与权益证明共识,验证执行客户端的计算结果。节点运营者可以通过在质押合约中存入32 ETH来给共识客户端添加验证者角色。
+- 共识客户端的作用是参与权益证明共识，验证执行客户端的计算结果。节点运营者可以通过在质押合约中存入32 ETH来给共识客户端添加验证者角色。
 
-- 新的以太坊节点架构采用模块化设计,由执行客户端和共识客户端组成,分工明确,共同维护以太坊网络的安全和去中心化。
+- 新的以太坊节点架构采用模块化设计，由执行客户端和共识客户端组成，分工明确，共同维护以太坊网络的安全和去中心化。
 
 ### 2024.4.15
 
@@ -156,7 +194,7 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 - EthStorage 网络是一个去中心化的激励存储网络，专门用于存储 EIP-4844 BLOB，并获得 ESP 项目的资助。
 
-- 最小信任：与需要中心化数据桥的现有解决方案不同，EthStorage 依赖于以太坊的共识和无需许可的 EthStorage 存储节点的 1/m 信任模型。存储 BLOB 的过程是这样的：用户签署一个携带 BLOB 的交易，调用存储合约的put(key, blob_idx) 方法。然后存储合约将记录 BLOB 哈希在链上。之后存储提供商将直接从以太坊 DA 网络下载并存储 BLOB，从而绕过数据桥问题。
+- 最小信任：与需要中心化数据桥的现有解决方案不同，EthStorage 依赖于以太坊的共识和无需许可的 EthStorage 存储节点的 1/m 信任模型。存储 BLOB 的过程是这样的：用户签署一个携带 BLOB 的交易，调用存储合约的put(key， blob_idx) 方法。然后存储合约将记录 BLOB 哈希在链上。之后存储提供商将直接从以太坊 DA 网络下载并存储 BLOB，从而绕过数据桥问题。
 
 - 存储成本与激励相一致：当调用 put() 方法时，交易必须发送存储费（通过 msg.value）并存入合约中。在成功链下存储节点提交并验证存储证明后，这个存储费用将随着时间的推移逐渐分配给存储节点。与现有的向出块者(proposer)支付一次性存储费的以太坊存储费模型相比，随着时间的推移，支付的存储费遵循贴现现金流模型——假设随着时间的推移，存储成本将相对于 ETH价格而降低。EthStorage 引入的这一重大创新使得费用和存储节点的存储贡献保持一致。
 
@@ -175,12 +213,12 @@ hi guys, my name is Derick and I'm a back-end programmer who loves technology. I
 
 | Client    | 占比| Status | Support                | Language   |
 |-----------|-  |--------|------------------------|------------|
-| Grandine  |   | beta   | Linux, Win, macOS      | -          |
-| Lighthouse| 33.47%  | stable | Linux, Win, macOS, ARM | Rust       |
-| Lodestar  | 0.92%   | stable | Linux, Win, macOS      | TypeScript |
-| Nimbus    |9.34%   | stable | Linux, Win, macOS, ARM | Nim        |
-| Prysm     |37.89%   | stable | Linux, Win, macOS, ARM | Golang     |
-| Teku      |18.39%   | stable | Linux, Win, macOS      | Java       |
+| Grandine  |   | beta   | Linux， Win， macOS      | -          |
+| Lighthouse| 33.47%  | stable | Linux， Win， macOS， ARM | Rust       |
+| Lodestar  | 0.92%   | stable | Linux， Win， macOS      | TypeScript |
+| Nimbus    |9.34%   | stable | Linux， Win， macOS， ARM | Nim        |
+| Prysm     |37.89%   | stable | Linux， Win， macOS， ARM | Golang     |
+| Teku      |18.39%   | stable | Linux， Win， macOS      | Java       |
 
 Data provided by Sigma Prime's Blockprint — updated daily.
 Data may not be 100% accurate. 
@@ -191,14 +229,14 @@ Data may not be 100% accurate.
 | Client     | 占比|Status       | Support                | Language   |
 |------------|-|-------------|------------------------|------------|
 | Akula      | |deprecated   | -                      | -          |
-| Besu       |12% |stable       | Linux, Win, macOS      | Java       |
-| Erigon     |2% |alpha & beta | Linux, Win, macOS, ARM | Golang     |
-| EthereumJS | |alpha        | Linux, Win, macOS      | TypeScript |
-| Geth       |63% |stable       | Linux, Win, macOS, ARM | Golang     |
-| Nethermind |23% |stable       | Linux, Win, macOS, ARM | .NET       |
+| Besu       |12% |stable       | Linux， Win， macOS      | Java       |
+| Erigon     |2% |alpha & beta | Linux， Win， macOS， ARM | Golang     |
+| EthereumJS | |alpha        | Linux， Win， macOS      | TypeScript |
+| Geth       |63% |stable       | Linux， Win， macOS， ARM | Golang     |
+| Nethermind |23% |stable       | Linux， Win， macOS， ARM | .NET       |
 | Nimbus     | |pre-alpha    | -                      | Nim        |
-| Reth       | |alpha        | Linux, Win, macOS, ARM | Rust       |
-| Silkworm   | |pre-alpha    | Linux, Win, macOS      | C++        |
+| Reth       | |alpha        | Linux， Win， macOS， ARM | Rust       |
+| Silkworm   | |pre-alpha    | Linux， Win， macOS      | C++        |
 
 Data provided by supermajority.info — updated manually.
 Data may not be 100% accurate. 
@@ -301,7 +339,7 @@ git clone https://github.com/ethereum/execution-spec-tests
 cd execution-spec-tests
 python3 -m venv ./venv/
 source ./venv/bin/activate
-pip install -e '.[docs,lint,test]'
+pip install -e '.[docs，lint，test]'
 ```
 
 ##### 验证测试环境
@@ -349,7 +387,7 @@ fill -v tests/berlin/eip2930_access_list/test_acl.py
 对于区块链测试：
 ```
 def test_contract_creating_tx(
-    blockchain_test: BlockchainTestFiller, fork: Fork, initcode: Initcode
+    blockchain_test: BlockchainTestFiller， fork: Fork， initcode: Initcode
 ):
 ```
 
@@ -403,24 +441,24 @@ Verkle树是一种数据结构，代表了从当前以太坊使用的Merkle Patr
 
 地址：https://domothy.com/proof-of-stake/
 
-这篇文章主要讨论了以太坊从工作量证明(PoW)转向权益证明(PoS)共识机制的话题,包括:
+这篇文章主要讨论了以太坊从工作量证明(PoW)转向权益证明(PoS)共识机制的话题，包括:
 
-1. PoS并非一开始就被以太坊采用,主要原因是早期PoS还处于理论研究阶段,存在一些基本问题有待克服,且不同区块链的PoS实现各有利弊,没有放之四海而皆准的方案。
+1. PoS并非一开始就被以太坊采用，主要原因是早期PoS还处于理论研究阶段，存在一些基本问题有待克服，且不同区块链的PoS实现各有利弊，没有放之四海而皆准的方案。
 
-2. 有观点认为PoS会导致中心化,本质上与PoW类似,拥有更多资金的人可以获得更高的收益。但在PoS下,不管质押10美元还是1000万美元,每个人的收益率是一样的。
+2. 有观点认为PoS会导致中心化，本质上与PoW类似，拥有更多资金的人可以获得更高的收益。但在PoS下，不管质押10美元还是1000万美元，每个人的收益率是一样的。
 
-3. 虽然没有像PoW那样重复计算哈希,但验证者在PoS下仍然要做"工作",即创建和验证区块,只是这种工作完全由区块链达成共识所需的有用工作组成。
+3. 虽然没有像PoW那样重复计算哈希，但验证者在PoS下仍然要做"工作"，即创建和验证区块，只是这种工作完全由区块链达成共识所需的有用工作组成。
 
-4. 文章认为,无论是PoW还是PoS,拥有资金优势的人都能获得更多的算力或质押币,从而获利更多。PoW因规模效应会导致矿池中心化,而PoS下大户的收益率与小户一致。
+4. 文章认为，无论是PoW还是PoS，拥有资金优势的人都能获得更多的算力或质押币，从而获利更多。PoW因规模效应会导致矿池中心化，而PoS下大户的收益率与小户一致。
 
-这篇文章分析了PoS相对PoW的优缺点,指出二者在趋于中心化方面并无本质区别。PoS的核心在于让验证者做有助于区块链共识的有意义工作,而非单纯计算哈希。以太坊选择PoS是经过长期研究和权衡的结果。
+这篇文章分析了PoS相对PoW的优缺点，指出二者在趋于中心化方面并无本质区别。PoS的核心在于让验证者做有助于区块链共识的有意义工作，而非单纯计算哈希。以太坊选择PoS是经过长期研究和权衡的结果。
 
 
 ### 权益证明（PoS）介绍
 
 https://consensys.io/blog/what-is-proof-of-stake
 
-权益证明（Proof of Stake, PoS）是一种加密货币共识机制，用于验证和添加新的交易记录到区块链。与工作量证明（Proof of Work, PoW）相比，PoS不依赖于矿工通过解决复杂计算问题来竞争新区块的创建权，而是基于参与者持有的加密货币数量和持有时间来选择验证者。
+权益证明（Proof of Stake， PoS）是一种加密货币共识机制，用于验证和添加新的交易记录到区块链。与工作量证明（Proof of Work， PoW）相比，PoS不依赖于矿工通过解决复杂计算问题来竞争新区块的创建权，而是基于参与者持有的加密货币数量和持有时间来选择验证者。
 
 ### PoS的优势
 
@@ -439,23 +477,23 @@ https://consensys.io/blog/what-is-proof-of-stake
 
 权益证明机制为加密货币网络提供了一种更加高效、安全和环保的共识机制。以太坊2.0的升级标志着对这一机制的重大采纳，预计将为整个区块链行业带来深远的影响。
 
-- Proof of Stake addresses the three issues of PoW chains discussed earlier - accessibility, centralization, and especially scalability:
+- Proof of Stake addresses the three issues of PoW chains discussed earlier - accessibility， centralization， and especially scalability:
 
 #### 如何在POS中处理网络中的故障或恶意节点 
 
-在权益证明(PoS)共识机制中,分布式网络通过拜占庭容错(BFT)算法来处理故障或恶意节点的问题,以确保网络的正常运行。具体来说:
+在权益证明(PoS)共识机制中，分布式网络通过拜占庭容错(BFT)算法来处理故障或恶意节点的问题，以确保网络的正常运行。具体来说:
 
-1. PoS网络利用BFT算法在存在一定数量的故障或恶意节点的情况下仍能达成共识,只要故障节点的数量不超过一定阈值。
+1. PoS网络利用BFT算法在存在一定数量的故障或恶意节点的情况下仍能达成共识，只要故障节点的数量不超过一定阈值。
 
-2. 验证者需要质押(锁定)一定数量的加密货币作为抵押。如果验证者试图攻击网络或验证错误的交易,他们将损失部分或全部的质押资金作为惩罚。这种惩罚机制激励验证者诚实行事。
+2. 验证者需要质押(锁定)一定数量的加密货币作为抵押。如果验证者试图攻击网络或验证错误的交易，他们将损失部分或全部的质押资金作为惩罚。这种惩罚机制激励验证者诚实行事。
 
-3. 一些PoS区块链会对验证者的停机时间进行严厉惩罚,如果他们的在线时间低于一定阈值,就会销毁("削减")部分质押的币。这促使验证者保持高水平的可用性。
+3. 一些PoS区块链会对验证者的停机时间进行严厉惩罚，如果他们的在线时间低于一定阈值，就会销毁("削减")部分质押的币。这促使验证者保持高水平的可用性。
 
-4. PoS共识的安全性直接掌握在那些维护网络并在协议中持有原生加密资产的人手中。与PoW相比,这种架构能更好地将网络安全与参与者的经济利益绑定在一起。
+4. PoS共识的安全性直接掌握在那些维护网络并在协议中持有原生加密资产的人手中。与PoW相比，这种架构能更好地将网络安全与参与者的经济利益绑定在一起。
 
-5. 尽管PoS在安全性方面可能不如PoW得到充分验证,但通过质押、惩罚和激励等机制,PoS网络能有效应对故障和恶意行为,维护系统的可靠运行。
+5. 尽管PoS在安全性方面可能不如PoW得到充分验证，但通过质押、惩罚和激励等机制，PoS网络能有效应对故障和恶意行为，维护系统的可靠运行。
 
-PoS网络主要通过BFT算法、质押和惩罚机制来处理故障或恶意节点。通过将验证者的经济利益与诚实行为绑定,并对不当行为进行严厉惩罚,PoS激励验证者维护网络的安全和可用性,从而确保系统在存在一定比例的拜占庭节点时仍能正常运行。
+PoS网络主要通过BFT算法、质押和惩罚机制来处理故障或恶意节点。通过将验证者的经济利益与诚实行为绑定，并对不当行为进行严厉惩罚，PoS激励验证者维护网络的安全和可用性，从而确保系统在存在一定比例的拜占庭节点时仍能正常运行。
 
 
 
@@ -503,7 +541,7 @@ PoS网络主要通过BFT算法、质押和惩罚机制来处理故障或恶意�
 
 执行层节点通过验证和执行交易，来维护以太坊区块链的状态。每个执行层节点都会验证每个区块中的所有交易，并执行这些交易中定义的智能合约代码。这个过程包括计算交易费用、更新账户余额、执行智能合约的函数调用等。执行层节点还负责创建新的区块，并将这些区块广播到网络中的其他节点。
 
-执行层节点与共识层节点（Consensus Layer node）一起工作，共识层节点负责网络的共识机制，例如在以太坊2.0中的权益证明（Proof of Stake, PoS）机制。执行层节点提供了执行交易和合约的功能，而共识层节点则确保了区块的产生和链的安全性。
+执行层节点与共识层节点（Consensus Layer node）一起工作，共识层节点负责网络的共识机制，例如在以太坊2.0中的权益证明（Proof of Stake， PoS）机制。执行层节点提供了执行交易和合约的功能，而共识层节点则确保了区块的产生和链的安全性。
 
 以太坊客户端软件，如Geth或Parity，通常包含了执行层的功能。这些客户端软件实现了以太坊的规范，并通过点对点网络与其他以太坊客户端通信。不同的客户端软件可能用不同的编程语言编写，但它们都遵循相同的协议规则，因此可以互操作。
 
@@ -623,19 +661,19 @@ Merkle 树的层级结构清晰，叶子节点代表原始数据块的哈希值�
 
 ##### Merkle 树的工作原理
 
-1. 在Merkle树中,每个叶子节点都标记了一个数据块的加密哈希值,而每个非叶子节点则标记了其子节点标签的加密哈希值。
+1. 在Merkle树中，每个叶子节点都标记了一个数据块的加密哈希值，而每个非叶子节点则标记了其子节点标签的加密哈希值。
 
-2. 叶子节点的数据先被哈希,然后成对分组。每对节点的哈希值再被哈希,生成它们的父节点。重复这个过程,直到只剩下一个根节点,称为Merkle根。
+2. 叶子节点的数据先被哈希，然后成对分组。每对节点的哈希值再被哈希，生成它们的父节点。重复这个过程，直到只剩下一个根节点，称为Merkle根。
 
-3. Merkle树通常使用二叉树结构,即每个节点最多有2个子节点。但也可以使用多叉树,每个节点有多个子节点。
+3. Merkle树通常使用二叉树结构，即每个节点最多有2个子节点。但也可以使用多叉树，每个节点有多个子节点。
 
-4. 为了验证某个叶子节点是否属于Merkle树,只需计算沿着该叶子到根的路径上的哈希值,数量与树的深度成正比。这比在哈希列表中逐个检查每个节点要高效得多。
+4. 为了验证某个叶子节点是否属于Merkle树，只需计算沿着该叶子到根的路径上的哈希值，数量与树的深度成正比。这比在哈希列表中逐个检查每个节点要高效得多。
 
-5. 如果Merkle树的任何部分发生变化,都会传播到根节点。通过比较根哈希,可以快速检测出数据是否被篡改。
+5. 如果Merkle树的任何部分发生变化，都会传播到根节点。通过比较根哈希，可以快速检测出数据是否被篡改。
 
-6. Merkle树的搜索、插入、删除操作复杂度为O(logn),空间复杂度为O(n),其中n是叶子节点数。
+6. Merkle树的搜索、插入、删除操作复杂度为O(logn)，空间复杂度为O(n)，其中n是叶子节点数。
 
-Merkle树利用哈希指针构建一个树形结构,可以高效地验证大型数据结构的完整性,广泛用于区块链、分布式系统、版本控制等领域中。它通过递归哈希的方式,在保证安全性的同时提供了更好的性能。
+Merkle树利用哈希指针构建一个树形结构，可以高效地验证大型数据结构的完整性，广泛用于区块链、分布式系统、版本控制等领域中。它通过递归哈希的方式，在保证安全性的同时提供了更好的性能。
 
 [1] https://www.youtube.com/watch?v=3AcQyTs_Es4&t=0
 
