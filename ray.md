@@ -413,3 +413,50 @@ BTC 用 PoW 机制解决了共识和激励的问题。在以太坊转向 PoS 之
 
 真实协议要比这些简单的描述复杂的多，以太坊的安全就是建立这些激励和惩罚的措施之上。除了这些措施之外，还有很重要的一点就是提升客户端软件的多样性。
 
+### 2024.4.21
+如果想成为质押者，就需要在以太坊的存款合约中存入 32 个以太坊的交易。在这笔交易中，除了传入的 32 个 ETH，还需要有其他的参数：
+
+- Validator 的公钥，作为在共识层上的身份
+- 接受激励的提款地址
+- 对公钥、提款地址和存款金额的签名
+- 存款数据的 merkle 根，这些数据也是通过 ssz 的方式序列化，然后构建成 merkle 树
+
+存款合约的主要代码如下：
+
+```go
+contract DepositContract is IDepositContract, ERC165 {
+    uint constant DEPOSIT_CONTRACT_TREE_DEPTH = 32;
+    uint constant MAX_DEPOSIT_COUNT = 2**DEPOSIT_CONTRACT_TREE_DEPTH - 1;
+
+    bytes32[DEPOSIT_CONTRACT_TREE_DEPTH] branch;
+    uint256 deposit_count;
+
+    bytes32[DEPOSIT_CONTRACT_TREE_DEPTH] zero_hashes;
+
+    constructor() public {
+        for (uint height = 0; height < DEPOSIT_CONTRACT_TREE_DEPTH - 1; height++)
+            zero_hashes[height + 1] = sha256(abi.encodePacked(zero_hashes[height], zero_hashes[height]));
+    }
+
+    function get_deposit_root() override external view returns (bytes32) {
+        bytes32 node;
+        uint size = deposit_count;
+        for (uint height = 0; height < DEPOSIT_CONTRACT_TREE_DEPTH; height++) {
+            if ((size & 1) == 1)
+                node = sha256(abi.encodePacked(branch[height], node));
+            else
+                node = sha256(abi.encodePacked(node, zero_hashes[height]));
+            size /= 2;
+        }
+        return sha256(abi.encodePacked(
+            node,
+            to_little_endian_64(uint64(deposit_count)),
+            bytes24(0)
+        ));
+    }
+ }
+```
+
+在 The Merge 之前，信标链不需要连接到执行层，这个存款的数据根就是用来证明参与者完成了存款。在 EIP-6110 升级之后，可以在链上显示公开验证者的存款，之后这个存款跟实际上就是多余的。
+
+在完成存款之后，存款合约会生成一个 Event，里面包含了存款的一些详细信息。共识客户端可以通过执行层的 eth_getLogs RPC 方法来获取这些数据，通过传入存款合约地址、区块号和 Event 参数进行过滤，然后快速获取到存款的详细信息。
