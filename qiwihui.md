@@ -785,3 +785,45 @@ func build(env Environment, pool txpool.Pool, state state.StateDB) (types.Block,
 - [Let’s take a crack at understanding distributed consensus](https://www.preethikasireddy.com/post/lets-take-a-crack-at-understanding-distributed-consensus)
 - [WHAT WE TALK ABOUT WHEN WE TALK ABOUT DISTRIBUTED SYSTEMS](http://alvaro-videla.com/2015/12/learning-about-distributed-systems.html)
 - Time, Clocks and the Ordering of Events in a Distributed System
+
+### 2024.04.21
+
+[The Beacon Chain](https://ethos.dev/beacon-chain)
+
+1. Slots and Epochs
+
+- Each slot is 12 seconds and an epoch is 32 slots: 6.4 minutes.
+- Every 12 seconds, one block is added when the system is running optimally.
+- A slot is like the block time, but slots can be empty.
+
+2. Validators and Attestations
+
+- An attestation is a validator’s vote, weighted by the validator’s balance.
+- Each validator has a maximum balance of 32 ETH
+- One validator client can execute many validators.
+
+3. Committees
+
+- RANDAO
+- Attesting to the Beacon Chain head is called an LMD GHOST vote.
+
+4. Beacon Chain Checkpoints
+
+- Only validators assigned to a slot cast an LMD GHOST vote for that slot. However, all validators cast FFG votes for each epoch checkpoint.
+- Supermajority: A vote that is made by 2/3 of the total balance of all active validators, is deemed a supermajority. 
+
+5. finality
+
+- justified, finalized
+- The epoch boundary block at Slot 96 is proposed and contains attestations for the Epoch 2 checkpoint.
+
+6. Attestations
+
+- An attestation contains both an LMD GHOST vote and an FFG vote
+- Validators are rewarded the most when their attestation is included on-chain at their assigned slot; later inclusion is a decaying reward.
+
+TODO
+
+7. Staking Rewards and Penalties
+8. Slashable Offences
+9. Beacon Chain Validator Activation and Lifecycle
