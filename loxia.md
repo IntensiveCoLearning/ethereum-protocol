@@ -4,9 +4,66 @@
 
 ## Notes
 
+### 2024.4.22
+
+研究下 RUNDAO 细节和真随机数的生成，还有 PBS (proposer-builder separation) 的细节。结束 Week 2 的学习
+
+
 ### 2024.4.21
 
-明天研究下 RUNDAO 细节和真随机数的生成，还有 PBS (proposer-builder separation) 的细节。结束 Week 2 的学习
+[DAOs, DACs, DAs and More: An Incomplete Terminology Guide | Ethereum Foundation Blog](https://blog.ethereum.org/2014/05/06/daos-dacs-das-and-more-an-incomplete-terminology-guide)
+
+**DAOs == automation at the center, humans at the edges.** 
+
+从 DO 到 DAO，关键在于自动化能力。
+
+![Untitled](https://prod-files-secure.s3.us-west-2.amazonaws.com/f9e21f4a-a137-4782-94dd-8f61c319e242/22288f8f-93eb-445a-9283-f94128b035e9/Untitled.png)
+
+自动化在中心（程序正确），人在边缘（人不被抛弃，人的思想和行为仍占据主导，慎用 AI）
+
+**“在一个人类观察比以往任何时候都更具有预见性的时代，在对未来进行编程时，学习如何将社会性编入系统 (而不是基于信任编程) 似乎是人类在这个星球上生存下去的必修课。”**
+
+DAO的七个根定义：
+
+***1，元叙事：Metanarrative***
+
+Why us？Why me？Why you？Why xxx？How we work？How xxx？
+
+***2，去中心：Decentralization***
+
+不受单一节点控制，独立，自治。
+
+***3，自主权：Autonomy***
+
+**自主/自动/自治，**DAO所体现的自治本质，事实上是一种对公共资源/公共资产/公共资本进行决定的权力。**并不是**提案-投票的完全/混合民主制（太表面了），而是基于集体自主权的自动化治理，
+
+***4，组织体：Organization***
+
+DAO 的生产关系网络/组织架构，要具备反向构建现实生活空间的能力。
+
+***5，互通性：Interoperability***
+
+不具备任何互通性的 DAO 是 DO，互通性是衡量 DAO 的重要标准（链上互通性和链上-链下互通性）
+
+***6，空间性：Spatiality***
+
+需要有直观的空间特性。DAO 会基于生产关系创造独特的空间，DAO既是组织，也是空间。更明确的说，DAO是具备空间结构特征的组织体。
+
+***7，二重性：Duality***
+
+既是社会结构的二重性，亦是指符号穿透现实的二重性。
+
+DAO 会有由编程语言和特定文本规则，围绕 DAO 内独有的资源和生产关系，构建出新的一套社会结构，有着新的语境和规则。
+
+通过重构现有的符号和规则去构建新的社会结构，使得人们可以超越经典范式去理解新世界。
+
+**最重要的，能确保人类在新世界中不迷失最重要的思想。**
+
+DAO 的形成不只依赖于现实物质条件的支撑，**其根本性来自于社会生存文化的叙事，**在多元价值观的时代，每个人都可以选择自己的所喜好的生活方式，背后是生存文化的影响。
+
+对于 DAO 来说，协议的底层逻辑和服务设计的框架是最重要的，数据资源是 DAO 中权力来源（SBT），DAO 需要利用好该来源，DAO 切勿只把目光放在业务工具本身上。
+
+叙事通常包括五个要素：人物、情节、背景、目的和意义。
 
 ### 2024.4.20
 
