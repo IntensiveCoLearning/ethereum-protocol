@@ -212,7 +212,7 @@ Pendle将stETH封装成sy-stTH。标准化收益代币（Standardized Yield，�
 
 如果用户选择“零价格冲击模式”（zero price impact mode），则Pendle会在第三步中，将一半的sy-stTH分拆成为收益代币YT-stETH和本金代币PT-stETH，并将PT-stETH与另一半sy-stTH组合成LP放入池子中，收益代币YT-stETH存放在用户账户中；如果用户不选择“零价格冲击模式”，则Pendle会在将PT-stETH与另一半sy-stTH组合成LP放入池子中的同时，把YT-stETH自动卖出，并将获得的资金购买更多PT-stETH。如果用户选择“manual”，则上述步骤都需要用户手动操作。
 
-### 2024.4.22
+### 2024.4.21
 
 学习资料：
 
