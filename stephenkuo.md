@@ -382,6 +382,7 @@ devp2p 协议命名的有趣历史：
       - Max EB (max effective balance): Aim to increase the effective balance of Ethereum validators at 32 ETH
         - Research link: https://ethresear.ch/t/increase-the-max-effective-balance-a-modest-proposal/15801
 ### 4.18
+### week 4
 #### Execution Layer Testing
 #### EVM testing
 - 主要目的：验证每个执行客户端都遵守规范，否则会导致链中潜在的积极分叉
@@ -460,3 +461,59 @@ devp2p 协议命名的有趣历史：
 #### 共识层测试格式
 - [repo link](https://github.com/ethereum/consensus-specs/tree/dev/tests/formats)
 - 共识层测试格式比 EVM 的测试格式更多。对于开发人员来说，对共识层的各个方面进行精细测试非常有用。
+### 4.21
+#### 跨层（Interop）测试
+##### 特点
+- 涉及测试完全实例化的客户端、向其提供信息并验证其行为的正确性
+- 总的来说，它正在构建从 Genesis 到某个点的链，然后验证执行层和共识层之间的所有交互是否都正确发生
+##### Hive
+- [repo link](https://github.com/ethereum/hive)
+- Hive 是一个针对以太坊客户端运行集成测试的系统
+  - Hive 与其他通用 CI 基础设施的不同之处在于以太坊客户端及其功能的紧密集成。
+  - Hive的工作流程
+    - 搭建Hive服务器并启动
+    - Hive 服务器将启动给定的模拟器，其中包含有关如何运行测试的所有说明。模拟器的工作是知道何时开始和结束测试、如何、何时开始和结束客户端等。
+  ![alt text](img/step/WorkFlowOfHive.png)
+- 不同的 Hive 模拟器
+  - [repo link](https://github.com/ethereum/hive/tree/master/simulators)
+##### 开发网
+- 用于验证概念证明或硬分叉早期阶段的有限节点数链
+##### Shawdow forks
+- 配置为遵循以太坊主网的有限节点数分叉，但具有早期硬分叉配置时间来测试真实网络活动
+##### 公共测试网
+- Goerli testnet (Deprecated)
+- Sepolia testnet (Launched in Oct 23rd, 2021)
+- Holesky testnet (Launched in Sep 28th, 2023)
+##### 安全
+###### 潜在问题
+- EL side
+  - 有效失效：执行客户端使完全符合以太坊规范的区块失效
+  - 无效验证：执行客户端验证了不符合以太坊规范的块
+  - 区块执行期间的 DoS：由于交易，客户端花费太多时间来处理区块​
+- CL side
+  - Faulty clients and finalization
+  - <33% faulty node majority: can cause missed slots but chain will still finalize
+  - 33%+ faulty node majority: can cause delayed finality
+  - 50%+ faulty node majority: can disrupt forkchoice
+  - 66%+ faulty node majority: can finalize an incorrect chain 
+###### Bug bounties
+- Link: https://ethereum.org/en/bug-bounty/
+###### Public disclosures
+- Link: https://github.com/ethereum/public-disclosures
+### 4.22
+#### Q&A
+- As the EVM testing needs Geth implementation to fill the test, what if there is a bug in Geth's code or how to ensure there is no bug?
+  - Ideally, devs don't want to depend on Geth's implementation. Devs are currently working on another specs-oriented repo, so that in the future the test filing will not be dependent on Geth. 
+- Which is the most complex part to test in EL/ CL? How much time it takes to run all these tests?
+  - Interopperability is the most complex part. 
+  - EVM is also complex in its own way as there are lots of nuances during execution, which needs multiple back and forth testing.
+  - Regarding the time, it depends on the hardware running the test. Currently, it takes 5-10 mins to run the execution spec test in parallel
+- How to communicate bugs to the client teams?
+  - It depends on the severity of the bug. If the bug affects any live network, it's gonna be handled with caution such as communicate to the specific dev or through special communication.
+### Week 5 :EPFsg Ethereum Roadmap Notes
+#### Merge: Better PoS
+![alt text](img/step/merge.png)
+- Beacon chain 启动和合并
+  - 目前它拥有近 100 万验证者，质押超过 3100 万枚 ETH（约 1100 亿美元）
+  ![alt text](img/step/beacon.png)
+
