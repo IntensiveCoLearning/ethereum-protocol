@@ -212,9 +212,25 @@ Pendle将stETH封装成sy-stTH。标准化收益代币（Standardized Yield，�
 
 如果用户选择“零价格冲击模式”（zero price impact mode），则Pendle会在第三步中，将一半的sy-stTH分拆成为收益代币YT-stETH和本金代币PT-stETH，并将PT-stETH与另一半sy-stTH组合成LP放入池子中，收益代币YT-stETH存放在用户账户中；如果用户不选择“零价格冲击模式”，则Pendle会在将PT-stETH与另一半sy-stTH组合成LP放入池子中的同时，把YT-stETH自动卖出，并将获得的资金购买更多PT-stETH。如果用户选择“manual”，则上述步骤都需要用户手动操作。
 
-### 待学习
+### 2024.4.22
+
+学习资料：
 
  - https://domothy.com/blobspace/
+ - https://www.youtube.com/watch?v=n4eiiCDhTes
+ - https://foresightnews.pro/article/detail/17435
+ - https://w3hitchhiker.mirror.xyz/iY0IB8yc9arir9yAEE-SmjgKdT7HP2CKsJOU5nS1Nc4
+
+主要学习了关于 4844 blob 的存储方案和 specs，同时学习了 KZG commitment 在此处的应用。
+
+关于擦出编码、采样数据可用性验证和 KZG 多项式承诺的介绍还是十分有趣的，特别是采样这一段：
+
+> You pick a number i between 1 and 200,000 and ask the network for the evaluation of P(i). The probability that the i you picked happens to be one of the evaluations I did publish is at most 99,999/200,000≈1/2. You then repeat the process again. The probability that both succeeded is at most 1/4. You do it again. And again. After just 30 random checks, the probability that all of them just happened to be one of the minority data points I published is necessarily less than 1/(2^30)≈1/1,000,000,000. As you can see, it doesn’t take very long for me to fail this little game, since there’s no way I could have predicted ahead of time which random numbers you were going to ask for.
+
+有了 KZG commitment，就可以在不访问原始 blob 数据的情况下，证明某个 L2 的 tx 属于这条 blob，这是普通的 hash 做不到的功能，对于 L2 数据验证也非常方便。
+
+### 待学习
+
  - https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum
  - https://www.youtube.com/watch?v=UClaoL12W00
  - https://blog.bingx.com/blockchain-en/what-are-sequencers-in-ethereum-network/
