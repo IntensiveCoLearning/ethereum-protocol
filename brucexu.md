@@ -4,6 +4,31 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.22
+
+[Ethereum Testing and Security](https://github.com/eth-protocol-fellows/protocol-studies/blob/main/docs/eps/presentations/week4.pdf)
+
+测试就是测试客户端的行为是不是跟标准一致。在同样的输入下，有相同的输出。
+
+EVM 测试有几个大的测试内容：
+
+- Pre-State
+- Environment
+- Transactions
+- Post-State
+
+基本上就是不同阶段的各种类型的内容，加上 Fuzzy 随机生成进行测试，看结果。主要就是用 JSON 等格式来输入。
+
+主要测试工具代码：https://github.com/ethereum/tests
+
+感觉集成测试会是一个比较难的问题，这种去中心化网络的测试怎么做？如何构建和模拟一个去中心化网络和相关情况？
+
+测试网大概分三类：
+
+- Devnets：PoC 验证 hard-forks
+- Shadow-Forks：跟 mainnet 差不多，包括一些 hard-fork 参数，类似预发环境
+- Public Testnets：公开测试网，基于新的共识或者运行机制让大家测试
+
 ### 4.21
 
 开始学习 Week4，混了个 PR https://github.com/eth-protocol-fellows/protocol-studies/pull/197
