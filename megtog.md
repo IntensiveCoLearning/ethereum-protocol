@@ -4,6 +4,15 @@
 
 ## Notes
 
+### 2024.4.22
+
+出现 `PAUSE` `CONT` 的原因
+<https://pkg.go.dev/testing#T.Parallel>
+
+计划学习新 issuance 提案
+<https://ethresear.ch/t/reward-curve-with-tempered-issuance-eip-research-post/19171>
+
+
 ### 2024.4.21
 
 继续和 zrnt 玩耍
