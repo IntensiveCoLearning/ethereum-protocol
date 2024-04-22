@@ -810,7 +810,7 @@ func build(env Environment, pool txpool.Pool, state state.StateDB) (types.Block,
 4. Beacon Chain Checkpoints
 
 - Only validators assigned to a slot cast an LMD GHOST vote for that slot. However, all validators cast FFG votes for each epoch checkpoint.
-- Supermajority: A vote that is made by 2/3 of the total balance of all active validators, is deemed a supermajority. 
+- Supermajority: A vote that is made by 2/3 of the total balance of all active validators, is deemed a supermajority.
 
 5. finality
 
@@ -827,3 +827,30 @@ TODO
 7. Staking Rewards and Penalties
 8. Slashable Offences
 9. Beacon Chain Validator Activation and Lifecycle
+
+### 2024.04.23
+
+7. Staking Rewards and Penalties
+
+- attester rewards
+  - LMD GHOST and FFG votes
+  - Attestations in finalized blocks are worth more
+- attester penalties
+  - not attesting or if they attest to blocks that are not finalized.
+- typical downside risk for stakers
+- slashings and whistleblower rewards
+  - 0.5 ETH up to a validator’s entire stake
+- proposer rewards
+- inactivity leak penalty
+
+8. Slashable Offences
+
+- four slashing conditions for validators
+  - a double proposal: proposing more than one block for their assigned slot.
+  - an LMD GHOST double vote: attesting to two different Beacon Chain heads for their assigned slot.
+  - an FFG surround vote: casting an FFG vote that surrounds or is surrounded by a previous FFG vote they made.
+  - an FFG double vote: casting 2 FFG votes for any two targets at the same epoch.
+
+9. Beacon Chain Validator Activation and Lifecycle
+
+![i](https://ethos.dev/assets/images/posts/beacon-chain/Beacon-Chain-Validator-Lifecycle.png.webp)
