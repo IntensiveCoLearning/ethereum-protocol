@@ -4,6 +4,10 @@
 
 ## Notes
 
+### 2024.4.21
+
+完成trusted setup学习并撰写文档。准备下一步transaction的进一步学习
+
 ### 2024.4.20
 
 基本学完trusted setup实现
