@@ -384,3 +384,77 @@ https://notes.ethereum.org/@vbuterin/verkle_and_state_expiry_proposal
 ### 2024.4.21 Week 9R History expiry notes
 - Notes: https://twitter.com/EIPFun/status/1782120924172468636
 
+### 2024.4.22 Week 10D Precompiles notes
+- 3 kinds of precompiles
+  - Precompiles: tasks you could do with the EVM, but are too expensive/ slow
+  - System contracts: tasks & side effects you cannot do with the EVM
+  - Predeployed contracts: contracts that are part of the initial state
+- Ethereum mainnet precompiles: https://www.evm.codes/precompiled
+  - 0x01 - ecRecover
+  - 0x02 - SHA2-256
+  - 0x03 - RIPEMD-160
+  - 0x04 - identity
+  - 0x05 - modexp (Byzantium)
+  - 0x06, 0x07, 0x08 - ecAdd, ecMul, and ecPairing on alt_bn128 (Byzantium)
+  - 0x09 - Blake2B F Function (Istanbul)
+  - 0x0A - KZG point evaluation (Cancun)
+- EVM view
+- Design issues in precompiles
+  - All boundary conditions must be specified
+  - Gas should scale with effort
+    - Execution: algo can hide problems
+    - Input: variable input should always be charged
+  - Costs should account for worst case
+- Implementation strategies
+  - Implement with client software
+  - x
+- How it's implemented
+  - Besu
+  - Geth
+  - Nethermind
+  - Reth
+- Implementation strategies
+  - Implement with client software
+  - Implement 
+System contracts
+- System contract use cases
+  - Access L1/L2 bridging
+    - Arbitrum, Optimism, zk chains
+  - Access foreign host chain services
+    - Moonbeam, Aurora, Hedera
+  - Advanced services (coming soon)
+    - Fhenix (FHE), Ritual (AI model execution)
+- Typical L2 system contract uses: https://www.rollup.codes/
+  - L1/2 communications
+  - treasury/ fee vault mgmt
+  - security/ admin tasks
+  - Chain info queries
+- Notable design choices in L2 contracts
+  - Use of solidity ABI for precompiled access
+  - Mixed API designs
+  - Mixed permance
+  - Mixed implementation strategies
+  - Mixed contract address deployments
+- Foreign host chain services
+  - altL1 token access
+  - altL2 account tools
+  - Zk features
+- Security & system contracts
+  - Precompiles don't share Ethereum's memory model
+  - DELEGATECALLS can impersonate SENDERs via callback
+  - Best to ban Delegatecalls into precomiples
+  - Ensure all actions are revertable
+- Precompile futures
+  - There is resistance to adding new mainnet precompiles
+    - BLS-9 separate functions
+  - Rollcall is standdardinzing L2 precompiles
+    - ECDSA (secp256r1) verification
+  - EVMMAX (modular math extensions) may reduce the demand
+    - Aspirationally to be w/in 2x gas cost
+- Progressive precompile
+  - New quasi-proposal to "cannonize" well known contracts
+  - How to handle gas is unresolved
+  - Needs better math support (eg. EVMMAX)
+  - Mixed execution example: EIP 4788 - canonical EVM code exists
+    - Execute the contract - Geth/ Reth
+    - Native evaluation - Besu/ Nethermind
