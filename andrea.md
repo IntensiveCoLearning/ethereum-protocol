@@ -3,6 +3,46 @@
 区块链萌新
 
 ## Notes
+### 2024.4.21
+复习了一下拜占庭
+![](https://inevitableeth.com/bft-5.jpeg)
+
+[Casper FFG | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/casper-ffg)
+
+Casper FFG is a process that exists atop a block proposal mechanism; it is responsible for finalizing these blocks, canonizing the true Ethereum blockchain.
+
+Casper consists of two main parts: the finalization algorithm and the penalization scheme.
+
+At its core, pBFT uses a voting scheme to provide mathematical certainty that a decentralized network has made a collective, final decision.
+
+This is the principle that Casper applies: finalization certainty for Ethereum.
+
+Rather than finalizing blocks, Casper finalizes "checkpoints," a single block once every N blocks (N = 32 blocks for PoS). The Casper equivalent of pBFT's voting is called a "supermajority link," meaning >2/3s of validators confirmed the validity of the checkpoint.
+
+The two rounds of voting in pBFT are called prepare and commit; at the end of commit the action is final. In Casper, these ideas have different names: if a checkpoint has been confirmed once it is "justified." If it has been confirmed twice it is "finalized."
+
+  
+Every time a checkpoint is reached, each validator is responsible for evaluating the block and creating a vote. A vote simply marks the source checkpoint, the target block, proof of validity and the validator's signature.
+
+Casper FFG is not a full BFT algorithm (hence "gadget"). It will guarantee safety, but liveness depends on the proposal mechanism.
+
+However, Casper does provide new properties: 
+
+- Accountability, violations of Casper can be detected and the violator can be identified 
+- Defenses, against long range revision attacks and situations where >1/3 of nodes are offline 
+- Dynamic, nodes can be added or removed
+
+### 2024.4.20
+继续DFS我前几天的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
+[State Transition Function | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/state-transition)
+
+后面很多源码看不进去了🫠
+![](https://inevitableeth.com/state-transition-7.jpeg)
+
+![](https://inevitableeth.com/state-transition-8.png)
+
+
+
 ### 2024.4.19
 继续DFS我前几天的文章：[Inevitable Ethereum - World Computer](https://inevitableeth.com/home/ethereum/world-computer)
 
