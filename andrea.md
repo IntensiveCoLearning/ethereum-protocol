@@ -3,6 +3,20 @@
 区块链萌新
 
 ## Notes
+### 2024.4.23
+[Sync Committee | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/sync-committee)
+
+Sync committees only contain 512 validators; a tiny amount both in terms of data storage and aggregate key generation. This allows a light client to build (from scratch) the aggregate public key it needs to trustlessly verify the signature and therefore whole blockchain.
+
+Today, we don't have fully functioning light clients. Altair upgraded Ethereum at the protocol level and created the necessary surface area needed to support light clients, but we still need to fill in the rest of the pieces
+
+Most important: Merkle proof production.
+
+What we DO have today is an Ethereum ready to support light clients; we just need to build the tech.
+
+When that day comes, we'll have an Ethereum that welcomes all computers as potential nodes - even other blockchain computers.
+
+A truly decentralized World Computer.
 ### 2024.4.22
 关于LMD-GHOST:
 [Validated, staking on eth2: #2 - Two ghosts in a trench coat | Ethereum Foundation Blog](https://blog.ethereum.org/2020/02/12/validated-staking-on-eth2-2-two-ghosts-in-a-trench-coat)
