@@ -4,6 +4,37 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.23
+
+[Week 4 EPFsg Test & Security Notes](https://ab9jvcjkej.feishu.cn/docx/R1IOdEkDxoiNNHxvA6sclfITnLB)
+
+mermaid 这个代码画图工具可以学习了解一下，看看能不能构建出以太坊的路线图。
+
+- As the EVM testing needs Geth implementation to fill the test, what if there is a bug in Geth's code or how to ensure there is no bug?
+  - Ideally, devs don't want to depend on Geth's implementation. Devs are currently working on another specs-oriented repo, so that in the future the test filing will not be dependent on Geth.
+
+TODO 这里是个可以做的机会和事情。
+
+[Study Group Week 5 | Research and Roadmap](https://epf.wiki/#/eps/week5)
+
+● Merge: Better Proof of Stake
+● Surge: More data (availability) for rollups
+● Scourge: Less MEV downsides
+● Verge: Easier verification
+● Purge: Simpler protocol
+● Splurge: Miscellaneous goodies
+
+Single Slot Finality
+
+• From 12.6 minutes to 12 seconds
+• Main problem: Too many signatures to check and aggregate
+
+Solution paths:
+• Fewer validators (MaxEB)
+• Fewer active validators
+• Way fewer validators (8192) + Distributed Validators Tech
+• Better signature aggregation schemes
+
 ### 4.22
 
 [Ethereum Testing and Security](https://github.com/eth-protocol-fellows/protocol-studies/blob/main/docs/eps/presentations/week4.pdf)
