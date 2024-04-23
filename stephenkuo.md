@@ -516,4 +516,14 @@ devp2p 协议命名的有趣历史：
 - Beacon chain 启动和合并
   - 目前它拥有近 100 万验证者，质押超过 3100 万枚 ETH（约 1100 亿美元）
   ![alt text](img/step/beacon.png)
-
+- 预热分叉 (Altair)：Sync committee/ Light client protocol
+  - Sync committee
+    - Altair 分叉引入了同步委员会，而不是让每个验证者验证每个时期的每个slot
+    - 每个委员会有 512 名验证者，每 256 个 epoch（约 27 小时）轮换一次
+    - [Altair link](https://github.com/ethereum/annotated-spec/blob/master/altair/sync-protocol.md#introduction)
+  - Light client protocol
+    - 同步委员会的目的是允许轻客户端跟踪信标块头的链
+    - 关键特点
+      - 轻量级：512 个签名用于检查 VS c.1m 验证器用于先前检查
+      - 信任最小化而不是无信任
+    - [有关轻客户端的更多链接](https://a16zcrypto.com/posts/article/an-introduction-to-light-clients/)
