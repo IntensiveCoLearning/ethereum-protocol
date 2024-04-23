@@ -177,7 +177,7 @@ Overview: EIP-4844 introduces "blob-carrying transactions" to scale Ethereum's d
 
 Learn 4844 thoroughly [here](https://eips.ethereum.org/EIPS/eip-4844)
 
-Before 4844 was live on mainnet, rollups have been storing data only via a section of the transaction known as calldata. 4844  introduces "Blobs", which modifies the current transaction and block structure. 
+Before 4844 was live on mainnet, rollups have been storing data only via a section of the transaction known as calldata. 4844  introduces "Blobs" to replace calldata, which modifies the current transaction and block structure. 
 
 Aim to: scalability up, cost down. In detail:
 
@@ -198,7 +198,7 @@ Aim to: scalability up, cost down. In detail:
 ### 04/18
 Other EIPs regarding data availability.
 
-7624:
+EIP-7624:
 1. Objective: Increase the gas cost for calldata to reduce the maximum Ethereum block size.
 2. Rationale: Mitigates block size variance and supports the incorporation of data availability blobs as per EIP-4844.
 3. New Gas Pricing: Introduces adjustments in gas costs, affecting transactions that use Ethereum mainly for data storage.
@@ -215,7 +215,43 @@ Other EIPs regarding data availability.
 3. This further incentivizes the transition to using blobs for data availability, strengthening the multidimensional fee market by reducing competition between calldata and blobs.
 4. It slows down history growth, which might be preferable in preparing for the Verkle upgrades.
 
+### 04/20
+[EIP-4488](https://eips.ethereum.org/EIPS/eip-4488): Transaction calldata gas cost reduction with total calldata limit. 
+
+Looking at how scalability solutions evolved these years. It was back in 2021, further cut costs for rollups, and to incentivize an ecosystem-wide transition to a rollup-centric Ethereum. 
+
+parameters added:
+
+| Parameter    | Value |
+| -------- | ------- |
+| NEW_CALLDATA_GAS_COST  | 3    |
+| FebrBASE_MAX_CALLDATA_PER_BLOCKuary | 1,048,576     |
+| CALLDATA_PER_TX_STIPEND    | 300    |
+
+Summary: it decreases transaction calldata gas cost, and add a limit of how much total transaction calldata can be in a block.
+
+Also, talked about the rationale:
+
+A natural alternative proposal is to decrease NEW_CALLDATA_GAS_COST without adding a limit. However, this presents a security concern: **today(2021), the average block size is 60-90 kB, but the maximum block size is 30M / 16 = 1,875,000 bytes (plus about a kilobyte of block and tx overhead)**. Simply decreasing the calldata gas cost from 16 to 3 would increase the maximum block size to 10M bytes. This would push the Ethereum p2p networking layer to unprecedented levels of strain and risk breaking the network; some previous live tests of ~500 kB blocks a few years ago had already taken down a few bootstrap nodes.
+
+The decrease-cost-and-cap proposal achieves most of the benefits of the decrease, as rollups are unlikely to dominate Ethereum block space in the short term future and so 1.5 MB will be sufficient, while preventing most of the security risk.
+
+**The bold part gives a sense of the data sizes**
 
 
+### 04/21 Skipped
 
+### 04/22 
+
+Another angle: looking at deneb
+
+Deneb is a consensus-layer upgrade containing a number of features. Including:
+
+1. EIP-4788: Beacon block root in the EVM
+2. EIP-4844: Shard Blob Transactions scale data-availability of Ethereum in a simple, forwards-compatible manner
+3. EIP-7044: Perpetually Valid Signed Voluntary Exits
+4. EIP-7045: Increase Max Attestation Inclusion Slot
+5. EIP-7514: Add Max Epoch Churn Limit
+
+One dumb question: why are the consensus-specs written in python?
 
