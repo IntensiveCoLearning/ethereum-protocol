@@ -16,6 +16,7 @@ Sometimes a slot passes without a block being proposed; maybe the proposer was o
 - Inputs: current state, slot 
 - No output
 ![](https://inevitableeth.com/state-transition-5.jpeg)
+
 While the current slot is less than the intended slot, progress forward (process_slot). 
 
 If the next slot is going to be a new epoch, execute the processes associated with consensus and prepare for the next epoch (process_epoch).
