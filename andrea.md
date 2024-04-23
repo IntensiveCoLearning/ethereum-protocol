@@ -3,6 +3,39 @@
 区块链萌新
 
 ## Notes
+### 2024.4.22
+关于LMD-GHOST:
+[Validated, staking on eth2: #2 - Two ghosts in a trench coat | Ethereum Foundation Blog](https://blog.ethereum.org/2020/02/12/validated-staking-on-eth2-2-two-ghosts-in-a-trench-coat)
+
+[LMD-GHOST | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/lmd-ghost)
+
+[Attestation | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/attestation)
+
+[Block Proposal | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/block-proposal)
+
+Attestation is tricky; it involves socializing and processing thousands of packets across a busy network.
+
+Ethereum alleviates this pressure in two ways: 
+
+- attestation is run redundantly; many different parties will be working on gathering as many signatures as possible. 
+- the network will accept aggregation up to a single epoch late (at reduced rewards)
+
+Ethereum is more secure with more signatures and it therefore incentivizes gathering as many signatures as possible. The protocol will pay out more ETH for more signatures. 
+
+And so, the block proposer gathers as many signatures as possible and adds them to the block.
+
+Now you might be asking "if the block has been proposed, how does the producer add the attestations?" 
+
+Actually, they are included one block later. 
+
+So if a block is proposed in slot N, the attestation for that block will be attached to the block in slot N+1.
+
+In reality the attestation process happens when the proposer is creating the block header - it's just happening for the block that came before.
+
+Regardless, if we zoom out just a little bit, we can consider the point moot. 
+
+An attested block is part of the blockchain.
+
 ### 2024.4.21
 复习了一下拜占庭
 ![](https://inevitableeth.com/bft-5.jpeg)
