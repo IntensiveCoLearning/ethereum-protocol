@@ -3,6 +3,9 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.4.23
+刷完week2的视频；最后这一段提到了 p2p协议，以及snap相关；不过这里没有深入理解； 
+不过顺着找到了这个仓库，看着不错，todo细研究：https://github.com/ethereumjs/ethereumjs-monorepo/tree/master
 ### 2024.4.21
 刷视频：[Ethereum Execution Layer Overview | lightclient](https://www.youtube.com/watch?v=pniTkWo70OY)  还剩1/4没看完；
 
@@ -44,6 +47,8 @@ block transaction：
 
 ### 2024.4.20
 week2视频： https://www.youtube.com/watch?v=7sxBjSfmROc
+
+对应资料：可看https://cs251.stanford.edu/lectures/lecture7.pdf
 
 ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/25242467/e31e319f-987b-4995-a188-4f4f5d693339)
 
