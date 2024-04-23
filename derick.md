@@ -4,6 +4,31 @@ hi guys， my name is Derick and I'm a back-end programmer who loves technology.
 
 ## Notes
 
+### 2024.4.23
+#### PEPC (Proposer Efficiency and Privacy with Commit) 机制
+
+- 通过学习 https://github.com/eth-protocol-fellows/protocol-studies/blob/pbs/docs/wiki/research/PBS/PEPC.md 内容，了解到以下内容
+
+1. PEPC 旨在提高区块构建者(builders)的效率和隐私性,同时防止审查。它要求区块提议者(proposers)先提交一个承诺(commitment),然后再披露区块内容。
+
+2. PEPC 的工作原理是:
+   - 构建者生成一个区块,将其与一个随机数一起哈希,得到一个承诺。
+   - 构建者将承诺发送给提议者。提议者选择一个承诺,将其包含在信标链区块中。
+   - 在下一个时隙,构建者披露区块内容和随机数,证明其与先前的承诺相对应。
+
+3. PEPC 有几个优点:
+   - 在提议者没有披露区块内容的情况下,构建者可以开始构建下一个区块,提高了效率。  
+   - 提议者在构建者披露区块内容之前,无法审查特定交易。
+   - 通过使用 VDF (Verifiable Delay Function),可以抵抗 DoS 攻击。
+
+4. PEPC 的一些权衡和开放性问题包括:
+   - 构建者在披露区块之前可能会撤回,造成区块丢失。
+   - 恶意构建者可能会提交无效的承诺。需要一些机制来惩罚这种行为。
+   - 实现 VDF 可能具有挑战性。
+
+
+
+
 ### 2024.4.22
 
 #### 以太坊中的最大可提取价值MEV
