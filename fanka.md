@@ -4,6 +4,10 @@
 
 ## Notes
 
+### 2024.4.22
+
+搜集资料准备学习erasure coding
+
 ### 2024.4.21
 
 完成trusted setup学习并撰写文档。准备下一步transaction的进一步学习
