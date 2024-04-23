@@ -4,6 +4,33 @@
 
 ## Notes
 
+### 2024.4.23
+
+`justification_and_finalization` 里 9 个测试
+
+```
+123_ok_support
+123_poor_support
+12_ok_support
+12_ok_support_messed_target
+12_poor_support
+234_ok_support
+234_poor_support
+23_ok_support
+23_poor_support
+```
+
+可能现在 zrnt 版本有问题，会去读 `meta.yaml`，应该去读 `pre.yaml / post.yaml` 才对呀
+
+但是测试还是能通过，汗。。。
+
+```
+meta.yaml // 不存在
+pre.ssz
+post.ssz
+```
+
+
 ### 2024.4.22
 
 出现 `PAUSE` `CONT` 的原因
