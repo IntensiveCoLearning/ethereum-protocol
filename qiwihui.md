@@ -828,7 +828,7 @@ TODO
 8. Slashable Offences
 9. Beacon Chain Validator Activation and Lifecycle
 
-### 2024.04.23
+### 2024.04.22
 
 7. Staking Rewards and Penalties
 
@@ -854,3 +854,44 @@ TODO
 9. Beacon Chain Validator Activation and Lifecycle
 
 ![i](https://ethos.dev/assets/images/posts/beacon-chain/Beacon-Chain-Validator-Lifecycle.png.webp)
+
+### 2024.04.23
+
+Execution layer testing
+
+EVM testing
+
+- import characterics of testing
+  - pre-state
+  - environment
+  - transaction(s)
+  - post-state
+
+EVM testing - tests filling
+
+- Process of compiling a test source code into a fixture that can be consumed by any execution client
+- For test filling, the exact same test can be executed in any client implementation.
+- json
+
+EVM testing formats
+
+- State testing: Use the state root for verification
+- Fuzzy differential state testing: fuzzed smart contract code
+- Blockchain testing
+- Blockchain negative testing
+  - Add an invalid block at some point to check if the clients can reject the invalid block for the designed purpose, go back to the previous valid block and claim it as the chain head
+
+Tests Filling in details
+
+- ethereum/tests
+- ethereum/execution-spec-tests
+- FuzzyVM
+- Execution APIs testing
+
+Consensus Layer Testing
+
+Cross-Layer (Interop) Testing
+
+Devnets
+Shawdow forks
+Public Testnets
