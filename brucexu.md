@@ -4,6 +4,31 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.24
+
+[Study Group Week 5 | Research and Roadmap](https://epf.wiki/#/eps/week5)
+
+TODO https://hackmd.io/@vbuterin/stark_aggregation
+
+感觉路线图这个有点硬核，可以考虑出一个精品教程之类的，专门进行研究。
+
+All rollup data must be available on Layer 1 (for those who need/want it)
+• Force L2 transaction inclusion (i.e. to exit back to L1)
+
+DAS 需要考虑验证信息的问题，确保被分片切割的信息是准确没有丢失的。
+
+Quantum-proof blobspace
+• KZG drawbacks: Not quantum-proof and required a trusted setup (>140k contributors)
+• Eventually hot-swap KZG for something based on STARKs or Lattices
+
+Cross-rollup interopability
+• Establish standards between rollups
+• Based rollups, preconfirmations, shared sequencing
+
+感觉挺多要做的，比如 blob 的存储格式定义，方便其他 L2 互操作什么的。不过也有点难搞，涉及到跨链了。或许可以通过 blob 进行跨链？这样的场景有点类似使用 localstorage 实现跨域了。
+
+TODO Endgame：Centralized production, decentralized validation, strong anti-censorship protection https://vitalik.eth.limo/general/2021/12/06/endgame.html
+
 ### 4.23
 
 [Week 4 EPFsg Test & Security Notes](https://ab9jvcjkej.feishu.cn/docx/R1IOdEkDxoiNNHxvA6sclfITnLB)
