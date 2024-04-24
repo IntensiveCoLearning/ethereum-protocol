@@ -895,3 +895,52 @@ Cross-Layer (Interop) Testing
 Devnets
 Shawdow forks
 Public Testnets
+
+### 2024.04.24
+
+Security
+
+- EL sides
+- CL sides
+
+Research and Roadmap overview
+
+- The Merge: upgrades relating to the switch from proof-of-work to proof-of-stake
+  - beacon chain
+  - Sync committee / Light client protocol
+  - Secret Leader Election <- EIP-7441
+  - Single Slot Finality
+    - goal
+      - From 12.6 minutes to 12 seconds
+      - Main problem: Too many signatures to check and aggregate
+    - Solution paths:
+      - Fewer validators (MaxEB)
+      - Fewer active validators
+      - Way fewer validators (8192) + Distributed Validators Tech
+      - Better signature aggregation schemes
+    - Quantum-proof Beacon Chain
+      - STARKs
+- The Surge: upgrades related to scalability by rollups and data sharding
+  - zk/op rollups
+  - KZG Ceremony
+  - EIP-4844
+  - Data Availability Sampling
+  - Cross-rollup interop
+- The Scourge: upgrades related to censorship resistance, decentralization and protocol risks from MEV
+  - (very) brief overview of MEV
+  - ePBS / Inclusion Lists / MEV Burn
+  - Max EB, Stake capping
+- The Verge: upgrades related to verifying blocks more easily
+  - Verkle Trees
+  - SNARKify everything:
+    - Beacon fast sync
+    - Beacon state transition
+    - Verkle proofs
+    - EVM
+- The Purge: upgrades related to reducing the computational costs of running nodes and simplifying the protocol
+  - EIP-4444
+  - Protocol simplifications
+- The Splurge: other upgrades that don't fit well into the previous categories.
+  - EIP-1559 endgame
+  - Account Abstraction
+  - Deep cryptography
