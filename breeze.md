@@ -3,6 +3,15 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.4.24
+开启week3计划, 先刷pre-reading
+
+eth consensus mechanisms
+ - pow : 这里的原理和之前看到的bitcoin上的pow区别不大；比较大的区别是算法机制不同，以及奖励机制和出块时机机制不同
+ - mining： [ethash](https://ethereum.org/en/developers/docs/consensus-mechanisms/pow/mining/mining-algorithms/ethash/)
+ - pos
+
+
 ### 2024.4.23
 刷完week2的视频；最后这一段提到了 p2p协议，以及snap相关；不过这里没有深入理解； 
 不过顺着找到了这个仓库，看着不错，todo细研究：https://github.com/ethereumjs/ethereumjs-monorepo/tree/master
