@@ -229,9 +229,25 @@ Pendle将stETH封装成sy-stTH。标准化收益代币（Standardized Yield，�
 
 有了 KZG commitment，就可以在不访问原始 blob 数据的情况下，证明某个 L2 的 tx 属于这条 blob，这是普通的 hash 做不到的功能，对于 L2 数据验证也非常方便。
 
+### 2024.4.23
+
+学习资料：
+
+ - https://blog.bingx.com/blockchain-en/what-are-sequencers-in-ethereum-network/
+
+学习了关于 sequencer 的内容。A sequencer refers to a mechanism or component within a blockchain protocol that helps to establish the order of transactions or other operations.
+
+Optimism 使用了中心化的 OP Labs 维护的 sequencer，如果该 sequencer 被恶意控制，那么整个 Optimism 将被控制。
+
+Shared sequencer networks: 多个 rollups 可以共享的 sequencer（像是一种服务？）
+
+Schnorr sequencer： 使用算法（看起来是一种多项式承诺）去确定某个 transaction 在特定的顺序上，而不用同时处理一批 transactions。这种模式是基于 mpc 的，每个 node 生成签名并通过 p2p 连接去广播，该模式适合 rollup 为自己建立的 sequencer 但不需要提交回 layer 1 的情况。
+
+
+Espresso sequencer： 主要为 layer2 架构设计的 sequencer，提供高效率低延迟的 tx 排序服务，在 zk 和 op 模式下均可用。目前 Espresso sequencer 通过在 L1 上的 restaking 服务保障安全。
+
 ### 待学习
 
  - https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum
  - https://www.youtube.com/watch?v=UClaoL12W00
- - https://blog.bingx.com/blockchain-en/what-are-sequencers-in-ethereum-network/
  - https://epf.wiki/#/eps/week6-dev
