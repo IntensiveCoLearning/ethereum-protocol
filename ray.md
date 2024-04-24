@@ -501,3 +501,29 @@ contract DepositContract is IDepositContract, ERC165 {
 通过有效余额，可以实现信标链在经济和工程方面的稳定性。
 
 <img src="./img/ray/balance.png" height="50%" width="50%" />
+
+
+### 2024.4.24
+成为以太坊网络的 validator 之后，可以获得奖励，这些奖励来自新发行的 ETH。
+
+奖励基于有效余额来计算，有效余额中的每一个 ETH 被称之为一个 **increment，**如果有效余额是 32 ETH，那么当前这个 Validator 就有 32 个 increment，奖励具体的计算方式如下，其中 BaseRewardFactor 当前设置为 64：
+
+```go
+func BaseRewardPerIncrement(activeBalance uint64) (uint64, error) {
+	if activeBalance == 0 {
+		return 0, errors.New("active balance can't be 0")
+	}
+	cfg := params.BeaconConfig()
+	return cfg.EffectiveBalanceIncrement * cfg.BaseRewardFactor / math.CachedSquareRoot(activeBalance), nil
+}
+```
+
+如果有 50 万个 Validator，那么每年就会产生 665292 ETH，作为对比，在 PoW 机制下，每年新产生的 ETH 接近 500 万。
+
+下面是随着 validator 数量增长新发行的 ETH 数量变化，在 validator 数量达到 100 万，发行的 ETH 数量接近 100 万ETH。
+
+<img src="./img/ray/issuance.png" height="50%" width="50%" />
+
+上面是新增的 ETH 的变化，但是实际上，在伦敦升级 EIP-1559 之后，所有交易的 baseFee 都会被燃烧，在网络繁忙的时候，燃烧的 ETH 甚至要多于要多于新增的 ETH。而且在合并之后，也不会再继续发布区块和叔块奖励。
+
+在当前阶段，ETH 的总量甚至是通缩的，但是在未来，很有可能会达到新增供应量和销毁量的平衡，ETH 大规模新增的时期已经过去了。
