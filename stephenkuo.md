@@ -510,6 +510,7 @@ devp2p 协议命名的有趣历史：
   - Regarding the time, it depends on the hardware running the test. Currently, it takes 5-10 mins to run the execution spec test in parallel
 - How to communicate bugs to the client teams?
   - It depends on the severity of the bug. If the bug affects any live network, it's gonna be handled with caution such as communicate to the specific dev or through special communication.
+### 4.23
 ### Week 5 :EPFsg Ethereum Roadmap Notes
 #### Merge: Better PoS
 ![alt text](img/step/merge.png)
@@ -527,3 +528,22 @@ devp2p 协议命名的有趣历史：
       - 轻量级：512 个签名用于检查 VS c.1m 验证器用于先前检查
       - 信任最小化而不是无信任
     - [有关轻客户端的更多链接](https://a16zcrypto.com/posts/article/an-introduction-to-light-clients/)
+### 4.24
+- Secret Leader Election (SLE)
+  - 当前的问题
+    - 领导者/提议者（即负责在每个时隙提议区块的验证者）会提前一点透露。因此，理论上它会受到DoS攻击。
+  - SLE的解决方案
+    - [EIP 7441](https://eips.ethereum.org/EIPS/eip-7441)将区块提议者选举升级为 Whisk
+      - 将区块提议者选举机制升级为单一秘密领导者选举协议 Whisk
+      - 允许当选的区块提议者在区块发布之前保持私密，以防止 DoS 攻击
+    - 目前，SLE 的优先级相对较低。但如果发生此类 DoS 攻击，优先级可能会发生变化。
+- Single Slot Finality(SSF)
+  - 问题
+    - 当前的最终确定时间是在 2 个 epoch（约 12.6 分钟）之后，因为需要检查和聚合的签名太多。
+    - 开发人员希望将最终速度提高到 1 个slot（12 秒）
+  - 解决方案
+    - 通过 Max EB 减少验证者[EIP 7441](https://eips.ethereum.org/EIPS/eip-7441)
+    - 更少的活跃验证器，例如，rotating cap
+    - 更少的验证器 (8,192) + 分布式验证器技术 (DVT)
+    - 更好的签名聚合方案
+  - Vitalik 关于 SSF 之路的博客：https://notes.ethereum.org/@vbuterin/single_slot_finality
