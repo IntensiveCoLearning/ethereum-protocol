@@ -3,6 +3,24 @@
 hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
+### 2024.4.24
+#### V神提出的彩虹质押
+
+Vitalik Buterin在ETHTaipei 2024活动上提出了"彩虹质押"(Rainbow Staking)的概念,这是一个允许协议服务提供商(无论是"个人"还是"专业")最大限度地参与差异化协议服务菜单的概念框架。
+
+彩虹质押旨在解决以下问题:
+- 进一步整合"即插即用"方式的协议服务
+- 防止出现取代以太币成为网络代币的主导性LST(流动性质押代币)
+- 通过提供参与不同服务类别的机会,增强个人质押者的经济价值和代理权
+
+彩虹质押处理"重质押"(heavy staking)和"轻质押"(light staking)两类服务:
+- 重质押是可削减的,并在每个时隙签名
+- 轻质押是不可削减的,通过抽签系统被提取签名时隙
+- 两者都需要签署区块才能最终确定该区块
+
+但彩虹质押仍需更多的研究和开发,才能成为以太坊长期质押的可行设计。Vitalik指出,最大的问题不是技术性的,而是哲学性的,即如何让"懒惰的以太币持有者"参与保护以太坊网络。
+
+
 
 ### 2024.4.23
 #### PEPC (Proposer Efficiency and Privacy with Commit) 机制
