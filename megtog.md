@@ -4,6 +4,24 @@
 
 ## Notes
 
+### 2024.4.24
+
+今天比较拖延，基本没学啥
+
+这个 2022 年的视频 [Understanding L2: Ordering and Execution](https://youtu.be/RcOaH9GL-78)，看了前几分钟，什么是 sequencer，就是让用户提交 tx 的服务吧
+
+op 是否可以绕过 sequencer 直接提交 tx 呢 （看到 arb 有 inbox 这个概念）
+
+#### 其他
+
+<https://www.reddit.com/r/ethstaker/comments/1c0qmgn/on_issuance_reduction_and_anticorrelation/>
+
+留言看得出来，solo staker 对收益下降还是蛮反对的
+
+<https://twitter.com/terencechain/status/1782890058615324837>
+
+> I think rushing to ship MEV-boost to avoid delaying the merge was a mistake
+
 ### 2024.4.23
 
 `justification_and_finalization` 里 9 个测试
