@@ -7,6 +7,20 @@ hi guys， my name is Derick and I'm a back-end programmer who loves technology.
 ### 2024.4.25
 #### ePBS flavors
 
+Ethereum 目前有两种主要的 PBS (Proposer-Builder Separation) 方案,旨在提高网络的去中心化和安全性:
+
+## 1. 中继者/建造者分离 (Relayer/Builder Separation, 简称 RBS)
+
+- 在RBS模型中,区块提议者(proposer)和区块构建者(builder)的角色被分离。
+- 中继者(relayer)从建造者那里收集区块,并将其转发给提议者。提议者然后选择一个区块,对其进行验证并将其添加到区块链中。
+- 这种分离可以防止提议者审查特定的交易或使用MEV(最大可提取价值)获利。
+
+## 2. 提议者/建造者分离 (Proposer/Builder Separation, 简称 PBS) 
+
+- 与RBS类似,PBS也将区块提议和构建职责分离,但没有中继者的角色。
+- 建造者直接将区块提交给提议者,提议者进行选择和验证。
+- PBS旨在通过减少角色和简化流程,进一步去中心化并提高效率。
+
 
 ### 2024.4.24
 #### V神提出的彩虹质押
