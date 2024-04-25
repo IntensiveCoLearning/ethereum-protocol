@@ -4,6 +4,15 @@
 
 ## Notes
 
+### 2024.4.25
+
+这几天现实生活有点忙，不太有时间学习
+
+Ethereum Beats: Exploring the Dance of Validators and Builders in Ethereum's Festival of Transactions
+<https://discord.com/channels/1205546645496795137/1206623768940908566/1232956951667802185>
+
+至少认识到 MEV-Boost 是初代 PBS
+
 ### 2024.4.24
 
 今天比较拖延，基本没学啥
