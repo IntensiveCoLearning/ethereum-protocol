@@ -517,6 +517,7 @@ Source: https://github.com/ethereum/pos-evolution/blob/master/pos-evolution.md
   - View
     - A view is a subset of all the messages that a validator has received. 
     - The notion of view is local for validators.
+    
 == TODO ==
 - Gasper 
   - FFG (Friendly finality gadget) Casper
