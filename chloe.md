@@ -458,3 +458,38 @@ System contracts
   - Mixed execution example: EIP 4788 - canonical EVM code exists
     - Execute the contract - Geth/ Reth
     - Native evaluation - Besu/ Nethermind
+
+### 2024.4.24 Notes on Fork choice advanced research
+Week 10 最后一节课，听得我真是头大，需要重新回顾视频好几遍
+Deck link：https://docs.google.com/presentation/d/1Hrk-0x7N18qHwy9d7DeONdOVpA_6GPOqG7xxf6TtaGw/edit#slide=id.g1f7e27a7462_3_890
+
+- Gasper recap
+  - GHOST (Greediest Heaviest Observed SubTree)
+  - LMD-GHOST (Latest Message Driven GHOST)
+    - Aka Vote driven GHOST
+    - LMD-GHOST as a protocol
+  - Casper FFG
+  - Ethereum today
+  - Modelled as an Ebb-and-flow protocol
+    - Aim
+      - Dynamic availability
+      - Finality
+      - Prefix 
+  - Hybrid fork-choie
+- Problems of LMD-GHOST
+  - Simple ex-ante reorg
+    - Solution: Proposer boost
+      - New block proposals have a temporary weight boost during their slot
+      - In practice, set to 40%
+  - Balancing attacks
+    - Solution: Proposer boost still works in this case
+- Designing a theoretically secure available chain
+  - Improving on proposer boost: View-merge
+  - RLMD-GHOST
+- SSF protocol
+- Fork choice in the Ethereum Roadmap
+  - SSF or fast finality
+  - ePBS
+  - DAS
+- Q&A
+  - If possible, can you elaborate on what's the BLS signature count limit / slot in SSF scenario?
