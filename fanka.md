@@ -4,6 +4,18 @@
 
 ## Notes
 
+### 2024.4.25
+
+理解erasure coding和DAS以及kzg之间的关系
+
+### 2024.4.24
+
+学习kzg和erasure coding
+
+### 2024.4.23
+
+调研erasure coding学习内容
+
 ### 2024.4.22
 
 搜集资料准备学习erasure coding
