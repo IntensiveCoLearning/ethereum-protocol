@@ -493,3 +493,58 @@ Deck link：https://docs.google.com/presentation/d/1Hrk-0x7N18qHwy9d7DeONdOVpA_6
   - DAS
 - Q&A
   - If possible, can you elaborate on what's the BLS signature count limit / slot in SSF scenario?
+
+### 2024.4.25 Notes on PoS evolution
+Source: https://github.com/ethereum/pos-evolution/blob/master/pos-evolution.md
+
+- System model
+  - Validators 
+    - Validators are assigned a protocol to follow
+    - A protocol for V consists of a collection of programs with instructions for all validators
+    - Each validator has a deposit/ or stake
+  - Failures
+    - A validator that follows its protocol during an execution is called honest
+    - A faulty validator may crash or deviate arbitrarily from its spec -> Byzantine faults
+    - Assume the existence of a probabilistic poly-time adversary A, that can choose up to F validators to corrupt
+  - Links
+    - Assume a best-effort gossip primitive that will reach all validators is available
+  - Time & sleepiness
+    - Time is divided into discrete rounds & validators have synchronized clocks
+    - In a synchronous network, the message delay is upper-bounded by a constant Δ rounds, with Δ known to the protocol.
+    - In a partially synchronous network in the sleepy model, communication is asynchronous until a global stabilization time (GST), after which communication becomes synchronous
+      - Honest validators sleep and wake up until a global awake time (GAT), after which all validators are awake. 
+      - Adversary validators are always awake.
+  - View
+    - A view is a subset of all the messages that a validator has received. 
+    - The notion of view is local for validators.
+== TODO ==
+- Gasper 
+  - FFG (Friendly finality gadget) Casper
+    - Checkpoint
+    - Voluntary exit
+  - LMD-GHOST
+    - Latest message
+  - FFG Casper + (H)LMD-GHOST = Gasper
+    - Beacon state
+    - Committee
+    - Proposer
+    - Beacon block
+    - Attestation
+    - Justification & finalization
+    - Fork choice
+    - Slashing
+    - More on slashing
+- Properties of Gasper
+  - Availability-finality dilemma
+- Extra: Weak subjectivity
+- Problem & solution
+  - Problem: balancing attack
+    - Part of the solution: Proposer weight boosting
+    - Other part of the solution: Equivocation discounting
+  - Problem: Avalanche attack (solved with equivocation discounting)
+  - Problem: Ex-Ante reorg
+    - Solution: View-merge as a replacement for proposer weight boosting
+
+
+
+
