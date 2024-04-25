@@ -4,6 +4,29 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.25
+
+Week 3
+
+Pre-reading:
+
+Beacon Chain explainer
+
+refs:
+
+- https://ethos.dev/beacon-chain
+- https://ethereum.org/en/roadmap/beacon-chain/#what-is-the-beacon-chain
+
+什么是 Beacon Chain？
+
+- Beacon Chain 是原始的 POS 区块链的名称，发布于 2020 年。它的创建是确保 POS 共识逻辑在以太坊主网上启用之前是健全和可持续的。最初，它是跟 POW 一起运行的。它是一条“空”的区块链，但关闭以太坊的 POW 并在以太坊上启用 POS 需要指示 Beacon Chain 接受 Execute Client 的交易数据，将其捆绑到区块中，然后使用基于 POS 的共识机制将其组织成区块链。同时，原始的以太坊客户端关闭了他们的挖矿、区块传播和共识逻辑，将所有这些交给了 Beacon Chain。这个事件被称为 The Merge。一旦发生了 The Merge，就不再存在两个区块链了。取而代之的是只有一个 POS 的以太坊，现在每个节点需要两种不同的客户端。The Beacon Chain 现在是 CL，是一组共识客户端的点对点网络，负责处理区块八卦和共识逻辑，而原始的客户端形成 EL，负责八卦和执行交易，并管理以太坊的状态。这两个层可以使用 Engine API 进行通信。
+
+Slots and Epochs
+
+- each slot is 12 seconds
+  - 一个 slot 是一个区块被添加到 Beacon Chain 的机会。在系统正常运行时，每 12 秒就会添加一个区块。Validator 需要与时间大致同步。Beacon Chain 创世块位于 Slot 0。
+- an epoch is 32 slots: 6.4 minutes
+
 ### 2024.4.22
 
 Week 3
