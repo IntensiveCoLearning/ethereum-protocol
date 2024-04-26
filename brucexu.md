@@ -4,6 +4,28 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.26
+
+[https://ethereum.org/en/roadmap/](https://ethereum.org/en/roadmap/)
+
+路线升级主要是四个目的和方向：
+
+- 更加便宜
+  - 通过 Rollups 和 L2 来实现，简单原理就是把很多交易执行，然后把结果打包压缩提交到 Ethereum，保持数据公开可用，大家可以方便验证
+  - Proto-Danksharding 就是提供一个临时的 blob 存储，这样减少存储的成本
+  - Danksharding 分片存储，加密验证部分数据的完整性和可靠性，依赖 PBS 和 DAS，还需要几年的时间开发。TODO 可以研究如何推进 Danksharding 的升级速度
+  - 去中心化 rollups，sequencers 是中心化的，存在 censorship 的问题，涉及到 validity/fraud proofs 等
+- 更加安全
+  - 转成 PoS 系统，而且开放了 withdraw 什么的，so far so good
+  - 减少攻击的可能性，比如更好的 fork-choice 算法 view-merge 然后就是降低出块时间
+  - Single slot finality (SSF) is a way to minimize the finalization delay
+  - 抗审查，通过 DVT distributed validator technology 技术。比如切割 validator keys 在不同的系统，而不是一个 operator 维护多个 validators
+  - PBS 也有助于抗审查，避免 validator 被操控或者贿赂
+  - 抵抗针对 validator 的 DoS，比如 secret leader election SLE，防止 block proposer 被提前知道（因为要提前进行选举）
+    - This works by continually shuffling a set of cryptographic commitments representing candidate block proposers and using their order to determine which validator is selected in such a way that only the validators themselves know their ordering in advance.
+- 更好体验
+- 面向未来
+
 ### 4.25
 
 [Study Group Week 5 | Research and Roadmap](https://epf.wiki/#/eps/week5)
