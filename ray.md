@@ -539,4 +539,24 @@ func BaseRewardPerIncrement(activeBalance uint64) (uint64, error) {
 
 轻客户端的好处在于可以让更多人独立地访问以太坊，而且几乎不要求硬件配置。可以让用户有多种渠道去获取数据，然后交叉验证，这样作恶者的成本和难度会随着是用轻客户端的人增加而持续增加。
 
+### 2024.4.26
+Validator 有三种方式来获取奖励：
 
+- 参与链的共识，并及时投票
+    - 给 source checkpoint 点投票
+    - 给 target checkpoint 点投票
+    - 给链头区块投票
+- 成为 block proposer，创建区块
+- 成为 sync committees 的成员，给区块签名
+
+其中 validator 参与投票的奖励是最稳定，也是占比最多的。成为 block proposer 和成为 syn ccommittees 成员的概率很低，大多数 validator 都获取不到相关的奖励。各项奖励发行的 ETH 比例如下：
+
+<img src="./img/ray/reward1.png" height="50%" width="50%" />
+
+如果验证者的数量是 50 万，每个 validator 的有效余额都是 32 ETH，那么每个 epoch 大概会新产生 8.08 个 ETH，这些 ETH 将按照上面的比例划分给 validator。
+
+上面是总体收益的分布情况，实际上到单个 validator 会产生一定的差异，因为 block proposer 和 sync committees 是随机分配的。但如果时间线拉的够长，所有 validator 的收益应该会接近。其实对于 block proposer 来说，除了上面的这些激励，他们还可以从交易中收取小费，还有可能获取到 MEV 收入，这些都有可能会大幅提升 validator 的收入，但是不会影响新 ETH 的发行，因为这些都来自已经存在的 ETH。
+
+下面是50 万验证者规模下，不同 validator 收益的分布，新产生 ETH 的数量与 validator 是成比例的，如果 validator 的数量越多，那么新产生的 ETH 就会越多：
+
+<img src="./img/ray/reward2.png" height="50%" width="50%" />

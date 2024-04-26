@@ -4,6 +4,39 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.25
+
+[Study Group Week 5 | Research and Roadmap](https://epf.wiki/#/eps/week5)
+
+Raise max effective balance (MaxEB)
+• Today: Minimum 32 ETH, maximum 32 ETH
+After MaxEB: Minimum 32 ETH, maximum 2048
+
+- automatic compounding
+- fewer validators for the same amount of stake (lower overhead)
+
+Verkle-prove that Bob owns 5 ETH
+Every node is now a polynomial commitment over its children
+
+Verkle trees
+• Much shorter state proofs
+• Wider tree (256 vs 16 siblings)
+• ZK-friendly proofs
+• Allow stateless validators
+(no history needed – instant sync)
+• Light clients become even lighter
+• Lower dev reliance on centralized indexers
+
+TODO 使用 JS 实现一个 merkle tree 和 verkle trees 试试看
+
+SNARKify all the things
+• Light client protocol (sync committee transitions)
+• All beacon chain transitions (signatures, balance changes, etc.)
+• Verkle state access proofs / block witnesses
+• Eventually all EVM execution (thank you zkRollups!)
+zkEVM opcode/precompile
+• Verify EVM execution proof inside the EVM (or inside an EVM execution proof…)
+
 ### 4.24
 
 [Study Group Week 5 | Research and Roadmap](https://epf.wiki/#/eps/week5)

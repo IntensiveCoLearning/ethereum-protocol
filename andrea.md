@@ -3,6 +3,24 @@
 区块链萌新
 
 ## Notes
+
+### 2024.4.24
+[Liquidity | Inevitable Ethereum](https://inevitableeth.com/home/concepts/liquidity)
+
+There are 2 types of liquidity: market & accounting. 
+
+- Market liquidity: the extent in which a market allows assets to be bought/sold at stable prices
+- Accounting liquidity: the ability of an entity to meet its financial obligations.
+
+[Reserve Currency | Inevitable Ethereum](https://inevitableeth.com/home/concepts/reserve-currency)
+
+A reserve currency is one that: 
+
+- Has the depth and [liquidity](https://inevitableeth.com/home/concepts/liquidity) to allow for reliable and efficient international transactions
+- Can be freely and easily exchanged for other currencies
+- Is held by many monetary authorities and institutions, in significant amounts
+
+  
 ### 2024.4.23
 [Sync Committee | Inevitable Ethereum](https://inevitableeth.com/home/ethereum/network/consensus/sync-committee)
 
