@@ -255,3 +255,35 @@ Deneb is a consensus-layer upgrade containing a number of features. Including:
 
 One dumb question: why are the consensus-specs written in python?
 
+## MEV 
+
+### 04/23
+
+**Proposer Builder Separation (PBS)** is important b/c 
+	1. It creates opportunities to prevent transaction censorship at the protocol level. 
+ 	2. It prevents hobbyist validators from being out-competed by institutional players that can better optimize the profitability of their block building. 
+  	3. It helps with scaling Ethereum by enabling the Danksharding upgrades.
+
+The Role of the Builder: Gather and validate transactions into a block body, also order them for a better block space and gas usage.
+
+The Role of the Proposer: validate and take block bodies from builders, and complete the block by adding metadata such as block header. 
+
+Also, PBS also reflects an overall goal of The Merge to move Ethereum’s network towards a more modular future. Specifically, the transition to PoS is an aggressive move towards decentralization through modularity.
+
+"When you break apart the different pieces of block construction, you can decentralize them individually. This allows different actors with different specialties to focus on their particular strengths. The net result is a more capable network with fewer external dependencies and a lower threshold for participation."
+
+### 04/24
+
+**MEV and PBS**
+
+MEV is the arbitrage from transaction ordering. **PBS solves this problem by reconfiguring the economics of MEV.** Instead of the block proposer doing their own MEV searching, they simply pick a block from many offered to them by block builders. The block builders might have done sophisticated MEV extraction, but the reward for it goes to the block proposer. 
+
+To sum up, the separation makes it very hard for builders to order transactions in an arbitrage way.
+
+Block building and centralization: 
+
+The important concept is "prover-verifier asymmetry" which refers to the idea that centralized block production is fine as long as there is a robust and maximally decentralized network of validators able to prove the blocks are honest. 
+
+
+
+
