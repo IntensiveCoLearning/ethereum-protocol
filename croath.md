@@ -246,8 +246,36 @@ Schnorr sequencer： 使用算法（看起来是一种多项式承诺）去确�
 
 Espresso sequencer： 主要为 layer2 架构设计的 sequencer，提供高效率低延迟的 tx 排序服务，在 zk 和 op 模式下均可用。目前 Espresso sequencer 通过在 L1 上的 restaking 服务保障安全。
 
+### 2024.4.24
+
+学习资料：
+
+ - https://epf.wiki/#/eps/week6-dev
+ - https://paradigmxyz.github.io/reth/
+
+学习了 reth 的基本设计思路和架构，尝试跑了 reth 客户端。
+
+### 2024.4.25
+
+学习资料：
+
+ - https://epf.wiki/#/eps/week7-research
+ - https://epf.wiki/#/wiki/EL/data-structures
+
+复习了 MPT 相关的内容，学习了 Verkle Trees。同时对 Transaction Trie 结构有了了解，但是 World State Trie 还没有看特别明白， Receipt Trie 也尚且没有找到合适的学习资料，需要继续研究。关于 Verkle Tree 的细节还需要继续深入。
+
+ > Verkle Trees
+ >
+ > Verkle tree is a new data structure that is being proposed to replace the current Merkle Patricia Trie. Named by combining the "Vector commitment" and "Merkle Tree", it is designed to be more efficient and scalable than the current MPT. It is a trie-based data structure that replaces the heavy witness used in the MPT with a lightweight witness. Verkle trees are the key part of The Verge upgrade of Ethereum Roadmap. They can enable stateless clients to be more efficient and scalable.
+ >
+ > Structure of Verkle Tree
+ > 
+ > The layout structure of a Verkle tree is just like a MPT but with different base of the tree i.e. number of children. Just like MPT it has root node, inner nodes, extension nodes and leaf nodes. There a slight difference in the key size, on which the tree is made. MPT uses 20 byte key which Verkle tree uses 32 byte key in which the 31 bytes are used as a stem of the tree while last 1 byte is used for storage with almost the same stem address or neighboring code chunks (opening the same commitment is cheaper). Also due to the fact that while computing the witness data the algorithms take 252 bit as field element so it is convenient to use 31 bytes as a suffix of the tree. Using this, the stem data can commit to two difference commitments ranging from 0-127 and 128-255, aka lower value and upper value of the same key, thus covering the whole suffix space. For more on this refer here.
+
+
+
 ### 待学习
 
  - https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum
  - https://www.youtube.com/watch?v=UClaoL12W00
- - https://epf.wiki/#/eps/week6-dev
+ 
