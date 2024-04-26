@@ -4,6 +4,29 @@
 
 ## Notes
 
+### 2024.4.26
+
+ERC-3525
+
+半同质化代币标准，此代币（SFT）实现了可计算、自描述、兼有同质化代币和非同质化代币特性。SFT重新定义了数字资产的生成和交易，提升市场效率和诚信度，应用范围广泛，例如礼品卡、支票、代金券、债券、期货、期权、ABS、房地产、能源等。
+
+数据结构包括tokenID, value, slot metadata：
+
+1）tokenID：与ERC-721标准中的tokenID一样，代表非同质化、独一无二的所有权；
+
+2）slot metadata：用于描述资产的各种属性的集合，比如公司债券的属性有面值、到期日、收益率等等，这部分代表了同质化或非同质化特性；
+
+3）value：与ERC20中的balanceOf()/_value类似，描述一个ERC-3525代币中各底层资产的数量，如果多个代币的slot属性相同，value可在代币间转移；
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95400362/d7e39154-5bc7-41d6-9bb6-57b55650a3f2)
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/95400362/70853ac1-6977-4f0c-9a03-3fc587a196b8)
+
+https://github.com/solv-finance/erc-3525/blob/main/contracts/ERC3525.sol
+
+周六周日 todo：详细了解3525
+
+
 ### 2024.4.24
 
 看一下 RANDAO 的代码，还有 PBS (proposer-builder separation) 的细节。
