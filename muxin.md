@@ -4,6 +4,47 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.26
+
+Week 3
+
+Pre-reading:
+
+Beacon Chain explainer
+
+refs:
+
+- https://ethos.dev/beacon-chain
+
+- Validators and Attestations
+  - 在每一个 epoch 中，一个 validator 会被伪随机的分配给一个 slot。
+  - 大多数情况下，validator 是对区块进行投票的 attester，一个 attestation 就是一个 validator 的投票，会根据 validator 的 balance 加权。
+  - 如果其他 validator 投票给这个 validator 的 proposed block，这个 validator 会收到奖励。
+  - 当一个 slot 分配的 validator 没有 propose a block，那么这个 slot 就缺少了 block，可能的原因是这个 validator offline 了，或者没有跟 reset of network 同步，那么这个 validator 就没有奖励。
+  - validator 之间也会互相监督，如果举报其他 validator 投票冲突或者提出多个区块可以或得奖励。
+  - Beacon Chain 的主要内容是 validator address，validator state 以及 attestation 的注册表。
+- Staking validators: semantics
+  - validator 是虚拟的，由 staker 激活。在 PoW 中，用户通过购买硬件成为矿工，在以太坊中，用户通过质押 ETH 来激活和控制 validator。
+  - 每个 validator 的最大余额为 32 个 ETH，但是质押着可以质押他们所有的 ETH，每质押 32 个 ETH，就将激活一个 validator。
+  - validator 由使用 Beacon node 的 validator clients 执行。 Beacon node 具有跟踪和读取 Beacon Chain 的功能。 validator client 可以实现 beacon node 功能或调用 beacon node。 一个 validator client 可以执行多个 validator。
+- Committees
+  - 一个 committee 是一组 validator。每个 committee 要有至少 128 个 validator。攻击者控制 三分之二 committee 的概率不到万亿分之一。
+  - Beacon Chain 通过一种称为 RANDAO 的伪随机过程来强制实现共识。在每一个 epoch，一个伪随机过程 RANDAO 为每一个 slot 选择 proposer（根据 validator balance 权重），并将 validator 分配到 committee。
+  - validator 有可能在同一个 slot 中既是 proposer 也是 committee 中的一员，但这不是常态。
+    ![committee](./img/muxin/committee.png)
+  - 在 committee 中的 validator 需要 attest 他们相信的 blockchain head 是哪个。
+  - 对 Beacon Chain head attest 被叫做 LMD GHOST vote。
+  - 每个 epoch，validator 只能加入一个 committee。 通常，validator 数量超过 8192 名：这意味着每个 slot 会有多个 committee。 所有 committee 的规模相同，并且至少有 128 名 validator。 当 validator 数量少于 4096 名时，安全概率会降低，因为 committee 的 validator 数量将少于 128 名。
+  - 每个 epoch ，validator 都会均匀地分配到各个 slot，然后再细分为适当规模的 committee。 该 epoch 中的所有 validator 都向 Beacon Chain head 提供证明。shuffling 算法会增加或减少每个 slot 的 committee 数量，以使每个 committee 至少有 128 个 validator。
+- Beacon Chain Checkpoints
+  - checkpoint 是一个 epoch 中第一个 slot 的 block，如果这个块不存在，那么 checkpoint 就是前一个最近的块。每一个 epoch 总是会有一个 checkpoint block，一个 block 可以是多个 epoch 的 checkpoint。
+  - ![checkpoint](./img/muxin/checkpoint.png)
+  - EBB means epoch boundary blocks，它可以被认为是 checkpoint 的同义词。
+  - 当进行 LMD GHOST vote 时，validator 也会投票给当前 epoch 中的 checkpoint（称为 target）。 该投票称为 Casper FFG vote，还包括一个称为 source 的先前 checkpoint。
+  - 只有分配给某个 slot 的 validator 才会对该 slot 进行 LMD GHOST vote。 然而，所有 validator 都为每个 epoch checkpoint 投 FFG 票。
+  - 所有活跃 validator 总余额的 2/3 进行的投票被视为绝对多数（Supermajority）。 从教学角度来说，假设有三个活跃 validator：两个 validator 的余额为 8 ETH，一个 validator 的余额为 32 ETH。 绝对多数投票必须包含唯一 validator 的投票：尽管其他两个 validator 的投票可能与唯一 validator 不同，但他们没有足够的余额来形成绝对多数。
+    - 这个例子有点不明白，一个 validator 要至少有 32 ETH，怎么会有 8 ETH 的情况呢？还是纯是为了举例子？纯是为了 Pedagogically？
+
 ### 2024.4.25
 
 Week 3
