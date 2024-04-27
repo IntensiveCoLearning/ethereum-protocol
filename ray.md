@@ -560,3 +560,89 @@ Validator 有三种方式来获取奖励：
 下面是50 万验证者规模下，不同 validator 收益的分布，新产生 ETH 的数量与 validator 是成比例的，如果 validator 的数量越多，那么新产生的 ETH 就会越多：
 
 <img src="./img/ray/reward2.png" height="50%" width="50%" />
+
+### 2024.4.27
+Validator 在网络中有三个关键的里程碑，activation、exit 和 withdrawable。用户会在 activation 到 exit 之间可以获取奖励，在 activation 到 withdrawable 之间都有可能被减少资金。
+
+<img src="./img/ray/lifecycle.png" height="50%" width="50%" />
+
+导致用户资金减少的形式有三种：
+
+- penalties
+- inactivity leak
+- slashing
+
+penalties 是程度最轻的一种。主要会因为两种情况而执行：
+
+- 错过区块共识的投票：没有对 source checkpoint 和 target checkpoint 投票或者对 source checkpoint 的错误投票
+- 错过 sync committees 的投票：错过这个投票，将减少获得和奖励一样多的惩罚，损失比较重，但概率比较小
+
+其实 penalties 很算是很轻微的处罚，因为至少在线的时间超过 42.5%，那么就能获得正向的回报。
+
+计算区块共识投票的奖励和处罚：
+
+```go
+func ProcessRewardsAndPenaltiesPrecompute(
+	beaconState state.BeaconState,
+	bal *precompute.Balance,
+	vals []*precompute.Validator,
+) (state.BeaconState, error) {
+  //....
+	balances := beaconState.Balances()
+	for i := 0; i < numOfVals; i++ {
+		vals[i].BeforeEpochTransitionBalance = balances[i]
+		delta := attDeltas[i]
+		balances[i], err = helpers.IncreaseBalanceWithVal(balances[i], delta.HeadReward+delta.SourceReward+delta.TargetReward)
+		if err != nil {
+			return nil, err
+		}
+		// 计算被 penalty 之后的余额
+		balances[i] = helpers.DecreaseBalanceWithVal(balances[i], delta.SourcePenalty+delta.TargetPenalty)
+
+		vals[i].AfterEpochTransitionBalance = balances[i]
+	}
+
+	if err := beaconState.SetBalances(balances); err != nil {
+		return nil, errors.Wrap(err, "could not set validator balances")
+	}
+
+	return beaconState, nil
+}
+```
+
+错误 sync committees 的处罚计算：
+```go
+func (s *Service) processSyncAggregate(state state.BeaconState, blk interfaces.ReadOnlyBeaconBlock) {
+	// ...
+	for validatorIdx, committeeIndices := range s.trackedSyncCommitteeIndices {
+		if len(committeeIndices) > 0 {
+			contrib := 0
+			for _, idx := range committeeIndices {
+				if bits.SyncCommitteeBits.BitAt(uint64(idx)) {
+					contrib++
+				}
+			}
+
+			balance, err := state.BalanceAtIndex(validatorIdx)
+			if err != nil {
+				log.Error("Could not get balance")
+				return
+			}
+
+			latestPerf := s.latestPerformance[validatorIdx]
+			balanceChg := int64(balance - latestPerf.balance)
+			latestPerf.balanceChange = balanceChg
+			latestPerf.balance = balance
+			s.latestPerformance[validatorIdx] = latestPerf
+
+			aggPerf := s.aggregatedPerformance[validatorIdx]
+			aggPerf.totalSyncCommitteeContributions += uint64(contrib)
+			s.aggregatedPerformance[validatorIdx] = aggPerf
+
+			syncCommitteeContributionCounter.WithLabelValues(
+				fmt.Sprintf("%d", validatorIdx)).Add(float64(contrib))
+			//...
+		}
+	}
+}
+```
