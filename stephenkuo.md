@@ -547,3 +547,31 @@ devp2p 协议命名的有趣历史：
     - 更少的验证器 (8,192) + 分布式验证器技术 (DVT)
     - 更好的签名聚合方案
   - Vitalik 关于 SSF 之路的博客：https://notes.ethereum.org/@vbuterin/single_slot_finality
+### 4.26
+- 理想的量子安全签名：量子证明信标链
+  - 问题
+    - 以太坊信标链目前依赖 BLS 聚合将签名聚合为单个组合聚合。
+    - 然而，当前的方法容易受到量子计算机的攻击，而且并不是SNARK友好。
+  ![alt text](img/step/QuantumProofBeaconChain.png)
+  - 更好的实现
+    - 递归路由，其中​​聚合发生在多个层中。这使得网络具有高度非结构化和量子证明性。
+    ![alt text](img/step/recursiveRoute.png)
+  - 又是一篇V神的vlog：https://hackmd.io/@vbuterin/stark_aggregation
+#### Surge：更多数据可用于汇总
+![alt text](img/step/surge.png)
+- 基本汇总缩放
+  - 扩展以太坊
+    - 安全扩展 L1 执行很困难，但扩展 L1 数据更容易
+    - rollup 的作用是将 L1 数据转换为 L2 执行
+  - 以 Rollup 为中心的路线图
+    - 乐观汇总
+      - 假设所有交易都是有效的
+      - 如果没有通过欺诈证明，则去掉排序器
+    - 零知识汇总
+      - Sequencer证明交易有效
+      - 经过 L1 验证的简洁证明
+    - 所有汇总数据必须在 L1 上可用
+    - 所有汇总都应该能够强制包含 L2 txn（即退出回到 L1）
+  - 更多链接
+    - V神的An Incomplete Guide to Rollups：https://vitalik.eth.limo/general/2021/01/05/rollup.html
+    - V神发布的以 Rollup 为中心的以太坊路线图：https://ethereum-magicians.org/t/a-rollup-centric-ethereum-roadmap/4698
