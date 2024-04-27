@@ -4,6 +4,34 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.27
+
+[https://ethereum.org/en/roadmap/](https://ethereum.org/en/roadmap/)
+
+路线升级主要是四个目的和方向：
+
+- 更好体验
+  - 如何管理 keys 和钱包，以及发送交易，gas 等，使用 Ethereum 需要得到简化
+    - 例如使用 AA 钱包
+      - 保护钱包的 key 不会丢失或者被盗，然后有更好的 fraud 检测
+  - 每个人都可以运行 node，更快的、私密的、无需可的使用以太坊，目前大家还是需要使用别人的 node 提供服务
+  - 目前需要非常大的硬件设施才可以运行
+  - 如何让大家可以更简单的更低成本的运行 node 是个很重要的课题
+    - 使用 Verkle Tree 可以有跟高效的数据存储方式，节约空间
+    - statelessness 和 data expiry 可以删除一些不用的老数据
+      - Full statelessness is still in the research phase and is likely several years away from being implemented.
+    - light nodes 提供了一些功能，可以运行在 mobile phones 或者简单的 browser apps
+- 面向未来
+  - 确保未来的一些问题和技术不会影响到以太坊的运行
+  - 抵抗量子计算，量子计算可能会对一些加密算法实现破解
+    - PoS 使用的签名 schema BLS 可以被量子计算机攻破，替代方案不够高效
+    - KZG commitment schemes 也是 quantum-vulnerable 的
+      - 目前使用 trusted setups 来解决，很多用户生成不可被逆向的随机数
+      - 最好的办法就是直接创建安全的量子加密算法
+        - STARK-based 和 lattice-based signing 是两个替代 BLS scheme 的潜在方法
+
+ETH R&D Discord link：https://t.co/EqHJvFlv9E
+
 ### 4.26
 
 [https://ethereum.org/en/roadmap/](https://ethereum.org/en/roadmap/)
@@ -23,8 +51,6 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
   - PBS 也有助于抗审查，避免 validator 被操控或者贿赂
   - 抵抗针对 validator 的 DoS，比如 secret leader election SLE，防止 block proposer 被提前知道（因为要提前进行选举）
     - This works by continually shuffling a set of cryptographic commitments representing candidate block proposers and using their order to determine which validator is selected in such a way that only the validators themselves know their ordering in advance.
-- 更好体验
-- 面向未来
 
 ### 4.25
 
