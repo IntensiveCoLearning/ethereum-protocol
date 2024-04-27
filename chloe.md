@@ -494,7 +494,7 @@ Deck link：https://docs.google.com/presentation/d/1Hrk-0x7N18qHwy9d7DeONdOVpA_6
 - Q&A
   - If possible, can you elaborate on what's the BLS signature count limit / slot in SSF scenario?
 
-### 2024.4.25 Notes on PoS evolution
+### 2024.4.25 & 4.26 Notes on PoS evolution
 Source: https://github.com/ethereum/pos-evolution/blob/master/pos-evolution.md
 
 - System model
@@ -517,12 +517,28 @@ Source: https://github.com/ethereum/pos-evolution/blob/master/pos-evolution.md
   - View
     - A view is a subset of all the messages that a validator has received. 
     - The notion of view is local for validators.
-    
-== TODO ==
-- Gasper 
+- Gasper: a PoS consensus protocol by combining FFG Casper, a partially synchronous consensus protocol, and a synchronous consensus protocol named LMD-GHOST.
   - FFG (Friendly finality gadget) Casper
+    - Overivew
+      - Goal: finalize the proposed blocks, ensuring their safety even during potential network partitions
+      - Feature
+        - Accountability, i.e. If a validator violates some rule, it's possible to detect the violation and know which one violated -> allow the system to penalize/ slash the Byzantine validator
+      - Casper Mechanism
+        - 2-phase traditional propose-vote-based BFT mechanism
+        - Designed as a gadget that works on top of a provided blockchain protocol
+        - There is no leader in charge of assembling proposals -> generated across honest nodes by an underlying proposal mechanism
     - Checkpoint
+      - Process of Casper
+        - Validators participate in the protocol by casting votes on blocks in the block-tree -> Messages exchange among validators are votes for blocks
+        - Vote message incl.: 2 blocks source & target, and their heights
+        - Once a vote has been cast by 2/3 of validators and the checkpoint of the source block is justified, and the target block becomes justified
+      - Casper has 2 properties
+        - Accountable safety: 2 conflicting checkpoints imply that more than 1/3 adversarial stake can be detected
+        - Plausible liveness: Possible to produce new finalized checkpoints
+
+  == TODO ==
     - Voluntary exit
+  
   - LMD-GHOST
     - Latest message
   - FFG Casper + (H)LMD-GHOST = Gasper
