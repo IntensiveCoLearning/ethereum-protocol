@@ -575,3 +575,11 @@ devp2p 协议命名的有趣历史：
   - 更多链接
     - V神的An Incomplete Guide to Rollups：https://vitalik.eth.limo/general/2021/01/05/rollup.html
     - V神发布的以 Rollup 为中心的以太坊路线图：https://ethereum-magicians.org/t/a-rollup-centric-ethereum-roadmap/4698
+### 4.27
+读了上面提到的V神的文章
+- Limited training wheels on Rollups
+  - 可升级/可变
+  - 多重签名/有限治理
+  - 许可元素
+  - Rollups 的结束：像 L1 一样去信任，但至今仍然不是
+  ![alt text](img/step/LimitedTrainingWheels.png)
