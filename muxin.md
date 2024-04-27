@@ -4,6 +4,42 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.4.27
+
+Week 3
+
+Pre-reading:
+
+Beacon Chain explainer
+
+refs:
+
+- https://ethos.dev/beacon-chain
+
+- Finality
+  - 当一个 epoch 结束时，如果它的 checkpoint 得到了三分之二的 supermajority，这个 checkpoint 被证明是 justified。
+  - 当一个 checkpoint B 是 justified，并且紧接着下一个 epoch 的 checkpoint 也是 justified 的，那么 checkpoint B 会变成 finalized。通常，一个 checkpoint 会在 两个 epoch 中变成 finalized，也就是 12.8 分钟。
+  - block 确认源自 block 的 attestation，justification 和 finality。
+    ![finality](./img//muxin//finality.png)
+- Attestations: a closer look
+  - 一个 attestation 包含了一个 LMD GHOST vote 和一个 FFG vote。
+  - 所有的 validator 每一个 epoch 中提交一个 attestation。
+  - 一个 attestation 有 32 个被纳入链上的机会。 这意味着 validator 可以在一个 epoch 内在链上包含两个 attestation。
+  - 当 validator 在它分配的 slot 上把它的 attestation 包含在链上时，验证者将获得最多的奖励； 较晚的包含将获得递减的奖励。
+- Staking Rewards and Penalties
+  - attester rewards
+    - validator make 大多数 validator 同意的 attestation 会获得奖励。在 finalized block 中的 attestation 会更有价值。
+  - attester penalties
+    - 如果 validator 没有作出 attest 或者他们 attest 的 block 没有 finalized 将会收到惩罚。
+  - typical downside risk for stakers
+    - 作为一名担心可能损失多少 ETH 的 validator，这几乎与你可以赚取多少 ETH 成正比。例如，如果一个 validator 有望在一年内通过参与认证获得 10% 的收益，那么一个（诚实的）validator 如果表现最差可能会损失 7.5%。
+  - slashings and whistleblower rewards
+    - slashing 是从超过 0.5 ETH 到 validator 整个质押的处罚。一个诚实、安全的 validator 不能因其他 validator 的行为而被 slashed。对于犯有 slashable 罪行的 validator，他们的余额至少会损失 1/32，并被停用（“强制退出”）。
+  - proposer rewards
+    - 得到 finalized 的 block 的 proposer 会获得可观的奖励。一直在线且表现良好的 validator 将获得总奖励的~1/8 提升，以提议带有新认证的 block。当发生 slashing 时，proposer 还会因在 block 中包含 slash 证据而获得小额奖励。目前，所有举报人奖励实际上都会流向 proposer。
+  - inactivity leak penalty
+    - 如果距离 finality 已经超过四个 epoch，那么 validator 将遭受 inactivity leak penalty，该惩罚将二次增加，直到一个 checkpoint 被最终确认。inactivity penalty(or “quadratic leak”) 确保了这种结果：如果 50% 的 validator 离线，区块将在 18 天后开始 finalizing。quadratic leak 将问题 validator 排出以强制退出，以便其他 validator 成为可以恢复 finality 的 2/3 多数派。inactivity leak 不会排出运行正常的 validator。在不活跃泄漏期间，认证奖励为零；validator 如常获得 proposer 和举报人的奖励。
+
 ### 2024.4.26
 
 Week 3
