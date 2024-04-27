@@ -979,3 +979,29 @@ Verkle trie (with the KZG commitment scheme)
 没看懂 :(
 
 ![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/9dda212e-7f55-49a4-b3f9-ca1e38d0769b)
+
+### 2024.04.27
+
+EIP-3074 简介
+
+- EIP 3074：操作码 AUTH 和 AUTHCALL
+- EIP 3074 后，普通账户（EOA）可发送批量事务、限期事务、无序事务等
+- 要想使用这两个操作码，外部账户需要在链下签署一个消息，并将该消息发送给中继者，再由中继者将签名和调用数据发送至一个链上合约（称为 “调用者”）。调用者合约会先使用操作码 AUTH 来验证签名，再使用操作码 AUTHCALL 中继外部账户的调用。
+- AUTHCALL 与普通调用只有一个区别：AUTHCALL 将调用者（例如，消息发送方）设为使用操作码 AUTH 恢复的外部地址。
+- EIP 3074 旨在淘汰元事务，降低合约的复杂性。
+
+目的：
+
+- 我们想要构建一个让普通用户无需使用以太币即可以免信任方式发送事务的机制。这里的关键词是 “免信任”，即，用户不会授予中继者任何可能会被利用的特权。
+- EIP 3074 通过谨慎选择普通账户签名中包含的参数来创建免信任系统。用户签署 keccak（0x03 ++ invoker_address ++ commit_hash）。
+
+![image](https://img.learnblockchain.cn/2021/05/21/16215616212581.jpg)
+
+- “type byte” 是 EIP 2718 的常量字节，值为 0x03。这个字节的作用是避免与其它签名机制发生冲突，例如，EIP 2930 的访问列表事务、EIP 1559 的费用市场事务、EIP 191 的 0x19 签名消息等。
+
+- 调用者地址将用户的调用与特定合约绑定。用户的签名只对调用者合约有效。因此，用户可以选择自己信任的调用者，就像是选择用来存放资产的智能合约钱包那样。
+- 最后一个签名参数是 commit_hash（或者 commit）。这个 commit 限制调用者只能执行特定操作并创建特定的验证要求（validity requirement）来处理调用。用户可以信任调用者会遵循这一流程，因为他们可以在链上验证代码。
+
+![](https://img.learnblockchain.cn/2021/05/21/16215616331751.jpg)
+
+![](https://img.learnblockchain.cn/2021/05/21/16215616473335.jpg)
