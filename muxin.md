@@ -4,6 +4,34 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+2024.4.28
+
+Week 3
+
+Pre-reading:
+
+Beacon Chain explainer
+
+refs:
+
+- https://ethos.dev/beacon-chain
+
+- Slashable Offences
+  - 有四种 slashing 条件：
+    - A double proposal
+      - a proposer proposing more than one block for their assigned slot
+    - An LMD GHOST double vote
+      - a validator attesting to two different Beacon Chain heads for their assigned slot
+    - An FFG surround vote
+      - a validator casting an FFG vote that *surrounds* or is *surrounded by* a previous FFG vote they made
+    - An FFG double vote
+      - a validator casting 2 FFG votes for any two targets at the same epoch
+- Beacon Chain Validator Activation and Lifecycle
+  - Each validator needs a balance of 32 ETH to get activated
+  - The Beacon Chain deactivates (“forced exit”) all validators whose balance reaches 16 ETH
+  - Validators can also “voluntary exit” after serving for 2,048 epochs, around 9 days
+    ![Beacon Chain Validator Lifecycle](./img/muxin/Beacon-Chain-Validator-Lifecycle.png)
+
 ### 2024.4.27
 
 Week 3
