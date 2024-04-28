@@ -4,6 +4,14 @@
 
 ## Notes
 
+### 2024.4.27
+
+学习verkle tree
+
+### 2024.4.26
+
+对erasure coding写文档，搜集verkle tree学习资料
+
 ### 2024.4.25
 
 理解erasure coding和DAS以及kzg之间的关系
