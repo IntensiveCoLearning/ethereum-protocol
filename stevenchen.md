@@ -268,9 +268,9 @@ The Role of the Builder: Gather and validate transactions into a block body, als
 
 The Role of the Proposer: validate and take block bodies from builders, and complete the block by adding metadata such as block header. 
 
-Also, PBS also reflects an overall goal of The Merge to move Ethereum’s network towards a more modular future. Specifically, the transition to PoS is an aggressive move towards decentralization through modularity.
+- Also, PBS also reflects an overall goal of The Merge to move Ethereum’s network towards a more modular future. Specifically, the transition to PoS is an aggressive move towards decentralization through modularity.
 
-"When you break apart the different pieces of block construction, you can decentralize them individually. This allows different actors with different specialties to focus on their particular strengths. The net result is a more capable network with fewer external dependencies and a lower threshold for participation."
+- "When you break apart the different pieces of block construction, you can decentralize them individually. This allows different actors with different specialties to focus on their particular strengths. The net result is a more capable network with fewer external dependencies and a lower threshold for participation."
 
 ### 04/24
 
@@ -285,5 +285,34 @@ Block building and centralization:
 The important concept is "prover-verifier asymmetry" which refers to the idea that centralized block production is fine as long as there is a robust and maximally decentralized network of validators able to prove the blocks are honest. 
 
 
+### 04/25 Skipped
+
+### 04/26
+
+**Mev-boost: A popular PBS Implementation**
+
+(Flashbots is doing good on mev-boost)
+
+How it works:
+![mev-boost](https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/mev-boost.png)
+
+to sum up, replaying on external block building, searchers' negative arbitrage impact are excluded. 
+
+### 04/27
+
+More interpretable detail implementations of Mev-Boost by Flashbots today.
+
+"PoS node operators must run three pieces of software: a validator client, a consensus client, and an execution client. MEV-boost is a sidecar for the beacon node - a separate piece of open source software, which queries and outsources block-building to a network of builders."
+
+Q: Why need mev-boost as a proposer? What incentive?
+A: To earn a fair share of the MEV extracted in the blocks you propose.
+
+Q: Who runs an external relay? And what exactly is a relay?
+A: Relays **aggregate blocks from multiple builders** in order to select the block with the highest fees. A relay has the power to censor or frontrun any block proposed by a block builder.
+![mev-boost-relays](https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/mev-boost-relays.png) 
+Flashbots network running it with their policy of neutrality and transparency.
+
+Q: How will Flashbots make sure that the relay treats their builder fairly compared to other builders?
+A: "Our relay will publish the logs of when blocks were received by builders and when they were supplied to proposers."
 
 
