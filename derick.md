@@ -3,7 +3,29 @@
 hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
-### 2.24.4.27
+### 2024.4.28
+#### Kurtosis 工具
+
+学习week 9 dev 过程中，了解到[Kurtosis](https://github.com/kurtosis-tech/kurtosis) 工具，了解了它的功能和优势。
+
+Kurtosis 是一个用于打包和启动后端技术栈的平台,主要目标是让普通开发者也能轻松上手。它主要包含两个部分:
+
+1. 一个用于分发后端技术栈定义的打包系统,可以在 Docker 或 Kubernetes 上运行。
+
+2. 一个带有每个技术栈文件管理系统的运行时环境。开发者可以专注于开发,而不用操心复杂的环境配置。
+
+使用 Kurtosis 的主要优势在于:
+
+- 可以轻松创建短暂的开发或测试环境,不用被环境配置等琐事困扰。这在协作开发或为开源项目做贡献时尤其有用。
+
+- 提供了一套标准化的方式来打包、分发和运行后端技术栈,简化了环境管理。
+
+- 内置文件管理功能,开发者不必单独搭建文件服务器。
+
+- 支持在 Docker 和 Kubernetes 等主流容器平台上运行,兼容性好。
+
+
+### 2024.4.27
 #### Attacknet介绍
 - Attacknet是一个用于在以太坊上进行混沌工程测试的软件。允许模拟各种边缘情况测试场景,以太坊Dencun分叉升级和peerDAS研究都使用了该工具进行测试。Attacknet的下一步工作重点是实现自动化测试,无需人工监督即可运行。
 
