@@ -646,3 +646,35 @@ func (s *Service) processSyncAggregate(state state.BeaconState, blk interfaces.R
 	}
 }
 ```
+
+### 2024.4.28
+如果在一定时间内（通常是 4 个 epoch），还没有产生新的 checkpoint，那么网络就会进入到 Inactivity leak 模式，在这个模式下，奖励和惩罚的规则都会修改：
+
+- 正常的 validator 不会获得奖励，但不投票的 validator 的惩罚保持不变
+- 任何被判断为不活跃的 validator 都会提高不活跃分数，从而导致额外的不活跃惩罚，并会随着时间呈二次方增长，这就是 Inactivity leak，也被称之为 quadratic leak
+- block proposer 和 sync comittees 的奖励不变
+
+这是为了解决当网络中超过 1/3 的验证者离线的情况下，让 checkpoint 继续产生的问题。因为当验证者不投票时，他们的余额会不断减少，最终当网络中活跃的验证者控制的权益达到了 2/3 时，系统又可以重新恢复正常。
+
+之所以在 inactivity leak 模式下不提供奖励，是因为攻击者可能会通过审查和对其他验证器的 DDos攻击，故意使信标链陷入 inactivity leak,而攻击者继续正常证明。在这种情况下，需要增加攻击者的成本，为此在 inactivity leak 期间根本不奖励。
+
+为了能够准确识别出网络中的不活跃者，会给每个 validator 记录 score，后续的处罚也是对于这个 score 来计算，score 的最小值为 0，score 的计算方式如下：
+
+<img src="./img/ray/leak.png" height="50%" width="50%" />
+
+- 无论是否处在 inactivity leak 状态：
+    - 如果 validator 不活跃，score 加 4
+    - 如果 validator 活跃，score 减 1
+- 如果在 inactivity leak 状态：
+    - 那么 validator 的 score 会根据自身的活跃状态增加或者减少
+- 如果不在 inactivity leak 状态：
+    - 那么 validator 的 score 会减少 16
+
+通过上面的机制，可以发现如果在 inactivity leak 发生时，只要保证 90%  以上的时间在线，就可以保证 score 接近于 0：
+
+<img src="./img/ray/leak1.png" height="50%" width="50%" />
+
+同样，在保证 90% 以上的在线时间时，那么基本就不会被处罚，如果持续离线，那么就可能会被持续处罚，如果被处罚到余额低于一定值，那么 validator 就会被踢出网络，目前是实际余额低于 16.75 的时候，就会发生踢出操作：
+
+
+<img src="./img/ray/leak2.png" height="50%" width="50%" />
