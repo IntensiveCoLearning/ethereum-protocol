@@ -4,6 +4,30 @@
 
 ## Notes
 
+### 2024.4.26
+
+今天又是迷你学习量
+
+#### precompiles
+
+需要赶紧去把 precomile 那一周的视频看了，了解是怎么调用的
+
+
+#### eips.wtf
+
+<https://www.eips.wtf/>
+
+能不能加上看到，哪次升级实现了哪个 eip 的功能
+
+#### More pictures about proposers and builders
+
+<https://mirror.xyz/barnabe.eth/QJ6W0mmyOwjec-2zuH6lZb0iEI2aYFB9gE-LHWIMzjQ>
+
+> The allocation of building rights is performed today with MEV-Boost, an out-of-protocol side-car allowing validators to passively listen to offers from builders for their building rights, and strike a deal with builders. The deal is mediated by **relays**, entities trusted by both sides of the deal.
+
+一句话解释什么是 relay
+
+
 ### 2024.4.25
 
 这几天现实生活有点忙，不太有时间学习
