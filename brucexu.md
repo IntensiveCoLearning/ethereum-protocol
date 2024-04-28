@@ -4,6 +4,59 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.28
+
+Vitalik 版本的路线图定义，但是被 EF 迪士尼了。
+
+- The Merge: upgrades relating to the switch from proof-of-work to proof-of-stake
+- The Surge: upgrades related to scalability by rollups and data sharding
+- The Scourge: upgrades related to censorship resistance, decentralization and protocol risks from MEV
+- The Verge: upgrades related to verifying blocks more easily
+- The Purge: upgrades related to reducing the computational costs of running nodes and simplifying the protocol
+- The Splurge: other upgrades that don't fit well into the previous categories.
+
+- Single slot finality - Instead of waiting for fifteen minutes, blocks could get proposed and finalized in the same slot. This is more convenient for apps and much more difficult to attack.
+- Proposer-builder separation - Splitting the block building and block proposal tasks across separate validators creates a fairer, more censorship resistant and efficient way for Ethereum to come to consensus.
+- Secret leader election - Clever cryptography can be used to ensure that the identity of the current block proposer is not made public, protecting them from certain types of attack.
+- Statelessness - Stateless clients will be able to verify new blocks without having to store large amounts of data. This will provide all the benefits of running a node with only a tiny fraction of today’s costs.
+
+- SLE solution
+  - EIP 7441 Upgrade block proposer election to Whisk
+    - Upgrade the block proposer election mechanism to Whisk, a single secret leader election protocol
+    - Allow elected block proposers to remain private until block publishing, to prevent DoS attacks
+  - Currently, SLE is relatively in low priority. But priority can change if such DoS attacks happen.
+
+TODO 目前 ethereum 没有 DDoS 攻击吗？目前是如何应对的？
+
+- Single Slot Finality (SSF)
+
+  - Current problem
+    - The current finality time is after 2 epochs (c.12.6min) as too many signatures to check and aggregate.
+    - And the devs want to enhance the finality speed into 1 slot (12s)
+  - Solution path
+    - Fewer validators through Max EB (EIP 7251)
+    - Fewer active validators eg. rotating cap
+    - Way fewer validators (8,192) + Distributed validators tech (DVT)
+    - Better signature aggregation schemes
+  - Vitalik's blog on Paths towards SSF: https://notes.ethereum.org/@vbuterin/single_slot_finality
+
+- Proposer/ Builder Separation (PBS)
+
+  - Current problem: MEV is inevitable, and untamed MEV markets will hurt solo stakers
+  - Goal: Minimize the choices validators have to make and reduce incentive to specialized validators
+  - Solution
+    - Current solution: Out-of-protocol with MEV boost, where relays act as trusted brokers
+    - Future solution: Enshrined PBS (ePBS), which removes relays and allows MEV burning to smooth the staking yield
+    - Future solution: Inclusion list, which puts constraints on builders and reduces censorship by forcing transactions inclusion
+
+- Fully SNARKed Ethereum
+  - Snarkify light client protocol (sync committee transitions)
+  - Snarkify all beacon chain transitions (signatures, balance changes, etc.)
+  - Snarkify verkle state across proofs/ block witness
+  - Eventually snarkify all EVM execution: zkRollups are working on zkEVMs, that could be brought back to the core protocol in the future.
+
+TODO 整个以太坊 ZK 化是一个大体方向。
+
 ### 4.27
 
 [https://ethereum.org/en/roadmap/](https://ethereum.org/en/roadmap/)
