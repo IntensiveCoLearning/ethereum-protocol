@@ -3,6 +3,28 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.4.29
+
+攻击战占有不同的比例的节点数量可以产生的攻击如下：
+33%: finality delay
+34%: finality delay, double finality
+51%: finality delay, double finality, censorship, control over blockchain future
+66%: finality delay, double finality, censorship, control over blockchain future and past
+
+抵御这些攻击的手段主要包含inactivity leak， 以及L0的介入；
+
+keys：
+在转到pos以后，对应的validator需要一套新的秘钥，该秘钥采用Boneh-Lynn-Shacham（BLS）签名方案
+validator key: private and public key; 主要用来做attestations;
+withdrawal key: private and public key ; 主要用来做余额提取；
+
+之所以validator里面要包含这两种key以及使用BLS的原因：
+1. 安全性：在以太坊PoS中，验证者密钥被用于签署区块和验证信息。因此，如果这把密钥被盗，恶意攻击者可能会对网络进行恶意行为，比如发起双花攻击等。然而，尽管攻击者可能控制了验证者密钥，但他们仍然无法访问验证者的资产，因为提币操作需要提币密钥。同样，即使提币密钥丢失或被盗，恶意攻击者也无法对网络进行恶意行为，因为这需要验证者密钥。
+2. 灵活性：引入验证者密钥和提币密钥后，用户可以在不同的设备或服务上分别管理这两把密钥。例如，他们可以将提币密钥保存在硬件钱包或其他安全设备中，而将验证者密钥保存在热钱包中，用于签署区块和验证信息。
+3. 可扩展性：在以太坊转向PoS后，参与者的数量可能显著增加，这可能会引发一些可扩展性问题。引入新的密钥类型（如基于BLS的密钥）可以帮助解决这些问题，因为这种密钥可以更有效地处理大量验证者之间的消息传递，从而降低共识达成所需的通信量。
+
+faq相关：https://ethereum.org/en/developers/docs/consensus-mechanisms/pos/faqs/
+
 ### 2024.4.28
 阅读有关eth网络攻击相关的，看官网文档还是很晦涩，借助gpt4比较详细的了解了；
 
