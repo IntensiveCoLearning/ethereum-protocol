@@ -4,6 +4,31 @@
 
 ## Notes
 
+### 2024.4.29
+
+又又是迷你学习量，还过了 12 点了
+
+#### Block-auction ePBS
+
+继续读昨天的 **图解P&S** 文章
+
+- Possibility of unconditional payment
+- Possibility of trust-minimised proposer/builder interaction
+- Consensus/execution separation
+
+为啥前两点设计目标还加个『Possibility』呢
+
+#### 闲话
+
+今天围观 uncommons 里的一次投票，关于一个专栏的奖励
+
+<https://snapshot.org/#/0xuncommons.eth/proposal/0xccbad2da0deca068eda2e06f1828e9da3d28129562df09bfbc950da26b92d8ac>
+
+大概是先有了一次 snapshot 投票，有反对票，下午开会讨论，决定梳理和细化规则，又创建了新投票 （原投票好像在 snapshot 上找不到了，不太熟悉）
+
+我个人感觉 uncommons 应该就这个事件，书写下文字发出来，因为这样的事件才是能让读者更了解 uncommons 的（也可能更有兴趣读）
+
+
 ### 2024.4.26
 
 今天又是迷你学习量
