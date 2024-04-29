@@ -678,3 +678,22 @@ func (s *Service) processSyncAggregate(state state.BeaconState, blk interfaces.R
 
 
 <img src="./img/ray/leak2.png" height="50%" width="50%" />
+
+### 2024.4.29
+如果 penalties 和 inactivity leak 的处罚的出发点都是 validator 不是故意的前提下，那么 slashing 就是为了惩罚故意作恶的行为，这种作恶已经可以被归结为攻击。slashing 罚没的资金也是量级最大的， validator 很可能在短时间内失去大量余额，然后被逐出网络。validator 被 slashing 的 ETH 都会被销毁，从而减少链上 ETH 总的发行量。
+
+触发  slashing 的行为如下：
+
+- 与 Casper FFG 共识有关：
+    - 对同一个 target checkpoint 做出不同的投票（attestation）
+    - 投票与历史投票冲突
+- 与 LMD GHOST 共识有关：
+    - 在同一个区块高度提议不同的区块
+    - 使用相同的 source 和 target 来证明不同的头区块
+
+总之，如果故意打乱共识过程，那么就会被 slashing。
+
+slashing 的处罚会分为两种：
+
+- **The initial penalty:** 如果 validator 的证据被网络确认，那么就会执行 slashing 有效余额，一次最多 1 ETH
+- **The correlation penalty:**  在被 slashing 后的 18 天，validator 将执行第二次处罚

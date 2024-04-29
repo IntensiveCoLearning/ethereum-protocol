@@ -4,6 +4,12 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.29
+
+[Node workshop](https://epf.wiki/#/eps/nodes_workshop)
+
+2 个小时视频，需要跟着搭建一个 node 跑一遍。
+
 ### 4.28
 
 Vitalik 版本的路线图定义，但是被 EF 迪士尼了。

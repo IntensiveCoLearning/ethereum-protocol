@@ -494,7 +494,7 @@ Deck link：https://docs.google.com/presentation/d/1Hrk-0x7N18qHwy9d7DeONdOVpA_6
 - Q&A
   - If possible, can you elaborate on what's the BLS signature count limit / slot in SSF scenario?
 
-### 2024.4.25 & 4.26 Notes on PoS evolution
+### 2024.4.25-28 Notes on PoS evolution
 Source: https://github.com/ethereum/pos-evolution/blob/master/pos-evolution.md
 
 - System model
@@ -535,10 +535,12 @@ Source: https://github.com/ethereum/pos-evolution/blob/master/pos-evolution.md
       - Casper has 2 properties
         - Accountable safety: 2 conflicting checkpoints imply that more than 1/3 adversarial stake can be detected
         - Plausible liveness: Possible to produce new finalized checkpoints
-
-  == TODO ==
     - Voluntary exit
-  
+      - Dynasty of a block: the number of finalized checkpoints in the chain from root to the parent of block b
+      - Start dynasty: When a would-be validator’s deposit message is included in a block with dynasty 𝑑, then the validator 𝑣𝑖 will join the validator set at first block with dynasty 𝑑+2
+      - End dynasty:  If validator 𝑣𝑖’s withdraw message is included in a block with dynasty 𝑑, it similarly leaves the validator set at the first block with dynasty 𝑑+2
+
+    == TODO ==
   - LMD-GHOST
     - Latest message
   - FFG Casper + (H)LMD-GHOST = Gasper

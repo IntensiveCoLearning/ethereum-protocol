@@ -4,7 +4,45 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
-2024.4.28
+### 2024.4.29
+
+Week 3
+
+Pre-reading
+
+Pos and Solar Punk future, Dany Ryan 2022
+
+- after the merge, transition to PoS, we will have a more secure, more sustainable home, other than that, nothing changes.
+
+![The Merge](./img//muxin/the-merge-01.png)
+
+![The Merge](./img//muxin/the-merge-02.png)
+
+- 视频中将 the merge 比喻成 kintsugi，一种日本修复 broken 陶瓷的艺术。
+- Ethereum post-merge client, the Ethereum client is the brain of the operation, the Beacon Node drives the execution engine via the Engine API. The User APIs doesn’t change.
+
+![Post Merge Client](./img//muxin/post-merge-client.png)
+
+- Kintsugi CL+EL semantic mismatch
+  - engine_executePayload
+  - engine_forkchoiceUpdated: use the fork choice to find the tip of the block tree, and the tip defines what is canonical, defines the canonical history
+- Why?
+  - Security
+    - Less Centralizing Crypto-Economy
+      - Lack of economies of scale
+      - Highly liquid and available
+      - Purer function of return on capital
+    - Higher Security Margin
+      ![Higher Security Margin](./img//muxin/higher-security-margin.png)
+    - Better Emergency Recovery
+      - In PoS: Attacking capital is either burned or can be socially intervened.
+  - Sustainability
+    - 99.96% energy reduction
+    - PoS opens the door to more sophisticated consensus mechanisms.
+    - (Dank)Sharding - Get more out of your consensus mechanism.
+  - Scalability
+
+### 2024.4.28
 
 Week 3
 
