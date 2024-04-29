@@ -1005,3 +1005,102 @@ EIP-3074 简介
 ![](https://img.learnblockchain.cn/2021/05/21/16215616331751.jpg)
 
 ![](https://img.learnblockchain.cn/2021/05/21/16215616473335.jpg)
+
+### 2024.04.29
+
+[EIP-4844 背景与技术解读](https://learnblockchain.cn/article/7586)
+
+1. EIP-4844
+
+- 引入新的数据存储类型“blob”， 为 Layer 2 扩容方案提供更低的 DA 方案。
+- 引入新的交易格式“blob-carrying transactions”，EVM 无需访问 blob 数据本身，仅通过其承诺（commitment）即可验证 blob 数据的正确性和完整性。
+
+2. 背景
+
+- Rollups 的相对昂贵源于 calldata 有限的存储空间和 Layer2 数据对 Layer1 较高的存储需求。
+- 解决 Rollups 本身长期不足的长期解决方案一直是数据分片，然而，数据分片仍需要相当长的时间才能完成实施和部署。
+- EIP-4844： "Proto-Danksharding"，实现将在完全分片中使用的交易格式，先行解决数据存储和传输的效率问题。
+
+3. 技术细节
+
+- 数据存储格式 blob
+  - 字节向量（`ByteVector[n]`），`n = FIELD_ELEMENTS_PER_BLOB * BYTES_PER_FIELD_ELEMENT`。
+    - `FIELD_ELEMENTS_PER_BLOB`：新增常量，表示每个 blob 中的字段数，为固定值 `4096`。
+    - `BYTES_PER_FIELD_ELEMENT`：新增常量，表示每一个 blob 字段的存储字节数，为固定值 32。
+  - 一个 blob 的可用容量为 4096 * 32 个字节，约为 0.125 MB 。
+  - `MIN_EPOCHS_FOR_BLOB_SIDECARS_REQUESTS`： 为固定值 4096 ，定义了节点必须存储 blob 数据的最少 epoch 数（`4096 * 32 * 12 / 3600 / 24 = ~18.2 天`）
+    - 期间数据依然可以被网络中的节点访问和验证；
+    - 逾期后，节点有权删除 blob 中的 sidecars 数据
+  - blob 数据的组成部分：
+    - 用户数据： 要在以太坊上存储和传输的实际数据集
+    - 数据承诺与证明： 确保数据的完整性和可验证性
+- blob 交易
+  - 符合 EIP-2718 交易框架
+    - TransactionType || TransactionPayload 为有效的交易。
+    - TransactionType || ReceiptPayload 为有效的交易收据。
+  - blob 交易的 TransactionType 为 BLOB_TX_TYPE，其值为 `Bytes1(0x03)`。
+  - blob 交易的 TransactionPayload 是 `TransactionPayloadBody` 的 RLP 序列化结果
+
+    ```shell
+    TransactionPayloadBody = [chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, to, value, data, access_list, max_fee_per_blob_gas, blob_versioned_hashes, y_parity, r, s]
+    TransactionPayload = rlp(TransactionPayloadBody)
+    ```
+
+  - blob 交易 TransactionPayloadBody 各字段解释如下：
+    - blob 交易常规字段（与 EIP-1559 的语义相同）：
+      - `chain_id`：链 ID 。
+      - `nonce`：发送者账户的交易计数器。
+      - `max_priority_fee_per_gas`：最大优先费用（小费）。
+      - `max_fee_per_gas`：最大总费用（包括基础费用）每单位 gas 。
+      - `gas_limit`：交易可使用的最大gas 量。
+      - `value`：以 wei 为单位的发送的以太币数量。
+      - `data`：交易的输入数据。
+      - `access_list`：一个访问列表，包括交易执行过程中需要访问的地址和存储键，以优化 gas 消耗和提高交易执行效率。
+    - blob 交易非常规字段（与 EIP-1559 的语义不同）：
+      - `to` ：接收方的 20 字节地址，不同于 EIP-1559，但它不能为 nil。这意味着 blob 交易不能用来创建合约。
+    - blob 交易独有字段：
+      - `max_fee_per_blob_gas` ：uint256，用户指定的愿意给出的每单位 blob gas 的最大费用。
+      - `blob_versioned_hashes`：方法 `{kzg_to_versioned_hash}` 的哈希输出列表，即一个数组，一个区块用到几个 blob 数组内就会有几个元素，每个元素为一个 blob 的 VersionedHash （即版本化哈希值，对 blob 的数据进行承诺，由方法 `{kzg_to_versioned_hash}` 基于 KZG 承诺生成。
+  - blob 交易的 `ReceiptPayload`（在 EIP-2718 中定义） 为 `rlp([status, cumulative_transaction_gas_used, logs_bloom, logs]`) 。
+    - `status`：交易执行的状态码（成功或失败）。
+    - `cumulative_transaction_gas_used`：执行到当前交易为止累计的 gas 消耗量。
+    - `logs_bloom`：交易产生的日志的Bloom过滤器，用于快速检索日志事件。
+    - `logs`：交易执行过程中产生的日志事件列表。
+
+- blob 交易的签名
+
+blob 交易的发送者对交易数据进行的数字签名，先将 `BLOB_TX_TYPE` 与 `TransactionPayload` 的拼接结果作为消息原文做 Keccak256 哈希处理，获得摘要如下：
+
+```shell
+keccak256(BLOB_TX_TYPE || rlp([chain_id, nonce, max_priority_fee_per_gas, max_fee_per_gas, gas_limit, to, value, data, access_list, max_fee_per_blob_gas, blob_versioned_hashes]))
+```
+
+再将摘要进行 secp256k1 签名 获得签名值 `y_parity`、`r` 和 `s`。
+
+- blob gas 设计
+  - 引入 blob gas 作为一种新型 gas。它独立于普通 gas 并遵循自己的目标规则。
+  - 单个 blob 的 gas 容量： `GAS_PER_BLOB`
+  - 目标 blob gas 消耗量： `TARGET_BLOB_GAS_PER_BLOCK`， （3 * `GAS_PER_BLOB`）
+  - 最大 blob gas 消耗量： `MAX_BLOB_GAS_PER_BLOCK`， （6 * `GAS_PER_BLOB`）
+- blob 基础费更新规则
+  - `blob_base_fee = MIN_BLOB_BASE_FEE * e**(excess_blob_gas / BLOB_BASE_FEE_UPDATE_FRACTION)`
+- 区块头扩展： 区块头将被加入 2 个新字段
+  - `blob_gas_used` 是区块内交易消耗的 blob gas 总量（即处理 blob 数据所需的 gas 量）
+  - `excess_blob_gas` 是在出块之前，累计超出目标 blob gas 消耗的总量。
+  - 区块头 RLP 编码也将包含这 2 个新字段。
+- 获取版本化哈希值的操作码
+  - 与 blob 数据哈希计算相关的新增常量：
+    - HASH_OPCODE_BYTE：对 blob 数据哈希计算的操作码，为固定值 bytes1(0x49)。
+    - HASH_OPCODE_GAS：blob 数据哈希计算所对应的 gas 消耗量，为固定值 3 。
+  - 此 EIP 添加一条指令 BLOBHASH
+- 点评估预编译
+  - 用于验证一个数据集对应的KZG 承诺正确性的证明（这确保了数据的接收方可以验证数据的发送方实际上承诺了特定的数据集，而无需接收整个数据集本身）
+  - 这个 KZG Proof 声称 blob（由承诺表示）在给定点（given point）评估为给定值（given value），即某个多项式 p(x)（由一个承诺表示）在给定点 z 上的值 p(z) 等于 y 。
+
+```py
+def point_evaluation_precompile(input: Bytes) -> Bytes:
+    """
+    Verify p(z) = y given commitment that corresponds to the polynomial p(x) and a KZG proof.
+    Also verify that the provided commitment matches the provided versioned_hash.
+    """
+```
