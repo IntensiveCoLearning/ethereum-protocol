@@ -564,6 +564,7 @@ Source: https://github.com/ethereum/pos-evolution/blob/master/pos-evolution.md
   - Problem: Ex-Ante reorg
     - Solution: View-merge as a replacement for proposer weight boosting
 
-
+### 2024.4.29 notes on week 10R fork choice
+Link: https://twitter.com/EIPFun/status/1785056437971927380
 
 
