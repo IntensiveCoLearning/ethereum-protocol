@@ -272,6 +272,46 @@ Espresso sequencer： 主要为 layer2 架构设计的 sequencer，提供高效�
  > 
  > The layout structure of a Verkle tree is just like a MPT but with different base of the tree i.e. number of children. Just like MPT it has root node, inner nodes, extension nodes and leaf nodes. There a slight difference in the key size, on which the tree is made. MPT uses 20 byte key which Verkle tree uses 32 byte key in which the 31 bytes are used as a stem of the tree while last 1 byte is used for storage with almost the same stem address or neighboring code chunks (opening the same commitment is cheaper). Also due to the fact that while computing the witness data the algorithms take 252 bit as field element so it is convenient to use 31 bytes as a suffix of the tree. Using this, the stem data can commit to two difference commitments ranging from 0-127 and 128-255, aka lower value and upper value of the same key, thus covering the whole suffix space. For more on this refer here.
 
+### 2024.4.27
+
+学习资料：
+
+ - https://epf.wiki/#/eps/week8-dev
+ - https://www.youtube.com/watch?v=6d4pkhL37Ao
+ - https://www.youtube.com/watch?v=1PHZHpVPLk4
+ - https://github.com/eth-protocol-fellows/protocol-studies/blob/main/docs/eps/presentations/week8-dev.pdf
+ - https://eips.ethereum.org/EIPS/eip-7251
+
+学习了 post-merge 时代 consensus client 的架构，为什么拆为 consensus 和 execution 两个客户端，以及了解了 Teku 客户端的基本架构设计。
+
+Teku 在上层分为 execution-api/beacon-api/keymanager-api/builder-api 四个可操作部分，由 Java 语言编写，是目前多个 consensus client 其中之一。
+
+同时学习饿了 EIP-7251 的内容，该提议将 `MAX_EFFECTIVE_BALANCE` 从 32E 提高到 2048E，这样有助于大型节点消减其 validator 数量，提高 BLS 签名的整体效率（更少的 validator 参与签名），降低网络的负载压力，同时还能提高资金使用的灵活度（小节点不需要拼 32 的整数倍，零散的 ETH 也能充分得到利用）。
+
+### 2024.4.28
+
+学习资料：
+
+ - https://epf.wiki/#/eps/week8-research
+ - https://github.com/eth-protocol-fellows/protocol-studies/blob/main/docs/eps/presentations/week8-research.pdf
+ - https://barnabe.substack.com/p/seeing-like-a-protocol
+ - https://ethereum.org/en/developers/docs/mev/
+ - https://efdn.notion.site/Robust-Incentives-Group-RIG-Homepage-802339956f2745a5964d8461c5ccef02
+ - https://github.com/eth-protocol-fellows/protocol-studies/tree/pbs/docs/wiki/research/PBS
+
+Ethereum protocol 被社区驱动，以质押量作为话语权系数。社区决定了 protocol 设计，从而影响 validators 的行为，因为 validators 是最终 protocol 的执行者。Protocol 的最终目的是用最小的成本为用户去中心化地实现更大的利益。
+
+Validator services 包括 Consensus service/Block construction service 两部分。（未完）
+
+### 2024.4.29
+
+学习资料：
+
+ - https://ethresear.ch/t/unbundling-staking-towards-rainbow-staking/18683
+ - https://efdn.notion.site/RIG-Open-Problems-ROPs-c11382c213f949a4b89927ef4e962adf
+ - https://barnabe.substack.com/p/pbs
+
+
 
 
 ### 待学习
