@@ -4,6 +4,12 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 4.30
+
+[Node workshop](https://epf.wiki/#/eps/nodes_workshop)
+
+还没看完没搭建起来，打算按照视频写一个简单的命令行版本提个 pr 到 wiki 上面，比较方便操作一些。
+
 ### 4.29
 
 [Node workshop](https://epf.wiki/#/eps/nodes_workshop)
