@@ -20,9 +20,11 @@
 
 下面那个链接是姚老师那儿看到的 <https://twitter.com/TimeOfSand/status/1582270557315211265>
 
-当时看到 Hasu 发推
+当时看到 Hasu 发推 <https://twitter.com/hasufl/status/1582005123794235395>
 
 > It's a failure of the Ethereum ecosystem that one month after the merge, there is still no neutral relay. All the relays that exist are vertically integrated builder relays.
+
+> Many builders don't trust builder relays because there's no way to know if a relay favors its own internal builder, e.g. by colocating the two.
 
 现在有点能明白在说啥了
 
