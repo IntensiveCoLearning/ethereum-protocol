@@ -600,7 +600,7 @@ devp2p 协议命名的有趣历史：
     - 目标为 3 个 blob/块，最多 6 个 blob/块
     - Blob 的定价与 EIP 1559 类似，基本费用被销毁：如果区块有 3 个以上 Blob，价格就会上涨，反之亦然
   ![alt text](img/step/EIP-4844.png)
-  ### 4.29
+### 4.29
   - Quantum-proof blobspace
     - 问题
       - KZG 缺点：不具备量子证明，需要可信设置（>14 万贡献者）
@@ -611,4 +611,27 @@ devp2p 协议命名的有趣历史：
     - 解决
       - 建立汇总之间的标准
       - 基于汇总、预先确认、共享排序
-  
+### 4.30
+#### Scourge：MEV 缺点较少
+![alt text](img/step/MEV.png)
+- MEV轨道
+  - 提案者/构建者分离（PBS）
+    - 当前的问题：MEV 是不可避免的，不受控制的 MEV 市场将伤害单独的利益相关者
+    - 目标：最小化验证者必须做出的选择并减少对专门验证者的激励
+    - 解决方案
+      - 当前的解决方案：MEV boost 协议外，中继充当可信经纪人
+      - 未来的解决方案：Enshrined PBS (ePBS)，它消除了中继并允许 MEV 燃烧以平滑质押收益率
+      - 未来的解决方案：包含列表，它对构建者施加限制，并通过强制交易包含来减少审查
+    - 残局区块生产
+      - 中心化区块生产
+      - 去中心化验证
+      - 强大的反审查保护
+  - V神在Endgame的blog： https://vitalik.eth.limo/general/2021/12/06/endgame.html
+- Execution tickets
+  - 处理 MEV 和单独质押者收益扭曲的解决方案
+    - 提前出售提出区块的权利，就像买彩票一样
+    - 更多的角色分离，例如证明和提议之间的角色分离
+  - 关键features
+    - 证明者保持简单，而提议者可以专业化（受包含列表的限制）
+    - 无需许可的 degen MEV 彩票（门票成本 ~= 每个区块 MEV 的预期值）
+  - EthResearch 执行票证：https://ethresear.ch/t/execution-tickets/17944
