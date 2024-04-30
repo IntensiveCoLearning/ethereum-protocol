@@ -1104,3 +1104,9 @@ def point_evaluation_precompile(input: Bytes) -> Bytes:
     Also verify that the provided commitment matches the provided versioned_hash.
     """
 ```
+
+### 2024.04.30
+
+review Modular Arithmetic, Finite Field of order prime p, Group, Generator of a Group and Cryptographic Assumptions.
+
+link: <https://thogiti.github.io/2024/03/22/Mastering-KZG-by-hands.html>
