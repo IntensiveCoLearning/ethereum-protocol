@@ -567,4 +567,32 @@ Source: https://github.com/ethereum/pos-evolution/blob/master/pos-evolution.md
 ### 2024.4.29 notes on week 10R fork choice
 Link: https://twitter.com/EIPFun/status/1785056437971927380
 
-
+### 2024.4.30 MEV basics
+- Blog link: https://ethereum.org/en/developers/docs/mev/
+- MEV definition
+  - MEV refers to the max value that can be extracted from block production in excess of the standard block reward and gas fees, by including, excluding, and changing the order of txns in a block
+- MEX extraction
+  - Overview
+    - In theory, MEV accrues entirely to validators
+    - In practice, a large portion of MEV is extracted by independent network participants aka searchers. 
+  - Gas golfing
+    - Definition: Program txns so that they use the least amount of gas, which allows searchers to set a higher gas price while keeping total gas fees constant
+  - Generalized frontrunners
+    - Definition: Bots that watch the mempool to detect profitable txns
+    - How it works
+      - The frontrunner will copy the potentially profitable txn's code, replace addresses with the frontrunner's address, and run the tx locally to double check if it's profitable
+      - If yes, the frontrunner will submit the modified tx with the replaced address, and a higher gas price
+      - Thus, frontrunning the original tx and gets the original searcher's MEV
+  - Flashbots
+    - Extend execution clients with a service that allows searchers to submit MEV tx to validators without revealing them to the public mempool
+    - This prevents tx from being frontrun by generalized frontrunners
+- MEV examples
+  - DEX arbitrage
+    - Most well known MEV opportunity, thus most competitive one
+    - How it works: If 2 DEXes are offering a token at 2 different prices, one can buy the token on the lower-priced DEV and sell it to the higher-priced DEX in a single, atomic tx
+  - Liquidations
+    - If, due to market fluctuation, there is collateral liquidation, the borrower usually has to pay a hefty liquidation fee, which is where MEV comes in. 
+    - Searchers compete to deteremine which borrowers can be liquidated, and be the first to submit a liquidation tx and collect the liquidation fee.
+  - Sandwich trading
+    - A searcher will watch the mempool for large DEX trades, which typically will raise the price of a token
+    - The searcher can cal the approximate price effect, execute an optimal buy order before the large trade, then sell it after the large trade for higher price
