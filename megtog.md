@@ -4,6 +4,33 @@
 
 ## Notes
 
+### 2024.4.30
+
+> relay: party specialized in DoS protection and networking who validates and routes execution payloads to proposers (trusted by builders for fair routing and by proposers for block validity, accuracy, and data availability)
+
+**MEV-Boost: Merge ready Flashbots Architecture**
+
+<https://ethresear.ch/t/mev-boost-merge-ready-flashbots-architecture/11177>
+
+**Flashbots POS: Merge Architecture**
+
+<https://hackmd.io/@flashbots/HJ3EbzVUY>
+
+这两个链接算是同一个文档吧，只是标题不一样？
+
+下面那个链接是姚老师那儿看到的 <https://twitter.com/TimeOfSand/status/1582270557315211265>
+
+当时看到 Hasu 发推
+
+> It's a failure of the Ethereum ecosystem that one month after the merge, there is still no neutral relay. All the relays that exist are vertically integrated builder relays.
+
+现在有点能明白在说啥了
+
+**Block-auction ePBS** 还是没看明白，明天继续看
+
+- builder protocol-bids `PB = { value, builderID, txroot }`
+
+
 ### 2024.4.29
 
 又又是迷你学习量，还过了 12 点了
