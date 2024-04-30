@@ -586,6 +586,8 @@ Link: https://twitter.com/EIPFun/status/1785056437971927380
   - Flashbots
     - Extend execution clients with a service that allows searchers to submit MEV tx to validators without revealing them to the public mempool
     - This prevents tx from being frontrun by generalized frontrunners
+    - 所以 flashbot 主要是为 EL 客户端提供服务，防止 generalized frontrunner 这种的 MEV
+    - 主要方法是将 MEV 交易秘密的提交给 validators 而不显示在公共的 mempool 中，这样 generalized bot 就没法在 mempool 中看到及抢跑了
 - MEV examples
   - DEX arbitrage
     - Most well known MEV opportunity, thus most competitive one
