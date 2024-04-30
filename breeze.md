@@ -3,6 +3,21 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.4.30
+刷了https://ethos.dev/beacon-chain 
+
+在一个epoch中，每一个slot会选出一个validator成为proposers用来构建区块，同时也会选出至少128个validator作为委员会来进行校验和cehck
+如下图所示
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/25242467/984db15b-4148-43cc-82da-ab7eecdc1fac)
+
+checkPoint: 一种特殊的区块
+
+每个epoch都会有32个区块被创建，因为在每个slot中，都会有一个验证者被选中以创建一个新的区块。然而，并非每一个区块都会被标记为checkpoint。
+
+在以太坊2.0中，仅当一个epoch的第一个slot对应的区块被创建时，这个区块才会被标记为checkpoint。也就是说，在一个含有32个slot的epoch中，只有第一个slot对应的区块才会被设定为checkpoint。其他的31个slot对应的区块，虽然它们也被验证并添加到了区块链中，但它们并没有被标记为checkpoint。
+
+Checkpoint有着特殊的地位和作用。首先，一个checkpoint是在网络中所有验证者之间达成共识的关键。其次，协议的"最终性"规定一旦一个checkpoint被2/3以上的验证者支持，它就成为了“最终”的，不会被改动或取代。所以，并非所有的区块都能成为checkpoint，只有每个epoch的第一个区块才有这样的地位。
+
 ### 2024.4.29
 
 攻击战占有不同的比例的节点数量可以产生的攻击如下：
