@@ -1110,3 +1110,47 @@ def point_evaluation_precompile(input: Bytes) -> Bytes:
 review Modular Arithmetic, Finite Field of order prime p, Group, Generator of a Group and Cryptographic Assumptions.
 
 link: <https://thogiti.github.io/2024/03/22/Mastering-KZG-by-hands.html>
+
+### 2024.05.01
+
+Verkle tries
+
+- introduction
+  - at each node, instead of a hash of the d nodes below (d=2 for binary Merkle trees), they commit to the $d$ nodes below using a vector commitment
+  - d-ary Merkle trees: needs $(d-1)log_{d}{n}$ hashes
+  - binary Merkle tree: $log_{}{n}$
+  - by using KZG polynomial commitment scheme,  each level only requires a constant size proof
+
+- A verkle trie is a trie where the inner nodes are d-ary vector commitments to their children, where the i-th child contains all nodes with the prefix i as a d-digit binary number.
+
+- example of d=16
+
+![](https://dankradfeist.de/assets/verkle_trie.svg)
+
+The root of a leaf node is simply a hash of the (key, value) pair of 32 byte strings, whereas the root of an inner node is the hash of the vector commitment (in KZG, this is a $G_1$ element).
+
+- Verkle proof for a single leaf
+  - for each inner node that the key path crosses, we have to add the commitment to that node to the proof.
+  - key and value are known, and `Root` is known to verifier(green), so for path in cyan color, we have to give the commitment to `Node A` and `Node B`
+  - The `Root` as well as the node itself are marked in green, as they are data that is required for the proof, but is assumed as given and thus is not part of the proof.
+  - consist of three KZG evaluation proofs
+  - KZG proofs can be compressed using different schemes to a small constant size
+- verkle vs. merkle
+  - much more efficient in proof size
+  - Merkle-Patricia Trie: 树上的一个节点，要么是 (i) 空的，要么是 (ii) 一个叶子节点，包含一个键和对应的值，或者是 (iii) 一个中间节点，拥有固定数量个子节点（这个数量也即是树的 “宽度”）
+  - shorter proofs the higher the width
+
+- Commitments and proofs
+  - In a Merkle tree (including Merkle Patricia trees), the proof of a value consists of the entire set of sister nodes at each level.
+  - In a Verkle tree, you just provide the path, with a little bit extra as a proof.
+  - the hash function used to compute an inner node from its children is not a regular hash. Instead, it's a **vector commitment**.
+
+![image](https://vitalik.eth.limo/images/verkle-files/verkle3.png)
+
+In practice, we use a primitive even more powerful than a vector commitment, called a **polynomial commitment**.
+
+- Polynomial commitments let you hash a polynomial, and make a proof for the evaluation of the hashed polynomial at any point
+- use polynomial commitments as vector commitments: if we agree on a set of standardized coordinates $(c_1, c_2, ..., c_n)$, given a list $(y_1, y_2, ..., y_n)$, you can commit to the polynomial $P$ where $P(c_i)=y_i$ for all $i \in [1...n]$
+ (you can find this polynomial with Lagrange interpolation).
+- The two polynomial commitment schemes that are the easiest to use are KZG commitments and bulletproof-style commitments.
+- if you use a KZG commitment and proof, the proof size is 96 bytes per intermediate node, nearly 3x more space-efficient than a simple Merkle proof if we set width = 256.
