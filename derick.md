@@ -3,6 +3,54 @@
 hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
+
+### 2024.5.01
+
+#### state_expiry_eip提案
+这篇[提案](https://notes.ethereum.org/%40vbuterin/verkle_and_state_expiry_proposal)是Vitalik Buterin提出的以太坊改进提案(EIP),主要内容是引入状态过期(State Expiry)机制。
+
+具体来说,该提案建议用一个状态树列表取代单一的状态树,每个树对应大约一年的时间段。状态编辑存储在当前时期对应的树中,超过最近两个时期的树不再由客户端存储。
+
+使用旧状态(在最近两个时期未被修改)的交易,需要提供证人(witness)。假设已经实施了Verkle树,因此状态对象包含一个Patricia树和一个Verkle树。
+
+该EIP通过将状态列表扩展为N个Verkle树来实现状态过期,客户端只存储最后两棵树。旧状态仍然可以访问,但交易发送者需要提供证人来验证状态。
+
+提案还引入了一种新的交易类型SignedNewTransaction,包含了访问旧状态所需的Verkle证明等字段。
+
+为了支持状态过期(State Expiry)机制,引入了一种新的交易类型SignedNewTransaction。它包含以下字段:
+
+```python
+class SignedNewTransaction(Container):
+    payload: NewTransaction 
+    old_state_proof: VerkleProof
+    signature: ECDSASignature
+
+class NewTransaction(Container):
+    nonce: uint64
+    target_address_period: uint24
+    gas: uint64 
+    priority_fee: uint64
+    max_gasprice: uint64
+    to: Address32
+    value: uint256 
+    data: bytes
+    claimed_states: List[StateClaim, 224]
+```
+
+其中最关键的是old_state_proof字段,它是一个VerkleProof类型,包含了访问过期状态所需的Verkle树证明。
+
+由于实施了状态过期后,超过最近两个时期(每个时期约一年)的状态不再由客户端存储,因此如果一个交易需要访问这些旧状态,就必须在交易中附上相应的Verkle证明,证明这些状态在过期之前的存在性和正确性。
+
+claimed_states字段则列出了该交易声称的一组账户状态。
+
+其他字段如nonce、gas、to、value、data等与普通交易类似,用于指定交易的各种参数。
+
+SignedNewTransaction通过引入old_state_proof等字段,使得在状态过期后,交易仍然能够安全地访问和使用旧状态,从而确保了状态过期机制的可行性。这是以太坊在不牺牲去中心化和安全性的前提下,努力提高可扩展性的重要探索之一。
+
+
+
+
+
 ### 2024.4.30
 - 学习两个提案并总结内容
 #### eip-4444提案
