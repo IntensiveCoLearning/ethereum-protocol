@@ -67,6 +67,8 @@ Insight: 1. Efficient data retrieval in MPT. 2. translating MPT into relational 
 	
 	[Merkle Tree Path Visualize](https://efficient-merkle-trees.netlify.app)
 
+---
+
 ## Execution Layer: EVM
 
 ### 04/07 Skipped
@@ -255,6 +257,8 @@ Deneb is a consensus-layer upgrade containing a number of features. Including:
 
 One dumb question: why are the consensus-specs written in python?
 
+--- 
+
 ## MEV 
 
 ### 04/23
@@ -314,5 +318,35 @@ Flashbots network running it with their policy of neutrality and transparency.
 
 Q: How will Flashbots make sure that the relay treats their builder fairly compared to other builders?
 A: "Our relay will publish the logs of when blocks were received by builders and when they were supplied to proposers."
+
+Flashbots also has many other implementations and solutions regarding MEV.
+
+--- 
+Now that I had some basic understanding of scalability by looking at those EIPs and Vitalik's posts. Now from an applicational angle of scaling, I'll briefly (or intensely) and quickly learn about topics that can benefit scalability.
+
+## ZKP first
+
+### 04/28 
+General purpose ZKP:
+![zkp-general](https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/zkp-general.png)
+
+ZK-SNARK: The main idea of zk-SNARKs is that they are all about proving that you know some polynomial f(x) that has some roots. The hard part is translating a program into a polynomial. 
+
+### 04/29 Skipped
+
+### 04/30
+Rollups in general.
+
+[Jon Charbonneau](https://twitter.com/jon_charb?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor): [Rollups Aren't Real?](https://joncharbonneau.substack.com/p/rollups-arent-real)
+
+Sum:
+
+Decentralization and trust issues associated with different types of rollups like ZK rollups and optimistic rollups. 
+
+1. Decentralization and Trust: The article discusses how current rollup solutions are often not fully decentralized or trustless. Many rely on trusted, permissioned setups which can potentially centralize control and reduce censorship resistance.
+2. Technical Mechanisms Explained: It delves into technical mechanisms like forced transaction inclusion, where even if a rollup operator is censoring users, they should be able to force their transactions onto the rollup to preserve censorship resistance.
+3. Sequencers and Consensus: The role of sequencers in rollups is examined, including how they batch transactions and their implications for decentralization. The article also discusses different models of leader selection and consensus mechanisms within rollups.
+5. Cross-chain Atomicity and MEV: The challenges of managing cross-chain atomicity (transactions across multiple blockchains) and miner extractable value (MEV) are covered. These are advanced topics that address the interaction between rollups and their base layers or other rollups.
+6. Future Directions and Improvements: The article proposes ideas for improving rollup technology, such as enhancing decentralization through more sophisticated sequencer selection mechanisms and better handling of transaction batching and MEV.
 
 
