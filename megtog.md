@@ -4,6 +4,40 @@
 
 ## Notes
 
+### 2024.5.01
+
+#### 翻推特
+
+看到 Hudson 进了 ETHPanda 的 tg 群
+
+> how consensus is formed around the block number/timing of a hard fork (network upgrade) in Ethereum.
+
+<https://twitter.com/hudsonjameson/status/1661905231767019520>
+
+> Ethereum presale prices
+
+<https://twitter.com/hudsonjameson/status/1657260574797955073>
+
+> the weeks wasted on arguing the finer details for PoS (CBC & FFG's dissection, definition/importance of weak subjectivity) and what defines an L2/side chain/bridged chains (beyond the colloquial definitions).
+
+<https://twitter.com/hudsonjameson/status/1662346559541981191>
+
+> An often overlooked reason to not have more **precompiles** is the increased chance of **chain splits** from clients having to use different implementations of the precompile code. If one client's precompile library has a bug, it will diverge from the others when a tx triggers the bug.
+
+<https://twitter.com/hudsonjameson/status/1642116003906850816>
+
+#### 准备运行节点
+
+<https://nimbus.guide/el-light-client.html>
+
+#### 关注 op 网络升级
+
+<https://docs.optimism.io/builders/node-operators/network-upgrades>
+
+fjord
+- <https://github.com/ethereum-optimism/specs/issues/61>
+- <https://github.com/ethereum-optimism/specs/issues/73>
+
 ### 2024.4.30
 
 > relay: party specialized in DoS protection and networking who validates and routes execution payloads to proposers (trusted by builders for fair routing and by proposers for block validity, accuracy, and data availability)
