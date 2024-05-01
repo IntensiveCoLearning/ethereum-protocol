@@ -4,6 +4,27 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 5.1
+
+```
+# Install htop or btop for monitoring
+# https://github.com/aristocratos/btop
+
+# install gpg for verifying binary
+sudo apt install gpg
+
+# optional: download OpenPGP Signatures and import
+gpg --import armored-keys.asc
+
+# verify tar.gz.asc
+gpg --verify geth-linux-amd64-1.14.0-87246f3c.tar.gz.asc
+
+# unzip tar.gz
+tar -xzf xxx.tar.gz
+
+
+```
+
 ### 4.30
 
 [Node workshop](https://epf.wiki/#/eps/nodes_workshop)
