@@ -635,3 +635,23 @@ devp2p 协议命名的有趣历史：
     - 证明者保持简单，而提议者可以专业化（受包含列表的限制）
     - 无需许可的 degen MEV 彩票（门票成本 ~= 每个区块 MEV 的预期值）
   - EthResearch 执行票证：https://ethresear.ch/t/execution-tickets/17944
+  - 应用层 MEV 最小化​
+    - 考虑 MEV 开发更好的 Dapp
+    - 例子：https://www.mev.wiki/solutions/mev-minimization
+  - 预先确认
+    - 从建造者处获得下一个区块包含保证
+    - 与执行票和重新抵押计划完美搭配 
+### 5.1
+- 质押经济学
+  - 提高最大有效余额 (MaxEB)
+    - 当前 EB：最少 32 ETH，最多 32 ETH
+    - MaxEB 之后：最少 32 ETH，最多 2048 ETH​
+      - MaxEB 可以实现奖励自动复利，并且相同数量的权益可以减少验证者的数量
+      - 验证器开销的降低可以减少网络上 P2P 消息的数量，并成为实现单时隙最终性的途径​
+  - 探索总股份上限
+    - 与开销/SSF相关
+    - 正在进行的研究
+      - 改变发行曲线（可能变为负值），股权目标
+      - EthResearch on Endgame Stake 经济学：目标案例：https://ethresear.ch/t/endgame-staking-economics-a-case-for-targeting/18751
+  - 流动性质押中心化
+    - 正在进行的研究：供奉？削减上限的处罚？​
