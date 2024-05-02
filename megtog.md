@@ -4,6 +4,19 @@
 
 ## Notes
 
+### 2024.5.02
+
+假期出去玩了，基本没学习
+
+看了看 <https://nimbus.guide/validator-client-options.html#multiple-beacon-nodes>
+
+> Sentry nodes setups allow separating block production traffic from attestations and sync committee messages, making sure that a separate public IP address is used when proposing blocks. In this setup, there are two beacon nodes
+
+nimbus 的 beacon node 可以运行多个？ 分配不同的角色
+
+感觉很厉害，想再看看，特别是 `aggregated` 是什么，完全没概念
+
+
 ### 2024.5.01
 
 #### 翻推特
