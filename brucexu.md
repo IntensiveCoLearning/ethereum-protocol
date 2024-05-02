@@ -4,6 +4,84 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 5.2
+
+```
+# Install htop or btop for monitoring
+# https://github.com/aristocratos/btop
+
+# Install gpg for verifying binary
+sudo apt install gpg
+
+# Download geth here: https://geth.ethereum.org/downloads
+# Download lighthouse here: https://github.com/sigp/lighthouse/releases
+
+# Optional: download OpenPGP Signatures and import
+gpg --import armored-keys.asc
+
+# Optional: verify tar.gz.asc
+gpg --verify geth-linux-amd64-1.14.0-87246f3c.tar.gz.asc
+
+# Unzip tar.gz
+tar -xzf xxx.tar.gz
+
+# Run geth, you could check the logs
+./geth
+
+# Create dirs for data so that you can check original data easier
+mkdir geth-data
+
+# Tips: by using ./geth --help you will see a lot of parameters, feel free to take look on them
+
+# Generate jwtsecret
+openssl rand -hex 32 > /tmp/jwt
+
+# Set some parameters to start geth for holesky testnet and enable RPCs
+./geth --holesky --datadir geth-data --syncmode snap --http --http.port 8545 --authrpc.jwtsecret /tmp/jwt --authrpc.port 8551
+
+# Check the logs, EL should be started
+
+# Start CL
+# Same, you can check the parameters by using --help
+./lighthouse --help
+
+# Start beacon node with checkpoint
+./lighthouse bn --network holesky --execution-endpoint http://localhost:8551 --execution-jwt /tmp/jwt --http --checkpoint-sync-url https://holesky.beaconstate.ethstaker.cc/
+
+
+# Setup ephemery for a quicker test
+# Download ephemery from https://github.com/ephemery-testnet/ephemery-genesis/releases
+wget https://github.com/ephemery-testnet/ephemery-genesis/releases/download/ephemery-CHECKLATEST/testnet-all.tar.gz
+mkdir ephemery && tar -xzf testnet-all.tar.gz -C ephemery
+./geth --datadir geth-ephemery init ephemery/genesis.json
+source ephemery/nodevars_env.txt
+./geth --datadir geth-ephemery --authrpc.jwtsecret=/tmp/jwt --bootnodes $BOOTNODE_ENODE --http
+./lighthouse bn -t ephemery --execution-endpoint http://localhost:8551 --execution-jwt=/tmp/jwt --boot-nodes=$BOOTNODE_ENR_LIST
+
+# Go get some curl from https://ethereum.org/en/developers/docs/apis/json-rpc/ and test the RPC API
+# Tip: add --http to geth to enable rpc
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_syncing","params":[],"id":67}' localhost:8545 | jq
+curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":67}' localhost:8545 | jq
+
+```
+
+- lighthouse 可以运行 bn or vc，bn 是 beacon node，vc 是 validator node。
+- 可以使用 ephemery https://github.com/ephemery-testnet 提升学习下载的速度 https://ephemery.dev/
+- genesis.json 记录了一些账户 balance 等初始信息
+- 可以通过 MetaMask 添加本地 RPC 来连接到测试网
+- Check nodes https://www.ethernets.io/
+
+测试网的注册 validator 流程：
+
+- 领一下测试币，至少 32 个 https://github.com/ephemery-testnet/ephemery-resources?tab=readme-ov-file#faucets
+- 打开 launchpad https://github.com/ephemery-testnet/ephemery-resources?tab=readme-ov-file#validators 然后 become a validator
+
+TODO，从 1:44m 开始的，但是那个 deposit cli 失效了。
+
+- Beacon Deposit Contract https://etherscan.io/address/0x00000000219ab540356cbb839cbe05303d7705fa
+
+TODO 创建一个中文地区的 eth-clients.github.io
+
 ### 5.1
 
 ```
