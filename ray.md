@@ -730,3 +730,46 @@ slashing 的处罚会分为两种：
 
 
 <img src="./img/ray/deposit.png" height="50%" width="50%" />
+
+### 2024.5.2
+每个 validator 本质上都是一对 BLS 公私钥，这个公私钥对和发送存款的钱包地址不是同一个，所以在运行 validator 的时候，都需要额外指定提款地址。
+
+存款有以下三个主要的步骤：
+
+- 生成公私钥对
+- 生成充值数据，并使用生成的公私钥对签名
+- 然后再使用普通的钱包来执行这笔充值的交易，比如使用 metamask 来执行这笔存款交易
+
+充值数据结构如下：
+
+```go
+{
+  // 根据助记词的 BLS 密钥生成的 BLS 公钥，是 validator 在共识层的身份标识
+  "pubkey": "a70d57e5fd4615bd3110a709be82be7a8b966fe881290f2738e4d8d0b38f39fe...",
+  // 提案地址
+  "withdrawal_credentials": "0100000000000000000000000001020304050607080900010203040506070809",
+  // 存入的以太坊数量
+  "amount": 32000000000,
+  // 使用 BLS 密钥对前三个字段的签名
+  "signature": "a6821877521df6ea65e7458fd599ef6430d23f64789cf7d89a75658eccdaf841...",
+  // 用于实际签名的数据，由前三个数段构成的 merkle 树
+  "deposit_message_root": "047eb9f043b4cd464084c44db76ddb937e3fda11a63fde59a6149f74b8c50685",
+  // 由前四个字段构成的 merkle 树，用来校验提交的数据和签名是否正确
+  "deposit_data_root": "5a05c42ace9518a92c5ec950e6f58a6fd490a06b7619370d1b700d8d93b2cbbe",
+  // 指定存款所用的链
+  "fork_version": "00000000",
+  "network_name": "mainnet",
+  "deposit_cli_version": "2.5.0"
+}
+```
+
+存款也分为两种情况：
+
+- 初始存款
+- 充值
+
+如果是第一次存款，那么就需要按照上面所说的方式来构造公私钥对，然后构造存款数据，最后存款。
+
+validator 在运行的过程中，可以会因为被惩罚导致有效余额不满 32 ETH，这样可能会让获得奖励变少，所以需要对 validator 充值。
+
+充值和初始存款交易不同，充值不需要构造存款数据，直接使用 metamask 就可以充值，ethereum 提供了一个充值的页面：https://launchpad.ethereum.org/en/top-up，也就是说，你可以为任意一个 validator 充值。
