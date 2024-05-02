@@ -1135,6 +1135,9 @@ The root of a leaf node is simply a hash of the (key, value) pair of 32 byte str
   - The `Root` as well as the node itself are marked in green, as they are data that is required for the proof, but is assumed as given and thus is not part of the proof.
   - consist of three KZG evaluation proofs
   - KZG proofs can be compressed using different schemes to a small constant size
+
+- Average verkle trie depth: $log_{d}{b} + 2/3$
+
 - verkle vs. merkle
   - much more efficient in proof size
   - Merkle-Patricia Trie: 树上的一个节点，要么是 (i) 空的，要么是 (ii) 一个叶子节点，包含一个键和对应的值，或者是 (iii) 一个中间节点，拥有固定数量个子节点（这个数量也即是树的 “宽度”）
@@ -1154,3 +1157,12 @@ In practice, we use a primitive even more powerful than a vector commitment, cal
  (you can find this polynomial with Lagrange interpolation).
 - The two polynomial commitment schemes that are the easiest to use are KZG commitments and bulletproof-style commitments.
 - if you use a KZG commitment and proof, the proof size is 96 bytes per intermediate node, nearly 3x more space-efficient than a simple Merkle proof if we set width = 256.
+
+### 2024.05.02
+
+Original paper on Verkle trees: https://math.mit.edu/research/highschool/primes/materials/2018/Kuszmaul.pdf
+
+![image](https://miro.medium.com/v2/resize:fit:1390/format:webp/1*Ihy_EFHYkbTmVLzzD-Ktyg.png)
+
+learn some basic information about verkle tree, including data structure of merkle tree and merkle patricia trie.
+learn math basics including group theory, Elliptic curve, Lagrange Polynomial.
