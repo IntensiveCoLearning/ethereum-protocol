@@ -4,6 +4,19 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.5.2
+
+Week 3
+
+- Blockchain enables a way to create digital scarcity
+  ![Digital Scarcity](./img/muxin/digital-scarcity.png)
+- Distributed networks deal with Byzantine fault tolerance(BFT)
+  - 如果更多的节点会带来更高的安全性，我们就会希望有更多数量的节点，但是在开放的分布式的系统中，每一个节点都可能会因为各种原因出现问题，我们需要有一个确定的容错机制来让这个系统继续运行。
+  - BFT 是能抵抗源自 Byzantine Generals’ Problem 的鼓掌类别的系统属性。这意味着，即使一些节点发生了故障或者恶意行为 BFT 系统也能继续运行。
+  - Two- phase commit(2PC)
+    - 1st Prepare Phase: One node will ask other nodes whether they can commit the proposed tx.
+    - 2nd Commit Phase: The node will command other nodes to either commit or abort the proposed tx.
+
 ### 2024.4.29
 
 Week 3
