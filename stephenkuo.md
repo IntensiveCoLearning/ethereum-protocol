@@ -655,3 +655,23 @@ devp2p 协议命名的有趣历史：
       - EthResearch on Endgame Stake 经济学：目标案例：https://ethresear.ch/t/endgame-staking-economics-a-case-for-targeting/18751
   - 流动性质押中心化
     - 正在进行的研究：供奉？削减上限的处罚？​
+### 5.2
+#### Verge：更容易验证
+![alt text](img/step/Verge.png)
+- Verkle trees
+  - 状态 vs 历史
+    - 状态：所有当前余额
+    - 历史记录：所有过去的转账/交易
+  - 当前的方法
+    - Merkle-prove：接收新节点，计算中间节点，并检查状态根是否与块头匹配
+    - 节点需要同步历史记录，计算状态，然后检查余额并验证新的交易。然而，随着状态规模的增长，Merkle 证明可能会变得更大且难以管理
+  - 未来方法
+    - Verkle-prove：每个节点都是对其子节点的多项式承诺。不再需要兄弟姐妹，因为证明只需要路径、中间节点和开放证明
+    - Verkle树的特点
+      - 更短的状态证明
+      - 更宽的树：256 个兄弟姐妹 vs Merkle 树中的 16 个兄弟姐妹
+      - ZK 友好的证明
+      - 允许无状态验证器：不需要历史记录，即时同步
+      - 轻客户端变得更轻
+      - 降低开发人员对集中式索引器的依赖
+    - 更多Verkle上的信息:[Verkle.info](https://verkle.info/)
