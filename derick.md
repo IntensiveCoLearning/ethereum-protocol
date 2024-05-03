@@ -3,6 +3,26 @@
 hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
+### 2024.5.3
+#### 预编译合约的使用方式
+
+EVM 预编译合约的使用方式主要包括：
+
+1. 通过特定地址调用：预编译合约位于 EVM 中从 0x1 到 0x9 的特定地址。可以像调用普通合约一样，使用 CALL 等 EVM 操作码调用这些地址，执行预编译合约。
+
+2. 在 Solidity 中调用：Solidity 提供了一些内置的函数，如 ecrecover、sha256 等，可以直接在 Solidity 代码中调用这些函数，底层实际执行的是对应的预编译合约。
+
+3. 使用 Solidity assembly 调用：可以在 Solidity 的 assembly 块中，使用 CALL 操作码直接调用预编译合约的地址。
+
+4. 设置合适的 gas：调用预编译合约需要提供足够的 gas。每个预编译合约都有特定的 gas 消耗，调用时需要设置合适的 gas limit。
+
+5. 传入正确的输入：每个预编译合约都有自己的输入格式规范，调用时需要按照规范传入正确的参数。例如，ecrecover 预编译合约需要传入签名的哈希值、v/r/s 值等。
+
+6. 处理返回值：预编译合约的执行结果会通过返回值返回。调用者需要按照预编译合约的规范，正确解析返回值。
+
+7. 在 L2 上使用自定义预编译合约：一些 L2 如 Bitfinity 支持添加自定义的预编译合约。开发者可以在这些 L2 上部署和使用自己的预编译合约，来实现特定功能。
+
+使用 EVM 预编译合约主要是通过特定地址调用，并正确设置 gas、传入参数、处理返回值。在 Solidity 中，有一些内置的函数可以直接使用。L2 上还可能支持自定义预编译合约的部署和使用。
 
 ### 2024.5.02
 #### 预编译智能合约precompiled contracts
