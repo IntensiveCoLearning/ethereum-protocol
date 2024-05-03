@@ -4,6 +4,24 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 5.3
+
+[Week 6](https://epf.wiki/#/eps/week6-dev)
+
+共识层的 specs，信息量挺大的 https://github.com/ethereum/consensus-specs?tab=readme-ov-file 感觉包括了各种变更历史。
+
+TODO 或许可以通过标准的变更来写一下以太坊的进化历史？
+
+How to use Executable Consensus Pyspec By Hsiao-Wei Wang
+
+协议可以通过 Python Pyspec 运行？大概流程：
+
+1. 用 Pyspec markdown 文件实现新的功能
+2. 附带 test vector suite @ethereum/consensus-spec-tests
+3. CL 实施 + 测试
+
+TODO 咋运行？跑一下看看
+
 ### 5.2
 
 ```
