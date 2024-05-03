@@ -773,3 +773,26 @@ slashing 的处罚会分为两种：
 validator 在运行的过程中，可以会因为被惩罚导致有效余额不满 32 ETH，这样可能会让获得奖励变少，所以需要对 validator 充值。
 
 充值和初始存款交易不同，充值不需要构造存款数据，直接使用 metamask 就可以充值，ethereum 提供了一个充值的页面：https://launchpad.ethereum.org/en/top-up，也就是说，你可以为任意一个 validator 充值。
+
+### 2024.5.3
+存款合约是运行在执行层的普通以太坊合约，任何希望运行 validator 的人都可以通过正常的以太坊交易将 32 ETH 存入到存款合约中。
+
+存款合约除了接收  validator 的 ETH 之外，还有其他的数据：
+
+- 存储 validator 的公钥，公钥是 validator 在共识层的主要标识，validator 的私钥将用于共识层的共识过程
+- 指定执行的提款地址，在 validator 退出网络时，将用来接收全部余额
+- 对公钥、提款地址和存款金额的签名，用来证明 validator 拥有这个密钥
+- 存款数据的 merkle 树根，就是上面数据生成的 merkle 树根
+
+充值信息从执行层到共识层有两种方式：
+
+- 一种是在投票的过程中就存款合约的状态达成一致
+- 一种是通过 eth_getLogs 方法去执行层查询 receipts
+
+<img src="./img/ray/deposit1.png" height="50%" width="50%" />
+
+上面的这些数据其实就是上面的 json 结构中的数据，会在存款合约中存储，存款数据按照如下的结构来组织，用的是上面所说的 SSZ 序列方法：
+
+<img src="./img/ray/deposit2.png" height="50%" width="50%" />
+
+最开始存款合约由 Vyper 语言编写，后来才改成 solidity，并且在 2020-10-14 09:22:52 UTC 时间部署上线。其中有趣的是，这个合约是被匿名部署的，现在也不知道部署者是谁，而且这个匿名的金额是通过 Tornado Cash 处理的，现在这个产品都被封禁了，因为用来洗钱是在是太方便了。
