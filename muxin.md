@@ -4,6 +4,41 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.5.3
+
+Week 3
+
+- Bitcoin solves the BFT with PoW approach
+
+  - Bitcoin 被认为是第一个解决 Byzantine General Problem 的方案
+    - 系统可以扩展到无限的节点数量
+    - 开放、无许可加入
+    - 用 PoW 机制达成共识
+  - Bitcoin 的共识机制
+    - Bitcoin 的状态机复制
+    - 使用密码学来减少可能的状态空间
+    - 用 PoW 来实现共识
+      - 挖矿难度调整
+        - 挖矿难度由网络总算力决定。如果更多的矿工加入网络并且 hash rate 增加，挖矿难度也会增加，反之亦然。
+      - 挖矿难度调整的影响
+        - 女巫保护：一个新块必须执行一定量的工作才能被视为有效
+        - 共识算法：节点找到链头的方式是总结每个区块的挖矿难度，选出总难度最大的链
+    - 发行 native 货币 BTC 进行激励
+      - 给当前工作量最多的单链提供奖励来激励工作
+
+- PoW to PoS
+  - 相关的基础知识已经在预习中学习了
+  - Justin Drake’s research on pragmatic signature aggregation with BLS: https://ethresear.ch/t/pragmatic-signature-aggregation-with-bls/2105
+  - Some of the important things on the roadmap of Ethereum
+    - SSF(single slot finality): Aim to get finality in a single slot
+      - Vitalik post on SSF: https://notes.ethereum.org/@vbuterin/single_slot_finality
+      - Roadmap blog: https://ethereum.org/en/roadmap/single-slot-finality/
+    - SSLE(single secret leader election): Aim to have proposer selection in secret
+      - Research link: https://ethresear.ch/t/simplified-ssle/12315
+      - Roadmap blog: https://ethereum.org/en/roadmap/secret-leader-election/
+    - Max EB(max effective balance): Aim to increase the effective balance of Ethereum validators at 32ETH
+      - Research link: https://ethresear.ch/t/increase-the-max-effective-balance-a-modest-proposal/15801
+
 ### 2024.5.2
 
 Week 3
