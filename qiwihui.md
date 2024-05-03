@@ -1160,9 +1160,35 @@ In practice, we use a primitive even more powerful than a vector commitment, cal
 
 ### 2024.05.02
 
-Original paper on Verkle trees: https://math.mit.edu/research/highschool/primes/materials/2018/Kuszmaul.pdf
+Original paper on Verkle trees: <https://math.mit.edu/research/highschool/primes/materials/2018/Kuszmaul.pdf>
 
 ![image](https://miro.medium.com/v2/resize:fit:1390/format:webp/1*Ihy_EFHYkbTmVLzzD-Ktyg.png)
 
 learn some basic information about verkle tree, including data structure of merkle tree and merkle patricia trie.
 learn math basics including group theory, Elliptic curve, Lagrange Polynomial.
+
+### 2024.05.03
+
+verkle tree structure
+
+Suffix Node Commitment
+
+![suffix](https://verkle.dev/assets/images/suffix_node_1-8a86820230457819e475d2782dc3e179.png)
+
+- nested Pedersen commitment
+- cannot use a single flat Pedersen commitment over all the suffix node values
+  - the implementation specified in the verkle tree EIP is limited to committing 256 values of up to 253 bits in size
+  - split each 32-byte/256-bit value into two 128-bit halves, resulting in 512 elements of 128-bits in size.
+
+![image](https://verkle.dev/assets/images/suffix_node_2-5c05b70f0facd2344b8f4daffc04c5d9.png)
+
+- Pedersen commitments can be converted to a 253-bit value: `group_to_field`
+- suffix node commitment: the Pedersen commitment of the 256-length array `[1, stem, C1, C2, 0, 0, ..., 0]`
+  - `1` is the suffix node marker
+- the Bandersnatch elliptic curve is used to generate Pedersen commitments
+
+![image](https://verkle.dev/assets/images/suffix_node_3-cfd789b82c68e6058854d9fa10bb07bc.png)
+
+Inner nodes
+
+![](https://verkle.dev/assets/images/inner_node-3965017f012fe5005aa40c14d7234e3d.png)
