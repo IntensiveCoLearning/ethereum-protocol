@@ -675,3 +675,11 @@ devp2p 协议命名的有趣历史：
       - 轻客户端变得更轻
       - 降低开发人员对集中式索引器的依赖
     - 更多Verkle上的信息:[Verkle.info](https://verkle.info/)
+### 5.3
+- Fully SNARKed Ethereum
+  - Snarkify 轻客户端协议（同步委员会过渡）
+  - Snarkify 所有信标链转换（签名、余额变化等）
+  - Snarkify 跨证明/区块见证的 verkle 状态
+  - 最终对所有 EVM 执行进行 snarkify：zkRollups 正在 zkEVM 上工作，这可能会在未来带回核心协议。
+- zkEVM 操作码/预编译
+  - 验证 EVM 内部（或 EVM 执行证明内部）的 EVM 执行证明
