@@ -3,6 +3,24 @@
 hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
+### 2024.5.4
+#### Hyperledger Besu
+- 通过week 10 dev的课外内容了解到Hyperledger Besu，做私有化，联盟链的时候可以使用。
+- [Hyperledger Besu](https://www.youtube.com/watch?v=djL5nczlYFw)是一个专为企业设计的以太坊客户端,旨在满足公共和私有许可网络的需求,具有可提取的以太坊虚拟机(EVM)实现。其主要目的包括:
+
+1. 提供一个企业友好的以太坊解决方案:Besu专为企业级用例而设计,支持公共和私有许可网络,满足企业对安全性、隐私性和性能的要求。
+
+2. 支持多种共识算法:Besu内置了多种共识机制,包括权益证明(PoS)、工作量证明(PoW)以及权威证明(PoA),如IBFT 2.0、QBFT和Clique,适应不同的使用场景。
+
+3. 提供全面的权限管理:Besu提供了专门用于联盟环境的综合权限管理方案,可以精细控制数据访问。
+
+4. 实现互操作性:Besu不仅可以构建私有网络,还与以太坊网络兼容,具有很强的互操作性。它完全支持流行的ERC721、ERC1155和ERC1400等标准。
+
+5. 构建去中心化应用:Besu可用于开发各种去中心化应用,如供应链追踪、金融结算、中央银行数字货币(CBDC)、贸易融资等。
+
+Hyperledger Besu旨在为企业提供一个安全、灵活、高性能的以太坊平台,支持构建满足企业级需求的公共和私有许可区块链网络及应用。其开源性质和活跃的社区也为Besu的持续发展和创新提供了动力。
+
+
 ### 2024.5.3
 #### 预编译合约的使用方式
 
