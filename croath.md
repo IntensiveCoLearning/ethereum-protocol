@@ -308,14 +308,26 @@ Validator services 包括 Consensus service/Block construction service 两部分
 学习资料：
 
  - https://ethresear.ch/t/unbundling-staking-towards-rainbow-staking/18683
- - https://efdn.notion.site/RIG-Open-Problems-ROPs-c11382c213f949a4b89927ef4e962adf
- - https://barnabe.substack.com/p/pbs
+ - https://twitter.com/StakingRewards/status/1781290759674560676
 
+学习了关于 rainbow staking 相关的知识。目前以太坊 validators 的数量已经超过 100 万，其中 85 万是通过中心化平台托管的，这对以太坊的去中心化进程是一种伤害。Rainbow staking 的想法就是为了解决这个问题，它将服务根据影响中心化的风险程度不同分为重服务和轻服务，重服务参与的 validator 应该是可罚没的，对应的操作也是具有重要意义的，而轻服务则对应处理一下相对较为不那么重要的和对去中心化风险影响不大的工作。
 
+| | Heavy services	| Light services |
+| --- | --- | --- |
+| Service archetype	| Gasper |	Censorship-resistance gadgets |
+|Reward dynamics |	Correlation yields rewards usually, anticorrelation is good during faults|	Anticorrelation yields rewards (surface different signals) |
+| Slashing risk |	Operators and delegators |	None or operators only |
+| Role of operators |	Run full node to provide Gasper validation services	| Run small node to provide light services |
+| Role of delegates |	Contribute economic security to Gasper |	Lend weight to light operators with good | service quality |
+| Operator capital requirements	| High capital efficiency (high stake-per-operator) + high capital investments |	Not really a constraint (operators receive weight) + small node fixed cost |
+| Solo staker access |	Primarily as part of LSPs (e.g., as DVT nodes) |	High access for all light services |
+| Liquid stake representation |	Market-driven plurality of heavy LSTs |	In-protocol light LSTs |
 
 
 ### 待学习
 
+ - https://efdn.notion.site/RIG-Open-Problems-ROPs-c11382c213f949a4b89927ef4e962adf
+ - https://barnabe.substack.com/p/pbs
  - https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum
  - https://www.youtube.com/watch?v=UClaoL12W00
  
