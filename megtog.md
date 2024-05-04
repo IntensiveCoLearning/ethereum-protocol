@@ -4,6 +4,25 @@
 
 ## Notes
 
+### 2024.5.04
+
+#### 学了新词 Proof of custody
+
+op blog 上看到
+
+<https://blog.oplabs.co/the-collective-triumph-of-4844/>
+
+<https://ethresear.ch/t/a-non-interactive-proof-of-custody-using-polynomial-commitments/5692>
+
+但在 [Vitalik 的 proto danksharding faq](https://notes.ethereum.org/@vbuterin/proto_danksharding_faq#What-parts-of-full-danksharding-does-proto-danksharding-implement-and-what-remains-to-be-implemented) 却归类在 What parts of full danksharding does proto-danksharding implement, and what remains to be implemented 的后一类中
+
+不太懂
+
+#### 细节待学习 aggregation_bits
+
+<https://ethereum.stackexchange.com/questions/125970/what-is-the-aggregation-bits-in-beacon-chains-attestation>
+
+
 ### 2024.5.02
 
 假期出去玩了，基本没学习
