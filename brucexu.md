@@ -4,6 +4,10 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 5.4
+
+今天主要看了下 Pyspec 尝试跑了一下。
+
 ### 5.3
 
 [Week 6](https://epf.wiki/#/eps/week6-dev)
