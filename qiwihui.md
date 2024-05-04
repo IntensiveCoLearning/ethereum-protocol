@@ -1192,3 +1192,17 @@ Suffix Node Commitment
 Inner nodes
 
 ![](https://verkle.dev/assets/images/inner_node-3965017f012fe5005aa40c14d7234e3d.png)
+
+### 2024.05.04
+
+additively homomorphic: it should be possible to compute the commitment to the sum of two polynomials by adding the two commitments.
+
+performance comparison:
+
+![image](https://github.com/brucexu-eth/intensive-ethereum-protocol-study-group/assets/3297411/8bcce72d-c273-4a00-845b-ae240adaf417)
+
+Polynomial commitments:
+
+data -> polynomial -> post a point of data on that polynomial, one that didn't provide a real value(non-sensitive point)
+
+![commitments](https://inevitableeth.com/polynomial-commitments-3.jpeg)
