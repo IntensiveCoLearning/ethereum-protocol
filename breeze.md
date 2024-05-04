@@ -3,6 +3,9 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.5.3
+开始week4计划，刷了一半的[视频](https://www.youtube.com/watch?v=PQVW5dJ8J0c)， 准备搭一下环境自己跑一下整个测试过程
+
 ### 2024.5.2
 刷完week3的视频，后面一个小时讲的是ethereum的pos的机制了，发现自己混淆了committee里面2/3的投票，以及全网的投票，所以这里重新再理一下整个过程
 
