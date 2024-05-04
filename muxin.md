@@ -4,6 +4,48 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.5.4
+
+Week 4
+
+Execution Layer Testing
+
+- EVM testing
+  - 主要目的是验证每个 execution client 都遵守规范，每一个 client 都给定相同的输入，期望得到相同的输出，保证相同的环境，prestate, 硬分叉激活规则
+  - 主要测试的内容：
+    - Pre-State
+    - Environment
+    - Transaction(s)
+    - Post-State
+- EVM testing - Tests Filling
+  - 跟 client unit testing 不同的是，Tests Filling 是将测试源代码编译成任何 execution client 都可以使用的 fixture，所有不同格式的 test fixture 都是一个简单的 JSON 文件。
+- EVM testing formats
+  - State testing
+    ![State testing](./img/muxin/state-testing.png)
+  - Fuzzy Differential State Testing
+    ![Fuzzy Differential State Testing](./img/muxin/fuzzy-differential-state-testing.png)
+  - Blockchain Testing
+    ![Blockchain Testing](./img/muxin/blockchain-testing.png)
+  - Blockchain Negative Testing
+    ![Blockchain Negative Testing](./img/muxin/blockchain-navigative-testing.png)
+- EVM Testing - Tests Filling - ethereum/tests
+  - https://github.com/ethereum/tests
+  - Simple JSON and YAML source codes
+  - Provides simple parametrization
+  - Filled by Retesteth(Written in C++)
+- EVM Testing - Tests Filling - Execution Spec Tests
+  - https://github.com/ethereum/execution-spec-tests
+  - Python source code
+  - Powered by pytest and provides simple to complex parametrization
+  - Still requires an actual client implementation to fill because of the transition function
+    ![Execution Spec Tests](./img/muxin/execution-spec-tests.png)
+- FuzzyVM
+  - https://github.com/MariusVanDerWijden/FuzzyVM
+  - A framework to fuzz Ethereum Virtual Machine implementations. FuzzyVM creates state tests that can be used to differential fuzz EVM implementations against each other. It only focus on the test generation part, the test execution is handled by Go evmlab.
+- Execution APIs testing
+  - https://github.com/ethereum/execution-apis/tree/main/tests
+  - To test all the execution APIs used to query the execution clients.
+
 ### 2024.5.3
 
 Week 3
