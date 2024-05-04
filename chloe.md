@@ -601,3 +601,15 @@ Link: https://twitter.com/EIPFun/status/1785056437971927380
 
 ### 2024.5.3 notes on devp2p & libp2p
 https://twitter.com/Chloe_zhuX/status/1786420940701659246
+
+### 2024.5.4 notes on MEV basic
+blog: https://ethereum.org/en/developers/docs/mev/
+
+- Effects of MEV
+  - The good
+    - Many defi projects rely on eco rational actors to ensure the usefulness & stability of their protocols
+    - Eg. Price discovery, speedy liquidation
+  - The bad
+    - At app layer, some MEV (eg. sandwich trading) could result in worse experience for end users, eg. Increased slippage
+    - At network layer, generalized frontrunners & gas-price auctions could result in network congestion and high gas prices
+    - Within blocks, MEV can have deleterious effects between blocks. If the MEV in a block significantly > standard block reward, validators may be incentivized to reorg blocks and capture MEV for themselves -> block reorg & consensus instability
