@@ -341,12 +341,41 @@ Rollups in general.
 
 Sum:
 
-Decentralization and trust issues associated with different types of rollups like ZK rollups and optimistic rollups. 
+Talked about decentralization and trust issues associated with different types of rollups like ZK rollups and optimistic rollups. 
 
-1. Decentralization and Trust: The article discusses how current rollup solutions are often not fully decentralized or trustless. Many rely on trusted, permissioned setups which can potentially centralize control and reduce censorship resistance.
-2. Technical Mechanisms Explained: It delves into technical mechanisms like forced transaction inclusion, where even if a rollup operator is censoring users, they should be able to force their transactions onto the rollup to preserve censorship resistance.
+1.Rollup solutions are often not fully decentralized or trustless. Many rely on trusted, permissioned setups which can potentially centralize control and reduce censorship resistance.
+2. Technical mechanisms like forced transaction inclusion, where even if a rollup operator is censoring users, they should be able to force their transactions onto the rollup to preserve censorship resistance.
 3. Sequencers and Consensus: The role of sequencers in rollups is examined, including how they batch transactions and their implications for decentralization. The article also discusses different models of leader selection and consensus mechanisms within rollups.
-5. Cross-chain Atomicity and MEV: The challenges of managing cross-chain atomicity (transactions across multiple blockchains) and miner extractable value (MEV) are covered. These are advanced topics that address the interaction between rollups and their base layers or other rollups.
-6. Future Directions and Improvements: The article proposes ideas for improving rollup technology, such as enhancing decentralization through more sophisticated sequencer selection mechanisms and better handling of transaction batching and MEV.
+5. The challenges of managing cross-chain atomicity (transactions across multiple blockchains) and MEV.
+6. For future directions and improvements, proposed more **sophisticated sequencer selection mechanisms** and better handling of transaction batching and MEV.
 
+
+### 05/01
+
+So, with that in mind (much to be done for rollups and scalability), put those fancy rollups aside, look closer AGAIN at:
+
+- Ethereum scalability
+- History of sharding and path forward
+- Data availability
+
+From the study group [video](https://epf.wiki/#/eps/week6-research)
+
+V explaining [sharding+DAS](https://hackmd.io/@vbuterin/sharding_proposal)
+
+### 05/02
+
+![Sharding]([https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/explain-shardingDAS.png](https://github.com/WildcatsC/eth-projects/blob/main/assets-pics/shard.png))
+
+### 05/03
+
+Data Availability Sampling DAS
+
+DAS is in some ways a mirror image of randomly sampled committees.
+
+Weakness of ONLY using DAS not committes:
+
+- New and untested
+- Higher latency than committees
+- More edge cases
+- **Committees are more forward-compatible with future addition of in-shard execution**
 
