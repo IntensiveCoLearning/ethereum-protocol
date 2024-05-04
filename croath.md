@@ -323,6 +323,31 @@ Validator services 包括 Consensus service/Block construction service 两部分
 | Solo staker access |	Primarily as part of LSPs (e.g., as DVT nodes) |	High access for all light services |
 | Liquid stake representation |	Market-driven plurality of heavy LSTs |	In-protocol light LSTs |
 
+### 2024.5.2
+
+学习资料：
+
+ - https://epf.wiki/#/eps/week9-research
+ - https://ethereum.org/en/roadmap/statelessness/
+
+目前以太坊节点数据规模庞大，全节点数据已经需要 2TB 以上的硬盘，存档节点则需要 12TB 以上的硬盘。这样的硬件要求会加重中心化风险，使得移动设备或低成本的个人设备无法快速满足运作节点的要求，就不可能将节点数量扩大到很大程度，所以需要采取一些方案来进行优化，主要优化的方式有 4 种：
+
+1. 历史数据到期：可以让节点删除早于 X 区块的状态数据，但不能改变以太坊客户端处理状态数据的模式
+2. 状态数据过期：让不常用的状态数据进入非活跃状态。 不活跃的数据在重新恢复前会被客户端忽略。
+3. 弱无状态性：只有区块生产者需要访问完整的状态数据，其他节点能够在没有本地状态数据库的情况下验证区块。
+4. 强无状态性：没有节点需要访问完整的状态数据。
+
+### 2024.5.3
+
+学习资料：
+
+ - https://www.ethportal.net/
+
+接上次学习的资料。Portal Network 是一种针对弱无状态性目标的方案之一，其网络与以太网络相连，Portal 网络中去中心化地存储着以太节点的数据，每个节点分布式存储一部分，而不需要每个节点都存有一份完整的数据，当需要本地不存在的数据时向网络请求即可。于是通过这样的方式，新的节点可以在启动时几乎不需要同步任何数据，在运行一段时间后也只需要存储部分数据，所以对于移动客户端和低性能设备是一种可行方案。
+
+Portal Network 的 DHT 方案是 Kademlia，没有找到为什么不使用 Chord 的原因，可能是因为和以太坊对齐会比较方便？
+
+
 
 ### 待学习
 
