@@ -4,6 +4,59 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.5.5
+
+Week 4
+
+Consensus Layer Testing
+
+- https://github.com/ethereum/consensus-specs/tree/dev/tests
+- Written in Python, same as execution-spec-tests
+- similar idea in terms of generating test fixtures in many different formats that all clients can consume
+- self contained within the spec, hence the tests can be written and filled in the same repo
+- Consensus Layer Testing Formats
+  - https://github.com/ethereum/consensus-specs/tree/dev/tests/formats
+  - the formats of CL is more than EVM’s, it’s useful for devs to test graularly every aspect of CL
+
+Cross-Layer(Interop) Testing
+
+- Involve testing a fully instantiated client, feeding information to it and verifying the correctness of its behavior
+- Tools:
+  - https://github.com/ethereum/hive
+  - [https://github.com/eth](https://github.com/ethereum/hive)pandaops/assertoor
+  - [https://github.com/](https://github.com/ethereum/hive)kurtosis-tech/ethereum-package
+- Hive
+  - a system for running integration tests against Ethereum clients
+  - generic CI infrastructure is the tight integration of Ethereum clients and their features
+    ![Hive](./img/muxin/Hive.png)
+  - Different Hive simulators: https://github.com/ethereum/hive/tree/master/simulators
+- Devnets
+  - Limited node count chains that are used to verify proof of concept or early stages of hardforks
+- Shadow-Forks
+  - Limited node count forks that are configured to follow Ethereum mainnet, but have an early hardfork configuration time to test real network activity
+- Public Testnets
+  - Georli testnet(RIP)
+  - Sepolia testnet(Launched Oct-23-2021)
+  - Holesky testnet(Launched Sep-28-2023)
+
+Security
+
+- Potential issues
+  - EL side
+    - Valid invalidation: Execution client invalidates a block that fully complies with the Ethereum specification
+    - Invalid validation: Execution client validates a block that doesn't comply with the Ethereum specification
+    - DoS during block execution: A client takes too much time to process a block due to a transaction
+  - CL side
+    - Faulty clients and finalization
+      - <33% faulty node majority: can cause missed slots but chain will still finalize
+      - 33%+ faulty node majority: can cause delayed finality
+      - 50%+ faulty node majority: can disrupt forkchoice
+      - 66%+ faulty node majority: can finalize an incorrect chain
+  - Bug bounties
+    - https://ethereum.org/en/bug-bounty/
+  - Public disclosures
+    - https://github.com/ethereum/public-disclosures
+
 ### 2024.5.4
 
 Week 4
