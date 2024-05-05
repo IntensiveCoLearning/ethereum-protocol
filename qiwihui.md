@@ -1206,3 +1206,94 @@ Polynomial commitments:
 data -> polynomial -> post a point of data on that polynomial, one that didn't provide a real value(non-sensitive point)
 
 ![commitments](https://inevitableeth.com/polynomial-commitments-3.jpeg)
+
+### 2024.05.05
+
+the non-real point to use PCS Trusted Setup:
+
+![pcs trusted setup](https://inevitableeth.com/pcs-trusted-setup-1.jpeg)
+
+1. pick a number(hidden secret): 100% random and secret, and be thrown away at the end of this process
+2. Preparing the Curve: bind our curve to a minimum and maximum bounds using modular arithmetic(elliptic curve discrete logarithm problem)
+3. use the (modular) elliptic curve and the secret (number) S to generate a series of values, start with $S^0$ and end with $S^n$, each time feeding it into the elliptic curve formula and generate a new value $[S^n]$,
+4. Permanently discard S. Without access to S, the list of points look like noise and are indistinguishable from random data, but actually related to S.
+
+(Modular) elliptic curves:
+
+- elliptic curve points can be added together
+- when added repeatedly, it is INCREDIBLY difficult to figure how many times a point has been added
+
+The result of the trusted setup is a Structured Reference String (SRS)
+
+- The SRS conveys enough information that the random number is accessible for our polynomial (and therefore our polynomial commitment scheme) while still keeping the value entirely secret.
+
+KZG Commitments
+
+![kzg](https://inevitableeth.com/kzg-commitment-summary-1.jpeg)
+
+- Step 1: Commit
+  - The prover is going to begin by applying the SRS to the data polynomial, generating a point on the elliptic curve. this point is called a commitment.
+  - Any changes to the underlying data will result in a new polynomial and therefore a new commitment. 
+  - Changes to the data = previous commitments will generate invalid proofs.
+- Step 2: Open
+  - The verifier will select a position and request a proof based around that specific chunk of data.
+  - The prover will divide the data polynomial to create a new quotient polynomial.
+- Step 3: Verify
+  - The prover replies back with two items: the evaluation of quotient polynomial using the elliptic curve and the result of the polynomial evaluated at that position.
+  - The former is an elliptic curve point, the later the data polynomial evaluation.
+
+Elliptic Curve Pairings
+
+![pairing](https://inevitableeth.com/elliptic-curve-pairings-1.jpeg)
+
+- one-way function: If an output set/group is different from an input set/group, we gain a very specific property: the output of this kind of function cannot be used as an input.
+- An elliptic curve pairing is a function that takes in two points on an elliptic curve and outputs a point in a finite field (think finite field = a predetermined set of points).
+- Not all elliptic curves have pairings, and not all pairings are secure. But once found, a single pairing can be shared by everyone.
+- Here's the plan: we are going to take two (different) elliptic curves, both of which are hiding a secret number S within their structured reference string (eg step 1 of a KZG commitment).
+- The pairing (denoted as e(p,q)) takes a point from each elliptic curve and outputs t. t is NOT a point on either curve, and therefore the pairing cannot be used more than once.
+
+Bilinear:
+
+- $e(p+r, q) = e(p, q) + e(r, q)$
+- $e(p, q+r) = e(p, q) + e(p, r)$
+
+Diffie-Hellman:
+
+Pairings do not break 2 of the 3 properties of Diffie-Hellman:
+
+- Still incredibly difficult:
+  - Discrete log problem (given $g^x$, solve for $x$)
+  - Computational Diffie-Hellman (given $g^x$ and $g^y$, find $g^{xy}$)
+- However, decision Diffie-Hellman becomes very easy.
+  - given $g^x$, $g^y$, and $g^z$, it should be hard to to see if $xy = z$.
+  - The bilinear property of elliptic pairing break this assumptions, it is trivial to test if $e(g^x, g^y) = e(g^z)$.
+
+Decision Linear Assumption
+
+- ?
+
+**A pairing an irreversible, one time elliptic curve point multiplication.**
+
+Then:
+
+- In order to combine the pieces sent by the prover, the verifier is going to need to multiply elliptic curve points.
+- The verifier constructs two expressions and checks them for equivalence. If they are equivalent, the verifier can be certain that the prover did the (polynomial) division and therefore still has the original data.
+
+summary:
+
+- a KZG commitment is a polynomial commitment scheme used to bind a prover to a specific set of data.
+- KZG commitments also have a very useful feature: they can be opened (audited) at any position without revealing any unrelated data.
+
+Steps:
+
+- The **Prover** committed to a polynomial using the Reference String (i.e. gluing together terms of the form $𝑔^{𝛼^𝑖}$, exponentiating by the polynomial $𝑓$'s coefficients to make $𝑔^{𝑓(𝛼)}$)
+- The **Verifier** said 'hang on, how do I know you've committed to any kind of polynomial'? Please evaluate this thing at a point of my choosing  $𝛽$ , and come back to me and prove they both evaluate the same polynomial
+- The **Prover** comes back with two items – the evaluation $𝑓(𝛽)$ and an elliptic curve point evaluated at the difference between the evaluations $𝑓(𝛼)$ and $𝑓(𝛽)$, divided out by the linear term $(𝛼−𝛽)$
+- The **Verifier** then uses a nice(ish) pairings equation to check this computation was done correctly inside the exponent of $𝑔$.
+
+ref:
+
+- [Kate Commitments: A Primer](https://hackmd.io/I9CvNQm-S-WQozt6ElNG_Q)
+
+- [verkle tree original paper](https://math.mit.edu/research/highschool/primes/materials/2018/Kuszmaul.pdf)
+- [verkle tree author presentation](https://math.mit.edu/research/highschool/primes/materials/2018/conf/CS/1-2-Kuszmaul.pdf)
