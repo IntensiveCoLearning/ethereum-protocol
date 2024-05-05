@@ -4,6 +4,26 @@
 
 ## Notes
 
+### 2024.5.05
+
+#### BLS 以及一些链接
+
+每次看密码学相关的内容，都会感到自己多么无知
+
+<https://ethresear.ch/t/pragmatic-signature-aggregation-with-bls/2105>
+
+> The term “curve” is massively overloaded, its an abbreviated term that describes many different things. Certainly the elliptic curve equation y^2 = x^3 + ax + b is the same, but they changed the a and b parameters. Between bn128 and alt_bn128 the a and b parameters are the exact same; only the G2 generator point is different (if I’m not mistaken). I spent some time figuring all this out and it was more difficult than it should be, not because the math is complex (which it is) but because the codebases tend to have large constants strewn about without any comments/explanation, though they can often be derived from rather simple formulas
+
+<https://ethresear.ch/t/precompiled-snark-pairing-for-bls-signatures/3196/6>
+
+<https://github.com/ethereum/py_ecc/pull/3>
+
+#### Consensys v. SEC 锐评
+
+> You wouldn’t know it because crypto lawyers are mostly class acts when it comes to “praise publicly, scold privately.”
+
+<https://twitter.com/AFDudley0/status/1784355377250791865>
+
 ### 2024.5.04
 
 #### 学了新词 Proof of custody
