@@ -3,6 +3,42 @@
 hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
+### 2024.5.5
+#### PoS演化过程
+- 今天学习week 10 research 的[pos演化过程分析](https://github.com/ethereum/pos-evolution/blob/master/pos-evolution.md)
+
+这篇文章主要介绍了以太坊从工作量证明(PoW)向权益证明(PoS)共识机制演进的过程和相关技术细节。
+
+以太坊最初采用PoW共识,但一直计划过渡到PoS。PoS下,区块生产者(验证者)运行全节点,质押原生代币,并根据选择过程提议或验证区块。
+
+2022年9月,以太坊通过"合并"升级实现了向PoS的转变。合并将原有的执行层与新的PoS共识层(信标链)连接在一起。这要求全节点同时运行执行客户端和共识客户端,两者通过API交互构成完整的以太坊节点。
+
+合并带来几个主要好处:
+1. 大幅降低能耗,更加环保 
+2. 通过质押ETH参与共识,使网络更加去中心化
+3. 为未来分片扩容奠定基础
+
+文档还详细介绍了信标链区块的数据结构、验证者的有效余额计算方法等技术实现细节。
+
+在信标链中,每个区块包含以下关键数据:
+- 区块头:包含父区块哈希、状态根、签名等元数据
+- 执行负载:包含已执行交易的相关信息
+- 共识负载:包含Casper FFG和LMD GHOST共识所需数据,如Epoch号、验证者投票等
+
+验证者的有效余额(effective balance)是参与共识的关键因素,但为了性能考虑,有效余额的更新频率远低于实际余额。有效余额具有以下特点:
+
+1. 有效余额以ETH为单位,必须是EFFECTIVE_BALANCE_INCREMENT常量(即1 ETH)的整数倍,而实际余额以Gwei为单位。 
+
+2. 有效余额设置上限为32 ETH,超出部分不计入有效余额。这促使大户创建多个验证者账户,而不是单个账户质押过多ETH。
+
+3. 有效余额的调整具有滞后性(hysteresis)。仅当实际余额达到特定阈值时,有效余额才会更新。这避免了频繁重新计算验证者列表的哈希值。
+
+4. 验证者的出块概率、投票权重、奖惩金额等,都与其有效余额成正比。
+
+有效余额作为验证者参与共识的加权因子,在性能和经济激励方面达成了平衡。通过限额和滞后调整,在降低计算开销的同时,确保了共识安全和网络去中心化。
+
+
+
 ### 2024.5.4
 #### Hyperledger Besu
 - 通过week 10 dev的课外内容了解到Hyperledger Besu，做私有化，联盟链的时候可以使用。
