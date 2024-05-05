@@ -4,6 +4,10 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 5.5
+
+还在看具体的 https://github.com/ethereum/consensus-specs/blob/dev/specs/phase0/beacon-chain.md 代码。
+
 ### 5.4
 
 今天主要看了下 Pyspec 尝试跑了一下。
