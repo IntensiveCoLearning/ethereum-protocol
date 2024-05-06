@@ -613,3 +613,33 @@ blog: https://ethereum.org/en/developers/docs/mev/
     - At app layer, some MEV (eg. sandwich trading) could result in worse experience for end users, eg. Increased slippage
     - At network layer, generalized frontrunners & gas-price auctions could result in network congestion and high gas prices
     - Within blocks, MEV can have deleterious effects between blocks. If the MEV in a block significantly > standard block reward, validators may be incentivized to reorg blocks and capture MEV for themselves -> block reorg & consensus instability
+
+### 2024.5.5 & 6 notes on MEV basic
+- MEV in PoS
+  - Validator centralization
+    - After the merge, validators earn less for proposing blocks than before. MEV can greatly influence validator's earnings
+    - Large staking pools could have more resources to capture MEV opps, creating economies of scale
+    - Solo stakers may be unable to profit from MEV opps -> less solo stakers, more centralized staking pool -> less decentralized for the network
+    - To Read: 
+      - https://ethereum.org/en/roadmap/merge/issuance/#how-the-merge-impacts-ETH-supply
+      - https://github.com/flashbots/eth2-research/blob/main/notebooks/mev-in-eth2/eth2-mev-calc.ipynb
+  - Permissioned mempools
+    - Traders may conduct off-chain deals with validators for tx privacy. Traders can send the tx directly to the validator, bypassing the public mempool to avoid MEV.
+      - Dark pool: permissioned, access-only mempools, open to users willing to pay certain fees
+    - Potential result
+      - -> diminish Ethereum's permissionless, trustless mechanism
+      - Accelerate the centralization risks -> large pools running multiple validators will benefit from offering tx privacy to traders & users -> more MEV revenue goes to larger player
+  - Two solutions to reduce the negative impact of MEV
+    - PBS: mitigate the MEV impact, especially at the consensus layer
+      - Separation of block producer & block proposer
+        - Validators: propose and vote on blocks
+        - Block builders (new entities): order tx and build blocks
+      - Create an auction market, where builders negotiate with validators selling blockspace
+      - Scheme: current PBS designs use a commit-reveal scheme
+        - Builders only publish a cryptographic commitment to a block's content, along with their bids
+        - After accepting the winning bid, the proposer creates a signed block proposal that incl. The block header
+        - The block builder is expected to publish the full block body after seeing the signed block proposal. It needs enough attestations before finalized.
+    - Builder API
+      - To do
+- To read
+  - https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum
