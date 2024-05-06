@@ -4,6 +4,43 @@
 
 ## Notes
 
+### 2024.5.06
+
+#### dumpState
+
+逛 protolambda 的 github 看到
+
+<https://github.com/ethereum-optimism/optimism/pull/10387>
+
+<https://github.com/ethereum-optimism/optimism/blob/0f11f2aacb22bafa926c04dcda285dcbc101f97f/packages/contracts-bedrock/scripts/Deploy.s.sol#L269-L273>
+```
+    function runWithStateDump() public {
+        vm.chainId(cfg.l1ChainID());
+        _run();
+        vm.dumpState(Config.stateDumpPath(""));
+    }
+```
+
+vm 应该是来自继承
+
+```
+contract Deploy is Deployer {
+  ...
+}
+
+abstract contract Deployer is Script, Artifacts {
+  ...
+}
+```
+
+<https://book.getfoundry.sh/tutorials/solidity-scripting#writing-the-script>
+
+下一步计划用下 [anvil_dumpState](https://book.getfoundry.sh/reference/anvil/#custom-methods)
+
+hardhat
+<https://github.com/NomicFoundation/hardhat/issues/3599>
+
+
 ### 2024.5.05
 
 #### BLS 以及一些链接
