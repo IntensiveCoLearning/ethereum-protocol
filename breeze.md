@@ -3,7 +3,10 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
-### 2024.5.3
+### 2024.5.6
+test视频刷到了hive部分， 环境部分Retesteth目前装成功了，接下来几天就开始跑各个章节的test内容
+
+### 2024.5.4
 开始week4计划，刷了一半的[视频](https://www.youtube.com/watch?v=PQVW5dJ8J0c)， 准备搭一下环境自己跑一下整个测试过程
 
 ### 2024.5.2
