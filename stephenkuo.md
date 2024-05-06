@@ -683,3 +683,16 @@ devp2p 协议命名的有趣历史：
   - 最终对所有 EVM 执行进行 snarkify：zkRollups 正在 zkEVM 上工作，这可能会在未来带回核心协议。
 - zkEVM 操作码/预编译
   - 验证 EVM 内部（或 EVM 执行证明内部）的 EVM 执行证明
+### 5.4
+#### Purge: Simpler protocol
+![alt text](img/step/Purge.png)
+- History expiry (EIP 4444):  Autoprune history older than 1 year
+  - Simplifies client codebases: No need to support earlier forks
+  - Alleviate node storage requirements
+  - History must reliably be accessible by other means eg. Portal network, torrents, block explorers, etc.
+- State expiry
+  - Lower priority now compared to PBS and Statelness
+  - Requie many breaking changes eg. Address length
+- Various harmonizations
+  - Serialization: RLP for EL and SSZ for CL
+  - Slowly phase out old tx types eg. pre-EIP 1559 legacy type 
