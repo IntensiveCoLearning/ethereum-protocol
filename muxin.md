@@ -4,6 +4,45 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.5.6
+
+Week 5
+
+Pre-reading
+
+- Ethereum roadmap
+  - 以太坊路线图主要是概述以太坊未来将对协议作出的具体改进
+  - 路线图主要给用户带来以下几点的 benefits
+    - Cheaper transactions
+    - Extra security
+    - Better user experience
+    - Future proofing
+  - 路线图的制定主要是研究人员和开发人员多年来工作的结果，但是任何人也都可以参与进来，可以在论坛（https://ethresear.ch/、https://ethereum-magicians.org/）或 discord 发表想法和讨论，提出一些建议，当想法比较成熟的时候，就可以作为 https://eips.ethereum.org/ 提出，整个过程都是公开的
+  - 路线图会随着时间而改变，会根据新的技术的出现而改变
+  - 以太坊将在今后 6 个月内实施一些升级（例如质押提款） - 其他升级的优先性较低，可能在今后 5-10 年内不会实施（例如量子计算抗性）
+  - 升级往往不会对终端用户产生影响，用户不需要积极参与升级，也不需要采取行动保护资产。节点运营商需要更新其客户端以准备升级。 某些升级可能导致应用程序开发者作出更改。 例如，历史数据到期升级可能需要应用开发者从新的来源获取历史数据。
+  - 一些升级（more details: https://domothy.com/roadmap/）：
+    - **The Merge**: upgrades relating to the switch from proof-of-work to proof-of-stake
+    - **The Surge**: upgrades related to scalability by rollups and data sharding
+    - **The Scourge**: upgrades related to censorship resistance, decentralization and protocol risks from MEV
+    - **The Verge**: upgrades related to verifying blocks more easily
+    - **The Purge**: upgrades related to reducing the computational costs of running nodes and simplifying the protocol
+    - **The Splurge**: other upgrades that don't fit well into the previous categories.
+  - 一些特定的技术升级：
+    - [Danksharding](https://ethereum.org/en/roadmap/danksharding/) - Danksharding makes layer 2 rollups much cheaper for users by adding “blobs” of data to Ethereum blocks.
+    - [Staking withdrawals](https://ethereum.org/en/staking/withdrawals/) - The Shanghai/Capella upgrade enabled staking withdrawals on Ethereum, allowing people to unlock their staked ETH.
+    - [Single slot finality](https://ethereum.org/en/roadmap/single-slot-finality/) - Instead of waiting for fifteen minutes, blocks could get proposed and finalized in the same slot. This is more convenient for apps and much more difficult to attack.
+    - [Proposer-builder separation](https://ethereum.org/en/roadmap/pbs/) - Splitting the block building and block proposal tasks across separate validators creates a fairer, more censorship resistant and efficient way for Ethereum to come to consensus.
+    - [Secret leader election](https://ethereum.org/en/roadmap/secret-leader-election/) - Clever cryptography can be used to ensure that the identity of the current block proposer is not made public, protecting them from certain types of attack.
+    - [Account abstraction](https://ethereum.org/en/roadmap/account-abstraction/) - Account abstraction is a class of upgrades that support smart contract wallets natively on Ethereum, rather than having to use complex middleware.
+    - [Verkle trees](https://ethereum.org/en/roadmap/verkle-trees/) - Verkle trees are a data structure that can be used to enable stateless clients on Ethereum. These “stateless” clients will require a tiny amount of storage space but will still be able to verify new blocks.
+    - [Statelessness](https://ethereum.org/en/roadmap/statelessness/) - Stateless clients will be able to verify new blocks without having to store large amounts of data. This will provide all the benefits of running a node with only a tiny fraction of today’s costs.
+- 其他需阅读：
+  - https://vitalik.eth.limo/general/2021/12/06/endgame.html
+  - https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum
+  - https://ethereum.org/en/community/research/#active-areas-of-ethereum-research
+  - https://domothy.com/blobspace/
+
 ### 2024.5.5
 
 Week 4
