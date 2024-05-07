@@ -3,6 +3,26 @@
 hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
+### 2024.5.7
+#### Single-slot finality (SSF)
+
+Single-slot finality (SSF) 是以太坊共识机制升级的一个重要目标,旨在将区块达成不可逆的时间从目前的64-95个时隙(约15分钟)缩短到一个时隙(12秒)。
+
+目前以太坊采用的Gasper共识协议在终局性时间、去中心化程度和链上负载之间做出了折中。而SSF的实现将带来以下好处:
+
+1. 大幅缩短交易确认时间,提升用户体验
+2. 消除短程重组(short-range reorg)的风险,提高安全性
+3. 简化共识协议,减少潜在的漏洞
+
+为实现SSF,以太坊需要减少参与共识的验证者数量,可能的方案包括:
+
+1. 提高每个验证者的最大质押额度(如从32 ETH提高到2048 ETH),鼓励验证者合并质押
+2. 动态调整验证者的奖励和惩罚,控制总数在一定范围内
+3. 引入超级委员会(supercommittee)机制,由部分验证者代表全体进行共识
+
+
+
+
 ### 2024.5.6
 #### view-merge提案
 以太坊共识层的一个改进提案,称为[view-merge](https://ethresear.ch/t/view-merge-as-a-replacement-for-proposer-boost/13739),旨在取代目前的proposer boost机制。主要观点如下:
@@ -929,7 +949,7 @@ PoS网络主要通过BFT算法、质押和惩罚机制来处理故障或恶意�
 
  https://ethereum.org/en/developers/docs/nodes-and-clients/
 
-[2] https://cs251.stanford.edu/lectures/lecture7.pdf
+https://cs251.stanford.edu/lectures/lecture7.pdf
 
 
 #### Execution Layer node
@@ -991,7 +1011,7 @@ PoS网络主要通过BFT算法、质押和惩罚机制来处理故障或恶意�
 
  https://icommunity.io/en/what-is-ifps-the-hard-drive-for-blockchain/
 
-[2]  https://www.youtube.com/watch?v=vTIfRgoaCIM
+ https://www.youtube.com/watch?v=vTIfRgoaCIM
 
 
 #### Ethereum in 30 minutes video 
@@ -1074,10 +1094,10 @@ Merkle树利用哈希指针构建一个树形结构，可以高效地验证大�
 
  https://www.youtube.com/watch?v=3AcQyTs_Es4&t=0
 
-[2] https://brilliant.org/wiki/merkle-tree/
+https://brilliant.org/wiki/merkle-tree/
 
 [3] https://www.geeksforgeeks.org/blockchain-merkle-trees/
 
-[4] https://en.wikipedia.org/wiki/Merkle_tree
+ https://en.wikipedia.org/wiki/Merkle_tree
 
 ### 2024.4.3
