@@ -643,3 +643,29 @@ blog: https://ethereum.org/en/developers/docs/mev/
       - To do
 - To read
   - https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum
+
+### 2024.5.7 EIP 7702 Set EOA account code for one transaction
+https://github.com/ethereum/EIPs/pull/8527/files
+- Why:
+  - Lots of interest in adding ST functionality improvements to EOAs
+    - Batching
+    - Sponsorship
+    - Privilege de-escalation
+  - EIP 3074 solves all the above use cases, but it has forward-compatibility concerns. 
+    - It introduces 2 opcodes, that would have no use in an endgame AA world, where all users will use smart contract wallets.
+    - That could lead to possible fragmentation of effort.
+  - EIP 7702 wants to enable the above use cases, without the 2 weakness
+- What: 
+  - Add a new tx type "contract_code" field and a signature, and convert the signing account into a smart contract wallet for the duration of that tx
+- How:
+  - Conversion of EIP 3074 use cases
+    - AUTH and AUTHCALL would be replaced by calls into the EOA
+    - AUTH would be replaced by a code to verify
+    - AUTHCALL would be replaced by a call to execute
+  - Forward compatibility with future AA
+    - The contract code that users would need to sign could be existing ERC 4337 wallet code
+    - No need to add any opcode
+    - Allow EOAs to temporarily convert themselves into contracts to be incl. Into ERC 4337 bundles
+    - Once implemented, EIP 5003 is just a flag to not set the code back to empty at the end
+  - Backward compatibility
+    - Impact on mempool and inclusion list （不太懂为啥）
