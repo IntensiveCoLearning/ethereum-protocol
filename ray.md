@@ -841,3 +841,35 @@ validator 的提款能力在上海的 Capella 升级中启用。在这次升级�
 以比特币为首的区块链体系踢出了一种完全不同的解决方案，在一个完全 permissionless 的环境中，通过使用 PoW 的方式来达成共识，在这样的环境下，系统确实会出现分叉，但是没关系，在短暂的分叉之后，系统还是会达成最终的共识。
 
 在这些方案的基础之上，开始出现了各种新的解决方案。当前区块链系统中最主流的解决方案就是 PoW 和 PoS 两种方式，这里有一个很小的误称，其实 **PoW 和 PoS 本身都不是共识协议，而是共识协议的推动者**。
+
+### 2024.5.7
+当前主流的共识机制总结：
+
+- PoW 驱动的共识算法
+    - 直接比拼算力，存粹的 PoW，代表项目 Bitcoin，The Merge 升级之前的 以太坊
+    - PoW 的改良版本，提高 TPS，代表项目：BitcoinNG，Thunderella
+    - 在小范围内使用 PBFT 选举，代表项目：ByzCoin
+    - DAG 共识，代表项目：Conflux、PHANTOM、SPECTRE
+- BFT 共识协议
+    - Large-Scale BPF 修改了 PBFT，允许任意选择副本和故障阈值
+    - Zeno 引入了一种 BFT 的状态复制机，以高可用的代价换一致性
+    - Depot 描述了一个在 2f+1 节点下保证安全性的协议
+- Now：从大量节点中选出对数级小范围节点，缩小共识的范围
+- PoS 驱动的共识算法
+    - SnowWhite、Ouroboros，最早的可证明安全性的 Pos 协议，Ouroboros 使用多方投币协议来为选举产生随机性
+    - HoneyBadger：在异构延迟的网络中提供了良好的可用性
+    - Casper：以太坊 The Merge 升级之后锁采用的共识算法
+    - Tendermint：Cosmos 使用的协议算法，在 PoS 的基础之上使用了 BPF 算法
+    - Hotstuff：Libra 项目的共识算法，也是在 PoS 的基础之上运行了 BPF 算法，Sync HotStuff  对 Hotstuff 进行了优化
+    - Federated Byzantine Agreement：联邦拜占庭协议，建立可信节点，保证安全性，代表项目：stellar
+    - Algorand： 使用可验证的随机函数来选择参与新型拜占庭共识协议的节点委员会
+    - Ripple：建立可信节点列表，系统过于中心化
+
+这些共识算法本质上就做一件事情，**就是找出一个能够修改系统状态的节点**。在区块链系统中，无法使用传统分布式系统的 Paxos/Raft 等算法，原因有以下几点：
+
+- 区块链的节点规模可能会很大，Paxos/Raft 很难处理这种大规模的节点
+- 而且面对的是一个完全不可信的网络环境，Paxos/Raft 需要节点是可信的
+- 区块链节点的加入和退出是自由的，但是 Paxos/Raft 需要提前对节点数有定义
+
+ref:
+https://arxiv.org/pdf/1906.08936
