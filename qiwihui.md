@@ -1233,7 +1233,7 @@ KZG Commitments
 
 - Step 1: Commit
   - The prover is going to begin by applying the SRS to the data polynomial, generating a point on the elliptic curve. this point is called a commitment.
-  - Any changes to the underlying data will result in a new polynomial and therefore a new commitment. 
+  - Any changes to the underlying data will result in a new polynomial and therefore a new commitment.
   - Changes to the data = previous commitments will generate invalid proofs.
 - Step 2: Open
   - The verifier will select a position and request a proof based around that specific chunk of data.
@@ -1297,3 +1297,9 @@ ref:
 
 - [verkle tree original paper](https://math.mit.edu/research/highschool/primes/materials/2018/Kuszmaul.pdf)
 - [verkle tree author presentation](https://math.mit.edu/research/highschool/primes/materials/2018/conf/CS/1-2-Kuszmaul.pdf)
+
+### 2024.05.07
+
+verkle tree structure
+
+<https://qiwihui.notion.site/Verkle-trie-8fa545dff5014191bfb6af2765b42e6e?pvs=4>
