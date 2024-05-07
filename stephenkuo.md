@@ -683,7 +683,7 @@ devp2p 协议命名的有趣历史：
   - 最终对所有 EVM 执行进行 snarkify：zkRollups 正在 zkEVM 上工作，这可能会在未来带回核心协议。
 - zkEVM 操作码/预编译
   - 验证 EVM 内部（或 EVM 执行证明内部）的 EVM 执行证明
-### 5.4
+### 5.6
 #### Purge: Simpler protocol
 ![alt text](img/step/Purge.png)
 - History expiry (EIP 4444):  Autoprune history older than 1 year
@@ -696,3 +696,32 @@ devp2p 协议命名的有趣历史：
 - Various harmonizations
   - Serialization: RLP for EL and SSZ for CL
   - Slowly phase out old tx types eg. pre-EIP 1559 legacy type 
+
+### 5.7
+#### Splurge: Miscellaneous goodies
+![alt text](img/step/Splurge.png)
+- EVM improvements/ EVM Object Format (EOF)
+  - Series of EIPs to restructure aspects of EVM, making future upgrades easier
+  - Notes of EOF overview: https://notes.ethereum.org/@ipsilon/evm-object-format-overview
+- Account Abstraction
+  - UX around externally owned accounts (EOAs) is pretty bad
+    - Features/ function that requires further work: Gas sponsorship, tx batching, key security, spending conditions, social recovery
+  - EIP 3074 to delegate control of EOAs to smart contract
+  - ERC 4337 for smart wallet standards across EVM chains/ rollups (potential eventual  enshrinement)
+- Endgame EIP 1559
+  - More like an AMM curve
+    - Track excess gas instead of previous block's gas usage
+    - Higher censorship cost: Target the entire fee vs priority fee currently
+  - Multidimensional EIP 1559
+    - Similar to gas/ blob today, but for more resources eg. Call data, state reads/ writes, block size, witness etc.
+    - More efficient pricing: Demand for one resource won't affect price for other resources
+    - Time-aware base fee calculation (EIP 4396): Avoid treating missed slots as sudden spike in demand
+- Deep crypto
+  - Fully homomorphic encryption
+  - One-shot signatures: 
+    - Related paper: https://eprint.iacr.org/2020/107
+- Encrypted mempools
+  - Toxic MEV will disappear completely under encrypted mempools
+- Verifiable delay functions (VDF)
+  - Non-parallelizable proof of work
+  - Enhance beacon chain randomness 
