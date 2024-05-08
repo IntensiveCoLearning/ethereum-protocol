@@ -347,7 +347,49 @@ Validator services 包括 Consensus service/Block construction service 两部分
 
 Portal Network 的 DHT 方案是 Kademlia，没有找到为什么不使用 Chord 的原因，可能是因为和以太坊对齐会比较方便？
 
+### 2024.5.4
 
+学习资料：
+
+ - https://hackmd.io/@shemnon/precompiles#/
+ - https://lucasmartincalderon.medium.com/exploring-precompiled-contracts-on-ethereum-a-deep-dive-4e9f9682e0aa
+ - https://www.evm.codes/precompiled
+ - https://epf.wiki/#/eps/week10-dev
+
+Precompiles 是一系列预编译的方法或实现，主要用于三个方面：
+
+1. 在 EVM 中自行实现太复杂或消耗 gas 太高
+2. 有一些不能在 EVM 中操作的事情，或者在 EVM 中操作有副作用的事情
+3. 和链初始化有关的一些操作
+
+EVM 中常见的 precompiles:
+
+ - ecRecover
+ - SHA2-256
+ - identity
+ - ecAdd, ecMul
+ - Blake2B F Function
+ - KZG Point Evaluation
+
+待实现的 precompiles:
+
+ - BLS - 9 separate functions
+ - ECDSA(secp256r1) verification
+ - EVMMAX
+
+### 2024.5.5
+
+学习资料：
+
+ - https://epf.wiki/#/eps/week10-research
+ - https://github.com/eth-protocol-fellows/protocol-studies/blob/main/docs/eps/presentations/week10-research.pdf
+ - https://github.com/ethereum/pos-evolution/blob/master/pos-evolution.md
+
+PoS 的 validator 有 `effective_balance`，但是在 `BeaconState` 中有独立存储的 `balances`。当 `effective balance` 在整数个 ETH 上下 0.25 个区间（总共0.5）以外浮动时才会触发可用余额变化，这样可以避免攻击者对于可用余额进行频繁变动的攻击拖慢整条链。
+
+（内容较多，未完继续）
+
+### 2024.5.8
 
 ### 待学习
 
