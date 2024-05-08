@@ -1303,3 +1303,7 @@ ref:
 verkle tree structure
 
 <https://qiwihui.notion.site/Verkle-trie-8fa545dff5014191bfb6af2765b42e6e?pvs=4>
+
+### 2024.05.08
+
+verkle tree structure of inner node and suffix node
