@@ -3,6 +3,21 @@
 hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
+### 2024.5.8
+#### MAX_EFFECTIVE_BALANCE提案
+
+[这篇提案](https://ethresear.ch/t/increase-the-max-effective-balance-a-modest-proposal/15801) 提出了一个适度增加以太坊验证者最大有效余额(MAX_EFFECTIVE_BALANCE)的建议,主要内容总结如下:
+
+1. 目前以太坊的MAX_EFFECTIVE_BALANCE被设置为32 ETH,这导致验证者集合规模非常庞大,截至2023年6月6日已有超过60万个活跃验证者,另有9万个在激活队列中。虽然大量验证者意味着更高的去中心化,但人为限制了验证者的最大规模。
+
+2. 提案建议将MAX_EFFECTIVE_BALANCE从32 ETH提高到更高的值,以鼓励验证者集合收缩,这有利于改善以太坊的可扩展性和降低共识层的复杂性。但同时要保持激活新验证者所需的最低ETH数量不变,以维持去中心化。
+
+3. 增加MAX_EFFECTIVE_BALANCE可以让大型质押者获得更高的资本效率,因为他们可以更快地提高有效余额,减少提款和重新激活的需求。但也有观点认为,过高的罚没风险可能会阻碍验证者合并。
+
+4. 有效余额目前以1 ETH为增量单位,并与实际余额分开计算。调整增量单位可能会影响验证者集合的再散列频率,需要进一步研究其复杂性影响。
+
+
+
 ### 2024.5.7
 #### Single-slot finality (SSF)
 
