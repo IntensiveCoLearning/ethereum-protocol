@@ -3,6 +3,10 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.5.8
+本地跑了State Transition Tests的测试代码；碰到了一些问题，本地没有geth的config执行报错，使用默认的client，然后删掉了文件中的previousHash,执行成功。后面再细看下原理；
+
+
 ### 2024.5.6
 test视频刷到了hive部分， 环境部分Retesteth目前装成功了，接下来几天就开始跑各个章节的test内容
 
