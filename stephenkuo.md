@@ -725,3 +725,10 @@ devp2p 协议命名的有趣历史：
 - Verifiable delay functions (VDF)
   - Non-parallelizable proof of work
   - Enhance beacon chain randomness 
+### 5.8
+#### Consensus Layer Specs
+- CL specs repo: https://github.com/ethereum/consensus-specs
+#### 3 purposes of the CL specs repo
+- It's a collection of Ethereum core consensus specifications
+- It's executable and verifable
+- It's test vector generator
