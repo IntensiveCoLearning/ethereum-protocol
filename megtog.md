@@ -4,6 +4,53 @@
 
 ## Notes
 
+### 2024.5.08
+
+昨天的新闻是 7702 要替换 3074
+
+#### checkpoint
+
+看到 [EIP Fun 群里提问](https://t.me/eipfun/1593/2853)
+
+> checkpoint是每个epoch的第一个区块吧
+
+之前 4.11 我还记录 checkpoint 这个用词现在是 epoch
+
+现在看到 spec 里，还是有 checkpoint 这个用词的
+
+需要再看看 root 的赋值
+
+```python
+class Checkpoint(Container):
+    epoch: Epoch
+    root: Root
+```
+
+整个 epoch 是整体作为 finalize 的对象，要么记第一个 slot 要么记最后一个 slot
+
+感觉记最后一个 slot 还更合理？ 因为如果记第一个 slot，那么不管指向前一个 epoch 还是当前 epoch ，感觉都有点别扭
+
+需要看看 vitalik annotated phase 0
+
+#### consensus spec
+
+这个改动，可以不用再 `cd ./tests/core/pyspec` ?
+
+虽然文档里有
+
+<https://github.com/ethereum/consensus-specs/pull/3611>
+
+#### based rollup 待阅读
+
+<https://ethresear.ch/t/based-rollups-superpowers-from-l1-sequencing/15016>
+
+蛮早时候 John Adler 有个关于 rollup 的帖子，记得 rollup 主要是把 consensus 外包给 L1
+
+看到 Hasu 评论
+
+> I actually thought this is how all rollups work until about a year ago
+
+
 ### 2024.5.06
 
 #### dumpState
