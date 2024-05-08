@@ -4,6 +4,10 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 5.7
+
+https://github.com/ethereum/consensus-specs/blob/dev/tests/README.md 这个似乎是 OK 的，但是也有一些报错，明天看看视频吧，然后先跳过这个，不然卡住好几天了。
+
 ### 5.6
 
 跑了下 pyspec 还没跑起来，遇到了一些问题

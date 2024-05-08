@@ -873,3 +873,42 @@ validator 的提款能力在上海的 Capella 升级中启用。在这次升级�
 
 ref:
 https://arxiv.org/pdf/1906.08936
+
+### 2024.5.8
+以太坊的共识协议实际上由两个协议组成，两个协议合称 Gasper：
+
+- LMD GHOST：保证链的持续出块，保证可用性
+- Casper FFG：保证从某个时间点开始的区块不能被重新生成，保证安全性
+
+在以太坊看来，链的可用性是最重要的，如果在网络情况良好的情况下，共识协议可以同时提供安全性和可用性，在出现网络分区的情况下，会在分区的两侧持续生成区块。极端情况下，如果网络分区问题得不到解决，那么就会出现永久分区的情况。
+
+LMD GHOST：
+
+该算法由两个算法组成：
+
+- LMD：Latest Message Driven，网络中的 Validator 会不断地发布 Attestation，来驱动 GHOST 运行，Attestation 的发布就是 Message Driven
+- GHOST：Greedy Heaviest-Observed Sub-Tree，GHOST 会选择权重最大的分支
+
+该算法完成的事情如下：
+
+- 用来确定最佳链的分叉选择规则
+- 根据活跃验证者的投票为分叉的分支分配权重，而不是简单的最长链原则
+- 不提供最终确定性，但支持确认规则，Casper FFG 就是 LMD GHOST 的最终确定性确认规则
+- Slashing 用来解决 nothing at stake 问题
+
+GHOST 会选择权重最大的分支，而 LMD 则决定了什么是权重。在每个 epoch 中，validator 都会发布一个 Attestation，结构如下。其中包含对最佳块头的投票，这也就是 LMD GHOST 需要进行的投票，然后算法会寻找一个合适的头块来继续提出新的区块。
+
+```go
+type AttestationData struct {
+	Slot            github_com_prysmaticlabs_prysm_v4_consensus_types_primitives.Slot           
+	CommitteeIndex  github_com_prysmaticlabs_prysm_v4_consensus_types_primitives.CommitteeIndex 
+	// LMD GHOST vote
+	BeaconBlockRoot []byte                                                                      
+	// FFG vote
+	Source          *Checkpoint                                                                
+	Target          *Checkpoint                                                                
+}
+```
+
+对所有被投票的分支进行”称重“，其实就是看哪个分支被投票的有效余额更多，哪个分支就会被选中。然后在分支中，递归地进行这个过程，直至找到最终的那个头块。
+

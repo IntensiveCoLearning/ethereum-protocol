@@ -4,6 +4,36 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.5.7
+
+Week 5
+
+Roadmap
+
+- The Merge
+  - Goal: have an ideal, simple, robust and decentralized proof-of-stake consensus
+    ![The Merge](./img/muxin/the-merge.png)
+  - what's done:
+    - Beacon chain launch
+    - Warmup fork(Altair)
+    - Merge, no more PoW
+    - Withdrawals
+    - Distributed validators
+  - what’s next:
+    - Secret leader election(SLE):
+      Today, the validator selected to propose a block (the *leader* of the slot) is known a bit ahead of time, enabling a potential DoS attack specifically targetting leaders of upcoming blocks
+    - Single Slot Finality:
+      Finalize the chain every slot (12 seconds) instead of every other epoch (12.8 minutes), relies on:
+      - Pre-slot participation selection
+      - SSF specification
+    - Increase validator count
+    - Quantum-safe aggregation-friendly signatures
+- The Surge
+  - Goal: 100000 transactions per second and beyond(on rollups)
+  - “on rollups” is key – The Surger will not result in 100,000 TPS on Layer 1. Changes made to Ethereum’s core protocol all aim at helping rollups scale massively.
+  - A key concept underlying The Surge is **Data Availability** (or DA): the endgame involves making *the availability of data itself* a validity check: Just like nodes won’t follow a fork containing an invalid state transition (e.g. someone arbitrarility printing themselves millions of ETH), nodes won’t follow a fork with unavailable data – which is critical for fully trustless scaling via rollups.
+    ![The Surge](./img/muxin/the-surge.png)
+
 ### 2024.5.6
 
 Week 5
