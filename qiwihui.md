@@ -1307,3 +1307,26 @@ verkle tree structure
 ### 2024.05.08
 
 verkle tree structure of inner node and suffix node
+
+### 2024.05.09
+
+LSD：Staking Restaking and AVS
+
+- PoS: 巴黎升级 + 上海升级
+- LSD
+  - 32ETH
+  - 在上海升级之前不能取出
+  - Lido
+- Liquid Staking/Liquid Restaking
+- AVS: Actively Validated Services, 主动验证服务
+- ETH2.0
+  - validator deposit steps
+    1. mempool - status: Unknown
+    2. deposit contract - status: Deposited
+    3. Validator queue - status: Pending
+    4. Staking - status: Active
+  - validator lifecycle
+    - DEPOSITED -> PENDING: 64 epochs
+    - PENDING -> ACTIVE
+    - ACTIVE -> EXISTING: partical/full withdrawl
+- LSD token model: Rebasing & Value Accumulating
