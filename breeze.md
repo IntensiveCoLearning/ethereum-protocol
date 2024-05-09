@@ -3,6 +3,34 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.5.9
+刷了state的test，以及block的test，感觉看这个测试用例比之前看文档更有感觉，基于这个测试用例又重新回顾了一下state的存储结构，以及Merkle Patricia Triev中的存储结构
+```
+Account: {
+    balance: 0, 
+    codeHash: 0x...（合约代码哈希值）,
+    nonce: 1, 
+    storage: {
+        0x0...（总供应量哈希值）: 总供应量,
+        0x0...（发送者地址哈希值）: 发送者新的余额,
+        0x0...（接收者地址哈希值）: 接收者新的余额
+    }
+}
+```
+
+```
+              rootHash
+                /    \
+           branchNode
+          /           \
+   extensionNode   extensionNode
+      /                \
+   leafNode           leafNode
+0x1234...           0x8765...
+   0x6400             0x3200
+
+
+```
 ### 2024.5.8
 本地跑了State Transition Tests的测试代码；碰到了一些问题，本地没有geth的config执行报错，使用默认的client，然后删掉了文件中的previousHash,执行成功。后面再细看下原理；
 
