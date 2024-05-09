@@ -732,3 +732,21 @@ devp2p 协议命名的有趣历史：
 - It's a collection of Ethereum core consensus specifications
 - It's executable and verifable
 - It's test vector generator
+### 5.9
+#### Flow of adding new feature patch
+- Implement new features in Pyspec markdown files
+- Release new Pyspec with test vector suite
+  - Important in the CL R&D process as this process finds basic bugs before implementation
+  - Test repo: https://github.com/ethereum/consensus-spec-tests
+- CL clients implement and test against test vectors
+#### Why use Python?
+- Cause it's very readable to devs
+- Main principle of the CL specs: Readability & Simplification
+#### How to read the specs?
+- Folder structure
+  - Specs folder: incl. all the CL hardforks already happened on the mainnet & WIP research projects
+    - Each hardfork folder usually incl. several mark down files, beacon-chain.md would be a good start for each hardfork specs
+    - Features folder: WIP CL-related research projects
+  - SSZ folder: SSZ (Simple Serialize) containers
+    - Info on SSZ: https://ethereum.org/en/developers/docs/data-structures-and-encoding/ssz/
+    - Devs also use SSZ hash tree root as the digests of consensus objects
