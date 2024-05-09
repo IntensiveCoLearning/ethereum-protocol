@@ -669,3 +669,19 @@ https://github.com/ethereum/EIPs/pull/8527/files
     - Once implemented, EIP 5003 is just a flag to not set the code back to empty at the end
   - Backward compatibility
     - Impact on mempool and inclusion list （不太懂为啥）
+
+### 2024.5.9 ACDE call notes
+主要围绕下个升级 Pectra 展开
+
+- devnet-0 准备：EF devops 团队正在进行 kurtosis 配置文件预计下周将推出
+- AA 相关讨论：本周进行了 AA 的单独会议，讨论主要围绕 Vitalik 新提出的 EIP 7702 展开，其中很多细节还有待商榷，但核心开发者整体比较支持 EIP 7702。相关讨论详见：【】
+- EIP 7685 General purpose execution layer requests：
+    - 核心开发者针对该 EIP 的改动及对 optimistic sync 的影响进行了讨论
+    - 另外讨论也涉及到是否引入 SSZ 来取代该 EIP 中使用的 MPT 根，目前该想法还未得到多数核心开发者的支持
+- EOF（EVM Object Format）：
+    - EOF 相关的 EIP 已有自己的 meta EIP：https://eips.ethereum.org/EIPS/eip-7692
+    - 另外有一个新的 EIP，可以使用创建交易来部署 EOF 合约：https://eips.ethereum.org/EIPS/eip-7698
+- EIP 7623 Increase calldata cost
+    - 核心开发者 William Morriss 针对该 EIP 提出了一些担忧，包括 gas sheltering、MEV 问题等：https://docs.google.com/presentation/d/1IUJ2TmcNdJbagPEjpZoBohpXEyjfaTJ8FZT4kydJDak/edit#slide=id.p
+    - Vitalik 就该主题今天也发布了 Multi-dimensional gas pricing 的文章：https://vitalik.eth.limo/general/2024/05/09/multidim.html
+    - 一些核心开发者针对该 EIP 也表达了担忧，并指出应该尽快开启针对安全 blob 数量的研究
