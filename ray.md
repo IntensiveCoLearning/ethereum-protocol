@@ -912,3 +912,33 @@ type AttestationData struct {
 
 对所有被投票的分支进行”称重“，其实就是看哪个分支被投票的有效余额更多，哪个分支就会被选中。然后在分支中，递归地进行这个过程，直至找到最终的那个头块。
 
+### 2024.5.9
+LMD GHOST 可以让节点持续的产生区块，但是 PoS 系统中，区块的产生比 Pow 要简单很多，所以攻击者可以随时新生成一条新的链。为了防止此类的攻击，需要 Casper FFG 来对过去的节点产生一个不可篡改的确定状态。
+
+- Casper：由 Vlad Zamfir 命名，灵感来自 GHOST 在 Pos 系统中应用
+- FFG：Friendly Finality Gadget，表明这是一个为共识协议提供最终确定性的工具
+
+该算法其实是 LMD GHOST 的补充，用来加强系统的安全性。它使用两个很关键的机制来保证系统的安全：
+
+1. 两阶段提交：这个是分布式系统中大城共识常用的方式，包括 justification 和 finalization 两个阶段，这两个阶段的共识从投票中获取
+2. accountable safety：如果系统中出现共识冲突，那么就会启动 slashing 机制，让系统不断惩罚那些作恶的节点，直到诚实节点的投票数能超过 2/3，达到新的共识
+
+CasperFFG 的投票与 LMD GHOST 的投票是一起进行的，其实就是一个产生 checkpoint 的过程：
+
+```go
+type AttestationData struct {
+	Slot            github_com_prysmaticlabs_prysm_v4_consensus_types_primitives.Slot           
+	CommitteeIndex  github_com_prysmaticlabs_prysm_v4_consensus_types_primitives.CommitteeIndex 
+	// LMD GHOST vote
+	BeaconBlockRoot []byte                                                                      
+	// FFG vote
+	Source          *Checkpoint                                                                
+	Target          *Checkpoint                                                                
+}
+```
+
+每个 validator 在一个 epoch 内会对之前的 checkpoint 投票一次，每 32 个 slot 会产生一个确定的 checkpoint：
+
+<img src="./img/ray/checkpoint.png" height="50%" width="50%" />
+
+Casper FFG 与 PBFT 在多个方面相似，但是在安全性保证和对非诚实行为的处理上有比较大的差异，这些都是通过底层的经济系统来完成的。
