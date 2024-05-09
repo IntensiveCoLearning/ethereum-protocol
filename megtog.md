@@ -4,6 +4,24 @@
 
 ## Notes
 
+### 2024.5.09
+
+基本没学习
+
+> checkpoint是每个epoch的第一个区块吧
+
+关于这个问题
+
+<https://t.me/eipfun/1593/2932>
+
+<https://discord.com/channels/1205546645496795137/1206622572834201661/1238144851078418472>
+
+另一个话题，需要装上 The Interceptor 体验下
+
+<https://github.com/ethereum/execution-apis/pull/484>
+
+<https://mirror.xyz/killaridev.eth/NXR9v4r8b4SWl-hbqJqRQyIAcE4GACobzMObREvL0fo>
+
 ### 2024.5.08
 
 昨天的新闻是 7702 要替换 3074
