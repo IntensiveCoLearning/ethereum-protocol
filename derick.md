@@ -3,6 +3,21 @@
 hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
+### 2024.5.9
+#### SSF带来的问题
+通过学习[这篇文章](https://ethresear.ch/t/reorg-resilience-and-security-in-post-ssf-lmd-ghost/14164/3)，它讨论了以太坊共识协议 LMD-GHOST 在实现单时隙确定性（Single Slot Finality，SSF）后的重组弹性和安全性问题。主要观点如下：
+
+1. 当前的 LMD-GHOST 协议在 SSF 设置下存在重组问题，这主要是由于协议考虑了所有的最新消息（Latest Message），而不仅仅是最近的消息。
+
+2. 为了解决这个问题，作者提出了一种改进的协议，称为 RLMD-GHOST（Recent LMD-GHOST），它只考虑最近 η 个时隙内的最新消息。当 η = 1 时，RLMD-GHOST 退化为 Goldfish 协议；当 η = ∞ 时，它退化为原始的 LMD-GHOST。
+
+3. RLMD-GHOST 在一个广义的 sleepy 模型下是动态可用的和重组弹性的。这比通常的 sleepy 模型下的安全性要弱，因为作者对攻击者施加了一些额外的限制，不允许完全可变的参与度。
+
+4. 尽管如此，作者认为这些假设在实践中是相当合理的。通过适当地选择 η 值，RLMD-GHOST 可以在重组弹性和活性之间取得平衡。
+
+5. 作者还讨论了 RLMD-GHOST 与 Gasper 的交互，Gasper 是以太坊当前的混合共识协议。他们提出RLMD-GHOST 可以作为 Gasper 的基础层，提供一个可用和重组弹性的链，而 Casper FFG 可以在其上实现经济确定性。
+
+
 ### 2024.5.8
 #### MAX_EFFECTIVE_BALANCE提案
 
