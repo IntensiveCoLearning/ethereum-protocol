@@ -942,3 +942,8 @@ type AttestationData struct {
 <img src="./img/ray/checkpoint.png" height="50%" width="50%" />
 
 Casper FFG 与 PBFT 在多个方面相似，但是在安全性保证和对非诚实行为的处理上有比较大的差异，这些都是通过底层的经济系统来完成的。
+
+### 2024.5.10
+以太坊本质上是一个分布式系统，而且是一个大规模的分布式系统，可以支持百万级的节点，在这样的一个共识系统中，使用 Gasper 作为共识算法，使用一个思维导图给这个算法做个总结：
+
+<img src="./img/ray/gasper.png" height="50%" width="50%" />
