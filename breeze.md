@@ -3,6 +3,12 @@ I'm breeze, a Product Engineer specialized in JavaScript, Electron and automatio
 
 
 ## Notes
+### 2024.5.10
+week4的视频刷完；主要过了针对各种场景提供的测试工具，以及演示了一些demo；
+
+虽然这个残酷共学结束了，但是会继续这个课程，一个月的时间倒是挺快，时间基本是靠挤出来的，大部分都是晚上11点左右提交的commit；后面的重点找个项目具体实践一下，不然感觉还是偏理论学习，反馈有点慢；
+
+
 ### 2024.5.9
 刷了state的test，以及block的test，感觉看这个测试用例比之前看文档更有感觉，基于这个测试用例又重新回顾了一下state的存储结构，以及Merkle Patricia Triev中的存储结构
 ```
