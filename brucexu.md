@@ -4,6 +4,12 @@ Hi guys, I'm Bruce, I'm learning Ethereum Protocol. I'm good at Web development.
 
 ## Notes
 
+### 5.10
+
+[Study Group Week 6 | Sharding and DAS](https://epf.wiki/#/eps/week6-research)
+
+看了一下 Deck 比较基础，主要是 Sampling 的概念
+
 ### 5.9
 
 请假
