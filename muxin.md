@@ -4,6 +4,39 @@ Hello guys, I'm Muxin, I'm learning everything about Ethereum, especially for Et
 
 ## Notes
 
+### 2024.5.10
+
+Week 5
+
+Roadmap
+
+- The Scourge
+  - Goal: mitigate centralization concerns in the Ethereum PoS design, particularly around MEV and liquid staking/pooling
+  - Relevant links:
+    - [Credible Neutrality as a Guiding Principle](https://nakamoto.com/credible-neutrality/)
+    - [Various twitter threads about MEV](https://twitter.com/bertcmiller/status/1402665992422047747)
+    - [Write-up about MEV and PBS](https://pseudotheos.mirror.xyz/i7sv9SFb1e64W2ax_kYwp68O0M2NdACtOu9Hj12SPP8)
+    - [List of links about PBS](https://notes.ethereum.org/@domothy/pbs_links)
+      ![The Scourge](./img/muxin/the-scourge.png)
+- The Verge
+  - Goal: verifying blocks should be super easy - download N bytes of data, perform a few basic computations, verify a SNARK and you’re done
+  - This section is essentially about filling [“the client gap”](https://www.reddit.com/r/ethereum/comments/ryk3it/my_first_impressions_of_web3/hrrz15r/) by making light clients finally viable: Not everyone wants to or can run a full node. The Verge aims to introduce trustless or trust-minimized alternatives that are easy to run and don’t require a lot of storage and bandwidth. The ultimate endgame of The Verge is having these light clients provide security guarantees that are equal to today’s full nodes.
+  - Everything relies on zero-knowledge technology such as SNARKs and STARKs, which themselves rely on polynomial commitment schemes. Here are some links about that:
+    - [An approximate introduction to how zk-SNARKs are possible](https://vitalik.ca/general/2021/01/26/snarks.html)
+    - [Anatomy of a STARK](https://aszepieniec.github.io/stark-anatomy/)
+    - [zkSNARKS explained like you’re someone who knows some math and some coding](https://www.reddit.com/r/zkTech/comments/tfjvrj/zksnarks_explained_like_youre_someone_who_knows/)
+    - [On the role of Polynomial Commitment Schemes in scaling Ethereum](https://scroll.io/blog/kzg)
+      ![The Verge](./img/muxin/the-verge.png)
+- The Purge
+  - Goal: simplify the protocol, eliminate technical debt and limit costs of participating in the network by clearing old history
+    ![The Purge](./img/muxin/the-purge.png)
+- The Splurge
+  - Goal: Fix everything else
+  - All the nice-to-have things that aren’t required for the higher priority stuff belong in The Splurge. The biggest item is account abstraction, but also small tweaks to existing things.
+    ![The Splurge](./img/muxin/the-splurge.png)
+
+虽然残酷共学结束了，但我还是会继续学，认真深入的学，说实话，有几次为了打卡而打卡，之后会在自己的 GitHub 继续更新。
+
 ### 2024.5.7
 
 Week 5
