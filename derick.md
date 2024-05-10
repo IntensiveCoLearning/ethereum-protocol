@@ -3,6 +3,23 @@
 hi guys， my name is Derick and I'm a back-end programmer who loves technology. I'm looking forward to learning about the Ethereum Protocol by attending https://epf.wiki/
 
 ## Notes
+### 2024.5.10
+#### Capital and enclosure in software commons: Linux & Ethereum
+
+这篇[文章](https://trent.mirror.xyz/GDDRqetgglGR5IYK1uTXxLalwIH6pBF9nulmY9zarUw)讨论了软件公共资源(如Linux和以太坊)的资本和围栏问题。主要观点如下:
+
+1. 软件(如Linux和以太坊)是一种共生资源:
+- 读取状态和历史记录具有低排他性和反竞争性:使用和引用EVM基础设施的人越多,对单个用户的价值就越大。任何运行节点的人都可以通过运行自己的节点来访问。链上数据可称为"知识共享资源",记录可供任何人验证,是一个广泛可用的丰富数据集。
+- 写入状态具有低排他性和高竞争性:并发用户数量受区块gas限制的限制,以确保节点运营商的资源需求不会增长太快。尽管它是一个数字对象,但需要注意存储、带宽、计算等方面的限制。
+
+2. 资本会寻求从哪里提取私人利益,如从状态验证(浏览器)、区块空间生产(MEV、托管验证)和区块空间消费(用户体验、产品)中插入和提取利润。
+
+3. 文章提出了两个问题:
+- 嵌入在资源生产中的本地资本形式是否能更好地修改负面外部性?
+- 随着时间的推移,它是否会加强外部资本进入和吸收资源生产系统的动机?
+
+
+
 ### 2024.5.9
 #### SSF带来的问题
 通过学习[这篇文章](https://ethresear.ch/t/reorg-resilience-and-security-in-post-ssf-lmd-ghost/14164/3)，它讨论了以太坊共识协议 LMD-GHOST 在实现单时隙确定性（Single Slot Finality，SSF）后的重组弹性和安全性问题。主要观点如下：
@@ -1126,7 +1143,7 @@ Merkle树利用哈希指针构建一个树形结构，可以高效地验证大�
 
 https://brilliant.org/wiki/merkle-tree/
 
-[3] https://www.geeksforgeeks.org/blockchain-merkle-trees/
+ https://www.geeksforgeeks.org/blockchain-merkle-trees/
 
  https://en.wikipedia.org/wiki/Merkle_tree
 
